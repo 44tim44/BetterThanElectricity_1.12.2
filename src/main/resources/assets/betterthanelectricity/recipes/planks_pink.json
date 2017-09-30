@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:planks",
+      "data": 32767
+    },
+    {
+      "item": "minecraft:dye",
+      "data": 9
+    }
+  ],
+  "result": {
+    "item": "betterthanelectricity:planks_pink",
+    "count": 1
+  }
+}

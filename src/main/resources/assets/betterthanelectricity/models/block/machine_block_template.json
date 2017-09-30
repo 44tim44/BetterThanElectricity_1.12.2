@@ -1,0 +1,12 @@
+{
+  "parent": "betterthanelectricity:block/orientable_all",
+  "textures": {
+    "particle": "betterthanelectricity:blocks/block_machine_top",
+    "bottom": "betterthanelectricity:blocks/block_machine_bottom",
+    "top": "betterthanelectricity:blocks/block_machine_top",
+    "front": "betterthanelectricity:blocks/block_machine_side",
+    "left": "betterthanelectricity:blocks/block_machine_side",
+    "back": "betterthanelectricity:blocks/block_machine_side",
+    "right": "betterthanelectricity:blocks/block_machine_side"
+  }
+}

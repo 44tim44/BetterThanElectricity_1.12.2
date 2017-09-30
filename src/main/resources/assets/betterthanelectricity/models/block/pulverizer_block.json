@@ -1,0 +1,7 @@
+{
+  "parent": "betterthanelectricity:block/machine_block_template",
+  "textures": {
+    "top": "betterthanelectricity:blocks/block_pulverizer_top_off",
+    "front": "betterthanelectricity:blocks/block_pulverizer_front"
+  }
+}

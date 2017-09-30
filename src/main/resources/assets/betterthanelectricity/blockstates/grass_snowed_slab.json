@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "half=bottom": { "model": "betterthanelectricity:grass_snowed_slab_half" },
+    "half=top": { "model": "betterthanelectricity:grass_snowed_slab_upper" }
+  }
+}

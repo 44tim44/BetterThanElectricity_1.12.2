@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:wooden_slab",
+      "data": 32767
+    },
+    {
+      "item": "minecraft:dye",
+      "data": 14
+    }
+  ],
+  "result": {
+    "item": "betterthanelectricity:planks_slab_orange",
+    "count": 1
+  }
+}

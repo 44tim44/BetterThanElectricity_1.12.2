@@ -1,0 +1,6 @@
+{
+  "parent": "betterthanelectricity:block/vertical_slab_nw_corner_outer",
+  "textures": {
+    "all": "blocks/stone"
+  }
+}

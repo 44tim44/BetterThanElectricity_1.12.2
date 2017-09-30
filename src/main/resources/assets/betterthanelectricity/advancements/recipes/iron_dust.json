@@ -1,0 +1,20 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "betterthanelectricity:iron_dust"
+    ]
+  },
+  "criteria": {
+    "has_iron_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:iron_ore"
+          }
+        ]
+      }
+    }
+  }
+}

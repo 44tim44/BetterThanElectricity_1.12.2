@@ -1,0 +1,23 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "betterthanelectricity:elec_furnace_recipe",
+      "betterthanelectricity:pulverizer_recipe",
+      "betterthanelectricity:solar_panel_recipe",
+      "betterthanelectricity:battery_recipe"
+    ]
+  },
+  "criteria": {
+    "has_machine_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betterthanelectricity:machine_block"
+          }
+        ]
+      }
+    }
+  }
+}

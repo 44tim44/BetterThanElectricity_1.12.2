@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "half=bottom": { "model": "betterthanelectricity:planks_slab_orange_half" },
+    "half=top": { "model": "betterthanelectricity:planks_slab_orange_upper" }
+  }
+}

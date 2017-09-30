@@ -1,0 +1,15 @@
+{
+  "result": {
+    "item": "betterthanelectricity:steel_rod"
+  },
+  "pattern": [
+    "S",
+    "S"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+      "item": "betterthanelectricity:ingot_steel"
+    }
+  }
+}

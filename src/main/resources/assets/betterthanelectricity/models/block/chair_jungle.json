@@ -1,0 +1,6 @@
+{
+  "parent": "betterthanelectricity:block/chair",
+  "textures": {
+    "0": "blocks/planks_jungle"
+  }
+}

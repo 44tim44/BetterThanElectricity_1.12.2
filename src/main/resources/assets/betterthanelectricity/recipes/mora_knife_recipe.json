@@ -1,0 +1,18 @@
+{
+  "result": {
+    "item": "betterthanelectricity:mora_knife"
+  },
+  "pattern": [
+    "I",
+    "S"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": {
+      "item": "betterthanelectricity:ingot_steel"
+    },
+    "S": {
+      "item": "betterthanelectricity:steel_rod"
+    }
+  }
+}

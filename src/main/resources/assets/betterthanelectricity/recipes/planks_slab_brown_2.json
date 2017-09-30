@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_slab",
+  "pattern": [
+
+
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "betterthanelectricity:planks_brown"
+    }
+  },
+  "result": {
+    "item": "betterthanelectricity:planks_slab_brown",
+    "count": 4
+  }
+}

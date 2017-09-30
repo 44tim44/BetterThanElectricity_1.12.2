@@ -1,0 +1,18 @@
+{
+  "result": {
+    "item": "betterthanelectricity:solar_panel_block"
+  },
+  "pattern": [
+    "G",
+    "M"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": {
+      "item": "betterthanelectricity:machine_block"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    }
+  }
+}

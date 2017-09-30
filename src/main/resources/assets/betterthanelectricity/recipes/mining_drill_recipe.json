@@ -1,0 +1,25 @@
+{
+  "result": {
+    "item": "betterthanelectricity:mining_drill"
+  },
+  "pattern": [
+    " D ",
+    "IEI",
+    "IBI"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": {
+      "item": "betterthanelectricity:ingot_steel"
+    },
+    "E": {
+      "item": "betterthanelectricity:electric_circuit"
+    },
+    "D": {
+      "item": "betterthanelectricity:drill_head"
+    },
+    "B": {
+      "item": "betterthanelectricity:battery"
+    }
+  }
+}

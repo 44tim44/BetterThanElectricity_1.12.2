@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "betterthanelectricity:machine_block"
+  },
+  "pattern": [
+    "III",
+    "IDI",
+    "IRI"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "R": {
+      "item": "betterthanelectricity:electric_circuit"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "half=bottom": { "model": "betterthanelectricity:dirt_slab_half" },
+    "half=top": { "model": "betterthanelectricity:dirt_slab_upper" }
+  }
+}

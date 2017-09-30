@@ -1,0 +1,130 @@
+# Items
+item.copper_dust.name=Copper Dust
+item.tin_dust.name=Tin Dust
+item.aluminum_dust.name=Aluminum Dust
+item.bronze_dust.name=Bronze Dust
+item.iron_dust.name=Iron Dust
+item.gold_dust.name=Gold Dust
+item.carbonated_iron_dust.name=Carbonated Iron Dust
+item.coal_dust.name=Coal Dust
+
+item.ingot_copper.name=Copper Ingot
+item.ingot_tin.name=Tin Ingot
+item.ingot_aluminum.name=Aluminum Ingot
+item.ingot_steel.name=Steel Ingot
+item.ingot_bronze.name=Bronze Ingot
+
+item.steel_rod.name=Steel Rod
+
+item.mora_knife.name=Mora 2000
+item.bronze_sword.name=Bronze Sword
+item.steel_sword.name=Steel Sword
+
+item.bronze_pickaxe.name=Bronze Pickaxe
+item.steel_pickaxe.name=Steel Pickaxe
+
+item.corn.name=Corn
+item.corn_seed.name=Corn Seed
+
+item.mining_drill.name=Mining Drill
+item.battery.name=Battery
+item.electric_circuit.name=Electric Circuit
+item.drill_head.name=Drill Head
+
+item.glass_door_item.name=Glass Door
+
+# Blocks
+tile.ore_copper.name=Copper Ore
+tile.ore_tin.name=Tin Ore
+tile.ore_aluminum.name=Aluminum Ore
+
+tile.pulverizer_block.name=Pulverizer
+container.pulverizer=Pulverizer
+
+tile.electric_furnace_block.name=Electric Furnace
+container.electric_furnace=Electric Furnace
+
+tile.solar_panel_block.name=Solar Panel
+container.solar_panel=Solar Panel
+
+tile.wind_mill_block.name=Wind Mill
+container.wind_mill=Wind Mill
+
+tile.machine_block.name=Machine Block
+
+
+tile.planks_white.name=White Dyed Planks
+tile.planks_lightgray.name=Light Gray Dyed Planks
+tile.planks_gray.name=Gray Dyed Planks
+tile.planks_black.name=Black Dyed Planks
+tile.planks_brown.name=Brown Dyed Planks
+tile.planks_red.name=Red Dyed Planks
+tile.planks_orange.name=Orange Dyed Planks
+tile.planks_yellow.name=Yellow Dyed Planks
+tile.planks_lime.name=Lime Dyed Planks
+tile.planks_green.name=Green Dyed Planks
+tile.planks_cyan.name=Cyan Dyed Planks
+tile.planks_lightblue.name=Light Blue Dyed Planks
+tile.planks_blue.name=Blue Dyed Planks
+tile.planks_purple.name=Purple Dyed Planks
+tile.planks_magenta.name=Magenta Dyed Planks
+tile.planks_pink.name=Pink Dyed Planks
+
+tile.planks_slab_white.name=White Dyed Planks Slab
+tile.planks_slab_lightgray.name=Light Gray Dyed Planks Slab
+tile.planks_slab_gray.name=Gray Dyed Planks Slab
+tile.planks_slab_black.name=Black Dyed Planks Slab
+tile.planks_slab_brown.name=Brown Dyed Planks Slab
+tile.planks_slab_red.name=Red Dyed Planks Slab
+tile.planks_slab_orange.name=Orange Dyed Planks Slab
+tile.planks_slab_yellow.name=Yellow Dyed Planks Slab
+tile.planks_slab_lime.name=Lime Dyed Planks Slab
+tile.planks_slab_green.name=Green Dyed Planks Slab
+tile.planks_slab_cyan.name=Cyan Dyed Planks Slab
+tile.planks_slab_lightblue.name=Light Blue Dyed Planks Slab
+tile.planks_slab_blue.name=Blue Dyed Planks Slab
+tile.planks_slab_purple.name=Purple Dyed Planks Slab
+tile.planks_slab_magenta.name=Magenta Dyed Planks Slab
+tile.planks_slab_pink.name=Pink Dyed Planks Slab
+
+tile.planks_stairs_white.name=White Dyed Planks Stairs
+tile.planks_stairs_lightgray.name=Light Gray Dyed Planks Stairs
+tile.planks_stairs_gray.name=Gray Dyed Planks Stairs
+tile.planks_stairs_black.name=Black Dyed Planks Stairs
+tile.planks_stairs_brown.name=Brown Dyed Planks Stairs
+tile.planks_stairs_red.name=Red Dyed Planks Stairs
+tile.planks_stairs_orange.name=Orange Dyed Planks Stairs
+tile.planks_stairs_yellow.name=Yellow Dyed Planks Stairs
+tile.planks_stairs_lime.name=Lime Dyed Planks Stairs
+tile.planks_stairs_green.name=Green Dyed Planks Stairs
+tile.planks_stairs_cyan.name=Cyan Dyed Planks Stairs
+tile.planks_stairs_lightblue.name=Light Blue Dyed Planks Stairs
+tile.planks_stairs_blue.name=Blue Dyed Planks Stairs
+tile.planks_stairs_purple.name=Purple Dyed Planks Stairs
+tile.planks_stairs_magenta.name=Magenta Dyed Planks Stairs
+tile.planks_stairs_pink.name=Pink Dyed Planks Stairs
+
+tile.smoothstone_slab.name=Stone Slab
+tile.stoneSlab.stone.name=Stone Tile Slab
+tile.grass_slab.name=Grass Slab
+tile.grass_snowed_slab.name=Snowy Grass Slab
+tile.dirt_slab.name=Dirt Slab
+
+tile.smoothstone_vertical_slab.name=Stone Pane
+tile.stone_vertical_slab.name=Stone Tile Pane
+
+tile.smoothstone_stairs.name=Stone Stairs
+
+tile.chair_oak.name=Oak Chair
+tile.chair_spruce.name=Spruce Chair
+tile.chair_birch.name=Birch Chair
+tile.chair_jungle.name=Jungle Chair
+tile.chair_acacia.name=Acacia Chair
+tile.chair_dark_oak.name=Dark Oak Chair
+
+tile.table_oak.name=Oak Table
+tile.table_spruce.name=Spruce Table
+tile.table_birch.name=Birch Table
+tile.table_jungle.name=Jungle Table
+tile.table_acacia.name=Acacia Table
+tile.table_dark_oak.name=Dark Oak Table

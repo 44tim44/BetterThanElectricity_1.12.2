@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "betterthanelectricity:chair_birch", "y": 270 },
+    "facing=south": { "model": "betterthanelectricity:chair_birch", "y": 90  },
+    "facing=east":  { "model": "betterthanelectricity:chair_birch"           },
+    "facing=west":  { "model": "betterthanelectricity:chair_birch", "y": 180 }
+  }
+}

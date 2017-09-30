@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "betterthanelectricity:pulverizer_block_on" },
+        "facing=south": { "model": "betterthanelectricity:pulverizer_block_on", "y": 180 },
+        "facing=west":  { "model": "betterthanelectricity:pulverizer_block_on", "y": 270 },
+        "facing=east":  { "model": "betterthanelectricity:pulverizer_block_on", "y": 90 }
+    }
+}

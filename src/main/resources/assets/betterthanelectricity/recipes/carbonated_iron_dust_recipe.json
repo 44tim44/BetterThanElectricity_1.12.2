@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "betterthanelectricity:iron_dust"
+    },
+    {
+      "item": "betterthanelectricity:coal_dust"
+    }
+  ],
+  "result": {
+    "item": "betterthanelectricity:carbonated_iron_dust",
+    "count": 2
+  }
+}

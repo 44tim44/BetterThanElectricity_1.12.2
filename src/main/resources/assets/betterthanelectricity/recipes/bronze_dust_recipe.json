@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "betterthanelectricity:copper_dust"
+    },
+    {
+      "item": "betterthanelectricity:tin_dust"
+    }
+  ],
+  "result": {
+    "item": "betterthanelectricity:bronze_dust",
+    "count": 2
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "betterthanelectricity:drill_head"
+  },
+  "pattern": [
+    " D ",
+    "DID",
+    "ISI"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": {
+      "item": "betterthanelectricity:ingot_steel"
+    },
+    "S": {
+      "item": "betterthanelectricity:steel_rod"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "normal": {
+      "model": "betterthanelectricity:table_birch"
+    },
+    "inventory": {
+      "model": "betterthanelectricity:table_birch"
+    }
+  }
+}

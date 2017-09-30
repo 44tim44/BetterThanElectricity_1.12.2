@@ -1,0 +1,6 @@
+{
+    "variants": {
+      "snowy=false": { "model": "minecraft:grass_normal"},
+      "snowy=true":  { "model": "minecraft:grass_snowed" }
+  }
+}

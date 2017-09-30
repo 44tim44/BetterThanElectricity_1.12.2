@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "normal": {
+      "model": "betterthanelectricity:machine_block"
+    },
+    "inventory": {
+      "model": "betterthanelectricity:machine_block"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "result": {
+    "item": "betterthanelectricity:pulverizer_block"
+  },
+  "pattern": [
+    "F",
+    "M"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": {
+      "item": "betterthanelectricity:machine_block"
+    },
+    "F": {
+      "item": "minecraft:flint"
+    }
+  }
+}

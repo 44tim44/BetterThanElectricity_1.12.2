@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "facing=north": { "model": "betterthanelectricity:wind_mill" },
+        "facing=south": { "model": "betterthanelectricity:wind_mill", "y": 180 },
+        "facing=west":  { "model": "betterthanelectricity:wind_mill", "y": 270 },
+        "facing=east":  { "model": "betterthanelectricity:wind_mill", "y": 90 },
+        "inventory":    { "model": "betterthanelectricity:wind_mill" }
+    }
+}

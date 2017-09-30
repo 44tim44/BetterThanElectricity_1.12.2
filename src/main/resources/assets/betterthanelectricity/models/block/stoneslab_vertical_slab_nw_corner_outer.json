@@ -1,0 +1,39 @@
+{
+	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
+	"textures": {
+		"trim": "blocks/stone_slab_side",
+		"particle": "blocks/stone_slab_side"
+	},
+	"elements": [
+		{
+			"name": "cube",
+			"from": [0, 0, 0],
+			"to": [8, 16, 8],
+			"faces": {
+				"north": {
+					"uv": [0, 0, 16, 8],
+					"texture": "#trim",
+					"rotation": 90
+				},
+				"east": {
+					"uv": [0, 0, 16, 8],
+					"texture": "#trim",
+					"rotation": 90
+				},
+				"south": {
+					"uv": [0, 0, 16, 8],
+					"texture": "#trim",
+					"rotation": 90
+				},
+				"west": {
+					"uv": [0, 0, 16, 8],
+					"texture": "#trim",
+					"rotation": 90
+				},
+				"up": {"uv": [0, 0, 8, 8], "texture": "#trim"},
+				"down": {"uv": [0, 8, 8, 16], "texture": "#trim"}
+			}
+		}
+	],
+	"groups": [0]
+}

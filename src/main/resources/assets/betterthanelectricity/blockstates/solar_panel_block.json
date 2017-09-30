@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "normal": {
+            "model": "betterthanelectricity:solar_panel_block"
+        },
+        "inventory": {
+            "model": "betterthanelectricity:solar_panel_block"
+        }
+    }
+}

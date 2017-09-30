@@ -1,0 +1,8 @@
+{
+    "parent": "block/stairs",
+    "textures": {
+        "bottom": "betterthanelectricity:blocks/planks_green",
+        "top": "betterthanelectricity:blocks/planks_green",
+        "side": "betterthanelectricity:blocks/planks_green"
+    }
+}

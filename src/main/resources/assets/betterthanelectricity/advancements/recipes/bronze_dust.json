@@ -1,0 +1,30 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "betterthanelectricity:bronze_dust_recipe"
+    ]
+  },
+  "criteria": {
+    "has_copper_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betterthanelectricity:ore_copper"
+          }
+        ]
+      }
+    },
+    "has_tin_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betterthanelectricity:ore_tin"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "betterthanelectricity:block/machine_block_template",
+  "textures": {
+    "top": "betterthanelectricity:blocks/block_solar_panel_top"
+  }
+}

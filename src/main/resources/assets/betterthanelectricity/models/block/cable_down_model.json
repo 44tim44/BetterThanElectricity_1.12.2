@@ -1,0 +1,24 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "down": "betterthanelectricity:blocks/basecable",
+    "up": "betterthanelectricity:blocks/basecable",
+    "north": "betterthanelectricity:blocks/basecable",
+    "south": "betterthanelectricity:blocks/basecable",
+    "east": "betterthanelectricity:blocks/basecable",
+    "west": "betterthanelectricity:blocks/basecable"
+  },
+  "elements": [
+    {  "from": [5, 0, 5],
+      "to": [11, 5, 11],
+      "faces": {
+        "down": {"uv": [ 5, 5, 11, 11], "texture": "#down", "cullface": "down"},
+        "up": {"uv": [ 5, 5, 11, 11], "texture": "#up"},
+        "north": {"uv": [ 5, 11, 11, 16], "texture": "#north"},
+        "south": {"uv": [ 5, 11, 11, 16], "texture": "#south"},
+        "west": {"uv": [ 5, 11, 11, 16], "texture": "#west"},
+        "east": {"uv": [ 5, 11, 11, 16], "texture": "#east"}
+      }
+    }
+  ]
+}

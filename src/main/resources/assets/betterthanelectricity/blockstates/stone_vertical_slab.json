@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "position=north,shape=straight": { "model": "betterthanelectricity:stone_vertical_slab_north" },
+    "position=north,shape=outer_corner_left": { "model": "betterthanelectricity:stone_vertical_slab_nw_corner_outer" },
+    "position=north,shape=outer_corner_right": { "model": "betterthanelectricity:stone_vertical_slab_nw_corner_outer", "y": 90 },
+    "position=north,shape=inner_corner_left": { "model": "betterthanelectricity:stone_vertical_slab_nw_corner_inner" },
+    "position=north,shape=inner_corner_right": { "model": "betterthanelectricity:stone_vertical_slab_nw_corner_inner", "y": 90 },
+
+    "position=south,shape=straight": { "model": "betterthanelectricity:stone_vertical_slab_north", "y": 180 },
+    "position=south,shape=outer_corner_left": { "model": "betterthanelectricity:stone_vertical_slab_nw_corner_outer", "y": 180  },
+    "position=south,shape=outer_corner_right": { "model": "betterthanelectricity:stone_vertical_slab_nw_corner_outer", "y": 270 },
+    "position=south,shape=inner_corner_left": { "model": "betterthanelectricity:stone_vertical_slab_nw_corner_inner", "y": 180  },
+    "position=south,shape=inner_corner_right": { "model": "betterthanelectricity:stone_vertical_slab_nw_corner_inner", "y": 270 },
+
+    "position=west,shape=straight":  { "model": "betterthanelectricity:stone_vertical_slab_north", "y": 270 },
+    "position=west,shape=outer_corner_left": { "model": "betterthanelectricity:stone_vertical_slab_nw_corner_outer", "y": 270 },
+    "position=west,shape=outer_corner_right": { "model": "betterthanelectricity:stone_vertical_slab_nw_corner_outer" },
+    "position=west,shape=inner_corner_left": { "model": "betterthanelectricity:stone_vertical_slab_nw_corner_inner", "y": 270 },
+    "position=west,shape=inner_corner_right": { "model": "betterthanelectricity:stone_vertical_slab_nw_corner_inner" },
+
+    "position=east,shape=straight":  { "model": "betterthanelectricity:stone_vertical_slab_north", "y": 90 },
+    "position=east,shape=outer_corner_left": { "model": "betterthanelectricity:stone_vertical_slab_nw_corner_outer", "y": 90 },
+    "position=east,shape=outer_corner_right": { "model": "betterthanelectricity:stone_vertical_slab_nw_corner_outer", "y": 180 },
+    "position=east,shape=inner_corner_left": { "model": "betterthanelectricity:stone_vertical_slab_nw_corner_inner", "y": 90 },
+    "position=east,shape=inner_corner_right": { "model": "betterthanelectricity:stone_vertical_slab_nw_corner_inner", "y": 180 }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "betterthanelectricity:bronze_sword"
+  },
+  "pattern": [
+    " B ",
+    " B ",
+    " S "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": {
+      "item": "betterthanelectricity:ingot_bronze"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  }
+}

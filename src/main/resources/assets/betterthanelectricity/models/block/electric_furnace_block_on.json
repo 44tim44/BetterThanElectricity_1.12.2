@@ -1,0 +1,6 @@
+{
+  "parent": "betterthanelectricity:block/machine_block_template",
+  "textures": {
+    "front": "betterthanelectricity:blocks/block_elec_furnace_front_on"
+  }
+}

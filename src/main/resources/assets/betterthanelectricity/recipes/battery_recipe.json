@@ -1,0 +1,25 @@
+{
+  "result": {
+    "item": "betterthanelectricity:battery"
+  },
+  "pattern": [
+    "ICI",
+    "ISI",
+    "IDI"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": {
+      "item": "betterthanelectricity:ingot_aluminum"
+    },
+    "C": {
+      "item": "betterthanelectricity:ingot_copper"
+    },
+    "S": {
+      "item": "betterthanelectricity:steel_rod"
+    },
+    "D": {
+      "item": "betterthanelectricity:coal_dust"
+    }
+  }
+}

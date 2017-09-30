@@ -1,0 +1,8 @@
+{
+  "parent": "block/half_slab",
+  "textures": {
+    "bottom": "betterthanelectricity:blocks/planks_gray",
+    "top": "betterthanelectricity:blocks/planks_gray",
+    "side": "betterthanelectricity:blocks/planks_gray"
+  }
+}

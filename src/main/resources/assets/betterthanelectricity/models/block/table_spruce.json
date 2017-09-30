@@ -1,0 +1,6 @@
+{
+  "parent": "betterthanelectricity:block/table",
+  "textures": {
+    "0": "blocks/planks_spruce"
+  }
+}

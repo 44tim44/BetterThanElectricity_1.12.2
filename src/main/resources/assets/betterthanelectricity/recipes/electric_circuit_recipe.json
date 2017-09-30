@@ -1,0 +1,25 @@
+{
+  "result": {
+    "item": "betterthanelectricity:electric_circuit"
+  },
+  "pattern": [
+    "RBR",
+    "TRT",
+    "CCC"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": {
+      "item": "betterthanelectricity:ingot_copper"
+    },
+    "T": {
+      "item": "betterthanelectricity:ingot_tin"
+    },
+    "C": {
+      "item": "minecraft:clay"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  }
+}

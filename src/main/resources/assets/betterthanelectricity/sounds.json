@@ -1,0 +1,17 @@
+{
+  "drill.spin": {
+    "category": "player",
+    "sounds": [
+      "betterthanelectricity:drill"
+    ],
+    "subtitle": "betterthanelectricity.subtitle.drill"
+  },
+
+  "door.slide": {
+    "category": "block",
+    "sounds": [
+      "betterthanelectricity:slide_door"
+    ],
+    "subtitle": "betterthanelectricity.subtitle.slide_door"
+  }
+}
