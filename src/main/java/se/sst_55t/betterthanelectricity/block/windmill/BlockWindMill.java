@@ -35,7 +35,7 @@ public class BlockWindMill extends Block implements ITileEntityProvider{
     protected String name;
 
     public BlockWindMill(boolean isActive, String name) {
-        super(Material.IRON);
+        super(Material.ROCK);
         this.name = name;
         this.isActive = isActive;
         this.isBlockContainer = true;

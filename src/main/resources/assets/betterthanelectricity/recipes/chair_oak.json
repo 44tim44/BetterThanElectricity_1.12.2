@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
+    "  #",
     "###",
-    " # ",
-    " # "
+    "# #"
   ],
   "key": {
     "#": {
@@ -12,6 +12,6 @@
     }
   },
   "result": {
-    "item": "betterthanelectricity:table_oak"
+    "item": "betterthanelectricity:chair_oak"
   }
 }

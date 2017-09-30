@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
+    "  #",
     "###",
-    " # ",
-    " # "
+    "# #"
   ],
   "key": {
     "#": {
       "item": "minecraft:planks",
-      "data": 0
+      "data": 5
     }
   },
   "result": {
-    "item": "betterthanelectricity:table_oak"
+    "item": "betterthanelectricity:chair_dark_oak"
   }
 }

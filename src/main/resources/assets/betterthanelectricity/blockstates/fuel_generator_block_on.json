@@ -3,6 +3,7 @@
         "facing=north": { "model": "betterthanelectricity:fuel_generator_block_on" },
         "facing=south": { "model": "betterthanelectricity:fuel_generator_block_on", "y": 180 },
         "facing=west":  { "model": "betterthanelectricity:fuel_generator_block_on", "y": 270 },
-        "facing=east":  { "model": "betterthanelectricity:fuel_generator_block_on", "y": 90 }
+        "facing=east":  { "model": "betterthanelectricity:fuel_generator_block_on", "y": 90 },
+        "inventory": { "model": "betterthanelectricity:fuel_generator_block_on" }
     }
 }

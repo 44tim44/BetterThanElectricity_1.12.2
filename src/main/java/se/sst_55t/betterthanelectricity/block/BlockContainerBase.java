@@ -25,4 +25,20 @@ public abstract class BlockContainerBase extends BlockContainer implements
     public void registerItemModel(Item itemBlock) {
         BTEMod.proxy.registerItemRenderer(itemBlock, 0, name);
     }
+
+    /**
+     * Sets how many hits it takes to break a block.
+     */
+    @Override
+    public BlockContainerBase setHardness(float hardness)
+    {
+        this.blockHardness = hardness;
+
+        if (this.blockResistance < hardness * 5.0F)
+        {
+            this.blockResistance = hardness * 5.0F;
+        }
+
+        return this;
+    }
 }

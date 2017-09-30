@@ -8,10 +8,10 @@
   "key": {
     "#": {
       "item": "minecraft:planks",
-      "data": 0
+      "data": 4
     }
   },
   "result": {
-    "item": "betterthanelectricity:table_oak"
+    "item": "betterthanelectricity:table_acacia"
   }
 }

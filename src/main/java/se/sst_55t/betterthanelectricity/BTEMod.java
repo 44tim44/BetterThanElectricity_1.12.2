@@ -1,5 +1,6 @@
 package se.sst_55t.betterthanelectricity;
 
+import net.minecraft.block.material.Material;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import se.sst_55t.betterthanelectricity.block.ModBlocks;
 import se.sst_55t.betterthanelectricity.entity.EntitySittableBlock;

@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "betterthanelectricity:chair_oak",
+      "betterthanelectricity:chair_spruce",
+      "betterthanelectricity:chair_birch",
+      "betterthanelectricity:chair_jungle",
+      "betterthanelectricity:chair_acacia",
+      "betterthanelectricity:chair_darkoak",
+      "betterthanelectricity:table_oak",
+      "betterthanelectricity:table_spruce",
+      "betterthanelectricity:table_birch",
+      "betterthanelectricity:table_jungle",
+      "betterthanelectricity:table_acacia",
+      "betterthanelectricity:table_darkoak"
+
+    ]
+  },
+  "criteria": {
+    "has_wooden_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:planks",
+            "data": 32767
+          }
+        ]
+      }
+    }
+  }
+}
