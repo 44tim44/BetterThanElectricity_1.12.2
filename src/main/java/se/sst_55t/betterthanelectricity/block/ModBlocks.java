@@ -8,6 +8,7 @@ import net.minecraft.init.Blocks;
 import se.sst_55t.betterthanelectricity.ModEnums.BlockType;
 import se.sst_55t.betterthanelectricity.block.counter.BlockCounter;
 import se.sst_55t.betterthanelectricity.block.electricfurnace.BlockElectricFurnace;
+import se.sst_55t.betterthanelectricity.block.fuelgenerator.BlockFuelGenerator;
 import se.sst_55t.betterthanelectricity.block.pulverizer.BlockPulverizer;
 import se.sst_55t.betterthanelectricity.block.solarpanel.BlockSolarPanel;
 import se.sst_55t.betterthanelectricity.block.table.BlockTable;
@@ -37,6 +38,8 @@ public class ModBlocks {
     public static BlockSolarPanel solarPanel = (BlockSolarPanel)new BlockSolarPanel().setCreativeTab(CreativeTabs.DECORATIONS);
     public static BlockWindMill windMill = (BlockWindMill)new BlockWindMill(false, "wind_mill_block").setCreativeTab(CreativeTabs.DECORATIONS);
     public static BlockWindMill windMill_on = (BlockWindMill)new BlockWindMill(true, "wind_mill_block_on");
+    public static BlockFuelGenerator fuelGenerator = (BlockFuelGenerator) new BlockFuelGenerator(false,"fuel_generator_block").setCreativeTab(CreativeTabs.DECORATIONS);
+    public static BlockFuelGenerator fuelGenerator_on = new BlockFuelGenerator(true,"fuel_generator_block_on");
 
     /* Building Blocks */
     public static BlockBase planks_white = new BlockBase(Material.WOOD,"planks_white").setCreativeTab(CreativeTabs.BUILDING_BLOCKS).setHardness(2.0F);
@@ -161,6 +164,8 @@ public class ModBlocks {
                 solarPanel,
                 windMill,
                 windMill_on,
+                fuelGenerator,
+                fuelGenerator_on,
 
                 /* Building Blocks */
                 planks_white,
@@ -268,6 +273,7 @@ public class ModBlocks {
         GameRegistry.registerTileEntity(electricFurnace.getTileEntityClass(), electricFurnace.getRegistryName().toString());
         GameRegistry.registerTileEntity(solarPanel.getTileEntityClass(), solarPanel.getRegistryName().toString());
         GameRegistry.registerTileEntity(windMill.getTileEntityClass(), windMill.getRegistryName().toString());
+        GameRegistry.registerTileEntity(fuelGenerator.getTileEntityClass(), fuelGenerator.getRegistryName().toString());
         GameRegistry.registerTileEntity(tableOak.getTileEntityClass(), tableOak.getRegistryName().toString());
     }
 
@@ -288,6 +294,8 @@ public class ModBlocks {
                 solarPanel.createItemBlock(),
                 windMill.createItemBlock(),
                 windMill_on.createItemBlock(),
+                fuelGenerator.createItemBlock(),
+                fuelGenerator_on.createItemBlock(),
 
                 /* Building Blocks */
                 planks_white.createItemBlock(),
@@ -380,6 +388,8 @@ public class ModBlocks {
         solarPanel.registerItemModel(Item.getItemFromBlock(solarPanel));
         windMill.registerItemModel(Item.getItemFromBlock(windMill));
         windMill_on.registerItemModel(Item.getItemFromBlock(windMill_on));
+        fuelGenerator.registerItemModel(Item.getItemFromBlock(fuelGenerator));
+        fuelGenerator_on.registerItemModel(Item.getItemFromBlock(fuelGenerator_on));
 
         planks_white.registerItemModel(Item.getItemFromBlock(planks_white));
         planks_lightgray.registerItemModel(Item.getItemFromBlock(planks_lightgray));

@@ -3,6 +3,9 @@ package se.sst_55t.betterthanelectricity;
 import se.sst_55t.betterthanelectricity.block.electricfurnace.ContainerElectricFurnace;
 import se.sst_55t.betterthanelectricity.block.electricfurnace.GuiElectricFurnace;
 import se.sst_55t.betterthanelectricity.block.electricfurnace.TileEntityElectricFurnace;
+import se.sst_55t.betterthanelectricity.block.fuelgenerator.ContainerFuelGenerator;
+import se.sst_55t.betterthanelectricity.block.fuelgenerator.GuiFuelGenerator;
+import se.sst_55t.betterthanelectricity.block.fuelgenerator.TileEntityFuelGenerator;
 import se.sst_55t.betterthanelectricity.block.pulverizer.ContainerPulverizer;
 import se.sst_55t.betterthanelectricity.block.pulverizer.TileEntityPulverizer;
 import se.sst_55t.betterthanelectricity.block.pulverizer.GuiPulverizer;
@@ -29,6 +32,7 @@ public class ModGuiHandler implements IGuiHandler {
     public static final int ELECFURNACE = 1;
     public static final int SOLARPANEL = 2;
     public static final int WINDMILL = 3;
+    public static final int FUELGENERATOR = 4;
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -41,6 +45,8 @@ public class ModGuiHandler implements IGuiHandler {
                 return new ContainerSolarPanel(player.inventory,(TileEntitySolarPanel)world.getTileEntity(new BlockPos(x, y, z)));
             case WINDMILL:
                 return new ContainerWindMill(player.inventory,(TileEntityWindMill)world.getTileEntity(new BlockPos(x, y, z)));
+            case FUELGENERATOR:
+                return new ContainerFuelGenerator(player.inventory, (TileEntityFuelGenerator)world.getTileEntity(new BlockPos(x, y, z)));
             default:
                 return null;
         }
@@ -63,6 +69,9 @@ public class ModGuiHandler implements IGuiHandler {
             case WINDMILL:
                 TileEntityWindMill tewm = (TileEntityWindMill) te;
                 return new GuiWindMill((Container) getServerGuiElement(ID, player, world, x, y, z), player.inventory, tewm);
+            case FUELGENERATOR:
+                TileEntityFuelGenerator tefg = (TileEntityFuelGenerator) te;
+                return new GuiFuelGenerator(player.inventory, tefg);
             default:
                 return null;
         }

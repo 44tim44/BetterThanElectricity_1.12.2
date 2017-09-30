@@ -50,6 +50,9 @@ container.solar_panel=Solar Panel
 tile.wind_mill_block.name=Wind Mill
 container.wind_mill=Wind Mill
 
+tile.fuel_generator_block.name=Fuel Generator
+container.fuel_generator=Fuel Generator
+
 tile.machine_block.name=Machine Block
 
 
