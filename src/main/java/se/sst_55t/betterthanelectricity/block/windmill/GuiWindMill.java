@@ -75,9 +75,10 @@ public class GuiWindMill extends GuiContainer{
         fontRenderer.drawString(playerInv.getDisplayName().getUnformattedText(), 8, ySize - 94, 0x404040);
         float chargeRate = this.tileWindMill.getItemChargeTime(null);
         if (tileWindMill.isCharging()) {
-            fontRenderer.drawString("Charge rate: " + String.format("%.2f", 1.0F / (chargeRate / 20.0F)) + " Energy/sec", 8, 18, 0x404040);
+            fontRenderer.drawString(String.format("%.2f", 1.0F / (chargeRate / 20.0F)) + " Energy/sec", 85, ySize - 94, 0x404040);
         } else {
-            fontRenderer.drawString("Charge rate: " + String.format("%.2f", 0.0F) + " Energy/sec", 8, 18, 0x404040);
+            fontRenderer.drawString(String.format("%.2f", 0.0F) + " Energy/sec", 85, ySize - 94, 0x404040);
+            //fontRenderer.drawString("Charge rate: " + String.format("%.2f", 0.0F) + " Energy/sec", 8, 18, 0x404040);
         }
     }
 
