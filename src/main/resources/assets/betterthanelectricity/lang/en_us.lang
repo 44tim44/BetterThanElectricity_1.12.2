@@ -27,11 +27,18 @@ item.corn.name=Corn
 item.corn_seed.name=Corn Seed
 
 item.mining_drill.name=Mining Drill
+item.chainsaw.name=Chainsaw
 item.battery.name=Battery
 item.electric_circuit.name=Electric Circuit
 item.drill_head.name=Drill Head
+item.chainsaw_head.name=Chainsaw Head
 
 item.glass_door_item.name=Glass Door
+
+item.steel_helmet.name=Steel Helmet
+item.steel_chestplate.name=Steel Chestplate
+item.steel_leggings.name=Steel Leggings
+item.steel_boots.name=Steel Boots
 
 # Blocks
 tile.ore_copper.name=Copper Ore

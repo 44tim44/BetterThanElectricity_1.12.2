@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "betterthanelectricity:glass_door_item"
+  },
+  "pattern": [
+    "GG",
+    "GG",
+    "GG"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    }
+  }
+}

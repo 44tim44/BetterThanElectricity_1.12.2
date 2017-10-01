@@ -1,11 +1,13 @@
 package se.sst_55t.betterthanelectricity.item;
 
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import se.sst_55t.betterthanelectricity.BTEMod;
 import se.sst_55t.betterthanelectricity.block.ModBlocks;
 import se.sst_55t.betterthanelectricity.item.tool.ItemPickaxe;
 import se.sst_55t.betterthanelectricity.item.tool.ItemSword;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
+//import net.minecraft.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;
 
 /**
@@ -51,6 +53,12 @@ public class ModItems {
 
     public static ItemBase glassDoorItem = new ItemDoorCustom(ModBlocks.glassDoor,"glass_door_item").setCreativeTab(CreativeTabs.REDSTONE);
 
+    // Armor
+    public static ItemArmorCustom steelHelmet = new ItemArmorCustom(BTEMod.steelArmorMaterial, EntityEquipmentSlot.HEAD, "steel_helmet");
+    public static ItemArmorCustom steelChestplate = new ItemArmorCustom(BTEMod.steelArmorMaterial, EntityEquipmentSlot.CHEST, "steel_chestplate");
+    public static ItemArmorCustom steelLeggings = new ItemArmorCustom(BTEMod.steelArmorMaterial, EntityEquipmentSlot.LEGS, "steel_leggings");
+    public static ItemArmorCustom steelBoots = new ItemArmorCustom(BTEMod.steelArmorMaterial, EntityEquipmentSlot.FEET, "steel_boots");
+
     public static void register(IForgeRegistry<Item> registry) {
         registry.registerAll(
                 copperDust,
@@ -89,7 +97,12 @@ public class ModItems {
                 chainsaw,
                 chainsawHead,
 
-                glassDoorItem
+                glassDoorItem,
+
+                steelHelmet,
+                steelChestplate,
+                steelLeggings,
+                steelBoots
         );
     }
 
@@ -130,6 +143,11 @@ public class ModItems {
         chainsawHead.registerItemModel();
 
         glassDoorItem.registerItemModel();
+
+        steelHelmet.registerItemModel();
+        steelChestplate.registerItemModel();
+        steelLeggings.registerItemModel();
+        steelBoots.registerItemModel();
     }
 
 }

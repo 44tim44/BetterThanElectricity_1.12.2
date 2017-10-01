@@ -1,6 +1,7 @@
 {
   "result": {
-    "item": "betterthanelectricity:steel_rod"
+    "item": "betterthanelectricity:steel_rod",
+    "count": 2
   },
   "pattern": [
     "S",
