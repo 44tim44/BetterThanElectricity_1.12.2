@@ -492,7 +492,7 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
             {
                 if(((ItemBattery)stack.getItem()).getCharge(stack) > 0)
                 {
-                    return 10;
+                    return 20;
                 }
             }
             else

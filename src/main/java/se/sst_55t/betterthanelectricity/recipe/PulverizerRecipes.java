@@ -45,6 +45,17 @@ public class PulverizerRecipes
         this.addSmeltingRecipeForBlock(ModBlocks.oreAluminum, new ItemStack
                 (ModItems.aluminumDust,2), 1.0F);
 
+        this.addSmelting(Items.IRON_INGOT, new ItemStack
+                (ModItems.ironDust,1), 0.7F);
+        this.addSmelting(Items.GOLD_INGOT, new ItemStack
+                (ModItems.goldDust,1), 1.0F);
+        this.addSmelting(ModItems.ingotCopper, new ItemStack
+                (ModItems.copperDust,1), 0.7F);
+        this.addSmelting(ModItems.ingotTin, new ItemStack
+                (ModItems.tinDust,1), 1.0F);
+        this.addSmelting(ModItems.ingotAluminum, new ItemStack
+                (ModItems.aluminumDust,1), 1.0F);
+
 
         this.addSmeltingRecipeForBlock(Blocks.COBBLESTONE, new ItemStack
                 (Blocks.GRAVEL,2), 0.1F);

@@ -1,0 +1,25 @@
+{
+  "result": {
+    "item": "betterthanelectricity:chainsaw"
+  },
+  "pattern": [
+    " H ",
+    "IEI",
+    "IBI"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": {
+      "item": "betterthanelectricity:ingot_steel"
+    },
+    "E": {
+      "item": "betterthanelectricity:electric_circuit"
+    },
+    "H": {
+      "item": "betterthanelectricity:chainsaw_head"
+    },
+    "B": {
+      "item": "betterthanelectricity:battery"
+    }
+  }
+}

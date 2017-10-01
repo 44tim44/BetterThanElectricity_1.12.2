@@ -2,7 +2,10 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "betterthanelectricity:mining_drill_recipe"
+      "betterthanelectricity:drill_head_recipe",
+      "betterthanelectricity:mining_drill_recipe",
+      "betterthanelectricity:chainsaw_head_recipe",
+      "betterthanelectricity:chainsaw_recipe"
     ]
   },
   "criteria": {

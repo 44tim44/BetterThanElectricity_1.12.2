@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class ItemBattery extends Item {
 
-    private static final int maxCharge = 640;
+    private static final int maxCharge = 320;
 
     public ItemBattery() {
         setUnlocalizedName("battery");

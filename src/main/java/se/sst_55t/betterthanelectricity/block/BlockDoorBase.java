@@ -47,6 +47,12 @@ public class BlockDoorBase extends BlockBase
     protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.8125D, 1.0D, 1.0D, 1.0D);
     protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.8125D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
     protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.1875D, 1.0D, 1.0D);
+
+    protected static final AxisAlignedBB SOUTH_AABB_GLASS = new AxisAlignedBB(0.0D, 0.0D, 0.375D, 1.0D, 1.0D, 0.625D);
+    protected static final AxisAlignedBB NORTH_AABB_GLASS = new AxisAlignedBB(0.0D, 0.0D, 0.375D, 1.0D, 1.0D, 0.625D);
+    protected static final AxisAlignedBB WEST_AABB_GLASS = new AxisAlignedBB(0.375D, 0.0D, 0.0D, 0.625D, 1.0D, 1.0D);
+    protected static final AxisAlignedBB EAST_AABB_GLASS = new AxisAlignedBB(0.375D, 0.0D, 0.0D, 0.625D, 1.0D, 1.0D);
+
     public static boolean redstoneOnly;
 
     public BlockDoorBase(Material material, String name, boolean redstoneOnly) {
@@ -63,17 +69,30 @@ public class BlockDoorBase extends BlockBase
         boolean flag = !((Boolean)state.getValue(OPEN)).booleanValue();
         boolean flag1 = state.getValue(HINGE) == BlockDoor.EnumHingePosition.RIGHT;
 
-        switch (enumfacing)
-        {
-            case EAST:
-            default:
-                return flag ? EAST_AABB : (flag1 ? NORTH_AABB : SOUTH_AABB);
-            case SOUTH:
-                return flag ? SOUTH_AABB : (flag1 ? EAST_AABB : WEST_AABB);
-            case WEST:
-                return flag ? WEST_AABB : (flag1 ? SOUTH_AABB : NORTH_AABB);
-            case NORTH:
-                return flag ? NORTH_AABB : (flag1 ? WEST_AABB : EAST_AABB);
+        if(this == ModBlocks.glassDoor) {
+            switch (enumfacing) {
+                case EAST:
+                default:
+                    return flag ? EAST_AABB_GLASS : (flag1 ? NORTH_AABB_GLASS : SOUTH_AABB_GLASS);
+                case SOUTH:
+                    return flag ? SOUTH_AABB_GLASS : (flag1 ? EAST_AABB_GLASS : WEST_AABB_GLASS);
+                case WEST:
+                    return flag ? WEST_AABB_GLASS : (flag1 ? SOUTH_AABB_GLASS : NORTH_AABB_GLASS);
+                case NORTH:
+                    return flag ? NORTH_AABB_GLASS : (flag1 ? WEST_AABB_GLASS : EAST_AABB_GLASS);
+            }
+        } else{
+            switch (enumfacing) {
+                case EAST:
+                default:
+                    return flag ? EAST_AABB : (flag1 ? NORTH_AABB : SOUTH_AABB);
+                case SOUTH:
+                    return flag ? SOUTH_AABB : (flag1 ? EAST_AABB : WEST_AABB);
+                case WEST:
+                    return flag ? WEST_AABB : (flag1 ? SOUTH_AABB : NORTH_AABB);
+                case NORTH:
+                    return flag ? NORTH_AABB : (flag1 ? WEST_AABB : EAST_AABB);
+            }
         }
     }
 

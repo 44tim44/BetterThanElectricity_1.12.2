@@ -1,6 +1,7 @@
 package se.sst_55t.betterthanelectricity.block.solarpanel;
 
 import net.minecraft.world.biome.BiomeDesert;
+import se.sst_55t.betterthanelectricity.item.IChargeable;
 import se.sst_55t.betterthanelectricity.item.ItemBattery;
 import se.sst_55t.betterthanelectricity.item.ItemMiningDrill;
 import se.sst_55t.betterthanelectricity.item.ModItems;
@@ -20,7 +21,7 @@ import javax.annotation.Nullable;
  */
 public class TileEntitySolarPanel extends TileEntity implements ITickable {
 
-    private static final int BASE_CHARGE_RATE = 40; // Amount of ticks required to charge 1 energy.
+    private static final int BASE_CHARGE_RATE = 20; // Amount of ticks required to charge 1 energy.
     private int chargeTime;
     private int totalChargeTime;
     private ItemStackHandler inventory = new ItemStackHandler(1);
@@ -29,7 +30,7 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable {
     {
         ItemStack itemstack = inventory.getStackInSlot(0);
 
-        if (isCharging() && (itemstack.getItem() == ModItems.battery || itemstack.getItem() == ModItems.miningDrill))
+        if (isCharging() && (itemstack.getItem() == ModItems.battery || itemstack.getItem() instanceof IChargeable))
         {
             ++this.chargeTime;
 
@@ -41,9 +42,9 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable {
                 {
                     ((ItemBattery)itemstack.getItem()).increaseCharge(itemstack);
                 }
-                else if(itemstack.getItem() == ModItems.miningDrill)
+                else if(itemstack.getItem() instanceof IChargeable)
                 {
-                    ((ItemMiningDrill)itemstack.getItem()).increaseCharge(itemstack);
+                    ((IChargeable)itemstack.getItem()).increaseCharge(itemstack);
                 }
             }
         }
@@ -76,9 +77,9 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable {
         {
             return ((ItemBattery)itemstack.getItem()).getCharge(itemstack);
         }
-        else if (itemstack.getItem() == ModItems.miningDrill)
+        else if (itemstack.getItem() instanceof IChargeable)
         {
-            return ((ItemMiningDrill)itemstack.getItem()).getCharge(itemstack);
+            return ((IChargeable)itemstack.getItem()).getCharge(itemstack);
         }
         else
         {

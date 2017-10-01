@@ -41,10 +41,13 @@ public class ModItems {
     public static ItemBase corn = new ItemBase("corn").setCreativeTab(CreativeTabs.FOOD);
 
     public static ItemBattery battery = new ItemBattery();
-    public static ItemMiningDrill miningDrill = new ItemMiningDrill();
-
     public static ItemBase electricCircuit = new ItemBase("electric_circuit").setCreativeTab(CreativeTabs.MISC);
+
+    public static ItemMiningDrill miningDrill = new ItemMiningDrill();
     public static ItemBase drillHead = new ItemBase("drill_head").setCreativeTab(CreativeTabs.MISC);
+
+    public static ItemChainsaw chainsaw = new ItemChainsaw();
+    public static ItemBase chainsawHead = new ItemBase("chainsaw_head").setCreativeTab(CreativeTabs.MISC);
 
     public static ItemBase glassDoorItem = new ItemDoorCustom(ModBlocks.glassDoor,"glass_door_item").setCreativeTab(CreativeTabs.REDSTONE);
 
@@ -78,10 +81,13 @@ public class ModItems {
                 corn,
 
                 battery,
-                miningDrill,
-
                 electricCircuit,
+
+                miningDrill,
                 drillHead,
+
+                chainsaw,
+                chainsawHead,
 
                 glassDoorItem
         );
@@ -115,10 +121,13 @@ public class ModItems {
         corn.registerItemModel();
 
         battery.registerItemModel();
-        miningDrill.registerItemModel();
-
         electricCircuit.registerItemModel();
+
+        miningDrill.registerItemModel();
         drillHead.registerItemModel();
+
+        chainsaw.registerItemModel();
+        chainsawHead.registerItemModel();
 
         glassDoorItem.registerItemModel();
     }

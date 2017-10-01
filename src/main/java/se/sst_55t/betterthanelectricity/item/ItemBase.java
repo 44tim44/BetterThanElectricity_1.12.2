@@ -1,5 +1,6 @@
 package se.sst_55t.betterthanelectricity.item;
 
+import net.minecraft.item.ItemStack;
 import se.sst_55t.betterthanelectricity.BTEMod;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -24,5 +25,17 @@ public class ItemBase extends Item {
     public ItemBase setCreativeTab(CreativeTabs tab) {
         super.setCreativeTab(tab);
         return this;
+    }
+
+    @Override
+    public int getItemBurnTime(ItemStack itemStack) {
+        if(this == ModItems.coalDust)
+        {
+            return 1200;
+        }
+        else
+        {
+            return super.getItemBurnTime(itemStack);
+        }
     }
 }

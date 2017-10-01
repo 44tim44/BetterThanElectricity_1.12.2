@@ -27,13 +27,13 @@ import java.util.List;
 /**
  * Created by Timeout on 2017-09-27.
  */
-public class ItemMiningDrill extends Item implements IChargeable{
+public class ItemChainsaw extends Item implements IChargeable{
 
     private static final int maxCharge = 1280;
 
-    public ItemMiningDrill() {
-        setUnlocalizedName("mining_drill");
-        setRegistryName("mining_drill");
+    public ItemChainsaw() {
+        setUnlocalizedName("chainsaw");
+        setRegistryName("chainsaw");
         setMaxStackSize(1);
         setMaxDamage(1300);
         setCreativeTab(CreativeTabs.TOOLS);
@@ -92,7 +92,7 @@ public class ItemMiningDrill extends Item implements IChargeable{
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
         ItemStack itemstack = player.getHeldItem(hand);
-        if(((ItemMiningDrill)itemstack.getItem()).getCharge(itemstack)>0)
+        if(((ItemChainsaw)itemstack.getItem()).getCharge(itemstack)>0)
         {
             if (!player.canPlayerEdit(pos.offset(facing), facing, itemstack))
             {
@@ -104,9 +104,14 @@ public class ItemMiningDrill extends Item implements IChargeable{
                 Block block = iblockstate.getBlock();
                 Material material = iblockstate.getMaterial();
 
-                if (block != Blocks.BEDROCK && (material == Material.ROCK || material == Material.GROUND || material == Material.GRASS || block == Blocks.GRAVEL || block == Blocks.SAND))
+                if (block == Blocks.LOG)
                 {
-                    this.mineBlock(itemstack, player, worldIn, pos, iblockstate);
+                    this.fellTree(itemstack, player, worldIn, pos, iblockstate);
+                    return EnumActionResult.SUCCESS;
+                }
+                else if (material == Material.WOOD)
+                {
+                    this.chopBlock(itemstack, player, worldIn, pos, iblockstate);
                     return EnumActionResult.SUCCESS;
                 }
                 else
@@ -121,15 +126,41 @@ public class ItemMiningDrill extends Item implements IChargeable{
         }
     }
 
-    protected void mineBlock(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, IBlockState state)
+    protected void chopBlock(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, IBlockState state)
     {
         worldIn.playSound(player, pos, ModSoundEvents.DRILL_SPIN, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
         if (!worldIn.isRemote)
         {
             worldIn.destroyBlock(pos,true);
-            //stack.damageItem(1, player);
-            ((ItemMiningDrill)stack.getItem()).decreaseCharge(stack);
+            ((ItemChainsaw)stack.getItem()).decreaseCharge(stack);
+        }
+    }
+
+    protected void fellTree(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, IBlockState state)
+    {
+        worldIn.playSound(player, pos, ModSoundEvents.DRILL_SPIN, SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+        if (!worldIn.isRemote)
+        {
+            BlockPos tempPos = pos;
+            boolean done = false;
+            //int amountOfLogs = 0;
+
+            while(!done){
+                if(worldIn.getBlockState(tempPos).getBlock() != Blocks.LOG){
+                    done = true;
+                } else {
+                    //amountOfLogs++;
+                    worldIn.destroyBlock(tempPos,true);
+                    ((ItemChainsaw)stack.getItem()).decreaseCharge(stack);
+                    tempPos = tempPos.offset(EnumFacing.UP);
+                }
+                if(((ItemChainsaw)stack.getItem()).getCharge(stack) == 0)
+                {
+                    done = true;
+                }
+            }
         }
     }
 
@@ -146,6 +177,6 @@ public class ItemMiningDrill extends Item implements IChargeable{
     */
 
     public void registerItemModel() {
-        BTEMod.proxy.registerItemRenderer(this, 0, "mining_drill");
+        BTEMod.proxy.registerItemRenderer(this, 0, "chainsaw");
     }
 }

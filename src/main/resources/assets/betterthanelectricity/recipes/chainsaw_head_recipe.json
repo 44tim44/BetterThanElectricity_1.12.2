@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "betterthanelectricity:chainsaw_head"
+  },
+  "pattern": [
+    "D D",
+    "IIS",
+    "D D"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": {
+      "item": "betterthanelectricity:ingot_steel"
+    },
+    "S": {
+      "item": "betterthanelectricity:steel_rod"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  }
+}

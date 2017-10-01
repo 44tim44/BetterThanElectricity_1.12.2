@@ -24,6 +24,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.sst_55t.betterthanelectricity.block.inventory.SlotBattery;
+import se.sst_55t.betterthanelectricity.item.IChargeable;
 import se.sst_55t.betterthanelectricity.item.ItemBattery;
 import se.sst_55t.betterthanelectricity.item.ItemMiningDrill;
 import se.sst_55t.betterthanelectricity.item.ModItems;
@@ -36,7 +37,7 @@ import javax.annotation.Nullable;
  */
 public class TileEntityFuelGenerator extends TileEntityLockable implements ITickable, ISidedInventory
 {
-    private static final int BASE_CHARGE_RATE = 25; // Amount of ticks required to charge 1 energy.
+    private static final int BASE_CHARGE_RATE = 20; // Amount of ticks required to charge 1 energy.
     private static final int[] SLOTS_TOP = new int[] {0};
     private static final int[] SLOTS_BOTTOM = new int[] {1};
     private static final int[] SLOTS_SIDES = new int[] {1};
@@ -256,9 +257,9 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
                         {
                             ((ItemBattery)itemstack.getItem()).increaseCharge(itemstack);
                         }
-                        else if(itemstack.getItem() == ModItems.miningDrill)
+                        else if(itemstack.getItem() instanceof IChargeable)
                         {
-                            ((ItemMiningDrill)itemstack.getItem()).increaseCharge(itemstack);
+                            ((IChargeable)itemstack.getItem()).increaseCharge(itemstack);
                         }
 
                         flag1 = true;
@@ -316,9 +317,9 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
                 }
                 return false;
             }
-            else if(itemstack.getItem() == ModItems.miningDrill)
+            else if(itemstack.getItem() instanceof IChargeable)
             {
-                if(((ItemMiningDrill)itemstack.getItem()).getCharge(itemstack) < ((ItemMiningDrill)itemstack.getItem()).getMaxCharge(itemstack))
+                if(((IChargeable)itemstack.getItem()).getCharge(itemstack) < ((IChargeable)itemstack.getItem()).getMaxCharge(itemstack))
                 {
                     return true;
                 }
@@ -462,7 +463,7 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
     {
         if (index != 1)
         {
-            return stack.getItem()==ModItems.battery || stack.getItem()==ModItems.miningDrill;
+            return stack.getItem()==ModItems.battery || stack.getItem() instanceof IChargeable;
         }
         else
         {
