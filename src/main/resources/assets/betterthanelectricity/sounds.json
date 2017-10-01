@@ -13,5 +13,37 @@
       "betterthanelectricity:slide_door"
     ],
     "subtitle": "betterthanelectricity.subtitle.slide_door"
-  }
+  },
+
+  "chainsaw.start": {
+    "category": "player",
+    "sounds": [
+      "betterthanelectricity:chainsaw_start"
+    ],
+    "subtitle": "betterthanelectricity.subtitle.chainsaw_start"
+  },
+
+  "chainsaw.idle": {
+    "category": "player",
+    "sounds": [
+      "betterthanelectricity:chainsaw_idle"
+    ],
+    "subtitle": "betterthanelectricity.subtitle.chainsaw_idle"
+  },
+
+  "chainsaw.stop": {
+    "category": "player",
+    "sounds": [
+      "betterthanelectricity:chainsaw_stop"
+    ],
+    "subtitle": "betterthanelectricity.subtitle.chainsaw_stop"
+  },
+
+  "chainsaw.use": {
+    "category": "player",
+    "sounds": [
+      "betterthanelectricity:chainsaw_use"
+    ],
+    "subtitle": "betterthanelectricity.subtitle.chainsaw_use"
+  },
 }

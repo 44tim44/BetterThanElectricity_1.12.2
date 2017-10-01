@@ -21,6 +21,10 @@ public class ModSoundEvents {
     @ObjectHolder("record.solaris")
     public static final SoundEvent DRILL_SPIN = createSoundEvent("drill.spin");
     public static final SoundEvent DOOR_SLIDE = createSoundEvent("door.slide");
+    public static final SoundEvent CHAINSAW_START = createSoundEvent("chainsaw.start");
+    public static final SoundEvent CHAINSAW_IDLE = createSoundEvent("chainsaw.idle");
+    public static final SoundEvent CHAINSAW_STOP = createSoundEvent("chainsaw.stop");
+    public static final SoundEvent CHAINSAW_USE = createSoundEvent("chainsaw.use");
 
 
     /**
@@ -40,7 +44,11 @@ public class ModSoundEvents {
         public static void registerSoundEvents(final RegistryEvent.Register<SoundEvent> event) {
             event.getRegistry().registerAll(
                     DRILL_SPIN,
-                    DOOR_SLIDE
+                    DOOR_SLIDE,
+                    CHAINSAW_START,
+                    CHAINSAW_IDLE,
+                    CHAINSAW_STOP,
+                    CHAINSAW_USE
             );
         }
     }
