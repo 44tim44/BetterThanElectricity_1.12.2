@@ -105,7 +105,7 @@ public class ItemMiningDrill extends Item implements IChargeable{
                 Block block = iblockstate.getBlock();
                 Material material = iblockstate.getMaterial();
 
-                if (block != Blocks.BEDROCK && (material == Material.ROCK || material == Material.GROUND || material == Material.GRASS || block == Blocks.GRAVEL || block == Blocks.SAND))
+                if (block != Blocks.BEDROCK && (material == Material.ROCK || material == Material.GROUND || material == Material.GRASS || block == Blocks.GRAVEL || block == Blocks.SAND || block == Blocks.CLAY))
                 {
                     this.mineBlock(itemstack, player, worldIn, pos, iblockstate);
                     return EnumActionResult.SUCCESS;
@@ -124,7 +124,7 @@ public class ItemMiningDrill extends Item implements IChargeable{
 
     protected void mineBlock(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, IBlockState state)
     {
-        worldIn.playSound(player, pos, ModSoundEvents.DRILL_SPIN, SoundCategory.BLOCKS, 0.5F, 1.0F);
+        worldIn.playSound(player, pos, ModSoundEvents.DRILL_SPIN, SoundCategory.BLOCKS, 0.5F, 0.5F);
 
         if (!worldIn.isRemote)
         {

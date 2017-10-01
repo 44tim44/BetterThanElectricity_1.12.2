@@ -129,7 +129,7 @@ public class ItemChainsaw extends Item implements IChargeable{
 
     protected void chopBlock(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, IBlockState state)
     {
-        worldIn.playSound(player, pos, ModSoundEvents.CHAINSAW_USE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        worldIn.playSound(player, pos, ModSoundEvents.CHAINSAW_USE, SoundCategory.BLOCKS, 0.5F, 1.0F);
 
         if (!worldIn.isRemote)
         {
