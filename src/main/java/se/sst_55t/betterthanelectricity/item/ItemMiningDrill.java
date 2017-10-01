@@ -8,6 +8,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
@@ -127,8 +128,9 @@ public class ItemMiningDrill extends Item implements IChargeable{
 
         if (!worldIn.isRemote)
         {
+            int exp = state.getBlock().getExpDrop(state, worldIn, pos, 0);
+            state.getBlock().dropXpOnBlockBreak(worldIn,pos,exp);
             worldIn.destroyBlock(pos,true);
-            //stack.damageItem(1, player);
             ((ItemMiningDrill)stack.getItem()).decreaseCharge(stack);
         }
     }
