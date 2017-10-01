@@ -142,7 +142,7 @@ public class ModBlocks {
     public static BlockTable tableAcacia = new BlockTable(Material.WOOD,"table_acacia");
     public static BlockTable tableDarkOak = new BlockTable(Material.WOOD,"table_dark_oak");
 
-    public static BlockBase glassDoor = new BlockDoorBase(Material.GLASS,"glass_door",true);
+    public static BlockBase glassDoor = new BlockDoorBase(Material.IRON,"glass_door",true).setHardness(5.0F);
 
 
 

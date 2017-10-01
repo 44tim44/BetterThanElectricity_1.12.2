@@ -264,7 +264,11 @@ public class BlockDoorBase extends BlockBase
      */
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-        return state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER ? Items.AIR : Item.getItemFromBlock(this);
+        if(this == ModBlocks.glassDoor) {
+            return ModItems.glassDoorItem;
+        } else {
+            return state.getValue(HALF) == BlockDoor.EnumDoorHalf.UPPER ? Items.AIR : Item.getItemFromBlock(this);
+        }
     }
 
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
