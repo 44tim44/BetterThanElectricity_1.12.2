@@ -4,6 +4,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import se.sst_55t.betterthanelectricity.block.ModBlocks;
 import se.sst_55t.betterthanelectricity.entity.EntitySittableBlock;
@@ -12,6 +13,7 @@ import se.sst_55t.betterthanelectricity.network.PacketRequestUpdatePedestal;
 import se.sst_55t.betterthanelectricity.network.PacketUpdatePedestal;
 import se.sst_55t.betterthanelectricity.proxy.CommonProxy;
 import se.sst_55t.betterthanelectricity.recipe.ModRecipes;
+import se.sst_55t.betterthanelectricity.util.FallDamageEventHandler;
 import se.sst_55t.betterthanelectricity.world.ModWorldGen;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -57,6 +59,9 @@ public class BTEMod {
             .addToolMaterial("STEEL", 2, 1000, 10, 3, 20);
     public static final ItemArmor.ArmorMaterial steelArmorMaterial = EnumHelper
             .addArmorMaterial("STEEL",MODID + ":steel", 15, new int[]{2, 5, 6, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
+    public static final ItemArmor.ArmorMaterial machineArmorMaterial = EnumHelper
+            .addArmorMaterial("MACHINE",MODID + ":machine", -1, new int[]{0, 0, 0, 0}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
+
 
     @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY)
     public static CommonProxy proxy;
@@ -89,7 +94,7 @@ public class BTEMod {
         ModRecipes.init();
         EntityRegistry.registerModEntity(new ResourceLocation("betterthanelectricity:mountable_block"), EntitySittableBlock.class, "MountableBlock", 0, this, 80, 1, false);
 
-        //MinecraftForge.EVENT_BUS.register(new EventHandlerCommon());
+        MinecraftForge.EVENT_BUS.register(new FallDamageEventHandler());
         proxy.init(event);
     }
 

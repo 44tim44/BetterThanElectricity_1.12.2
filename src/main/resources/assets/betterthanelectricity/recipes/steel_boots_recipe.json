@@ -1,0 +1,15 @@
+{
+  "result": {
+    "item": "betterthanelectricity:steel_boots"
+  },
+  "pattern": [
+    "# #",
+    "# #"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "betterthanelectricity:ingot_steel"
+    }
+  }
+}

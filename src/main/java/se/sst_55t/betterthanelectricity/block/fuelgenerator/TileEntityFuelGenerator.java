@@ -20,15 +20,11 @@ import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.datafix.FixTypes;
 import net.minecraft.util.datafix.walkers.ItemStackDataLists;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import se.sst_55t.betterthanelectricity.block.inventory.SlotBattery;
 import se.sst_55t.betterthanelectricity.item.IChargeable;
 import se.sst_55t.betterthanelectricity.item.ItemBattery;
-import se.sst_55t.betterthanelectricity.item.ItemMiningDrill;
 import se.sst_55t.betterthanelectricity.item.ModItems;
-import se.sst_55t.betterthanelectricity.recipe.PulverizerRecipes;
 
 import javax.annotation.Nullable;
 

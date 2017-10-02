@@ -59,6 +59,9 @@ public class ModItems {
     public static ItemArmorCustom steelLeggings = new ItemArmorCustom(BTEMod.steelArmorMaterial, EntityEquipmentSlot.LEGS, "steel_leggings");
     public static ItemArmorCustom steelBoots = new ItemArmorCustom(BTEMod.steelArmorMaterial, EntityEquipmentSlot.FEET, "steel_boots");
 
+    public static ItemGravityBoots gravityBoots = new ItemGravityBoots(BTEMod.machineArmorMaterial, EntityEquipmentSlot.FEET, "gravity_boots");
+    public static ItemJetpack jetpack = new ItemJetpack(BTEMod.machineArmorMaterial, EntityEquipmentSlot.CHEST,"jetpack");
+
     public static void register(IForgeRegistry<Item> registry) {
         registry.registerAll(
                 copperDust,
@@ -102,7 +105,10 @@ public class ModItems {
                 steelHelmet,
                 steelChestplate,
                 steelLeggings,
-                steelBoots
+                steelBoots,
+
+                gravityBoots,
+                jetpack
         );
     }
 
@@ -148,6 +154,9 @@ public class ModItems {
         steelChestplate.registerItemModel();
         steelLeggings.registerItemModel();
         steelBoots.registerItemModel();
+
+        gravityBoots.registerItemModel();
+        jetpack.registerItemModel();
     }
 
 }

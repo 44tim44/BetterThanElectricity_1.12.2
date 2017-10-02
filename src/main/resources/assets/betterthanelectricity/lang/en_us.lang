@@ -40,6 +40,9 @@ item.steel_chestplate.name=Steel Chestplate
 item.steel_leggings.name=Steel Leggings
 item.steel_boots.name=Steel Boots
 
+item.gravity_boots.name=Gravity Boots
+item.jetpack.name=Jetpack
+
 # Blocks
 tile.ore_copper.name=Copper Ore
 tile.ore_tin.name=Tin Ore

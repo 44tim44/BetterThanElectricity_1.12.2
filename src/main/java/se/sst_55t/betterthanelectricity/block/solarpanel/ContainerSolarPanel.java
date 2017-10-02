@@ -63,10 +63,10 @@ public class ContainerSolarPanel extends Container implements IEnergyStorage{
 
             if (index < containerSlots) {
                 if (!this.mergeItemStack(itemstack1, containerSlots, inventorySlots.size(), true)) {
-                    return null;
+                    return ItemStack.EMPTY;
                 }
             } else if (!this.mergeItemStack(itemstack1, 0, containerSlots, false)) {
-                return null;
+                return ItemStack.EMPTY;
             }
 
             if (itemstack1.isEmpty()) {

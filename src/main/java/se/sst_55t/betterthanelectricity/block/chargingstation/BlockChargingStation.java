@@ -1,4 +1,4 @@
-package se.sst_55t.betterthanelectricity.block.fuelgenerator;
+package se.sst_55t.betterthanelectricity.block.chargingstation;
 
 
 import net.minecraft.block.BlockHorizontal;
@@ -32,13 +32,13 @@ import java.util.Random;
 /**
  * Created by Timmy on 2016-11-27.
  */
-public class BlockFuelGenerator extends BlockContainerBase {
+public class BlockChargingStation extends BlockContainerBase {
 
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     private final boolean isActive;
     private static boolean keepInventory;
 
-    public BlockFuelGenerator(boolean isActive, String name) {
+    public BlockChargingStation(boolean isActive, String name) {
         super(Material.ROCK, name);
         this.setDefaultState(this.blockState.getBaseState().withProperty
                 (FACING,EnumFacing.NORTH));
@@ -52,7 +52,7 @@ public class BlockFuelGenerator extends BlockContainerBase {
     @Nullable
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-        return Item.getItemFromBlock(ModBlocks.fuelGenerator);
+        return Item.getItemFromBlock(ModBlocks.chargingStation);
     }
 
     /**
@@ -140,12 +140,13 @@ public class BlockFuelGenerator extends BlockContainerBase {
             TileEntity tileentity = world.getTileEntity(pos);
             if (player.isSneaking()) {
             } else {
-                player.openGui(BTEMod.instance, ModGuiHandler.FUELGENERATOR, world, pos.getX(), pos.getY(), pos.getZ());
+                player.openGui(BTEMod.instance, ModGuiHandler.CHARGINGSTATION, world, pos.getX(), pos.getY(), pos.getZ());
             }
         }
         return true;
     }
 
+    /*
     public static void setState(boolean active, World worldIn, BlockPos pos)
     {
         IBlockState iblockstate = worldIn.getBlockState(pos);
@@ -154,16 +155,16 @@ public class BlockFuelGenerator extends BlockContainerBase {
 
         if (active)
         {
-            worldIn.setBlockState(pos, ModBlocks.fuelGenerator_on.getDefaultState()
+            worldIn.setBlockState(pos, ModBlocks.chargingStation_on.getDefaultState()
                     .withProperty(FACING, iblockstate.getValue(FACING)), 3);
-            worldIn.setBlockState(pos, ModBlocks.fuelGenerator_on.getDefaultState()
+            worldIn.setBlockState(pos, ModBlocks.chargingStation_on.getDefaultState()
                     .withProperty(FACING, iblockstate.getValue(FACING)), 3);
         }
         else
         {
-            worldIn.setBlockState(pos, ModBlocks.fuelGenerator.getDefaultState()
+            worldIn.setBlockState(pos, ModBlocks.chargingStation.getDefaultState()
                     .withProperty(FACING, iblockstate.getValue(FACING)), 3);
-            worldIn.setBlockState(pos, ModBlocks.fuelGenerator.getDefaultState()
+            worldIn.setBlockState(pos, ModBlocks.chargingStation.getDefaultState()
                     .withProperty(FACING, iblockstate.getValue(FACING)), 3);
         }
 
@@ -175,17 +176,18 @@ public class BlockFuelGenerator extends BlockContainerBase {
             worldIn.setTileEntity(pos, tileentity);
         }
     }
+    */
 
-    public Class<TileEntityFuelGenerator> getTileEntityClass() {
-        return TileEntityFuelGenerator.class;
+    public Class<TileEntityChargingStation> getTileEntityClass() {
+        return TileEntityChargingStation.class;
     }
 
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
-    public TileEntityFuelGenerator createNewTileEntity(World world, int meta)
+    public TileEntityChargingStation createNewTileEntity(World world, int meta)
     {
-        return new TileEntityFuelGenerator();
+        return new TileEntityChargingStation();
     }
 
     /**
@@ -208,9 +210,9 @@ public class BlockFuelGenerator extends BlockContainerBase {
         {
             TileEntity tileentity = worldIn.getTileEntity(pos);
 
-            if (tileentity instanceof TileEntityFuelGenerator)
+            if (tileentity instanceof TileEntityChargingStation)
             {
-                ((TileEntityFuelGenerator)tileentity).setCustomInventoryName(stack.getDisplayName());
+                ((TileEntityChargingStation)tileentity).setCustomInventoryName(stack.getDisplayName());
             }
         }
     }
@@ -224,9 +226,9 @@ public class BlockFuelGenerator extends BlockContainerBase {
         {
             TileEntity tileentity = worldIn.getTileEntity(pos);
 
-            if (tileentity instanceof TileEntityFuelGenerator)
+            if (tileentity instanceof TileEntityChargingStation)
             {
-                InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntityFuelGenerator)tileentity);
+                InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntityChargingStation)tileentity);
                 worldIn.updateComparatorOutputLevel(pos, this);
             }
         }
@@ -246,7 +248,7 @@ public class BlockFuelGenerator extends BlockContainerBase {
 
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
     {
-        return new ItemStack(ModBlocks.fuelGenerator);
+        return new ItemStack(ModBlocks.chargingStation);
     }
 
     /**
