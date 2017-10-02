@@ -73,7 +73,7 @@ public class GuiChargingStation extends GuiContainer
         this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
         this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
         float chargeRate = this.tileChargingStation.getOutputRate((ItemStack)null);
-        fontRenderer.drawString(String.format("%.2f", 1.0F / (chargeRate / 20.0F)) + " Energy/sec", 85, ySize - 94, 0x404040);
+        fontRenderer.drawString(String.format("%.2f", 1.0F / (chargeRate / 20.0F)) + " Energy/sec", 80, ySize - 94, 0x404040);
     }
 
     /**
@@ -90,12 +90,14 @@ public class GuiChargingStation extends GuiContainer
         if (TileEntityChargingStation.isTakingCharge(this.tileChargingStation))
         {
             //int k = this.getBurnLeftScaled(14);
-            this.drawTexturedModalRect(x + 98, y + 50, 176, 0, 14, 14);
+            this.drawTexturedModalRect(x + 98, y + 49, 176, 0, 14, 14);
+            this.drawTexturedModalRect(x + 115, y + 49, 206, 14, 23, 14);
         }
         if (TileEntityChargingStation.isGivingCharge(this.tileChargingStation))
         {
             //int l = this.getCookProgressScaled(14);
             this.drawTexturedModalRect(x + 98, y + 23, 176, 0, 14, 14);
+            this.drawTexturedModalRect(x + 115, y + 23, 206, 0, 23, 14);
         }
         int k = this.getChargeBar(42);
         this.drawTexturedModalRect(x + 143, y + 22 + 42 - k, 190, 0, 16, k);

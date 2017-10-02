@@ -1,9 +1,7 @@
 package se.sst_55t.betterthanelectricity;
 
-import net.minecraft.block.material.Material;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemArmor;
-import net.minecraft.util.SoundEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import se.sst_55t.betterthanelectricity.block.ModBlocks;
@@ -32,7 +30,6 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
-import javax.annotation.Nullable;
 import java.util.logging.Logger;
 
 /**

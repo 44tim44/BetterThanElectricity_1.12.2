@@ -309,4 +309,10 @@ public class BlockChargingStation extends BlockContainerBase {
     public Item createItemBlock() {
         return new ItemBlock(this).setRegistryName(this.getRegistryName());
     }
+
+    @Override
+    @Deprecated
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
 }

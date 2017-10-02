@@ -19,6 +19,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import se.sst_55t.betterthanelectricity.BTEMod;
 import se.sst_55t.betterthanelectricity.block.BlockDoorBase;
 import se.sst_55t.betterthanelectricity.block.ModBlocks;
+import se.sst_55t.betterthanelectricity.block.chargingstation.TESRChargingStation;
+import se.sst_55t.betterthanelectricity.block.chargingstation.TileEntityChargingStation;
 import se.sst_55t.betterthanelectricity.block.table.TESRTable;
 import se.sst_55t.betterthanelectricity.block.table.TileEntityTable;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -44,6 +46,7 @@ public class ClientProxy extends CommonProxy
     @Override
     public void registerRenderers() {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTable.class, new TESRTable());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChargingStation.class, new TESRChargingStation());
         ModelLoader.setCustomStateMapper(ModBlocks.glassDoor, (new StateMap.Builder()).ignore(BlockDoorBase.POWERED).build());
     }
 
