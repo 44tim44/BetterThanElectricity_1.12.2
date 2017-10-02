@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "facing=north": { "model": "betterthanelectricity:charging_station" },
+        "facing=south": { "model": "betterthanelectricity:charging_station", "y": 180 },
+        "facing=west":  { "model": "betterthanelectricity:charging_station", "y": 270 },
+        "facing=east":  { "model": "betterthanelectricity:charging_station", "y": 90 },
+        "inventory":    { "model": "betterthanelectricity:charging_station" }
+    }
+}

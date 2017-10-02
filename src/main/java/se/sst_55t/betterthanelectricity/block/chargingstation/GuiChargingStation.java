@@ -1,20 +1,28 @@
 package se.sst_55t.betterthanelectricity.block.chargingstation;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 import se.sst_55t.betterthanelectricity.BTEMod;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiChargingStation extends GuiContainer
 {
     private static final ResourceLocation chargingStationTextures =
             new ResourceLocation(BTEMod.MODID,
-                    "textures/gui/fuel_generator.png");
+                    "textures/gui/charging_station.png");
 
     /** The player inventory bound to this GUI. */
     private final InventoryPlayer playerInventory;
@@ -27,6 +35,12 @@ public class GuiChargingStation extends GuiContainer
         this.tileChargingStation = tecs;
     }
 
+    @Override
+    public void initGui() {
+        super.initGui();
+        buttonList.add(new HintButton(0, this.guiLeft + 143, this.guiTop + 22));
+    }
+
     /**
      * Draws the screen and all the components in it.
      */
@@ -35,6 +49,19 @@ public class GuiChargingStation extends GuiContainer
         this.drawDefaultBackground();
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.renderHoveredToolTip(mouseX, mouseY);
+
+        for (int i = 0; i < buttonList.size(); i++) {
+            if (buttonList.get(i) instanceof GuiButton) {
+                GuiButton btn = (GuiButton) buttonList.get(i);
+                if (btn.isMouseOver())
+                {
+                    String[] desc = { "Charge: " +  tileChargingStation.getCharge() + "/" + tileChargingStation.getMaxCharge()};
+                    @SuppressWarnings("rawtypes")
+                    List temp = Arrays.asList(desc);
+                    drawHoveringText(temp, mouseX, mouseY, fontRenderer);
+                }
+            }
+        }
     }
 
     /**
@@ -63,31 +90,40 @@ public class GuiChargingStation extends GuiContainer
         if (TileEntityChargingStation.isTakingCharge(this.tileChargingStation))
         {
             //int k = this.getBurnLeftScaled(14);
-            this.drawTexturedModalRect(x + 71, y + 36, 176, 0, 14, 14);
+            this.drawTexturedModalRect(x + 98, y + 50, 176, 0, 14, 14);
         }
         if (TileEntityChargingStation.isGivingCharge(this.tileChargingStation))
         {
             //int l = this.getCookProgressScaled(14);
-            this.drawTexturedModalRect(x + 89, y + 36, 176, 0, 14, 14);
+            this.drawTexturedModalRect(x + 98, y + 23, 176, 0, 14, 14);
         }
+        int k = this.getChargeBar(42);
+        this.drawTexturedModalRect(x + 143, y + 22 + 42 - k, 190, 0, 16, k);
     }
 
-    private int getCookProgressScaled(int pixels)
+    private int getChargeBar(int pixels)
     {
-        int i = this.tileChargingStation.getField(2);
-        int j = this.tileChargingStation.getField(3);
+        int i = this.tileChargingStation.getCharge();
+        int j = this.tileChargingStation.getMaxCharge();
         return j != 0 && i != 0 ? i * pixels / j : 0;
     }
 
-    private int getBurnLeftScaled(int pixels)
-    {
-        int i = this.tileChargingStation.getField(1);
+    @SideOnly(Side.CLIENT)
+    static class HintButton extends GuiButton {
+        private static final String __OBFID = "CL_00000743";
 
-        if (i == 0)
-        {
-            i = 200;
+        protected HintButton(int buttonID, int posx, int posy) {
+            super(buttonID, posx, posy, 16, 42, "");
         }
 
-        return this.tileChargingStation.getField(0) * pixels / i;
+        public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+            if (this.visible) {
+                mc.getTextureManager().bindTexture(chargingStationTextures);
+                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
+                this.drawTexturedModalRect(this.x, this.y, 0, 182, this.width, this.height);
+            }
+        }
+
     }
 }

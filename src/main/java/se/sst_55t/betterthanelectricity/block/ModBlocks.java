@@ -6,6 +6,7 @@ package se.sst_55t.betterthanelectricity.block;
 
 import net.minecraft.init.Blocks;
 import se.sst_55t.betterthanelectricity.ModEnums.BlockType;
+import se.sst_55t.betterthanelectricity.block.chargingstation.BlockChargingStation;
 import se.sst_55t.betterthanelectricity.block.counter.BlockCounter;
 import se.sst_55t.betterthanelectricity.block.electricfurnace.BlockElectricFurnace;
 import se.sst_55t.betterthanelectricity.block.fuelgenerator.BlockFuelGenerator;
@@ -40,6 +41,7 @@ public class ModBlocks {
     public static BlockWindMill windMill_on = (BlockWindMill)new BlockWindMill(true, "wind_mill_block_on").setHardness(2.0F);
     public static BlockFuelGenerator fuelGenerator = (BlockFuelGenerator) new BlockFuelGenerator(false,"fuel_generator_block").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
     public static BlockFuelGenerator fuelGenerator_on = (BlockFuelGenerator) new BlockFuelGenerator(true,"fuel_generator_block_on").setHardness(2.0F);
+    public static BlockChargingStation chargingStation = (BlockChargingStation) new BlockChargingStation(false, "charging_station_block").setHardness(2.0F);
 
     /* Building Blocks */
     public static BlockBase planks_white = new BlockBase(Material.WOOD,"planks_white").setCreativeTab(CreativeTabs.BUILDING_BLOCKS).setHardness(2.0F);
@@ -166,6 +168,7 @@ public class ModBlocks {
                 windMill_on,
                 fuelGenerator,
                 fuelGenerator_on,
+                chargingStation,
 
                 /* Building Blocks */
                 planks_white,
@@ -274,6 +277,7 @@ public class ModBlocks {
         GameRegistry.registerTileEntity(solarPanel.getTileEntityClass(), solarPanel.getRegistryName().toString());
         GameRegistry.registerTileEntity(windMill.getTileEntityClass(), windMill.getRegistryName().toString());
         GameRegistry.registerTileEntity(fuelGenerator.getTileEntityClass(), fuelGenerator.getRegistryName().toString());
+        GameRegistry.registerTileEntity(chargingStation.getTileEntityClass(),chargingStation.getRegistryName().toString());
         GameRegistry.registerTileEntity(tableOak.getTileEntityClass(), tableOak.getRegistryName().toString());
     }
 
@@ -296,6 +300,7 @@ public class ModBlocks {
                 windMill_on.createItemBlock(),
                 fuelGenerator.createItemBlock(),
                 fuelGenerator_on.createItemBlock(),
+                chargingStation.createItemBlock(),
 
                 /* Building Blocks */
                 planks_white.createItemBlock(),
@@ -390,6 +395,7 @@ public class ModBlocks {
         windMill_on.registerItemModel(Item.getItemFromBlock(windMill_on));
         fuelGenerator.registerItemModel(Item.getItemFromBlock(fuelGenerator));
         fuelGenerator_on.registerItemModel(Item.getItemFromBlock(fuelGenerator_on));
+        chargingStation.registerItemModel(Item.getItemFromBlock(chargingStation));
 
         planks_white.registerItemModel(Item.getItemFromBlock(planks_white));
         planks_lightgray.registerItemModel(Item.getItemFromBlock(planks_lightgray));

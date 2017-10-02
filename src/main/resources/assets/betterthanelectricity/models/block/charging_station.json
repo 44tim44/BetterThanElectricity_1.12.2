@@ -1,0 +1,7 @@
+{
+    "parent": "betterthanelectricity:block/machine_block_template",
+    "textures": {
+        "front": "betterthanelectricity:blocks/block_charging_station_front",
+        "top": "betterthanelectricity:blocks/block_charging_station_top"
+    }
+}

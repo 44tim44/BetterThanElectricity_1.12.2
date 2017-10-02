@@ -1,5 +1,8 @@
 package se.sst_55t.betterthanelectricity;
 
+import se.sst_55t.betterthanelectricity.block.chargingstation.ContainerChargingStation;
+import se.sst_55t.betterthanelectricity.block.chargingstation.GuiChargingStation;
+import se.sst_55t.betterthanelectricity.block.chargingstation.TileEntityChargingStation;
 import se.sst_55t.betterthanelectricity.block.electricfurnace.ContainerElectricFurnace;
 import se.sst_55t.betterthanelectricity.block.electricfurnace.GuiElectricFurnace;
 import se.sst_55t.betterthanelectricity.block.electricfurnace.TileEntityElectricFurnace;
@@ -33,6 +36,7 @@ public class ModGuiHandler implements IGuiHandler {
     public static final int SOLARPANEL = 2;
     public static final int WINDMILL = 3;
     public static final int FUELGENERATOR = 4;
+    public static final int CHARGINGSTATION = 5;
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -47,6 +51,8 @@ public class ModGuiHandler implements IGuiHandler {
                 return new ContainerWindMill(player.inventory,(TileEntityWindMill)world.getTileEntity(new BlockPos(x, y, z)));
             case FUELGENERATOR:
                 return new ContainerFuelGenerator(player.inventory, (TileEntityFuelGenerator)world.getTileEntity(new BlockPos(x, y, z)));
+            case CHARGINGSTATION:
+                return new ContainerChargingStation(player.inventory, (TileEntityChargingStation)world.getTileEntity(new BlockPos(x, y, z)));
             default:
                 return null;
         }
@@ -72,6 +78,9 @@ public class ModGuiHandler implements IGuiHandler {
             case FUELGENERATOR:
                 TileEntityFuelGenerator tefg = (TileEntityFuelGenerator) te;
                 return new GuiFuelGenerator(player.inventory, tefg);
+            case CHARGINGSTATION:
+                TileEntityChargingStation tecs = (TileEntityChargingStation) te;
+                return new GuiChargingStation(player.inventory,tecs);
             default:
                 return null;
         }

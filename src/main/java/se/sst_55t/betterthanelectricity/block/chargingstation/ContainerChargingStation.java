@@ -21,8 +21,8 @@ public class ContainerChargingStation extends Container
     public ContainerChargingStation(InventoryPlayer playerInventory, IInventory furnaceInventory)
     {
         this.tileChargingStation = furnaceInventory;
-        this.addSlotToContainer(new Slot(furnaceInventory, 0, 107, 35));
-        this.addSlotToContainer(new Slot(furnaceInventory, 1, 53, 35));
+        this.addSlotToContainer(new Slot(furnaceInventory, 0, 80, 22));
+        this.addSlotToContainer(new Slot(furnaceInventory, 1, 80, 48));
         //this.addSlotToContainer(new SlotFurnaceOutput(playerInventory.player, furnaceInventory, 2, 116, 35));
 
         for (int i = 0; i < 3; ++i)
