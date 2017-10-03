@@ -44,6 +44,8 @@ public class ModBlocks {
     public static BlockChargingStation chargingStation = (BlockChargingStation) new BlockChargingStation(false, "charging_station_block").setHardness(2.0F);
 
     /* Building Blocks */
+    public static BlockBase stone_tile = new BlockBase(Material.ROCK,"stone_tile").setCreativeTab(CreativeTabs.BUILDING_BLOCKS).setHardness(5.0F);
+
     public static BlockBase planks_white = new BlockBase(Material.WOOD,"planks_white").setCreativeTab(CreativeTabs.BUILDING_BLOCKS).setHardness(2.0F);
     public static BlockBase planks_lightgray = new BlockBase(Material.WOOD,"planks_lightgray").setCreativeTab(CreativeTabs.BUILDING_BLOCKS).setHardness(2.0F);
     public static BlockBase planks_gray = new BlockBase(Material.WOOD,"planks_gray").setCreativeTab(CreativeTabs.BUILDING_BLOCKS).setHardness(2.0F);
@@ -171,6 +173,8 @@ public class ModBlocks {
                 chargingStation,
 
                 /* Building Blocks */
+                stone_tile,
+
                 planks_white,
                 planks_lightgray,
                 planks_gray,
@@ -303,6 +307,8 @@ public class ModBlocks {
                 chargingStation.createItemBlock(),
 
                 /* Building Blocks */
+                stone_tile.createItemBlock(),
+
                 planks_white.createItemBlock(),
                 planks_lightgray.createItemBlock(),
                 planks_gray.createItemBlock(),
@@ -396,6 +402,8 @@ public class ModBlocks {
         fuelGenerator.registerItemModel(Item.getItemFromBlock(fuelGenerator));
         fuelGenerator_on.registerItemModel(Item.getItemFromBlock(fuelGenerator_on));
         chargingStation.registerItemModel(Item.getItemFromBlock(chargingStation));
+
+        stone_tile.registerItemModel(Item.getItemFromBlock(stone_tile));
 
         planks_white.registerItemModel(Item.getItemFromBlock(planks_white));
         planks_lightgray.registerItemModel(Item.getItemFromBlock(planks_lightgray));

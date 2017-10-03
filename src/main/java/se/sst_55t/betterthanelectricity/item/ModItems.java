@@ -44,6 +44,7 @@ public class ModItems {
 
     public static ItemBattery battery = new ItemBattery();
     public static ItemBase electricCircuit = new ItemBase("electric_circuit").setCreativeTab(CreativeTabs.MISC);
+    public static ItemBase electricCircuitAdvanced = new ItemBase("electric_circuit_advanced").setCreativeTab(CreativeTabs.MISC);
 
     public static ItemMiningDrill miningDrill = new ItemMiningDrill();
     public static ItemBase drillHead = new ItemBase("drill_head").setCreativeTab(CreativeTabs.MISC);
@@ -93,6 +94,7 @@ public class ModItems {
 
                 battery,
                 electricCircuit,
+                electricCircuitAdvanced,
 
                 miningDrill,
                 drillHead,
@@ -141,6 +143,7 @@ public class ModItems {
 
         battery.registerItemModel();
         electricCircuit.registerItemModel();
+        electricCircuitAdvanced.registerItemModel();
 
         miningDrill.registerItemModel();
         drillHead.registerItemModel();

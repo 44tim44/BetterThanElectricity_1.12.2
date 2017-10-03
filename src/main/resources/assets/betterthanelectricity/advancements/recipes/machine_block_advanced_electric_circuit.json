@@ -2,7 +2,8 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "betterthanelectricity:machine_block_recipe"
+      "betterthanelectricity:machine_block_recipe",
+      "betterthanelectricity:electric_circuit_advanced"
     ]
   },
   "criteria": {

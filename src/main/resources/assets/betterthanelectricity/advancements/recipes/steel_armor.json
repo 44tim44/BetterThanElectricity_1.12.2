@@ -1,0 +1,24 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "betterthanelectricity:steel_boots_recipe",
+      "betterthanelectricity:steel_chestplate_recipe",
+      "betterthanelectricity:steel_helmet_recipe",
+      "betterthanelectricity:steel_leggings_recipe"
+
+    ]
+  },
+  "criteria": {
+    "has_steel_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betterthanelectricity:ingot_steel"
+          }
+        ]
+      }
+    }
+  }
+}

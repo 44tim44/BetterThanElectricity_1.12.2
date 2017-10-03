@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "betterthanelectricity:electric_circuit_advanced"
+  },
+  "pattern": [
+    "ERE",
+    "RDR",
+    "ERE"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "E": {
+      "item": "betterthanelectricity:electric_circuit"
+    },
+    "C": {
+      "item": "minecraft:diamond"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  }
+}

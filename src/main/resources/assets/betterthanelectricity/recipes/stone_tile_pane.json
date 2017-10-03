@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "betterthanelectricity:stone_tile",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "betterthanelectricity:stone_vertical_slab"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "result": {
+    "item": "betterthanelectricity:charging_station_block"
+  },
+  "pattern": [
+    "B",
+    "M"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": {
+      "item": "betterthanelectricity:machine_block"
+    },
+    "B": {
+      "item": "minecraft:battery"
+    }
+  }
+}

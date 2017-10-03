@@ -1,0 +1,21 @@
+{
+  "result": {
+    "item": "betterthanelectricity:gravity_boots"
+  },
+  "pattern": [
+    "ESE",
+    " B "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+      "item": "betterthanelectricity:steel_boots"
+    },
+    "E": {
+      "item": "betterthanelectricity:electric_circuit_advanced"
+    },
+    "B": {
+      "item": "betterthanelectricity:battery"
+    }
+  }
+}

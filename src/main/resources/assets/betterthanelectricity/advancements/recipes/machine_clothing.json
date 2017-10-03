@@ -1,0 +1,22 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "betterthanelectricity:gravity_boots_recipe",
+      "betterthanelectricity:jetpack_recipe"
+
+    ]
+  },
+  "criteria": {
+    "has_adv_elec_circuit": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betterthanelectricity:electric_circuit_advanced"
+          }
+        ]
+      }
+    }
+  }
+}

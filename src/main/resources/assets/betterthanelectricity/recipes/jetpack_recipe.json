@@ -1,0 +1,25 @@
+{
+  "result": {
+    "item": "betterthanelectricity:jetpack"
+  },
+  "pattern": [
+    "SES",
+    "SBS",
+    "D D"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+      "item": "betterthanelectricity:ingot_steel"
+    },
+    "E": {
+      "item": "betterthanelectricity:electric_circuit_advanced"
+    },
+    "B": {
+      "item": "betterthanelectricity:battery"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  }
+}

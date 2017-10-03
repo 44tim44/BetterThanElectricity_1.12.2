@@ -1,0 +1,15 @@
+{
+  "defaults": {
+    "textures": {
+      "all": "blocks/stone_slab_top"
+    }
+  },
+  "variants": {
+    "normal": {
+      "model": "cube_all"
+    },
+    "inventory": {
+      "model": "cube_all"
+    }
+  }
+}

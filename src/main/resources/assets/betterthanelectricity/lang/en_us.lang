@@ -30,6 +30,7 @@ item.mining_drill.name=Mining Drill
 item.chainsaw.name=Chainsaw
 item.battery.name=Battery
 item.electric_circuit.name=Electric Circuit
+item.electric_circuit_advanced.name=Advanced Electric Circuit
 item.drill_head.name=Drill Head
 item.chainsaw_head.name=Chainsaw Head
 
@@ -68,6 +69,8 @@ container.charging_station=Charging Station
 
 tile.machine_block.name=Machine Block
 
+
+tile.stone_tile.name=Stone Tile
 
 tile.planks_white.name=White Dyed Planks
 tile.planks_lightgray.name=Light Gray Dyed Planks

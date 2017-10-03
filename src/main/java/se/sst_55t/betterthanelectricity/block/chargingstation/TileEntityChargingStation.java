@@ -44,7 +44,7 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
     private int inChargeTime;
     private int totalInChargeTime;
     private String furnaceCustomName;
-    private static final int maxCharge = 1280;
+    private static final int maxCharge = 6400;
     private int currentCharge;
 
 
