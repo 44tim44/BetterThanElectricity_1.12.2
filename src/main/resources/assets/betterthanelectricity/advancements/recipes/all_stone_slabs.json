@@ -3,7 +3,8 @@
   "rewards": {
     "recipes": [
       "betterthanelectricity:smoothstone_slab",
-      "betterthanelectricity:smoothstone_vertical_slab"
+      "betterthanelectricity:smoothstone_vertical_slab",
+      "betterthanelectricity:smoothstone_stairs"
     ]
   },
   "criteria": {
