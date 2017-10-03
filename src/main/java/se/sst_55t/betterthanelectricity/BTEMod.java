@@ -12,6 +12,7 @@ import se.sst_55t.betterthanelectricity.network.PacketUpdatePedestal;
 import se.sst_55t.betterthanelectricity.proxy.CommonProxy;
 import se.sst_55t.betterthanelectricity.recipe.ModRecipes;
 import se.sst_55t.betterthanelectricity.util.FallDamageEventHandler;
+import se.sst_55t.betterthanelectricity.util.WeatherEventHandler;
 import se.sst_55t.betterthanelectricity.world.ModWorldGen;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -92,6 +93,7 @@ public class BTEMod {
         EntityRegistry.registerModEntity(new ResourceLocation("betterthanelectricity:mountable_block"), EntitySittableBlock.class, "MountableBlock", 0, this, 80, 1, false);
 
         MinecraftForge.EVENT_BUS.register(new FallDamageEventHandler());
+        MinecraftForge.EVENT_BUS.register(new WeatherEventHandler());
         proxy.init(event);
     }
 
