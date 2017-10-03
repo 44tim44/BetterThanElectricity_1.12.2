@@ -2,18 +2,18 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "betterthanelectricity:smoothstone_slab",
-      "betterthanelectricity:smoothstone_vertical_slab"
+      "betterthanelectricity:stone_tile_pane",
+      "betterthanelectricity:stone_tile_slab"
+
     ]
   },
   "criteria": {
-    "has_smoothstone": {
+    "has_stonetile": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "minecraft:stone",
-            "data": 0
+            "item": "betterthanelectricity:stone_tile"
           }
         ]
       }

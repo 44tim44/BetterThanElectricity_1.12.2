@@ -33,7 +33,7 @@ import javax.annotation.Nullable;
  */
 public class TileEntityFuelGenerator extends TileEntityLockable implements ITickable, ISidedInventory
 {
-    private static final int BASE_CHARGE_RATE = 20; // Amount of ticks required to charge 1 energy.
+    private static final int BASE_CHARGE_RATE = 10; // Amount of ticks required to charge 1 energy.
     private static final int[] SLOTS_TOP = new int[] {0};
     private static final int[] SLOTS_BOTTOM = new int[] {1};
     private static final int[] SLOTS_SIDES = new int[] {1};
@@ -151,7 +151,7 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
         this.furnaceBurnTime = compound.getInteger("BurnTime");
         this.cookTime = compound.getInteger("CookTime");
         this.totalCookTime = compound.getInteger("CookTimeTotal");
-        this.currentItemBurnTime = getItemBurnTime(this.fuelGeneratorItemStacks.get(1));
+        this.currentItemBurnTime = getItemBurnTime(this.fuelGeneratorItemStacks.get(1)) / 2;
 
         if (compound.hasKey("CustomName", 8))
         {
@@ -218,7 +218,7 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
             {
                 if (!this.isBurning() && this.canGenerate())
                 {
-                    this.furnaceBurnTime = getItemBurnTime(itemstackFuel);
+                    this.furnaceBurnTime = getItemBurnTime(itemstackFuel)/2;
                     this.currentItemBurnTime = this.furnaceBurnTime;
 
                     if (this.isBurning())

@@ -51,7 +51,7 @@ public class ContainerWindMill extends Container implements IEnergyStorage{
 
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int index) {
-        ItemStack itemstack = null;
+        ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = inventorySlots.get(index);
 
         if (slot != null && slot.getHasStack()) {

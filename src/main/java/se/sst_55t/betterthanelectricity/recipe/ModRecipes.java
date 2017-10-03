@@ -1,5 +1,6 @@
 package se.sst_55t.betterthanelectricity.recipe;
 
+import net.minecraft.init.Blocks;
 import se.sst_55t.betterthanelectricity.block.ModBlocks;
 import se.sst_55t.betterthanelectricity.item.ModItems;
 import net.minecraft.init.Items;
@@ -32,5 +33,7 @@ public class ModRecipes {
                 new ItemStack(ModItems.ingotAluminum), 0.7f);
         GameRegistry.addSmelting(ModItems.tinDust,
                 new ItemStack(ModItems.ingotTin), 0.7f);
+        GameRegistry.addSmelting(Blocks.STONE,
+                new ItemStack(ModBlocks.stone_tile), 0.7F);
     }
 }

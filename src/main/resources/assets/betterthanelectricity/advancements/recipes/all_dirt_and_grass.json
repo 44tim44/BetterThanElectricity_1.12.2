@@ -2,17 +2,18 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "betterthanelectricity:smoothstone_slab",
-      "betterthanelectricity:smoothstone_vertical_slab"
+      "betterthanelectricity:grass_slab",
+      "betterthanelectricity:grass_block",
+      "betterthanelectricity:dirt_slab"
     ]
   },
   "criteria": {
-    "has_smoothstone": {
+    "has_dirt": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "minecraft:stone",
+            "item": "minecraft:dirt",
             "data": 0
           }
         ]

@@ -6,6 +6,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import se.sst_55t.betterthanelectricity.item.IChargeable;
 import se.sst_55t.betterthanelectricity.item.ModItems;
 
@@ -32,6 +34,54 @@ public class FallDamageEventHandler {
                             event.setDamageMultiplier(0);
                         }
                     }
+                }
+            }
+            ItemStack chestplateStack = ((EntityPlayer) event.getEntityLiving()).inventory.armorInventory.get(2);
+            if(!chestplateStack.isEmpty())
+            {
+                if(chestplateStack.getItem() == ModItems.jetpack)
+                {
+                    if(((EntityPlayer) event.getEntityLiving()).motionY > -0.4)
+                    {
+                        event.setDistance(1);
+                    }
+                    else if(((EntityPlayer) event.getEntityLiving()).motionY > -0.6)
+                    {
+                        event.setDistance(2);
+                    }
+                    else if(((EntityPlayer) event.getEntityLiving()).motionY > -0.7)
+                    {
+                        event.setDistance(3);
+                    }
+                    else if(((EntityPlayer) event.getEntityLiving()).motionY > -0.8)
+                    {
+                        event.setDistance(4);
+                    }
+                    else if(((EntityPlayer) event.getEntityLiving()).motionY > -0.85)
+                    {
+                        event.setDistance(5);
+                    }
+                    else if(((EntityPlayer) event.getEntityLiving()).motionY > -0.9)
+                    {
+                        event.setDistance(6);
+                    }
+                    else if(((EntityPlayer) event.getEntityLiving()).motionY > -1.0)
+                    {
+                        event.setDistance(7);
+                    }
+                    else if(((EntityPlayer) event.getEntityLiving()).motionY > -1.05)
+                    {
+                        event.setDistance(8);
+                    }
+                    else if(((EntityPlayer) event.getEntityLiving()).motionY > -1.1)
+                    {
+                        event.setDistance(9);
+                    }
+                    else if(((EntityPlayer) event.getEntityLiving()).motionY > -1.15)
+                    {
+                        event.setDistance(10);
+                    }
+
                 }
             }
         }

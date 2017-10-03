@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class ItemJetpack extends ItemArmorCustom implements IChargeable, ISpecialArmor {
 
-    private static final int maxCharge = 640 * 50;
+    private static final int maxCharge = 320 * 50;
 
     public ItemJetpack(ArmorMaterial materialIn, EntityEquipmentSlot slot, String name) {
         super(materialIn, slot, name);
@@ -104,18 +104,29 @@ public class ItemJetpack extends ItemArmorCustom implements IChargeable, ISpecia
                         if(Minecraft.getMinecraft().gameSettings.keyBindJump.isKeyDown())
                         {
                             //BTEMod.network.sendToServer(new PacketUpdateJetpack((EntityPlayer)entityIn,stack,0));
-                            entityIn.setVelocity(entityIn.motionX, 0.5F, entityIn.motionZ);
-                            ((IChargeable) stack.getItem()).decreaseCharge(stack);
+                            if(!(entityIn.motionY >= 0.5F)) {
+                                entityIn.setVelocity(entityIn.motionX, entityIn.motionY+0.15F, entityIn.motionZ);
+                                ((IChargeable) stack.getItem()).decreaseCharge(stack);
+                            }
                         }
                     }
 
-                    if (Keyboard.isKeyDown(forwardKeyCode) && entityIn.isAirBorne)
+                    if (Keyboard.isKeyDown(forwardKeyCode) && !entityIn.onGround)
                     {
                         if (((IChargeable) stack.getItem()).getCharge(stack) > 0)
                         {
+                            double calculatedX;
+                            double calculatedZ;
                             //BTEMod.network.sendToServer(new PacketUpdateJetpack((EntityPlayer)entityIn,stack,1));
-                            double calculatedX = (double) (-MathHelper.sin(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.8f);
-                            double calculatedZ = (double) (MathHelper.cos(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.8f);
+                            if(Minecraft.getMinecraft().gameSettings.keyBindSprint.isKeyDown()) {
+                                calculatedX = (double) (-MathHelper.sin(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.8f);
+                                calculatedZ = (double) (MathHelper.cos(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.8f);
+                            }
+                            else
+                            {
+                                calculatedX = (double) (-MathHelper.sin(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.4f);
+                                calculatedZ = (double) (MathHelper.cos(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.4f);
+                            }
                             entityIn.setVelocity(calculatedX, entityIn.motionY, calculatedZ);
                             ((IChargeable) stack.getItem()).decreaseCharge(stack);
                         }

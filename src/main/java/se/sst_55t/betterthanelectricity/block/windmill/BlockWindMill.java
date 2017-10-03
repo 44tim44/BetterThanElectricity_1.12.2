@@ -43,7 +43,7 @@ public class BlockWindMill extends Block implements ITileEntityProvider{
         setRegistryName(name);
         this.setHardness(2.0F);
         this.setSoundType(SoundType.METAL);
-        this.setCreativeTab(CreativeTabs.MISC);
+        //this.setCreativeTab(CreativeTabs.MISC);
         this.setLightOpacity(0);
     }
 
