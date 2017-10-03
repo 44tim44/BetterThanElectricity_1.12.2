@@ -11,12 +11,10 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
-
+import se.sst_55t.betterthanelectricity.BTEMod;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
@@ -88,7 +86,7 @@ public class ItemJetpack extends ItemArmorCustom implements IChargeable, ISpecia
         return false;
     }
 
-
+    @SideOnly(Side.CLIENT)
     @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 
@@ -103,25 +101,21 @@ public class ItemJetpack extends ItemArmorCustom implements IChargeable, ISpecia
                     int forwardKeyCode = Minecraft.getMinecraft().gameSettings.keyBindForward.getKeyCode();
                     if (((IChargeable) stack.getItem()).getCharge(stack) > 0)
                     {
-                        ((EntityPlayer)entityIn).capabilities.setFlySpeed(0.5F);
-                        //if (Keyboard.isKeyDown(jumpKeyCode))
                         if(Minecraft.getMinecraft().gameSettings.keyBindJump.isKeyDown())
                         {
+                            //BTEMod.network.sendToServer(new PacketUpdateJetpack((EntityPlayer)entityIn,stack,0));
                             entityIn.setVelocity(entityIn.motionX, 0.5F, entityIn.motionZ);
                             ((IChargeable) stack.getItem()).decreaseCharge(stack);
                         }
                     }
-                    else
-                    {
-                        ((EntityPlayer)entityIn).capabilities.setFlySpeed(0.05F);
-                    }
 
-                    if (Keyboard.isKeyDown(jumpKeyCode) && Keyboard.isKeyDown(forwardKeyCode))
+                    if (Keyboard.isKeyDown(forwardKeyCode) && entityIn.isAirBorne)
                     {
                         if (((IChargeable) stack.getItem()).getCharge(stack) > 0)
                         {
-                            double calculatedX= (double) (-MathHelper.sin(entityIn.rotationYaw/ 180.0F * (float) Math.PI)* MathHelper.cos(entityIn.rotationPitch / 180.0F* (float) Math.PI) * 0.8f);
-                            double calculatedZ = (double) (MathHelper.cos(entityIn.rotationYaw	/ 180.0F * (float) Math.PI)* MathHelper.cos(entityIn.rotationPitch / 180.0F* (float) Math.PI) * 0.8f);
+                            //BTEMod.network.sendToServer(new PacketUpdateJetpack((EntityPlayer)entityIn,stack,1));
+                            double calculatedX = (double) (-MathHelper.sin(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.8f);
+                            double calculatedZ = (double) (MathHelper.cos(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.8f);
                             entityIn.setVelocity(calculatedX, entityIn.motionY, calculatedZ);
                             ((IChargeable) stack.getItem()).decreaseCharge(stack);
                         }
@@ -143,6 +137,7 @@ public class ItemJetpack extends ItemArmorCustom implements IChargeable, ISpecia
             }
         }
     }
+
 
     @Override
     public ISpecialArmor.ArmorProperties getProperties(EntityLivingBase player, @Nonnull ItemStack armor, DamageSource source, double damage, int slot) {

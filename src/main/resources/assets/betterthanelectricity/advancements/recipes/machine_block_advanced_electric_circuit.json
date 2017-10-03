@@ -3,7 +3,7 @@
   "rewards": {
     "recipes": [
       "betterthanelectricity:machine_block_recipe",
-      "betterthanelectricity:electric_circuit_advanced"
+      "betterthanelectricity:electric_circuit_advanced_recipe"
     ]
   },
   "criteria": {

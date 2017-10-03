@@ -43,7 +43,7 @@ public class BTEMod {
     public static final String MODID = "betterthanelectricity";
     public static final String MODID_short = "bte";
     public static final String MODNAME = "Better Than Electricity";
-    public static final String VERSION = "1.0.10";
+    public static final String VERSION = "1.0.12";
     public static final String CLIENT_PROXY = "se.sst_55t.betterthanelectricity.proxy.ClientProxy";
     public static final String COMMON_PROXY = "se.sst_55t.betterthanelectricity.proxy.CommonProxy";
 
@@ -81,6 +81,7 @@ public class BTEMod {
         network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID_short);
         network.registerMessage(new PacketUpdatePedestal.Handler(), PacketUpdatePedestal.class, 0, Side.CLIENT);
         network.registerMessage(new PacketRequestUpdatePedestal.Handler(), PacketRequestUpdatePedestal.class, 1, Side.SERVER);
+        //network.registerMessage(new PacketUpdateJetpack.Handler(), PacketUpdateJetpack.class, 1, Side.SERVER);
         //int id = 0;
         //network.registerMessage(new PacketUpdateCharge.Handler(),PacketUpdateCharge.class,id++, Side.CLIENT);
 

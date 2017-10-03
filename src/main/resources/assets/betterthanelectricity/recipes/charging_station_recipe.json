@@ -12,7 +12,7 @@
       "item": "betterthanelectricity:machine_block"
     },
     "B": {
-      "item": "minecraft:battery"
+      "item": "betterthanelectricity:battery"
     }
   }
 }

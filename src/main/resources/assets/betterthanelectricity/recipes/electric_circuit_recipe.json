@@ -16,7 +16,8 @@
       "item": "betterthanelectricity:ingot_tin"
     },
     "C": {
-      "item": "minecraft:sand"
+      "item": "minecraft:sand",
+      "data": 0
     },
     "R": {
       "item": "minecraft:redstone"

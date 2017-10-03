@@ -1,7 +1,8 @@
 {
+  "forge_marker": 1,
   "defaults": {
     "textures": {
-      "all": "blocks/stone_slab_top"
+      "all": "minecraft:blocks/stone_slab_top"
     }
   },
   "variants": {
