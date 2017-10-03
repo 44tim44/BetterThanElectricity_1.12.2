@@ -73,13 +73,13 @@ public class BlockDoorBase extends BlockBase
             switch (enumfacing) {
                 case EAST:
                 default:
-                    return flag ? EAST_AABB_GLASS : (flag1 ? NULL_AABB : NULL_AABB);
+                    return flag ? EAST_AABB_GLASS : (flag1 ? NORTH_AABB : SOUTH_AABB);
                 case SOUTH:
-                    return flag ? SOUTH_AABB_GLASS : (flag1 ? NULL_AABB : NULL_AABB);
+                    return flag ? SOUTH_AABB_GLASS : (flag1 ? EAST_AABB : WEST_AABB);
                 case WEST:
-                    return flag ? WEST_AABB_GLASS : (flag1 ? NULL_AABB : NULL_AABB);
+                    return flag ? WEST_AABB_GLASS : (flag1 ? SOUTH_AABB : NORTH_AABB);
                 case NORTH:
-                    return flag ? NORTH_AABB_GLASS : (flag1 ? NULL_AABB : NULL_AABB);
+                    return flag ? NORTH_AABB_GLASS : (flag1 ? WEST_AABB : EAST_AABB);
             }
         } else{
             switch (enumfacing) {
