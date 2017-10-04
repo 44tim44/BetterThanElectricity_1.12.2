@@ -105,7 +105,7 @@ public class ItemChainsaw extends Item implements IChargeable{
                 Block block = iblockstate.getBlock();
                 Material material = iblockstate.getMaterial();
 
-                if (block == Blocks.LOG)
+                if (block == Blocks.LOG || block == Blocks.LOG2)
                 {
                     this.fellTree(itemstack, player, worldIn, pos, iblockstate);
                     return EnumActionResult.SUCCESS;

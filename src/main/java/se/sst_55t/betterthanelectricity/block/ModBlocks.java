@@ -41,7 +41,7 @@ public class ModBlocks {
     public static BlockWindMill windMill_on = (BlockWindMill)new BlockWindMill(true, "wind_mill_block_on").setHardness(2.0F);
     public static BlockFuelGenerator fuelGenerator = (BlockFuelGenerator) new BlockFuelGenerator(false,"fuel_generator_block").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
     public static BlockFuelGenerator fuelGenerator_on = (BlockFuelGenerator) new BlockFuelGenerator(true,"fuel_generator_block_on").setHardness(2.0F);
-    public static BlockChargingStation chargingStation = (BlockChargingStation) new BlockChargingStation(false, "charging_station_block").setHardness(2.0F);
+    public static BlockChargingStation chargingStation = (BlockChargingStation) new BlockChargingStation(false, "charging_station_block").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
 
     /* Building Blocks */
     public static BlockBase stone_tile = new BlockBase(Material.ROCK,"stone_tile").setCreativeTab(CreativeTabs.BUILDING_BLOCKS).setHardness(5.0F);
@@ -148,6 +148,8 @@ public class ModBlocks {
 
     public static BlockBase glassDoor = new BlockDoorBase(Material.IRON,"glass_door",true).setHardness(5.0F);
 
+    public static BlockBase electricLamp = new BlockElectricLamp(Material.CIRCUITS,"electric_lamp",false).setCreativeTab(CreativeTabs.DECORATIONS);
+    public static BlockBase electricLamp_on = new BlockElectricLamp(Material.CIRCUITS,"electric_lamp_on",true);
 
 
     public static void register(IForgeRegistry<Block> registry) {
@@ -272,7 +274,10 @@ public class ModBlocks {
                 tableAcacia,
                 tableDarkOak,
 
-                glassDoor
+                glassDoor,
+
+                electricLamp,
+                electricLamp_on
 
         );
 
@@ -382,7 +387,10 @@ public class ModBlocks {
                 tableBirch.createItemBlock(),
                 tableJungle.createItemBlock(),
                 tableAcacia.createItemBlock(),
-                tableDarkOak.createItemBlock()
+                tableDarkOak.createItemBlock(),
+
+                electricLamp.createItemBlock(),
+                electricLamp_on.createItemBlock()
         );
     }
 
@@ -478,6 +486,9 @@ public class ModBlocks {
         tableJungle.registerItemModel(Item.getItemFromBlock(tableJungle));
         tableAcacia.registerItemModel(Item.getItemFromBlock(tableAcacia));
         tableDarkOak.registerItemModel(Item.getItemFromBlock(tableDarkOak));
+
+        electricLamp.registerItemModel(Item.getItemFromBlock(electricLamp));
+        electricLamp_on.registerItemModel(Item.getItemFromBlock(electricLamp_on));
 
     }
 
