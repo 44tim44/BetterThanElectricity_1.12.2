@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.sst_55t.betterthanelectricity.block.inventory.SlotBattery;
+import se.sst_55t.betterthanelectricity.item.IBattery;
 import se.sst_55t.betterthanelectricity.item.ModItems;
 import se.sst_55t.betterthanelectricity.recipe.PulverizerRecipes;
 
@@ -128,7 +129,7 @@ public class ContainerCompactor extends Container
                         return ItemStack.EMPTY;
                     }
                 }
-                else if (TileEntityCompactor.isItemFuel(itemstack1) || itemstack1.getItem() == ModItems.battery)
+                else if (TileEntityCompactor.isItemFuel(itemstack1) || itemstack1.getItem() instanceof IBattery)
                 {
                     if (!this.mergeItemStack(itemstack1, 1, 2, false))
                     {

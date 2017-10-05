@@ -10,10 +10,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import se.sst_55t.betterthanelectricity.block.pulverizer.BlockPulverizer;
-import se.sst_55t.betterthanelectricity.item.IChargeable;
-import se.sst_55t.betterthanelectricity.item.ItemBattery;
-import se.sst_55t.betterthanelectricity.item.ItemMiningDrill;
-import se.sst_55t.betterthanelectricity.item.ModItems;
+import se.sst_55t.betterthanelectricity.item.*;
 
 import javax.annotation.Nullable;
 
@@ -35,7 +32,7 @@ public class TileEntityWindMill extends TileEntity implements ITickable {
 
         ItemStack itemstack = inventory.getStackInSlot(0);
 
-        if (isCharging() && (itemstack.getItem() == ModItems.battery || itemstack.getItem() instanceof IChargeable))
+        if (isCharging() && (itemstack.getItem() instanceof IBattery || itemstack.getItem() instanceof IChargeable))
         {
             ++this.chargeTime;
 
@@ -43,7 +40,7 @@ public class TileEntityWindMill extends TileEntity implements ITickable {
             {
                 this.chargeTime = 0;
                 this.totalChargeTime = this.getItemChargeTime(itemstack);
-                if(itemstack.getItem() == ModItems.battery)
+                if(itemstack.getItem() instanceof IBattery)
                 {
                     ((ItemBattery)itemstack.getItem()).increaseCharge(itemstack);
                 }
@@ -78,7 +75,7 @@ public class TileEntityWindMill extends TileEntity implements ITickable {
         if (itemstack.isEmpty()){
             return -1;
         }
-        else if (itemstack.getItem() == ModItems.battery)
+        else if (itemstack.getItem() instanceof IBattery)
         {
             return ((ItemBattery)itemstack.getItem()).getCharge(itemstack);
         }

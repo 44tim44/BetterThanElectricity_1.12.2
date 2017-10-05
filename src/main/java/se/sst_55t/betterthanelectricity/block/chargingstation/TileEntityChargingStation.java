@@ -21,6 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.sst_55t.betterthanelectricity.BTEMod;
+import se.sst_55t.betterthanelectricity.item.IBattery;
 import se.sst_55t.betterthanelectricity.item.IChargeable;
 import se.sst_55t.betterthanelectricity.item.ItemBattery;
 import se.sst_55t.betterthanelectricity.item.ModItems;
@@ -251,7 +252,7 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
                     this.totalInChargeTime = this.getOutputRate(this.chargingStationItemStacks.get(1));
 
                     ItemStack itemstack = chargingStationItemStacks.get(1);
-                    if(itemstack.getItem() == ModItems.battery)
+                    if(itemstack.getItem() instanceof IBattery)
                     {
                         ((ItemBattery)itemstack.getItem()).decreaseCharge(itemstack);
                         this.increaseCharge();
@@ -275,7 +276,7 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
                     this.totalOutChargeTime = this.getOutputRate(this.chargingStationItemStacks.get(0));
 
                     ItemStack itemstack = chargingStationItemStacks.get(0);
-                    if(itemstack.getItem() == ModItems.battery)
+                    if(itemstack.getItem() instanceof IBattery)
                     {
                         ((ItemBattery)itemstack.getItem()).increaseCharge(itemstack);
                         this.decreaseCharge();
@@ -323,7 +324,7 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
         else
         {
             if(currentCharge > 0) {
-                if (itemstack.getItem() == ModItems.battery) {
+                if (itemstack.getItem() instanceof IBattery) {
                     if (((ItemBattery) itemstack.getItem()).getCharge(itemstack) < ((ItemBattery) itemstack.getItem()).getMaxCharge(itemstack)) {
                         return true;
                     }
@@ -358,7 +359,7 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
         else
         {
             if (currentCharge < maxCharge) {
-                if (itemstack.getItem() == ModItems.battery) {
+                if (itemstack.getItem() instanceof IBattery) {
                     if (((ItemBattery) itemstack.getItem()).getCharge(itemstack) > 0) {
                         return true;
                     }
@@ -399,11 +400,11 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
     {
         if (index != 1)
         {
-            return stack.getItem() == ModItems.battery || stack.getItem() instanceof IChargeable;
+            return stack.getItem() instanceof IBattery || stack.getItem() instanceof IChargeable;
         }
         else
         {
-            return stack.getItem() == ModItems.battery ;
+            return stack.getItem() instanceof IBattery;
         }
     }
 

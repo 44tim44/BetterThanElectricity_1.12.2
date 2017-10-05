@@ -1,6 +1,7 @@
 package se.sst_55t.betterthanelectricity.block.pulverizer;
 
 import se.sst_55t.betterthanelectricity.block.inventory.SlotBattery;
+import se.sst_55t.betterthanelectricity.item.IBattery;
 import se.sst_55t.betterthanelectricity.item.ItemBattery;
 import se.sst_55t.betterthanelectricity.item.ModItems;
 import se.sst_55t.betterthanelectricity.recipe.PulverizerRecipes;
@@ -347,7 +348,7 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
         {
             Item item = stack.getItem();
 
-            if (item == ModItems.battery)
+            if (item instanceof IBattery)
             {
                 if(((ItemBattery)stack.getItem()).getCharge(stack) > 0)
                 {
@@ -404,7 +405,7 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
         else
         {
             ItemStack itemstack = this.pulverizerItemStacks.get(1);
-            return isItemFuel(stack) || SlotBattery.isBattery(stack) && (itemstack.isEmpty() || itemstack.getItem() != ModItems.battery);
+            return isItemFuel(stack) || SlotBattery.isBattery(stack) && (itemstack.isEmpty() || !(itemstack.getItem() instanceof IBattery));
         }
     }
 
@@ -430,7 +431,7 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
         {
             Item item = stack.getItem();
 
-            if (item != ModItems.battery)
+            if (!(item instanceof IBattery))
             {
                 return false;
             }

@@ -1,5 +1,6 @@
 package se.sst_55t.betterthanelectricity.block.electricfurnace;
 
+import se.sst_55t.betterthanelectricity.item.IBattery;
 import se.sst_55t.betterthanelectricity.item.ItemBattery;
 import se.sst_55t.betterthanelectricity.item.ModItems;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -488,7 +489,7 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
         {
             Item item = stack.getItem();
 
-            if (item == ModItems.battery)
+            if (item instanceof IBattery)
             {
                 if(((ItemBattery)stack.getItem()).getCharge(stack) > 0)
                 {

@@ -6,6 +6,7 @@ import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import se.sst_55t.betterthanelectricity.item.IBattery;
 import se.sst_55t.betterthanelectricity.item.IChargeable;
 import se.sst_55t.betterthanelectricity.item.ModItems;
 
@@ -118,7 +119,7 @@ public class ContainerChargingStation extends Container
 
             if (index != 1 && index != 0)
             {
-                if (itemstackSlot.getItem() == ModItems.battery )
+                if (itemstackSlot.getItem() instanceof IBattery)
                 {
                     if (!this.mergeItemStack(itemstackSlot, 0, 2, false))
                     {

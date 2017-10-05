@@ -67,6 +67,9 @@ container.fuel_generator=Fuel Generator
 tile.charging_station_block.name=Charging Station
 container.charging_station=Charging Station
 
+tile.compactor_block.name=Compactor
+container.compactor=Compactor
+
 tile.machine_block.name=Machine Block
 
 
@@ -147,3 +150,5 @@ tile.table_birch.name=Birch Table
 tile.table_jungle.name=Jungle Table
 tile.table_acacia.name=Acacia Table
 tile.table_dark_oak.name=Dark Oak Table
+
+tile.electric_lamp.name=Electric Lamp

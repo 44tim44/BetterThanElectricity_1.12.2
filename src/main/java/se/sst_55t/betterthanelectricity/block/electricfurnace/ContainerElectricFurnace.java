@@ -1,6 +1,7 @@
 package se.sst_55t.betterthanelectricity.block.electricfurnace;
 
 import se.sst_55t.betterthanelectricity.block.inventory.SlotBattery;
+import se.sst_55t.betterthanelectricity.item.IBattery;
 import se.sst_55t.betterthanelectricity.item.ModItems;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -141,7 +142,7 @@ public class ContainerElectricFurnace extends Container
                         return ItemStack.EMPTY;
                     }
                 }
-                else if (TileEntityElectricFurnace.isItemFuel(itemstack1) || itemstack1.getItem() == ModItems.battery)
+                else if (TileEntityElectricFurnace.isItemFuel(itemstack1) || itemstack1.getItem() instanceof IBattery)
                 {
                     if (!this.mergeItemStack(itemstack1, 1, 2, false))
                     {

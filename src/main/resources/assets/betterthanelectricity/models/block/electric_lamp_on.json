@@ -8,6 +8,7 @@
 			"name": "cube",
 			"from": [2, 0, 2],
 			"to": [14, 4, 14],
+			"shade": false,
 			"faces": {
 				"north": {"uv": [0, 12, 12, 16], "texture": "#all"},
 				"east": {"uv": [0, 12, 12, 16], "texture": "#all"},

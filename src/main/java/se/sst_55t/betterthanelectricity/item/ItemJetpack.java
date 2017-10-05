@@ -15,6 +15,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 import se.sst_55t.betterthanelectricity.BTEMod;
+import se.sst_55t.betterthanelectricity.network.PacketRequestUpdatePedestal;
+import se.sst_55t.betterthanelectricity.network.PacketToServerJetpack;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
@@ -95,6 +98,7 @@ public class ItemJetpack extends ItemArmorCustom implements IChargeable, ISpecia
             ItemStack chestplateStack = ((EntityPlayer) entityIn).inventory.armorInventory.get(2);
             if (!chestplateStack.isEmpty())
             {
+                boolean dirty = false;
                 if (chestplateStack.getItem() == ModItems.jetpack)
                 {
                     int jumpKeyCode = Minecraft.getMinecraft().gameSettings.keyBindJump.getKeyCode();
@@ -107,6 +111,7 @@ public class ItemJetpack extends ItemArmorCustom implements IChargeable, ISpecia
                             if(!(entityIn.motionY >= 0.5F)) {
                                 entityIn.setVelocity(entityIn.motionX, entityIn.motionY+0.15F, entityIn.motionZ);
                                 ((IChargeable) stack.getItem()).decreaseCharge(stack);
+                                dirty = true;
                             }
                         }
                     }
@@ -129,7 +134,16 @@ public class ItemJetpack extends ItemArmorCustom implements IChargeable, ISpecia
                             }
                             entityIn.setVelocity(calculatedX, entityIn.motionY, calculatedZ);
                             ((IChargeable) stack.getItem()).decreaseCharge(stack);
+                            dirty = true;
                         }
+                    }
+
+                    if(dirty)
+                    {
+                        if (worldIn.isRemote) {
+                            BTEMod.network.sendToServer(new PacketToServerJetpack(chestplateStack));
+                        }
+                        dirty = false;
                     }
 
 

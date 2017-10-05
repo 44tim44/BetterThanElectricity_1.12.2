@@ -4,6 +4,7 @@ package se.sst_55t.betterthanelectricity.block.inventory;
  * Created by Timeout on 2017-08-23.
  */
 
+import se.sst_55t.betterthanelectricity.item.IBattery;
 import se.sst_55t.betterthanelectricity.item.ModItems;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -31,6 +32,6 @@ public class SlotBattery extends Slot
 
     public static boolean isBattery(ItemStack stack)
     {
-        return stack.getItem() == ModItems.battery;
+        return stack.getItem() instanceof IBattery;
     }
 }

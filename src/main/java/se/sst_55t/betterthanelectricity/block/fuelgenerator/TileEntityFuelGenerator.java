@@ -22,6 +22,7 @@ import net.minecraft.util.datafix.walkers.ItemStackDataLists;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import se.sst_55t.betterthanelectricity.item.IBattery;
 import se.sst_55t.betterthanelectricity.item.IChargeable;
 import se.sst_55t.betterthanelectricity.item.ItemBattery;
 import se.sst_55t.betterthanelectricity.item.ModItems;
@@ -249,7 +250,7 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
                         this.totalCookTime = this.getCookTime(this.fuelGeneratorItemStacks.get(0));
 
                         ItemStack itemstack = fuelGeneratorItemStacks.get(0);
-                        if(itemstack.getItem() == ModItems.battery)
+                        if(itemstack.getItem() instanceof IBattery)
                         {
                             ((ItemBattery)itemstack.getItem()).increaseCharge(itemstack);
                         }
@@ -305,7 +306,7 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
         }
         else
         {
-            if(itemstack.getItem() == ModItems.battery)
+            if(itemstack.getItem() instanceof IBattery)
             {
                 if(((ItemBattery)itemstack.getItem()).getCharge(itemstack) < ((ItemBattery)itemstack.getItem()).getMaxCharge(itemstack))
                 {
@@ -459,7 +460,7 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
     {
         if (index != 1)
         {
-            return stack.getItem()==ModItems.battery || stack.getItem() instanceof IChargeable;
+            return stack.getItem() instanceof IBattery || stack.getItem() instanceof IChargeable;
         }
         else
         {

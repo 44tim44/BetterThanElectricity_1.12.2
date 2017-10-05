@@ -49,7 +49,7 @@ public class ModItems {
 
     // Electric Stuff
     public static ItemBattery battery = new ItemBattery();
-    public static ItemBattery batteryPack = new ItemBatteryPack();
+    public static ItemBatteryPack batteryPack = new ItemBatteryPack();
     public static ItemBase electricCircuit = new ItemBase("electric_circuit").setCreativeTab(CreativeTabs.MISC);
     public static ItemBase electricCircuitAdvanced = new ItemBase("electric_circuit_advanced").setCreativeTab(CreativeTabs.MISC);
 

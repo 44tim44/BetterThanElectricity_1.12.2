@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.sst_55t.betterthanelectricity.block.inventory.SlotBattery;
+import se.sst_55t.betterthanelectricity.item.IBattery;
 import se.sst_55t.betterthanelectricity.item.IChargeable;
 import se.sst_55t.betterthanelectricity.item.ModItems;
 import se.sst_55t.betterthanelectricity.recipe.PulverizerRecipes;
@@ -113,7 +114,7 @@ public class ContainerFuelGenerator extends Container
 
             if (index != 1 && index != 0)
             {
-                if (itemstackSlot.getItem() == ModItems.battery || itemstackSlot.getItem() instanceof IChargeable)
+                if (itemstackSlot.getItem() instanceof IBattery || itemstackSlot.getItem() instanceof IChargeable)
                 {
                     if (!this.mergeItemStack(itemstackSlot, 0, 1, false))
                     {

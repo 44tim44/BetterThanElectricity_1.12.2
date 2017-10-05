@@ -1,0 +1,25 @@
+{
+  "result": {
+    "item": "betterthanelectricity:battery_pack"
+  },
+  "pattern": [
+    "BCB",
+    "SRS",
+    "BCB"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": {
+      "item": "betterthanelectricity:battery"
+    },
+    "C": {
+      "item": "betterthanelectricity:ingot_copper"
+    },
+    "S": {
+      "item": "betterthanelectricity:steel_rod"
+    },
+    "R": {
+      "item": "betterthanelectricity:redstone"
+    }
+  }
+}

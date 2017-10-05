@@ -1,6 +1,7 @@
 package se.sst_55t.betterthanelectricity.block.pulverizer;
 
 import se.sst_55t.betterthanelectricity.block.inventory.SlotBattery;
+import se.sst_55t.betterthanelectricity.item.IBattery;
 import se.sst_55t.betterthanelectricity.item.ModItems;
 import se.sst_55t.betterthanelectricity.recipe.PulverizerRecipes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -128,7 +129,7 @@ public class ContainerPulverizer extends Container
                         return ItemStack.EMPTY;
                     }
                 }
-                else if (TileEntityPulverizer.isItemFuel(itemstack1) || itemstack1.getItem() == ModItems.battery)
+                else if (TileEntityPulverizer.isItemFuel(itemstack1) || itemstack1.getItem() instanceof IBattery)
                 {
                     if (!this.mergeItemStack(itemstack1, 1, 2, false))
                     {

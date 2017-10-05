@@ -8,6 +8,7 @@ import se.sst_55t.betterthanelectricity.block.ModBlocks;
 import se.sst_55t.betterthanelectricity.entity.EntitySittableBlock;
 import se.sst_55t.betterthanelectricity.item.ModItems;
 import se.sst_55t.betterthanelectricity.network.PacketRequestUpdatePedestal;
+import se.sst_55t.betterthanelectricity.network.PacketToServerJetpack;
 import se.sst_55t.betterthanelectricity.network.PacketUpdatePedestal;
 import se.sst_55t.betterthanelectricity.proxy.CommonProxy;
 import se.sst_55t.betterthanelectricity.recipe.ModRecipes;
@@ -81,6 +82,7 @@ public class BTEMod {
         network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID_short);
         network.registerMessage(new PacketUpdatePedestal.Handler(), PacketUpdatePedestal.class, 0, Side.CLIENT);
         network.registerMessage(new PacketRequestUpdatePedestal.Handler(), PacketRequestUpdatePedestal.class, 1, Side.SERVER);
+        network.registerMessage(new PacketToServerJetpack.Handler(), PacketToServerJetpack.class, 1, Side.SERVER);
         //network.registerMessage(new PacketUpdateJetpack.Handler(), PacketUpdateJetpack.class, 1, Side.SERVER);
         //int id = 0;
         //network.registerMessage(new PacketUpdateCharge.Handler(),PacketUpdateCharge.class,id++, Side.CLIENT);
