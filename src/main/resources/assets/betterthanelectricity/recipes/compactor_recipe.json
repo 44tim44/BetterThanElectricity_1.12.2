@@ -1,0 +1,18 @@
+{
+  "result": {
+    "item": "betterthanelectricity:compactor_block"
+  },
+  "pattern": [
+    "P",
+    "M"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": {
+      "item": "betterthanelectricity:machine_block"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    }
+  }
+}

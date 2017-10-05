@@ -4,6 +4,7 @@
     "recipes": [
       "betterthanelectricity:elec_furnace_recipe",
       "betterthanelectricity:pulverizer_recipe",
+      "betterthanelectricity:compactor_recipe",
       "betterthanelectricity:solar_panel_recipe",
       "betterthanelectricity:fuel_generator_recipe",
       "betterthanelectricity:wind_mill_recipe",

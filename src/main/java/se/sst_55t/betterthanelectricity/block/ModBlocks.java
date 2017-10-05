@@ -7,6 +7,7 @@ package se.sst_55t.betterthanelectricity.block;
 import net.minecraft.init.Blocks;
 import se.sst_55t.betterthanelectricity.ModEnums.BlockType;
 import se.sst_55t.betterthanelectricity.block.chargingstation.BlockChargingStation;
+import se.sst_55t.betterthanelectricity.block.compactor.BlockCompactor;
 import se.sst_55t.betterthanelectricity.block.counter.BlockCounter;
 import se.sst_55t.betterthanelectricity.block.electricfurnace.BlockElectricFurnace;
 import se.sst_55t.betterthanelectricity.block.fuelgenerator.BlockFuelGenerator;
@@ -42,6 +43,8 @@ public class ModBlocks {
     public static BlockFuelGenerator fuelGenerator = (BlockFuelGenerator) new BlockFuelGenerator(false,"fuel_generator_block").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
     public static BlockFuelGenerator fuelGenerator_on = (BlockFuelGenerator) new BlockFuelGenerator(true,"fuel_generator_block_on").setHardness(2.0F);
     public static BlockChargingStation chargingStation = (BlockChargingStation) new BlockChargingStation(false, "charging_station_block").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
+    public static BlockCompactor compactor = (BlockCompactor) new BlockCompactor(false,"compactor_block").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
+    public static BlockCompactor compactor_on = (BlockCompactor) new BlockCompactor(true,"compactor_block_on").setHardness(2.0F);
 
     /* Building Blocks */
     public static BlockBase stone_tile = new BlockBase(Material.ROCK,"stone_tile").setCreativeTab(CreativeTabs.BUILDING_BLOCKS).setHardness(5.0F);
@@ -173,6 +176,8 @@ public class ModBlocks {
                 fuelGenerator,
                 fuelGenerator_on,
                 chargingStation,
+                compactor,
+                compactor_on,
 
                 /* Building Blocks */
                 stone_tile,
@@ -287,6 +292,7 @@ public class ModBlocks {
         GameRegistry.registerTileEntity(windMill.getTileEntityClass(), windMill.getRegistryName().toString());
         GameRegistry.registerTileEntity(fuelGenerator.getTileEntityClass(), fuelGenerator.getRegistryName().toString());
         GameRegistry.registerTileEntity(chargingStation.getTileEntityClass(),chargingStation.getRegistryName().toString());
+        GameRegistry.registerTileEntity(compactor.getTileEntityClass(),compactor.getRegistryName().toString());
         GameRegistry.registerTileEntity(tableOak.getTileEntityClass(), tableOak.getRegistryName().toString());
     }
 
@@ -310,6 +316,8 @@ public class ModBlocks {
                 fuelGenerator.createItemBlock(),
                 fuelGenerator_on.createItemBlock(),
                 chargingStation.createItemBlock(),
+                compactor.createItemBlock(),
+                compactor_on.createItemBlock(),
 
                 /* Building Blocks */
                 stone_tile.createItemBlock(),
@@ -410,6 +418,8 @@ public class ModBlocks {
         fuelGenerator.registerItemModel(Item.getItemFromBlock(fuelGenerator));
         fuelGenerator_on.registerItemModel(Item.getItemFromBlock(fuelGenerator_on));
         chargingStation.registerItemModel(Item.getItemFromBlock(chargingStation));
+        compactor.registerItemModel(Item.getItemFromBlock(compactor));
+        compactor_on.registerItemModel(Item.getItemFromBlock(compactor_on));
 
         stone_tile.registerItemModel(Item.getItemFromBlock(stone_tile));
 

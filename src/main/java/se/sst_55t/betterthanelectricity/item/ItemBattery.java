@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Timeout on 2017-08-22.
  */
-public class ItemBattery extends Item {
+public class ItemBattery extends Item implements IBattery{
 
     private static final int maxCharge = 320;
 

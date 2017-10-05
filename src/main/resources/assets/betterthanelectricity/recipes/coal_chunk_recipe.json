@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "betterthanelectricity:coal_chunk"
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "betterthanelectricity:coal_lump"
+    }
+  }
+}

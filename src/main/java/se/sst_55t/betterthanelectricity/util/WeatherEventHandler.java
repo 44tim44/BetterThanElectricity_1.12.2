@@ -22,10 +22,10 @@ public class WeatherEventHandler {
     public void worldTick(TickEvent.WorldTickEvent event){
         if (event.world.isRaining() || event.world.isThundering()){
             currentTick++;
-        }
-        if(currentTick >= MAX_WEATHER_TIME*40){
-            event.world.provider.resetRainAndThunder();
-            currentTick = 0;
+            if(currentTick >= MAX_WEATHER_TIME*40){
+                event.world.provider.resetRainAndThunder();
+                currentTick = 0;
+            }
         }
     }
 }

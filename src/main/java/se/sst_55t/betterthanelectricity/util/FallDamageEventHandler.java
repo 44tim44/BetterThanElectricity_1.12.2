@@ -21,26 +21,15 @@ public class FallDamageEventHandler {
     {
         if (event.getEntityLiving() instanceof EntityPlayer)
         {
-            ItemStack bootStack = ((EntityPlayer) event.getEntityLiving()).inventory.armorInventory.get(0);
-            if (!bootStack.isEmpty())
-            {
-                if (bootStack.getItem() == ModItems.gravityBoots)
-                {
-                    BlockPos pos = event.getEntityLiving().getPosition();
-                    if(event.getDistance() > 3)
-                    {
-                        if (((IChargeable) bootStack.getItem()).getCharge(bootStack) > 0) {
-                            ((IChargeable) bootStack.getItem()).decreaseCharge(bootStack);
-                            event.setDamageMultiplier(0);
-                        }
-                    }
-                }
-            }
             ItemStack chestplateStack = ((EntityPlayer) event.getEntityLiving()).inventory.armorInventory.get(2);
             if(!chestplateStack.isEmpty())
             {
                 if(chestplateStack.getItem() == ModItems.jetpack)
                 {
+                    if(((EntityPlayer) event.getEntityLiving()).motionY > -0.3)
+                    {
+                        event.setDistance(0);
+                    }
                     if(((EntityPlayer) event.getEntityLiving()).motionY > -0.4)
                     {
                         event.setDistance(1);
@@ -84,6 +73,23 @@ public class FallDamageEventHandler {
 
                 }
             }
+
+            ItemStack bootStack = ((EntityPlayer) event.getEntityLiving()).inventory.armorInventory.get(0);
+            if (!bootStack.isEmpty())
+            {
+                if (bootStack.getItem() == ModItems.gravityBoots)
+                {
+                    BlockPos pos = event.getEntityLiving().getPosition();
+                    if(event.getDistance() > 3)
+                    {
+                        if (((IChargeable) bootStack.getItem()).getCharge(bootStack) > 0) {
+                            ((IChargeable) bootStack.getItem()).decreaseCharge(bootStack);
+                            event.setDamageMultiplier(0);
+                        }
+                    }
+                }
+            }
+
         }
     }
 }

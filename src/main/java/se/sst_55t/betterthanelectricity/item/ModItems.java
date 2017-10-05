@@ -30,6 +30,10 @@ public class ModItems {
     public static ItemBase ingotSteel = new ItemBase("ingot_steel").setCreativeTab(CreativeTabs.MATERIALS);
     public static ItemBase ingotBronze = new ItemBase("ingot_bronze").setCreativeTab(CreativeTabs.MATERIALS);
 
+    public static ItemBase coalLump = new ItemBase("coal_lump").setCreativeTab(CreativeTabs.MATERIALS);
+    public static ItemBase coalChunk = new ItemBase("coal_chunk").setCreativeTab(CreativeTabs.MATERIALS);
+
+    //Tools
     public static ItemBase steelRod = new ItemBase("steel_rod").setCreativeTab(CreativeTabs.MATERIALS);
 
     public static ItemSword moraKnife = new ItemSword(BTEMod.steelToolMaterial,"mora_knife");
@@ -39,10 +43,13 @@ public class ModItems {
     public static ItemPickaxe steelPickaxe = new ItemPickaxe(BTEMod.steelToolMaterial,"steel_pickaxe");
     public static ItemPickaxe bronzePickaxe = new ItemPickaxe(BTEMod.bronzeToolMaterial,"bronze_pickaxe");
 
+    // Food and crops
     public static ItemCornSeed cornSeed = new ItemCornSeed();
     public static ItemBase corn = new ItemBase("corn").setCreativeTab(CreativeTabs.FOOD);
 
+    // Electric Stuff
     public static ItemBattery battery = new ItemBattery();
+    public static ItemBattery batteryPack = new ItemBatteryPack();
     public static ItemBase electricCircuit = new ItemBase("electric_circuit").setCreativeTab(CreativeTabs.MISC);
     public static ItemBase electricCircuitAdvanced = new ItemBase("electric_circuit_advanced").setCreativeTab(CreativeTabs.MISC);
 
@@ -80,6 +87,9 @@ public class ModItems {
                 ingotSteel,
                 ingotBronze,
 
+                coalLump,
+                coalChunk,
+
                 steelRod,
 
                 moraKnife,
@@ -93,6 +103,7 @@ public class ModItems {
                 corn,
 
                 battery,
+                batteryPack,
                 electricCircuit,
                 electricCircuitAdvanced,
 
@@ -130,6 +141,9 @@ public class ModItems {
         ingotSteel.registerItemModel();
         ingotBronze.registerItemModel();
 
+        coalLump.registerItemModel();
+        coalChunk.registerItemModel();
+
         steelRod.registerItemModel();
 
         moraKnife.registerItemModel();
@@ -142,6 +156,7 @@ public class ModItems {
         corn.registerItemModel();
 
         battery.registerItemModel();
+        batteryPack.registerItemModel();
         electricCircuit.registerItemModel();
         electricCircuitAdvanced.registerItemModel();
 

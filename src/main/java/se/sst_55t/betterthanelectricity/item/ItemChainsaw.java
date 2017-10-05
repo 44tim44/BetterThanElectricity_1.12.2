@@ -18,7 +18,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.sst_55t.betterthanelectricity.BTEMod;
-import se.sst_55t.betterthanelectricity.sound.LoopableSound;
 import se.sst_55t.betterthanelectricity.util.ModSoundEvents;
 
 import javax.annotation.Nullable;
