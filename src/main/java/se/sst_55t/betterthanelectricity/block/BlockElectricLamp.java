@@ -13,6 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -134,7 +135,6 @@ public class BlockElectricLamp extends BlockBase //implements IChargeable
         }
     }
 
-
     public static void setState(boolean active,World worldIn, BlockPos pos, IBlockState state)
     {
         if (!worldIn.isRemote)
@@ -151,6 +151,7 @@ public class BlockElectricLamp extends BlockBase //implements IChargeable
         }
     }
 
+    @Override
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         IBlockState iblockstate = this.getStateFromMeta(meta);
@@ -178,9 +179,20 @@ public class BlockElectricLamp extends BlockBase //implements IChargeable
         return true;
     }
 
+    @Override
     public BlockFaceShape getBlockFaceShape(IBlockAccess access, IBlockState state, BlockPos pos, EnumFacing facing)
     {
         return BlockFaceShape.UNDEFINED;
+    }
+
+    /**
+     * Get the Item that this Block should drop when harvested.
+     */
+    @Nullable
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune)
+    {
+        return Item.getItemFromBlock(ModBlocks.electricLamp);
     }
 
     /*

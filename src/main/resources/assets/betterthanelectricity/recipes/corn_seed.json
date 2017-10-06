@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "betterthanelectricity:corn"
+    }
+  ],
+  "result": {
+    "item": "betterthanelectricity:corn_seed",
+    "count": 2
+  }
+}

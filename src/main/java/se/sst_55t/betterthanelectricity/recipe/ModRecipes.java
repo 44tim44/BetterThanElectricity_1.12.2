@@ -35,5 +35,10 @@ public class ModRecipes {
                 new ItemStack(ModItems.ingotTin), 0.7f);
         GameRegistry.addSmelting(Blocks.STONE,
                 new ItemStack(ModBlocks.stone_tile), 0.7F);
+
+        GameRegistry.addSmelting(ModItems.corn,
+                new ItemStack(ModItems.cornCooked), 0.7f);
+        GameRegistry.addSmelting(ModItems.cornSeed,
+                new ItemStack(ModItems.popcorn), 0.7f);
     }
 }

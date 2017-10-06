@@ -45,7 +45,9 @@ public class ModItems {
 
     // Food and crops
     public static ItemCornSeed cornSeed = new ItemCornSeed();
-    public static ItemBase corn = new ItemBase("corn").setCreativeTab(CreativeTabs.FOOD);
+    public static ItemFoodBase corn = new ItemFoodBase("corn",2,0.6F,false).setCreativeTab(CreativeTabs.FOOD);
+    public static ItemFoodBase cornCooked = new ItemFoodBase("corn_cooked",5,0.6F,false).setCreativeTab(CreativeTabs.FOOD);
+    public static ItemFoodBase popcorn = new ItemFoodBase("popcorn",2,0.6F,false).setCreativeTab(CreativeTabs.FOOD);
 
     // Electric Stuff
     public static ItemBattery battery = new ItemBattery();
@@ -101,6 +103,8 @@ public class ModItems {
 
                 cornSeed,
                 corn,
+                cornCooked,
+                popcorn,
 
                 battery,
                 batteryPack,
@@ -154,6 +158,8 @@ public class ModItems {
 
         cornSeed.registerItemModel();
         corn.registerItemModel();
+        cornCooked.registerItemModel();
+        popcorn.registerItemModel();
 
         battery.registerItemModel();
         batteryPack.registerItemModel();

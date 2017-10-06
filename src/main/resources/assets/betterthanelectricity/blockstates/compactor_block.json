@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "facing=north": { "model": "betterthanelectricity:compactor_block" },
+        "facing=south": { "model": "betterthanelectricity:compactor_block", "y": 180 },
+        "facing=west":  { "model": "betterthanelectricity:compactor_block", "y": 270 },
+        "facing=east":  { "model": "betterthanelectricity:compactor_block", "y": 90 },
+        "inventory": { "model": "betterthanelectricity:compactor_block" }
+    }
+}

@@ -1,5 +1,7 @@
 package se.sst_55t.betterthanelectricity.world;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockCrops;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DimensionType;
@@ -8,6 +10,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.common.IWorldGenerator;
+import se.sst_55t.betterthanelectricity.block.BlockCropCorn;
 import se.sst_55t.betterthanelectricity.block.ModBlocks;
 
 import java.util.Random;
@@ -44,6 +47,8 @@ public class ModWorldGen implements IWorldGenerator {
         generateOre(ModBlocks.oreAluminum.getDefaultState(),
                 world, random, chunkX * 16, chunkZ * 16,
                 1, 32, 4 + random.nextInt(7), 6);
+
+        generatePlant(ModBlocks.cropCorn.getDefaultState(), world, random, chunkX * 16, chunkZ * 16 + random.nextInt(20));
     }
 
     private void generateOre(IBlockState ore, World world, Random random,
@@ -57,6 +62,22 @@ public class ModWorldGen implements IWorldGenerator {
 
             WorldGenMinable generator = new WorldGenMinable(ore, size);
             generator.generate(world, random, pos);
+        }
+    }
+
+    private void generatePlant(IBlockState plant, World world, Random rand,
+                              int x, int z)
+    {
+        if(rand.nextInt(30) == 0) {
+            int plantsInGroup = 3 + rand.nextInt(3); //between 7 and 14 plants per group.
+            for(int i = 0; i < plantsInGroup; i++) {
+                x = x + rand.nextInt(4);
+                z = z + rand.nextInt(4);
+                int y = world.getHeight(x, z);
+                if(y > 0 && BlockCropCorn.canGrowOn(world.getBlockState(new BlockPos(x, y - 1, z)))) {
+                    world.setBlockState(new BlockPos(x, y, z), plant.withProperty(BlockCrops.AGE,7));
+                }
+            }
         }
     }
 
