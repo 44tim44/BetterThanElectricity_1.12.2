@@ -141,7 +141,7 @@ public class ItemJetpack extends ItemArmorCustom implements IChargeable, ISpecia
                     if(dirty)
                     {
                         if (worldIn.isRemote) {
-                            BTEMod.network.sendToServer(new PacketToServerJetpack(chestplateStack));
+                            BTEMod.network.sendToServer(new PacketToServerJetpack(((IChargeable)chestplateStack.getItem()).getCharge(chestplateStack)));
                         }
                         dirty = false;
                     }

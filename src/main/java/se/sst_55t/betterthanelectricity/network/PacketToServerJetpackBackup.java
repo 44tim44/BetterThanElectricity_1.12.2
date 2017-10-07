@@ -12,36 +12,37 @@ import se.sst_55t.betterthanelectricity.item.IChargeable;
 /**
  * @author shadowfacts
  */
-public class PacketToServerJetpack implements IMessage {
+public class PacketToServerJetpackBackup implements IMessage {
 
-  private int chestCharge;
+  private ItemStack chestStackClient;
 
-  public PacketToServerJetpack(int chestCharge) {
-    this.chestCharge = chestCharge;
+  public PacketToServerJetpackBackup(ItemStack chestStackClient) {
+    this.chestStackClient = chestStackClient;
   }
 
-  public PacketToServerJetpack() {
+  public PacketToServerJetpackBackup() {
   }
 
   @Override
   public void toBytes(ByteBuf buf) {
-    buf.writeInt(chestCharge);
+    ByteBufUtils.writeItemStack(buf, chestStackClient);
   }
 
   @Override
   public void fromBytes(ByteBuf buf) {
-    chestCharge = buf.readInt();
+    chestStackClient = ByteBufUtils.readItemStack(buf);
   }
 
-  public static class Handler implements IMessageHandler<PacketToServerJetpack, IMessage> {
+  public static class Handler implements IMessageHandler<PacketToServerJetpackBackup, IMessage> {
 
     @Override
-    public IMessage onMessage(PacketToServerJetpack message, MessageContext ctx) {
+    public IMessage onMessage(PacketToServerJetpackBackup message, MessageContext ctx) {
       EntityPlayerMP serverPlayer = ctx.getServerHandler().player;
-      int chestChargeClient = message.chestCharge;
+      ItemStack chestStackClient = message.chestStackClient;
       ItemStack chestStackServer = serverPlayer.inventory.armorInventory.get(2);
       serverPlayer.getServerWorld().addScheduledTask(() -> {
-        ((IChargeable)chestStackServer.getItem()).setCharge(chestChargeClient, chestStackServer);
+        ((IChargeable)chestStackServer.getItem()).setCharge(
+                ((IChargeable)chestStackClient.getItem()).getCharge(chestStackClient), chestStackServer);
       });
       return null;
     }
