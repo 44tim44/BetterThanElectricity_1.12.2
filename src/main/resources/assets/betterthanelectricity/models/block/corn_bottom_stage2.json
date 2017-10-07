@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "cross": "betterthanelectricity:blocks/corn/2_lower"
+    }
+}
