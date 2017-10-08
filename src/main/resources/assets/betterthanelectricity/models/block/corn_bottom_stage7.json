@@ -1,6 +1,6 @@
 {
-    "parent": "block/cross",
+    "parent": "betterthanelectricity:block/cross_crop",
     "textures": {
-        "cross": "betterthanelectricity:blocks/corn/7_lower"
+        "cross_crop": "betterthanelectricity:blocks/corn/7_lower"
     }
 }

@@ -34,6 +34,7 @@ item.popcorn.name=Popcorn
 item.mining_drill.name=Mining Drill
 item.chainsaw.name=Chainsaw
 item.battery.name=Battery
+item.battery_pack.name=Battery Pack
 item.electric_circuit.name=Electric Circuit
 item.electric_circuit_advanced.name=Advanced Electric Circuit
 item.drill_head.name=Drill Head

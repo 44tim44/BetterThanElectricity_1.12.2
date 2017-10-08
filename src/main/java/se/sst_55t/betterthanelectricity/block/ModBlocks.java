@@ -134,6 +134,7 @@ public class ModBlocks {
 
     /* Other */
     public static BlockCropCorn cropCorn = new BlockCropCorn();
+    public static BlockPlantCorn plantCorn = new BlockPlantCorn("plant_corn");
 
     public static BlockChair chairOak = new BlockChair(Material.WOOD, SoundType.WOOD,"chair_oak");
     public static BlockChair chairSpruce = new BlockChair(Material.WOOD, SoundType.WOOD,"chair_spruce");
@@ -161,7 +162,10 @@ public class ModBlocks {
                 oreCopper,
                 oreTin,
                 oreAluminum,
+
+                /* Plants */
                 cropCorn,
+                plantCorn,
 
                 /* Machines */
                 counter,

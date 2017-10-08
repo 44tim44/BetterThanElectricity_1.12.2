@@ -121,14 +121,18 @@ public class ContainerChargingStation extends Container
             {
                 if (itemstackSlot.getItem() instanceof IBattery)
                 {
-                    if (!this.mergeItemStack(itemstackSlot, 0, 2, false))
+                    if (!this.mergeItemStack(itemstackSlot, 1, 2, false))
+                    {
+                        return ItemStack.EMPTY;
+                    }
+                    if (!this.mergeItemStack(itemstackSlot, 0, 1, false))
                     {
                         return ItemStack.EMPTY;
                     }
                 }
                 else if (itemstackSlot.getItem() instanceof IChargeable)
                 {
-                    if (!this.mergeItemStack(itemstackSlot, 1, 2, false))
+                    if (!this.mergeItemStack(itemstackSlot, 0, 1, false))
                     {
                         return ItemStack.EMPTY;
                     }

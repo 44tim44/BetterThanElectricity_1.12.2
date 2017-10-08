@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import se.sst_55t.betterthanelectricity.item.IChargeable;
+import se.sst_55t.betterthanelectricity.item.ModItems;
 
 /**
  * @author shadowfacts
@@ -40,12 +41,13 @@ public class PacketToServerJetpack implements IMessage {
       EntityPlayerMP serverPlayer = ctx.getServerHandler().player;
       int chestChargeClient = message.chestCharge;
       ItemStack chestStackServer = serverPlayer.inventory.armorInventory.get(2);
-      serverPlayer.getServerWorld().addScheduledTask(() -> {
-        ((IChargeable)chestStackServer.getItem()).setCharge(chestChargeClient, chestStackServer);
-      });
+      if (!chestStackServer.isEmpty() && chestStackServer.getItem() == ModItems.jetpack)
+      {
+        serverPlayer.getServerWorld().addScheduledTask(() -> {
+          ((IChargeable) chestStackServer.getItem()).setCharge(chestChargeClient, chestStackServer);
+        });
+      }
       return null;
     }
-
   }
-
 }

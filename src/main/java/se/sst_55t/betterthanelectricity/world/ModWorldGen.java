@@ -12,6 +12,7 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import se.sst_55t.betterthanelectricity.block.BlockCropCorn;
+import se.sst_55t.betterthanelectricity.block.BlockPlantCorn;
 import se.sst_55t.betterthanelectricity.block.ModBlocks;
 
 import java.util.Random;
@@ -93,9 +94,9 @@ public class ModWorldGen implements IWorldGenerator {
                 x = x + rand.nextInt(4);
                 z = z + rand.nextInt(4);
                 int y = world.getHeight(x, z);
-                if(y > 0 && BlockCropCorn.canGrowOn(world.getBlockState(new BlockPos(x, y - 1, z))) && world.isAirBlock(new BlockPos(x, y + 1, z))) {
-                    world.setBlockState(new BlockPos(x, y, z), ModBlocks.cropCorn.getDefaultState().withProperty(BlockCrops.AGE,7).withProperty(HALF, BlockDoublePlant.EnumBlockHalf.LOWER));
-                    world.setBlockState(new BlockPos(x, y+1, z), ModBlocks.cropCorn.getDefaultState().withProperty(BlockCrops.AGE,7).withProperty(HALF, BlockDoublePlant.EnumBlockHalf.UPPER));
+                if(y > 0 && BlockPlantCorn.canGrowOn(world.getBlockState(new BlockPos(x, y - 1, z))) && world.isAirBlock(new BlockPos(x, y + 1, z))) {
+                    world.setBlockState(new BlockPos(x, y, z), ModBlocks.plantCorn.getDefaultState().withProperty(HALF, BlockDoublePlant.EnumBlockHalf.LOWER));
+                    world.setBlockState(new BlockPos(x, y+1, z), ModBlocks.plantCorn.getDefaultState().withProperty(HALF, BlockDoublePlant.EnumBlockHalf.UPPER));
                 }
             }
         }

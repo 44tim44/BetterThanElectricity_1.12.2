@@ -72,12 +72,12 @@ public class BlockCropCorn extends BlockCrops {
     @Override
     protected boolean canSustainBush(IBlockState state)
     {
-        return state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.FARMLAND;
+        return state.getBlock() == Blocks.FARMLAND;
     }
 
     public static boolean canGrowOn(IBlockState state)
     {
-        return state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.FARMLAND;
+        return state.getBlock() == Blocks.FARMLAND;
     }
 
     @Override
@@ -168,7 +168,10 @@ public class BlockCropCorn extends BlockCrops {
      */
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
     {
-        worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(HALF, BlockDoublePlant.EnumBlockHalf.UPPER), 2);
+        if(state.getValue(HALF) == BlockDoublePlant.EnumBlockHalf.LOWER) {
+            int bottomAge = state.getValue(AGE);
+            worldIn.setBlockState(pos.up(), this.withAge(bottomAge).withProperty(HALF, BlockDoublePlant.EnumBlockHalf.UPPER), 2);
+        }
     }
 
 
@@ -233,7 +236,7 @@ public class BlockCropCorn extends BlockCrops {
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
-        super.updateTick(worldIn, pos, state, rand);
+        this.checkAndDropBlock(worldIn, pos, state);
 
         if (worldIn.getLightFromNeighbors(pos.up()) >= 9)
         {
