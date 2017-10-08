@@ -42,6 +42,7 @@ item.corn.name=Corn
 item.corn_seed.name=Corn Seed
 item.corn_cooked.name=Corn on the Cob
 item.popcorn.name=Popcorn
+item.cooked_egg.name=Cooked Egg
 
 item.mining_drill.name=Mining Drill
 item.chainsaw.name=Chainsaw
