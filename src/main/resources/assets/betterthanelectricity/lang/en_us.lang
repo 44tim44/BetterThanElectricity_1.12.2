@@ -13,6 +13,8 @@ item.ingot_tin.name=Tin Ingot
 item.ingot_aluminum.name=Aluminum Ingot
 item.ingot_steel.name=Steel Ingot
 item.ingot_bronze.name=Bronze Ingot
+item.ruby.name=Ruby
+item.sapphire.name=Sapphire
 
 item.coal_lump.name=Coal Lump
 item.coal_chunk.name=Coal Chunk
@@ -22,9 +24,19 @@ item.steel_rod.name=Steel Rod
 item.mora_knife.name=Mora 2000
 item.bronze_sword.name=Bronze Sword
 item.steel_sword.name=Steel Sword
+item.lightsaber_green.name=Lightsaber (Green)
+item.lightsaber_green_off.name=Lightsaber (Green)
+item.lightsaber_red.name=Lightsaber (Red)
+item.lightsaber_red_off.name=Lightsaber (Red)
+item.lightsaber_blue.name=Lightsaber (Blue)
+item.lightsaber_blue_off.name=Lightsaber (Blue)
 
 item.bronze_pickaxe.name=Bronze Pickaxe
 item.steel_pickaxe.name=Steel Pickaxe
+item.bronze_axe.name=Bronze Axe
+item.steel_axe.name=Steel Axe
+item.bronze_shovel.name=Bronze Shovel
+item.steel_shovel.name=Steel Shovel
 
 item.corn.name=Corn
 item.corn_seed.name=Corn Seed
@@ -54,6 +66,8 @@ item.jetpack.name=Jetpack
 tile.ore_copper.name=Copper Ore
 tile.ore_tin.name=Tin Ore
 tile.ore_aluminum.name=Aluminum Ore
+tile.ore_ruby.name=Ruby Ore
+tile.ore_sapphire.name=Sapphire Ore
 
 tile.pulverizer_block.name=Pulverizer
 container.pulverizer=Pulverizer

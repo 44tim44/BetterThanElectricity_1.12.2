@@ -56,8 +56,10 @@ public class BTEMod {
 
     public static final Item.ToolMaterial steelToolMaterial = EnumHelper
             .addToolMaterial("STEEL", 2, 1000, 10, 3, 20);
+
     public static final ItemArmor.ArmorMaterial steelArmorMaterial = EnumHelper
             .addArmorMaterial("STEEL",MODID + ":steel", 15, new int[]{2, 5, 6, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
+
     public static final ItemArmor.ArmorMaterial machineArmorMaterial = EnumHelper
             .addArmorMaterial("MACHINE",MODID + ":machine", -1, new int[]{0, 0, 0, 0}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F);
 

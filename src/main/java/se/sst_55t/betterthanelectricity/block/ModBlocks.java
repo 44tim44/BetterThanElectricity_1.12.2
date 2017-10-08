@@ -26,9 +26,11 @@ import se.sst_55t.betterthanelectricity.block.windmill.BlockWindMill;
 public class ModBlocks {
 
     /* Ores */
-    public static BlockOre oreCopper = new BlockOre("ore_copper").setCreativeTab(CreativeTabs.MATERIALS);
-    public static BlockOre oreTin = new BlockOre("ore_tin").setCreativeTab(CreativeTabs.MATERIALS);
-    public static BlockOre oreAluminum = new BlockOre("ore_aluminum").setCreativeTab(CreativeTabs.MATERIALS);
+    public static BlockOre oreCopper = new BlockOre("ore_copper",false).setCreativeTab(CreativeTabs.MATERIALS);
+    public static BlockOre oreTin = new BlockOre("ore_tin",false).setCreativeTab(CreativeTabs.MATERIALS);
+    public static BlockOre oreAluminum = new BlockOre("ore_aluminum",false).setCreativeTab(CreativeTabs.MATERIALS);
+    public static BlockOre oreRuby = new BlockOre("ore_ruby",true).setCreativeTab(CreativeTabs.MATERIALS);
+    public static BlockOre oreSapphire = new BlockOre("ore_sapphire",true).setCreativeTab(CreativeTabs.MATERIALS);
 
     /* Machines */
     public static BlockCounter counter = new BlockCounter();
@@ -162,6 +164,8 @@ public class ModBlocks {
                 oreCopper,
                 oreTin,
                 oreAluminum,
+                oreRuby,
+                oreSapphire,
 
                 /* Plants */
                 cropCorn,
@@ -306,6 +310,8 @@ public class ModBlocks {
                 oreCopper.createItemBlock(),
                 oreTin.createItemBlock(),
                 oreAluminum.createItemBlock(),
+                oreRuby.createItemBlock(),
+                oreSapphire.createItemBlock(),
 
                 /* Machines */
                 counter.createItemBlock(),
@@ -410,6 +416,9 @@ public class ModBlocks {
         oreCopper.registerItemModel(Item.getItemFromBlock(oreCopper));
         oreTin.registerItemModel(Item.getItemFromBlock(oreTin));
         oreAluminum.registerItemModel(Item.getItemFromBlock(oreAluminum));
+        oreRuby.registerItemModel(Item.getItemFromBlock(oreRuby));
+        oreSapphire.registerItemModel(Item.getItemFromBlock(oreSapphire));
+
         counter.registerItemModel(Item.getItemFromBlock(counter));
         pulverizer.registerItemModel(Item.getItemFromBlock(pulverizer));
         pulverizer_on.registerItemModel(Item.getItemFromBlock(pulverizer_on));

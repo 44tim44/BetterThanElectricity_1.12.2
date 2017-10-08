@@ -4,8 +4,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import se.sst_55t.betterthanelectricity.BTEMod;
 import se.sst_55t.betterthanelectricity.block.ModBlocks;
-import se.sst_55t.betterthanelectricity.item.tool.ItemPickaxe;
-import se.sst_55t.betterthanelectricity.item.tool.ItemSword;
+import se.sst_55t.betterthanelectricity.item.tool.*;
 import net.minecraft.creativetab.CreativeTabs;
 //import net.minecraft.item.Item;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -29,6 +28,8 @@ public class ModItems {
     public static ItemBase ingotAluminum = new ItemBase("ingot_aluminum").setCreativeTab(CreativeTabs.MATERIALS);
     public static ItemBase ingotSteel = new ItemBase("ingot_steel").setCreativeTab(CreativeTabs.MATERIALS);
     public static ItemBase ingotBronze = new ItemBase("ingot_bronze").setCreativeTab(CreativeTabs.MATERIALS);
+    public static ItemBase ruby = new ItemBase("ruby").setCreativeTab(CreativeTabs.MATERIALS);
+    public static ItemBase sapphire = new ItemBase("sapphire").setCreativeTab(CreativeTabs.MATERIALS);
 
     public static ItemBase coalLump = new ItemBase("coal_lump").setCreativeTab(CreativeTabs.MATERIALS);
     public static ItemBase coalChunk = new ItemBase("coal_chunk").setCreativeTab(CreativeTabs.MATERIALS);
@@ -36,12 +37,24 @@ public class ModItems {
     //Tools
     public static ItemBase steelRod = new ItemBase("steel_rod").setCreativeTab(CreativeTabs.MATERIALS);
 
-    public static ItemSword moraKnife = new ItemSword(BTEMod.steelToolMaterial,"mora_knife");
+    public static ItemKnife moraKnife = new ItemKnife(BTEMod.steelToolMaterial,"mora_knife");
+    public static ItemLightsaberOff lightsaberRedOff = new ItemLightsaberOff("lightsaber_red_off");
+    public static ItemLightsaberOff lightsaberGreenOff = new ItemLightsaberOff("lightsaber_green_off");
+    public static ItemLightsaberOff lightsaberBlueOff = new ItemLightsaberOff("lightsaber_blue_off");
+    public static ItemLightsaber lightsaberRed = new ItemLightsaber("lightsaber_red");
+    public static ItemLightsaber lightsaberGreen = new ItemLightsaber("lightsaber_green");
+    public static ItemLightsaber lightsaberBlue = new ItemLightsaber("lightsaber_blue");
     public static ItemSword steelSword = new ItemSword(BTEMod.steelToolMaterial,"steel_sword");
     public static ItemSword bronzeSword = new ItemSword(BTEMod.bronzeToolMaterial,"bronze_sword");
 
     public static ItemPickaxe steelPickaxe = new ItemPickaxe(BTEMod.steelToolMaterial,"steel_pickaxe");
     public static ItemPickaxe bronzePickaxe = new ItemPickaxe(BTEMod.bronzeToolMaterial,"bronze_pickaxe");
+
+    public static ItemAxe steelAxe = new ItemAxe(BTEMod.steelToolMaterial,"steel_axe");
+    public static ItemAxe bronzeAxe = new ItemAxe(BTEMod.bronzeToolMaterial,"bronze_axe");
+
+    public static ItemShovel steelShovel = new ItemShovel(BTEMod.steelToolMaterial,"steel_shovel");
+    public static ItemShovel bronzeShovel = new ItemShovel(BTEMod.bronzeToolMaterial,"bronze_shovel");
 
     // Food and crops
     public static ItemCornSeed cornSeed = new ItemCornSeed();
@@ -88,6 +101,8 @@ public class ModItems {
                 ingotAluminum,
                 ingotSteel,
                 ingotBronze,
+                ruby,
+                sapphire,
 
                 coalLump,
                 coalChunk,
@@ -95,11 +110,21 @@ public class ModItems {
                 steelRod,
 
                 moraKnife,
+                lightsaberRedOff,
+                lightsaberGreenOff,
+                lightsaberBlueOff,
+                lightsaberRed,
+                lightsaberGreen,
+                lightsaberBlue,
                 steelSword,
                 bronzeSword,
 
                 steelPickaxe,
                 bronzePickaxe,
+                steelAxe,
+                bronzeAxe,
+                steelShovel,
+                bronzeShovel,
 
                 cornSeed,
                 corn,
@@ -144,6 +169,8 @@ public class ModItems {
         ingotAluminum.registerItemModel();
         ingotSteel.registerItemModel();
         ingotBronze.registerItemModel();
+        ruby.registerItemModel();
+        sapphire.registerItemModel();
 
         coalLump.registerItemModel();
         coalChunk.registerItemModel();
@@ -151,10 +178,20 @@ public class ModItems {
         steelRod.registerItemModel();
 
         moraKnife.registerItemModel();
+        lightsaberRedOff.registerItemModel();
+        lightsaberGreenOff.registerItemModel();
+        lightsaberBlueOff.registerItemModel();
+        lightsaberRed.registerItemModel();
+        lightsaberGreen.registerItemModel();
+        lightsaberBlue.registerItemModel();
         steelSword.registerItemModel();
         bronzeSword.registerItemModel();
         steelPickaxe.registerItemModel();
         bronzePickaxe.registerItemModel();
+        steelAxe.registerItemModel();
+        bronzeAxe.registerItemModel();
+        steelShovel.registerItemModel();
+        bronzeShovel.registerItemModel();
 
         cornSeed.registerItemModel();
         corn.registerItemModel();
