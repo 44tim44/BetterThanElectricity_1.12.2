@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
@@ -51,6 +52,18 @@ public class ModWorldGen implements IWorldGenerator {
         generateOre(ModBlocks.oreAluminum.getDefaultState(),
                 world, random, chunkX * 16, chunkZ * 16,
                 1, 32, 4 + random.nextInt(7), 6);
+
+        generateOre(ModBlocks.oreRuby.getDefaultState(),
+                world, random, chunkX * 16, chunkZ * 16,
+                4, 32, 1, 3 + random.nextInt(6));
+
+        generateOre(ModBlocks.oreSapphire.getDefaultState(),
+                world, random, chunkX * 16, chunkZ * 16,
+                4, 32, 1, 3 + random.nextInt(6));
+
+        generateOre(Blocks.EMERALD_ORE.getDefaultState(),
+                world, random, chunkX * 16, chunkZ * 16,
+                4, 32, 1, 3 + random.nextInt(6));
 
         generateCorn(world, random, chunkX * 16, chunkZ * 16 + random.nextInt(20));
     }

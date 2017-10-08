@@ -40,5 +40,7 @@ public class ModRecipes {
                 new ItemStack(ModItems.cornCooked), 0.7f);
         GameRegistry.addSmelting(ModItems.cornSeed,
                 new ItemStack(ModItems.popcorn), 0.7f);
+        GameRegistry.addSmelting(Items.EGG,
+                new ItemStack(ModItems.cookedEgg), 0.7f);
     }
 }

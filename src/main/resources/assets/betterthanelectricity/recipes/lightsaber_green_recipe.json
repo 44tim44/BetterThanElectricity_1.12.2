@@ -1,0 +1,25 @@
+{
+  "result": {
+    "item": "betterthanelectricity:lightsaber_green_off"
+  },
+  "pattern": [
+    "SGS",
+    "SCS",
+    "SBS"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": {
+      "item": "betterthanelectricity:battery"
+    },
+    "C": {
+      "item": "betterthanelectricity:electric_circuit_advanced"
+    },
+    "S": {
+      "item": "betterthanelectricity:ingot_steel"
+    },
+    "G": {
+      "item": "minecraft:emerald"
+    }
+  }
+}

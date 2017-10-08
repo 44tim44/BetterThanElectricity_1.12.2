@@ -62,6 +62,8 @@ public class ModItems {
     public static ItemFoodBase cornCooked = new ItemFoodBase("corn_cooked",5,0.6F,false).setCreativeTab(CreativeTabs.FOOD);
     public static ItemFoodBase popcorn = new ItemFoodBase("popcorn",2,0.6F,false).setCreativeTab(CreativeTabs.FOOD);
 
+    public static ItemFoodBase cookedEgg = new ItemFoodBase("cooked_egg",2,0.6F,false).setCreativeTab(CreativeTabs.FOOD);
+
     // Electric Stuff
     public static ItemBattery battery = new ItemBattery();
     public static ItemBatteryPack batteryPack = new ItemBatteryPack();
@@ -130,6 +132,7 @@ public class ModItems {
                 corn,
                 cornCooked,
                 popcorn,
+                cookedEgg,
 
                 battery,
                 batteryPack,
@@ -197,6 +200,7 @@ public class ModItems {
         corn.registerItemModel();
         cornCooked.registerItemModel();
         popcorn.registerItemModel();
+        cookedEgg.registerItemModel();
 
         battery.registerItemModel();
         batteryPack.registerItemModel();
