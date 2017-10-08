@@ -3,6 +3,7 @@ package se.sst_55t.betterthanelectricity.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockDoublePlant;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -41,6 +42,9 @@ public class BlockPlantCorn extends BlockBush {
         this.setDefaultState(this.blockState.getBaseState().withProperty(HALF, BlockDoublePlant.EnumBlockHalf.LOWER));
         setUnlocalizedName(name);
         setRegistryName(name);
+        this.setHardness(0.0F);
+        this.setSoundType(SoundType.PLANT);
+        this.disableStats();
     }
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
@@ -107,6 +111,49 @@ public class BlockPlantCorn extends BlockBush {
         }
     }
 
+    protected Item getSeed() {
+        return ModItems.cornSeed;
+    }
+
+    protected Item getCrop() {
+        return ModItems.corn;
+    }
+
+    @Override
+    public void getDrops(net.minecraft.util.NonNullList<ItemStack> drops, net.minecraft.world.IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+    {
+        super.getDrops(drops, world, pos, state, 0);
+
+        Random rand = world instanceof World ? ((World)world).rand : new Random();
+        int k = 3 + fortune;
+        for (int i = 0; i < k; ++i)
+        {
+            if (rand.nextInt(14) <= 7)
+            {
+                drops.add(new ItemStack(this.getSeed(), 1, 0));
+            }
+        }
+    }
+
+    /**
+     * Spawns this Block's drops into the World as EntityItems.
+     */
+    public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune) {
+        super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
+
+        if (false && !worldIn.isRemote) // Forge: NOP all this.
+        {
+            int j = 3 + fortune;
+            for (int k = 0; k < j; ++k)
+            {
+                if (worldIn.rand.nextInt(14) <= 7)
+                {
+                    spawnAsEntity(worldIn, pos, new ItemStack(this.getSeed()));
+                }
+            }
+        }
+    }
+
 
     /**
      * Get the Item that this Block should drop when harvested.
@@ -120,7 +167,7 @@ public class BlockPlantCorn extends BlockBush {
         }
         else
         {
-            return ModItems.corn;
+            return getCrop();
         }
     }
 
