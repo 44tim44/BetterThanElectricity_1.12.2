@@ -254,7 +254,7 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
                     ItemStack itemstack = chargingStationItemStacks.get(1);
                     if(itemstack.getItem() instanceof IBattery)
                     {
-                        ((ItemBattery)itemstack.getItem()).decreaseCharge(itemstack);
+                        ((IBattery)itemstack.getItem()).decreaseCharge(itemstack);
                         this.increaseCharge();
                     }
 
@@ -278,7 +278,7 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
                     ItemStack itemstack = chargingStationItemStacks.get(0);
                     if(itemstack.getItem() instanceof IBattery)
                     {
-                        ((ItemBattery)itemstack.getItem()).increaseCharge(itemstack);
+                        ((IBattery)itemstack.getItem()).increaseCharge(itemstack);
                         this.decreaseCharge();
                     }
                     else if(itemstack.getItem() instanceof IChargeable)
@@ -325,7 +325,7 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
         {
             if(currentCharge > 0) {
                 if (itemstack.getItem() instanceof IBattery) {
-                    if (((ItemBattery) itemstack.getItem()).getCharge(itemstack) < ((ItemBattery) itemstack.getItem()).getMaxCharge(itemstack)) {
+                    if (((IBattery) itemstack.getItem()).getCharge(itemstack) < ((IBattery) itemstack.getItem()).getMaxCharge(itemstack)) {
                         return true;
                     }
                     return false;
@@ -360,7 +360,7 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
         {
             if (currentCharge < maxCharge) {
                 if (itemstack.getItem() instanceof IBattery) {
-                    if (((ItemBattery) itemstack.getItem()).getCharge(itemstack) > 0) {
+                    if (((IBattery) itemstack.getItem()).getCharge(itemstack) > 0) {
                         return true;
                     }
                     return false;

@@ -252,7 +252,7 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
                         ItemStack itemstack = fuelGeneratorItemStacks.get(0);
                         if(itemstack.getItem() instanceof IBattery)
                         {
-                            ((ItemBattery)itemstack.getItem()).increaseCharge(itemstack);
+                            ((IBattery)itemstack.getItem()).increaseCharge(itemstack);
                         }
                         else if(itemstack.getItem() instanceof IChargeable)
                         {
@@ -308,7 +308,7 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
         {
             if(itemstack.getItem() instanceof IBattery)
             {
-                if(((ItemBattery)itemstack.getItem()).getCharge(itemstack) < ((ItemBattery)itemstack.getItem()).getMaxCharge(itemstack))
+                if(((IBattery)itemstack.getItem()).getCharge(itemstack) < ((IBattery)itemstack.getItem()).getMaxCharge(itemstack))
                 {
                     return true;
                 }

@@ -225,7 +225,7 @@ public class TileEntityCompactor extends TileEntityLockable implements ITickable
 
                         if (!itemstack.isEmpty())
                         {
-                            ((ItemBattery)itemstack.getItem()).decreaseCharge(itemstack);
+                            ((IBattery)itemstack.getItem()).decreaseCharge(itemstack);
                         }
                     }
                 }
@@ -354,7 +354,7 @@ public class TileEntityCompactor extends TileEntityLockable implements ITickable
 
             if (item instanceof IBattery)
             {
-                if(((ItemBattery)stack.getItem()).getCharge(stack) > 0)
+                if(((IBattery)stack.getItem()).getCharge(stack) > 0)
                 {
                     return 20;
                 }

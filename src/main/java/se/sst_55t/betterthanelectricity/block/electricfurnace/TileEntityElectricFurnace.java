@@ -269,8 +269,8 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
 
                         if (!itemstack1.isEmpty())
                         {
-                            //if(((ItemBattery)itemstack1.getItem()).getCharge(itemstack1) < ((ItemBattery)itemstack1.getItem()).getMaxCharge(itemstack1)) {
-                                ((ItemBattery)itemstack1.getItem()).decreaseCharge(itemstack1);
+                            //if(((IBattery)itemstack1.getItem()).getCharge(itemstack1) < ((IBattery)itemstack1.getItem()).getMaxCharge(itemstack1)) {
+                                ((IBattery)itemstack1.getItem()).decreaseCharge(itemstack1);
                             //}
                         }
                     }
@@ -491,7 +491,7 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
 
             if (item instanceof IBattery)
             {
-                if(((ItemBattery)stack.getItem()).getCharge(stack) > 0)
+                if(((IBattery)stack.getItem()).getCharge(stack) > 0)
                 {
                     return 20;
                 }

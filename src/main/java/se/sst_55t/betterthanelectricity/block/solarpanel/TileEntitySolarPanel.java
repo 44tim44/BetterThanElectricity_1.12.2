@@ -37,7 +37,7 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable {
                 this.totalChargeTime = this.getItemChargeTime(itemstack);
                 if(itemstack.getItem() instanceof IBattery)
                 {
-                    ((ItemBattery)itemstack.getItem()).increaseCharge(itemstack);
+                    ((IBattery)itemstack.getItem()).increaseCharge(itemstack);
                 }
                 else if(itemstack.getItem() instanceof IChargeable)
                 {
@@ -72,7 +72,7 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable {
         }
         else if (itemstack.getItem() instanceof IBattery)
         {
-            return ((ItemBattery)itemstack.getItem()).getCharge(itemstack);
+            return ((IBattery)itemstack.getItem()).getCharge(itemstack);
         }
         else if (itemstack.getItem() instanceof IChargeable)
         {
