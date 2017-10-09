@@ -134,6 +134,8 @@ public class ModBlocks {
 
     public static BlockStairsBase smoothstone_stairs = new BlockStairsBase(Blocks.STONE.getDefaultState(),"smoothstone_stairs").setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 
+    public static BlockFenceBase steel_fence = new BlockFenceBase(Material.IRON,"steel_fence").setCreativeTab(CreativeTabs.DECORATIONS);
+
     /* Other */
     public static BlockCropCorn cropCorn = new BlockCropCorn();
     public static BlockPlantCorn plantCorn = new BlockPlantCorn("plant_corn");
@@ -273,6 +275,8 @@ public class ModBlocks {
 
                 smoothstone_stairs,
 
+                steel_fence,
+
                 /* Other */
                 chairOak,
                 chairSpruce,
@@ -393,6 +397,8 @@ public class ModBlocks {
 
                 smoothstone_stairs.createItemBlock(),
 
+                steel_fence.createItemBlock(),
+
                 /* Other */
                 chairOak.createItemBlock(),
                 chairSpruce.createItemBlock(),
@@ -496,6 +502,8 @@ public class ModBlocks {
         stone_vertical_slab.registerItemModel(Item.getItemFromBlock(stone_vertical_slab));
 
         smoothstone_stairs.registerItemModel(Item.getItemFromBlock(smoothstone_stairs));
+
+        steel_fence.registerItemModel(Item.getItemFromBlock(steel_fence));
 
         chairOak.registerItemModel(Item.getItemFromBlock(chairOak));
         chairSpruce.registerItemModel(Item.getItemFromBlock(chairSpruce));
