@@ -34,7 +34,7 @@ import javax.annotation.Nullable;
  */
 public class TileEntityFuelGenerator extends TileEntityLockable implements ITickable, ISidedInventory
 {
-    private static final int BASE_CHARGE_RATE = 10; // Amount of ticks required to charge 1 energy.
+    private static final int BASE_CHARGE_RATE = 8; // Amount of ticks required to charge 1 energy.
     private static final int[] SLOTS_TOP = new int[] {0};
     private static final int[] SLOTS_BOTTOM = new int[] {1};
     private static final int[] SLOTS_SIDES = new int[] {1};
