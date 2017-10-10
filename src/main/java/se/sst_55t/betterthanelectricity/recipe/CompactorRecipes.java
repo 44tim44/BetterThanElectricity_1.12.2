@@ -38,7 +38,8 @@ public class CompactorRecipes
                 (Items.DIAMOND,1), 0.7F);
         this.addSmeltingRecipeForBlock(Blocks.GRAVEL, new ItemStack
                 (Items.FLINT,2), 0.1F);
-
+        this.addSmeltingRecipeForBlock(Blocks.WATERLILY, new ItemStack
+                (Items.SLIME_BALL,1), 0.1F);
     }
 
     /**

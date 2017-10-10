@@ -1,5 +1,6 @@
 {
     "variants": {
-        "normal": { "model": "barbed_log" }
+        "normal": { "model": "betterthanelectricity:barbed_log" },
+        "inventory": { "model": "betterthanelectricity:barbed_log" }
     }
 }
