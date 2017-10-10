@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SRS",
+    "SRS"
+  ],
+  "key": {
+    "S": {
+      "item": "betterthanelectricity:ingot_steel"
+    },
+    "R": {
+      "item": "betterthanelectricity:steel_rod"
+    }
+  },
+  "result": {
+    "item": "betterthanelectricity:steel_fence",
+    "count": 6
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SLS"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:log2",
+      "data": 32767
+    },
+    "S": {
+      "item": "betterthanelectricity:ingot_steel"
+    }
+  },
+  "result": {
+    "item": "betterthanelectricity:barbed_log"
+  }
+}

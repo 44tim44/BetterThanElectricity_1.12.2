@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "betterthanelectricity:ingot_steel"
+    }
+  },
+  "result": {
+    "item": "betterthanelectricity:corrugated_pane",
+    "count": 6
+  }
+}
