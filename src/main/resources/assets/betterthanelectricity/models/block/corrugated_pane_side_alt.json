@@ -1,0 +1,24 @@
+{
+    "ambientocclusion": false,
+    "textures": {
+        "particle": "betterthanelectricity:blocks/corrugated_steel",
+        "bars": "betterthanelectricity:blocks/corrugated_steel",
+        "edge": "betterthanelectricity:blocks/corrugated_steel_top"
+    },
+    "elements": [
+        {
+            "name": "cube",
+            "from": [7, 0, 9],
+            "to": [9, 16, 16],
+            "faces": {
+                "west":  { "uv": [7, 0, 0, 16],   "texture": "#bars" },
+                "east":  { "uv": [0, 0, 7, 16],  "texture": "#bars" },
+
+                "south": { "uv": [7, 0, 9, 16],   "texture": "#bars", "cullface": "south" },
+
+                "up":    { "uv": [ 7, 9, 9, 16 ], "texture": "#edge" },
+                "down":  { "uv": [ 9, 9, 7, 16 ], "texture": "#edge" }
+            }
+        }
+    ]
+}

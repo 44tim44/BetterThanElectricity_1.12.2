@@ -135,6 +135,7 @@ public class ModBlocks {
     public static BlockStairsBase smoothstone_stairs = new BlockStairsBase(Blocks.STONE.getDefaultState(),"smoothstone_stairs").setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 
     public static BlockFenceBase steel_fence = new BlockFenceBase(Material.IRON,"steel_fence").setCreativeTab(CreativeTabs.DECORATIONS);
+    public static BlockPaneBase corrugated_pane = new BlockPaneBase(Material.IRON,"corrugated_pane",true).setCreativeTab(CreativeTabs.DECORATIONS);
 
     /* Other */
     public static BlockCropCorn cropCorn = new BlockCropCorn();
@@ -158,6 +159,8 @@ public class ModBlocks {
 
     public static BlockBase electricLamp = new BlockElectricLamp(Material.CIRCUITS,"electric_lamp",false).setCreativeTab(CreativeTabs.DECORATIONS);
     public static BlockBase electricLamp_on = new BlockElectricLamp(Material.CIRCUITS,"electric_lamp_on",true);
+
+    public static BlockBase barbedLog = new BlockBarbedLog(Material.WOOD,"barbed_log").setCreativeTab(CreativeTabs.DECORATIONS);
 
 
     public static void register(IForgeRegistry<Block> registry) {
@@ -276,6 +279,7 @@ public class ModBlocks {
                 smoothstone_stairs,
 
                 steel_fence,
+                corrugated_pane,
 
                 /* Other */
                 chairOak,
@@ -294,7 +298,9 @@ public class ModBlocks {
                 glassDoor,
 
                 electricLamp,
-                electricLamp_on
+                electricLamp_on,
+
+                barbedLog
 
         );
 
@@ -398,6 +404,7 @@ public class ModBlocks {
                 smoothstone_stairs.createItemBlock(),
 
                 steel_fence.createItemBlock(),
+                corrugated_pane.createItemBlock(),
 
                 /* Other */
                 chairOak.createItemBlock(),
@@ -414,7 +421,9 @@ public class ModBlocks {
                 tableDarkOak.createItemBlock(),
 
                 electricLamp.createItemBlock(),
-                electricLamp_on.createItemBlock()
+                electricLamp_on.createItemBlock(),
+
+                barbedLog.createItemBlock()
         );
     }
 
@@ -504,6 +513,7 @@ public class ModBlocks {
         smoothstone_stairs.registerItemModel(Item.getItemFromBlock(smoothstone_stairs));
 
         steel_fence.registerItemModel(Item.getItemFromBlock(steel_fence));
+        corrugated_pane.registerItemModel(Item.getItemFromBlock(corrugated_pane));
 
         chairOak.registerItemModel(Item.getItemFromBlock(chairOak));
         chairSpruce.registerItemModel(Item.getItemFromBlock(chairSpruce));
@@ -520,6 +530,8 @@ public class ModBlocks {
 
         electricLamp.registerItemModel(Item.getItemFromBlock(electricLamp));
         electricLamp_on.registerItemModel(Item.getItemFromBlock(electricLamp_on));
+
+        barbedLog.registerItemModel(Item.getItemFromBlock(barbedLog));
 
     }
 

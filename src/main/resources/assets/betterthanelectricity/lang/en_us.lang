@@ -157,6 +157,8 @@ tile.smoothstone_vertical_slab.name=Stone Pane
 tile.stone_vertical_slab.name=Stone Tile Pane
 
 tile.smoothstone_stairs.name=Stone Stairs
+tile.steel_fence.name=Steel Fence
+tile.corrugated_pane.name=Corrugated Steel Pane
 
 tile.chair_oak.name=Oak Chair
 tile.chair_spruce.name=Spruce Chair
@@ -173,3 +175,5 @@ tile.table_acacia.name=Acacia Table
 tile.table_dark_oak.name=Dark Oak Table
 
 tile.electric_lamp.name=Electric Lamp
+
+tile.barbed_log.name=Barbed Log
