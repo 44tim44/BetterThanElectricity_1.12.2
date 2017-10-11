@@ -34,19 +34,19 @@ public class ModBlocks {
 
     /* Machines */
     public static BlockCounter counter = new BlockCounter();
-    public static BlockPulverizer pulverizer = (BlockPulverizer) new BlockPulverizer(false,"pulverizer_block").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
-    public static BlockPulverizer pulverizer_on = (BlockPulverizer) new BlockPulverizer(true,"pulverizer_block_on").setHardness(2.0F);
-    public static BlockElectricFurnace electricFurnace = (BlockElectricFurnace) new BlockElectricFurnace(false,"electric_furnace_block").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
-    public static BlockElectricFurnace electricFurnace_on = (BlockElectricFurnace) new BlockElectricFurnace(true,"electric_furnace_block_on").setHardness(2.0F);
-    public static BlockBase machineblock = new BlockBase(Material.ROCK,"machine_block").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
-    public static BlockSolarPanel solarPanel = (BlockSolarPanel)new BlockSolarPanel().setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
-    public static BlockWindMill windMill = (BlockWindMill)new BlockWindMill(false, "wind_mill_block").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
-    public static BlockWindMill windMill_on = (BlockWindMill)new BlockWindMill(true, "wind_mill_block_on").setHardness(2.0F);
-    public static BlockFuelGenerator fuelGenerator = (BlockFuelGenerator) new BlockFuelGenerator(false,"fuel_generator_block").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
-    public static BlockFuelGenerator fuelGenerator_on = (BlockFuelGenerator) new BlockFuelGenerator(true,"fuel_generator_block_on").setHardness(2.0F);
-    public static BlockChargingStation chargingStation = (BlockChargingStation) new BlockChargingStation(false, "charging_station_block").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
-    public static BlockCompactor compactor = (BlockCompactor) new BlockCompactor(false,"compactor_block").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
-    public static BlockCompactor compactor_on = (BlockCompactor) new BlockCompactor(true,"compactor_block_on").setHardness(2.0F);
+    public static BlockPulverizer pulverizer = (BlockPulverizer) new BlockPulverizer(false,"pulverizer_block").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(5.0F);
+    public static BlockPulverizer pulverizer_on = (BlockPulverizer) new BlockPulverizer(true,"pulverizer_block_on").setHardness(5.0F);
+    public static BlockElectricFurnace electricFurnace = (BlockElectricFurnace) new BlockElectricFurnace(false,"electric_furnace_block").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(5.0F);
+    public static BlockElectricFurnace electricFurnace_on = (BlockElectricFurnace) new BlockElectricFurnace(true,"electric_furnace_block_on").setHardness(5.0F);
+    public static BlockBase machineblock = new BlockBase(Material.ROCK,"machine_block").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(5.0F);
+    public static BlockSolarPanel solarPanel = (BlockSolarPanel)new BlockSolarPanel().setCreativeTab(CreativeTabs.DECORATIONS).setHardness(5.0F);
+    public static BlockWindMill windMill = (BlockWindMill)new BlockWindMill(false, "wind_mill_block").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(5.0F);
+    public static BlockWindMill windMill_on = (BlockWindMill)new BlockWindMill(true, "wind_mill_block_on").setHardness(5.0F);
+    public static BlockFuelGenerator fuelGenerator = (BlockFuelGenerator) new BlockFuelGenerator(false,"fuel_generator_block").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(5.0F);
+    public static BlockFuelGenerator fuelGenerator_on = (BlockFuelGenerator) new BlockFuelGenerator(true,"fuel_generator_block_on").setHardness(5.0F);
+    public static BlockChargingStation chargingStation = (BlockChargingStation) new BlockChargingStation(false, "charging_station_block").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(5.0F);
+    public static BlockCompactor compactor = (BlockCompactor) new BlockCompactor(false,"compactor_block").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(5.0F);
+    public static BlockCompactor compactor_on = (BlockCompactor) new BlockCompactor(true,"compactor_block_on").setHardness(5.0F);
 
     /* Building Blocks */
     public static BlockBase stone_tile = new BlockBase(Material.ROCK,"stone_tile").setCreativeTab(CreativeTabs.BUILDING_BLOCKS).setHardness(5.0F);
@@ -134,8 +134,8 @@ public class ModBlocks {
 
     public static BlockStairsBase smoothstone_stairs = new BlockStairsBase(Blocks.STONE.getDefaultState(),"smoothstone_stairs").setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 
-    public static BlockFenceBase steel_fence = new BlockFenceBase(Material.IRON,"steel_fence").setCreativeTab(CreativeTabs.DECORATIONS);
-    public static BlockPaneBase corrugated_pane = new BlockPaneBase(Material.IRON,"corrugated_pane",true).setCreativeTab(CreativeTabs.DECORATIONS);
+    public static BlockFenceBase steel_fence = new BlockFenceBase(Material.IRON,"steel_fence").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(5.0F);
+    public static BlockPaneBase corrugated_pane = new BlockPaneBase(Material.IRON,"corrugated_pane",true).setCreativeTab(CreativeTabs.DECORATIONS).setHardness(5.0F);
 
     /* Other */
     public static BlockCropCorn cropCorn = new BlockCropCorn();
@@ -160,7 +160,7 @@ public class ModBlocks {
     public static BlockBase electricLamp = new BlockElectricLamp(Material.CIRCUITS,"electric_lamp",false).setCreativeTab(CreativeTabs.DECORATIONS);
     public static BlockBase electricLamp_on = new BlockElectricLamp(Material.CIRCUITS,"electric_lamp_on",true);
 
-    public static BlockBase barbedLog = new BlockBarbedLog(Material.WOOD,"barbed_log").setCreativeTab(CreativeTabs.DECORATIONS);
+    public static BlockBase barbedLog = new BlockBarbedLog(Material.WOOD,"barbed_log").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
 
 
     public static void register(IForgeRegistry<Block> registry) {
