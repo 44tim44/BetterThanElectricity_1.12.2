@@ -12,6 +12,7 @@ import se.sst_55t.betterthanelectricity.block.counter.BlockCounter;
 import se.sst_55t.betterthanelectricity.block.electricfurnace.BlockElectricFurnace;
 import se.sst_55t.betterthanelectricity.block.fuelgenerator.BlockFuelGenerator;
 import se.sst_55t.betterthanelectricity.block.pulverizer.BlockPulverizer;
+import se.sst_55t.betterthanelectricity.block.saftblandare.BlockLightRed;
 import se.sst_55t.betterthanelectricity.block.solarpanel.BlockSolarPanel;
 import se.sst_55t.betterthanelectricity.block.table.BlockTable;
 import net.minecraft.block.Block;
@@ -162,6 +163,7 @@ public class ModBlocks {
 
     public static BlockBase barbedLog = new BlockBarbedLog(Material.WOOD,"barbed_log").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
 
+    public static BlockLightRed redLightBlock = (BlockLightRed) new BlockLightRed(Material.GLASS,"red_light_block").setCreativeTab(CreativeTabs.DECORATIONS);
 
     public static void register(IForgeRegistry<Block> registry) {
         registry.registerAll(
@@ -300,7 +302,8 @@ public class ModBlocks {
                 electricLamp,
                 electricLamp_on,
 
-                barbedLog
+                barbedLog,
+                redLightBlock
 
         );
 
@@ -312,6 +315,7 @@ public class ModBlocks {
         GameRegistry.registerTileEntity(chargingStation.getTileEntityClass(),chargingStation.getRegistryName().toString());
         GameRegistry.registerTileEntity(compactor.getTileEntityClass(),compactor.getRegistryName().toString());
         GameRegistry.registerTileEntity(tableOak.getTileEntityClass(), tableOak.getRegistryName().toString());
+        GameRegistry.registerTileEntity(redLightBlock.getTileEntityClass(), redLightBlock.getRegistryName().toString());
     }
 
     public static void registerItemBlocks(IForgeRegistry<Item> registry) {
@@ -423,7 +427,8 @@ public class ModBlocks {
                 electricLamp.createItemBlock(),
                 electricLamp_on.createItemBlock(),
 
-                barbedLog.createItemBlock()
+                barbedLog.createItemBlock(),
+                redLightBlock.createItemBlock()
         );
     }
 
@@ -532,6 +537,8 @@ public class ModBlocks {
         electricLamp_on.registerItemModel(Item.getItemFromBlock(electricLamp_on));
 
         barbedLog.registerItemModel(Item.getItemFromBlock(barbedLog));
+
+        redLightBlock.registerItemModel(Item.getItemFromBlock(redLightBlock));
 
     }
 
