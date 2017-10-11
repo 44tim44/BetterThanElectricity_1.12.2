@@ -25,6 +25,7 @@ public class ModSoundEvents {
     public static final SoundEvent CHAINSAW_IDLE = createSoundEvent("chainsaw.idle");
     public static final SoundEvent CHAINSAW_STOP = createSoundEvent("chainsaw.stop");
     public static final SoundEvent CHAINSAW_USE = createSoundEvent("chainsaw.use");
+    public static final SoundEvent JETPACK_THRUST = createSoundEvent("jetpack.thrust");
 
 
     /**
@@ -48,7 +49,8 @@ public class ModSoundEvents {
                     CHAINSAW_START,
                     CHAINSAW_IDLE,
                     CHAINSAW_STOP,
-                    CHAINSAW_USE
+                    CHAINSAW_USE,
+                    JETPACK_THRUST
             );
         }
     }

@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
@@ -17,6 +18,7 @@ import org.lwjgl.input.Keyboard;
 import se.sst_55t.betterthanelectricity.BTEMod;
 import se.sst_55t.betterthanelectricity.network.PacketRequestUpdatePedestal;
 import se.sst_55t.betterthanelectricity.network.PacketToServerJetpack;
+import se.sst_55t.betterthanelectricity.util.ModSoundEvents;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -111,6 +113,7 @@ public class ItemJetpack extends ItemArmorCustom implements IChargeable, ISpecia
                             if(!(entityIn.motionY >= 0.5F)) {
                                 entityIn.setVelocity(entityIn.motionX, entityIn.motionY+0.15F, entityIn.motionZ);
                                 ((IChargeable) stack.getItem()).decreaseCharge(stack);
+                                //if(worldIn.getWorldTime()%10 == 0) { worldIn.playSound((EntityPlayer) entityIn, entityIn.getPosition(), ModSoundEvents.JETPACK_THRUST, SoundCategory.PLAYERS, 1.0F, 1.0F);}
                                 dirty = true;
                             }
                         }

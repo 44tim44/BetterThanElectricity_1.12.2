@@ -2,7 +2,7 @@
   "drill.spin": {
     "category": "player",
     "sounds": [
-      "betterthanelectricity:drill"
+      "betterthanelectricity:drill2"
     ],
     "subtitle": "betterthanelectricity.subtitle.drill"
   },
@@ -45,5 +45,13 @@
       "betterthanelectricity:chainsaw_use"
     ],
     "subtitle": "betterthanelectricity.subtitle.chainsaw_use"
+  },
+
+  "jetpack.thrust": {
+    "category": "player",
+    "sounds": [
+      "betterthanelectricity:jetpack"
+    ],
+    "subtitle": "betterthanelectricity.subtitle.jetpack_thrust"
   }
 }
