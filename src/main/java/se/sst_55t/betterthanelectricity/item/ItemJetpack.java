@@ -113,6 +113,29 @@ public class ItemJetpack extends ItemArmorCustom implements IChargeable, ISpecia
                         }
                     }
 
+                    if (((IChargeable) stack.getItem()).getCharge(stack) > 0)
+                    {
+                        if(Minecraft.getMinecraft().gameSettings.keyBindSneak.isKeyDown() && !entityIn.onGround)
+                        {
+                            if ((entityIn.motionY > 0.15F))
+                            {
+                                entityIn.setVelocity(entityIn.motionX, entityIn.motionY - 0.15F, entityIn.motionZ);
+                                BTEMod.network.sendToServer(new PacketToServerJetpack(3,((EntityPlayer) entityIn).getName()));
+                            }
+                            else if (!(entityIn.motionY < 0.15F))
+                            {
+                                entityIn.setVelocity(entityIn.motionX, entityIn.motionY - 0.15F, entityIn.motionZ);
+                                BTEMod.network.sendToServer(new PacketToServerJetpack(3,((EntityPlayer) entityIn).getName()));
+                            }
+                            else
+                            {
+                                entityIn.setVelocity(entityIn.motionX, 0, entityIn.motionZ);
+                                BTEMod.network.sendToServer(new PacketToServerJetpack(3,((EntityPlayer) entityIn).getName()));
+                            }
+
+                        }
+                    }
+
                     if (Minecraft.getMinecraft().gameSettings.keyBindForward.isKeyDown() && !entityIn.onGround)
                     {
                         if (((IChargeable) stack.getItem()).getCharge(stack) > 0)

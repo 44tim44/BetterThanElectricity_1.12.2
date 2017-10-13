@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "half=bottom": { "model": "betterthanelectricity:grass_path_slab_half" },
+    "half=top": { "model": "betterthanelectricity:grass_path_slab_upper" },
+    "inventory": {"model": "betterthanelectricity:grass_path_slab_half" }
+  }
+}

@@ -1,5 +1,6 @@
 package se.sst_55t.betterthanelectricity.block;
 
+import net.minecraft.block.BlockDirt;
 import se.sst_55t.betterthanelectricity.ModEnums;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.state.IBlockState;
@@ -39,6 +40,34 @@ public class BlockSlabDirt extends BlockSlabBase {
                     worldIn.setBlockState(pos, ModBlocks.grass_snowed_slab.getDefaultState().withProperty(HALF, BlockSlab.EnumBlockHalf.TOP));
                 } else {
                     worldIn.setBlockState(pos, ModBlocks.grass_snowed_slab.getDefaultState().withProperty(HALF, BlockSlab.EnumBlockHalf.BOTTOM));
+                }
+            }
+
+            // Transforms this block to grass slab if surrounded by grass
+            if (worldIn.getLightFromNeighbors(pos.up()) >= 9)
+            {
+                for (int i = 0; i < 4; ++i)
+                {
+                    BlockPos surroundingBlocksPos = pos.add(rand.nextInt(3) - 1, rand.nextInt(5) - 3, rand.nextInt(3) - 1);
+
+                    if (surroundingBlocksPos.getY() >= 0 && surroundingBlocksPos.getY() < 256 && !worldIn.isBlockLoaded(surroundingBlocksPos))
+                    {
+                        return;
+                    }
+
+                    IBlockState blockStateAbove = worldIn.getBlockState(pos.up());
+                    IBlockState blockStateGrass = worldIn.getBlockState(surroundingBlocksPos);
+
+                    if (blockStateGrass.getBlock() == Blocks.GRASS && worldIn.getLightFromNeighbors(pos.up()) >= 4 && blockStateAbove.getLightOpacity(worldIn, pos.up()) <= 2)
+                    {
+                        if(state.getValue(HALF) == BlockSlab.EnumBlockHalf.TOP) {
+                            worldIn.setBlockState(pos, ModBlocks.grass_slab.getDefaultState().withProperty(HALF,BlockSlab.EnumBlockHalf.TOP));
+                        }
+                        else
+                        {
+                            worldIn.setBlockState(pos, ModBlocks.grass_slab.getDefaultState().withProperty(HALF,BlockSlab.EnumBlockHalf.BOTTOM));
+                        }
+                    }
                 }
             }
         }

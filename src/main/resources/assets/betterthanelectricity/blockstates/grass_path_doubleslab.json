@@ -1,0 +1,6 @@
+{
+    "variants": {
+      "normal": { "model": "minecraft:grass_path"},
+      "inventory": { "model": "minecraft:grass_path"}
+  }
+}

@@ -126,6 +126,8 @@ public class ModBlocks {
     public static BlockSlabGrassSnowed grass_snowed_doubleslab = new BlockSlabDoubleGrassSnowed(BlockType.GRASS,"grass_snowed_doubleslab");
     public static BlockSlabDirt dirt_slab = new BlockSlabDirt(BlockType.DIRT,"dirt_slab").setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
     public static BlockSlabDirt dirt_doubleslab = new BlockSlabDoubleDirt(BlockType.DIRT,"dirt_doubleslab");
+    public static BlockSlabGrassPath grass_path_slab = new BlockSlabGrassPath("grass_path_slab").setHardness(0.6F);
+    public static BlockSlabGrassPath grass_path_doubleslab = new BlockSlabDoubleGrassPath("grass_path_doubleslab").setHardness(0.6F);
 
     public static BlockSlabVerticalBase smoothstone_vertical_slab = new BlockSlabVerticalBase(BlockType.SMOOTHSTONE,"smoothstone_vertical_slab").setHardness(2.0F).setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
     public static BlockSlabVerticalBaseDouble smoothstone_vertical_doubleslab = new BlockSlabVerticalBaseDouble(BlockType.SMOOTHSTONE,"smoothstone_vertical_doubleslab").setHardness(2.0F);
@@ -269,6 +271,8 @@ public class ModBlocks {
                 grass_snowed_doubleslab,
                 dirt_slab,
                 dirt_doubleslab,
+                grass_path_slab,
+                grass_path_doubleslab,
 
                 smoothstone_vertical_slab,
                 smoothstone_vertical_doubleslab,
@@ -396,6 +400,7 @@ public class ModBlocks {
                 grass_slab.createItemSlab(grass_slab,grass_slab,grass_doubleslab),
                 grass_snowed_slab.createItemSlab(grass_snowed_slab,grass_snowed_slab,grass_snowed_doubleslab),
                 dirt_slab.createItemSlab(dirt_slab,dirt_slab,dirt_doubleslab),
+                grass_path_slab.createItemSlab(grass_path_slab,grass_path_slab,grass_path_doubleslab),
 
                 smoothstone_vertical_slab.createItemSlab(smoothstone_vertical_slab,smoothstone_vertical_slab,smoothstone_vertical_doubleslab),
                 stone_vertical_slab.createItemSlab(stone_vertical_slab,stone_vertical_slab,stone_vertical_doubleslab),
@@ -505,6 +510,7 @@ public class ModBlocks {
         grass_slab.registerItemModel(Item.getItemFromBlock(grass_slab));
         grass_snowed_slab.registerItemModel(Item.getItemFromBlock(grass_snowed_slab));
         dirt_slab.registerItemModel(Item.getItemFromBlock(dirt_slab));
+        grass_path_slab.registerItemModel(Item.getItemFromBlock(grass_path_slab));
 
         smoothstone_vertical_slab.registerItemModel(Item.getItemFromBlock(smoothstone_vertical_slab));
         stone_vertical_slab.registerItemModel(Item.getItemFromBlock(stone_vertical_slab));

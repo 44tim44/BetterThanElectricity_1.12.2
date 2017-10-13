@@ -20,6 +20,7 @@ public class PacketToServerJetpack implements IMessage {
     public static final int JUMP_BUTTON = 0;
     public static final int FORWARD_BUTTON = 1;
     public static final int FORWARD_AND_SPRINT_BUTTONS = 2;
+    public static final int SNEAK_BUTTON = 3;
 
     private int buttonPressed;
     private String playerName;
@@ -60,25 +61,37 @@ public class PacketToServerJetpack implements IMessage {
                 {
                     if (((IChargeable) chestStackServer.getItem()).getCharge(chestStackServer) > 0)
                     {
+                        double playerY;
+                        double groundY;
+
                         switch (buttonPressed)
                         {
                             case (JUMP_BUTTON):
                                 ((IChargeable) chestStackServer.getItem()).decreaseCharge(chestStackServer);
 
-                                double playerY = jetpackPlayer.posY - 1;
-                                double groundY = jetpackPlayer.getEntityWorld().getHeight(jetpackPlayer.getPosition().getX(),jetpackPlayer.getPosition().getZ());
+                                playerY = jetpackPlayer.posY - 1;
+                                groundY = jetpackPlayer.getEntityWorld().getHeight(jetpackPlayer.getPosition().getX(),jetpackPlayer.getPosition().getZ());
                                 if(jetpackPlayer.fallDistance > ((float) (playerY - groundY)))
                                 {
                                     jetpackPlayer.fallDistance = ((float) (playerY - groundY));
                                 }
-
-
                                 break;
                             case (FORWARD_BUTTON):
                                 ((IChargeable) chestStackServer.getItem()).decreaseCharge(chestStackServer);
                                 break;
                             case (FORWARD_AND_SPRINT_BUTTONS):
                                 ((IChargeable) chestStackServer.getItem()).decreaseCharge(chestStackServer);
+                                break;
+                            case (SNEAK_BUTTON):
+                                ((IChargeable) chestStackServer.getItem()).decreaseCharge(chestStackServer);
+                                ((IChargeable) chestStackServer.getItem()).decreaseCharge(chestStackServer);
+
+                                playerY = jetpackPlayer.posY - 1;
+                                groundY = jetpackPlayer.getEntityWorld().getHeight(jetpackPlayer.getPosition().getX(),jetpackPlayer.getPosition().getZ());
+                                if(jetpackPlayer.fallDistance > ((float) (playerY - groundY)))
+                                {
+                                    jetpackPlayer.fallDistance = ((float) (playerY - groundY));
+                                }
                                 break;
                         }
 
