@@ -100,67 +100,41 @@ public class ItemJetpack extends ItemArmorCustom implements IChargeable, ISpecia
             ItemStack chestplateStack = ((EntityPlayer) entityIn).inventory.armorInventory.get(2);
             if (!chestplateStack.isEmpty())
             {
-                boolean dirty = false;
                 if (chestplateStack.getItem() == ModItems.jetpack)
                 {
-                    int jumpKeyCode = Minecraft.getMinecraft().gameSettings.keyBindJump.getKeyCode();
-                    int forwardKeyCode = Minecraft.getMinecraft().gameSettings.keyBindForward.getKeyCode();
                     if (((IChargeable) stack.getItem()).getCharge(stack) > 0)
                     {
                         if(Minecraft.getMinecraft().gameSettings.keyBindJump.isKeyDown())
                         {
-                            //BTEMod.network.sendToServer(new PacketUpdateJetpack((EntityPlayer)entityIn,stack,0));
-                            if(!(entityIn.motionY >= 0.5F)) {
-                                entityIn.setVelocity(entityIn.motionX, entityIn.motionY+0.15F, entityIn.motionZ);
-                                ((IChargeable) stack.getItem()).decreaseCharge(stack);
-                                //if(worldIn.getWorldTime()%10 == 0) { worldIn.playSound((EntityPlayer) entityIn, entityIn.getPosition(), ModSoundEvents.JETPACK_THRUST, SoundCategory.PLAYERS, 1.0F, 1.0F);}
-                                dirty = true;
+                            if (!(entityIn.motionY >= 0.5F)) {
+                                entityIn.setVelocity(entityIn.motionX, entityIn.motionY + 0.15F, entityIn.motionZ);
+                                BTEMod.network.sendToServer(new PacketToServerJetpack(0,((EntityPlayer) entityIn).getName()));
                             }
                         }
                     }
 
-                    if (Keyboard.isKeyDown(forwardKeyCode) && !entityIn.onGround)
+                    if (Minecraft.getMinecraft().gameSettings.keyBindForward.isKeyDown() && !entityIn.onGround)
                     {
                         if (((IChargeable) stack.getItem()).getCharge(stack) > 0)
                         {
                             double calculatedX;
                             double calculatedZ;
-                            //BTEMod.network.sendToServer(new PacketUpdateJetpack((EntityPlayer)entityIn,stack,1));
-                            if(Minecraft.getMinecraft().gameSettings.keyBindSprint.isKeyDown()) {
-                                calculatedX = (double) (-MathHelper.sin(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.8f);
-                                calculatedZ = (double) (MathHelper.cos(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.8f);
+                            if(Minecraft.getMinecraft().gameSettings.keyBindSprint.isKeyDown())
+                            {
+                                calculatedX = (double) (-MathHelper.sin(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.4f);
+                                calculatedZ = (double) (MathHelper.cos(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.4f);
+                                entityIn.setVelocity(calculatedX, entityIn.motionY, calculatedZ);
+                                BTEMod.network.sendToServer(new PacketToServerJetpack(2,((EntityPlayer) entityIn).getName()));
                             }
                             else
                             {
                                 calculatedX = (double) (-MathHelper.sin(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.4f);
                                 calculatedZ = (double) (MathHelper.cos(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.4f);
+                                entityIn.setVelocity(calculatedX, entityIn.motionY, calculatedZ);
+                                BTEMod.network.sendToServer(new PacketToServerJetpack(1,((EntityPlayer) entityIn).getName()));
                             }
-                            entityIn.setVelocity(calculatedX, entityIn.motionY, calculatedZ);
-                            ((IChargeable) stack.getItem()).decreaseCharge(stack);
-                            dirty = true;
                         }
                     }
-
-                    if(dirty)
-                    {
-                        if (worldIn.isRemote) {
-                            BTEMod.network.sendToServer(new PacketToServerJetpack(((IChargeable)chestplateStack.getItem()).getCharge(chestplateStack)));
-                        }
-                        dirty = false;
-                    }
-
-
-                    //super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
-                    /*
-                    if (((IChargeable) stack.getItem()).getCharge(stack) > 0)
-                    {
-                        ((EntityPlayer)entityIn).capabilities.allowFlying = true;
-                    }
-                    else
-                    {
-                        ((EntityPlayer)entityIn).capabilities.allowFlying = false;
-                    }
-                    */
                 }
             }
         }

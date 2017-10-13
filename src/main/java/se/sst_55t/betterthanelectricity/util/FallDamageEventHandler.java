@@ -30,45 +30,46 @@ public class FallDamageEventHandler {
                     {
                         event.setDistance(0);
                     }
-                    if(((EntityPlayer) event.getEntityLiving()).motionY > -0.4)
+                    else if(((EntityPlayer) event.getEntityLiving()).motionY > -0.4)
                     {
-                        event.setDistance(1);
+                        if(!(event.getDistance() < 1)) event.setDistance(1);
                     }
                     else if(((EntityPlayer) event.getEntityLiving()).motionY > -0.6)
                     {
-                        event.setDistance(2);
+                        if(!(event.getDistance() < 2)) event.setDistance(2);
                     }
                     else if(((EntityPlayer) event.getEntityLiving()).motionY > -0.7)
                     {
-                        event.setDistance(3);
+                        if(!(event.getDistance() < 3)) event.setDistance(3);
                     }
                     else if(((EntityPlayer) event.getEntityLiving()).motionY > -0.8)
                     {
-                        event.setDistance(4);
+                        if(!(event.getDistance() < 4)) event.setDistance(4);
                     }
                     else if(((EntityPlayer) event.getEntityLiving()).motionY > -0.85)
                     {
-                        event.setDistance(5);
+                        if(!(event.getDistance() < 5)) event.setDistance(5);
                     }
                     else if(((EntityPlayer) event.getEntityLiving()).motionY > -0.9)
                     {
-                        event.setDistance(6);
+                        if(!(event.getDistance() < 6)) event.setDistance(6);
                     }
                     else if(((EntityPlayer) event.getEntityLiving()).motionY > -1.0)
                     {
-                        event.setDistance(7);
+                        if(!(event.getDistance() < 7)) event.setDistance(7);
                     }
                     else if(((EntityPlayer) event.getEntityLiving()).motionY > -1.05)
                     {
-                        event.setDistance(8);
+                        if(!(event.getDistance() < 8)) event.setDistance(8);
                     }
                     else if(((EntityPlayer) event.getEntityLiving()).motionY > -1.1)
                     {
-                        event.setDistance(9);
+                        if(!(event.getDistance() < 9)) event.setDistance(9);
                     }
                     else if(((EntityPlayer) event.getEntityLiving()).motionY > -1.15)
                     {
-                        event.setDistance(10);
+                        if(!(event.getDistance() < 10)) event.setDistance(10);
+
                     }
 
                 }

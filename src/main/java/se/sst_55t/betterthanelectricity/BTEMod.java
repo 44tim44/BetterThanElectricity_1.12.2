@@ -81,13 +81,11 @@ public class BTEMod {
 
         proxy.registerRenderers();
 
+        int id = 0;
         network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID_short);
-        network.registerMessage(new PacketUpdatePedestal.Handler(), PacketUpdatePedestal.class, 0, Side.CLIENT);
-        network.registerMessage(new PacketRequestUpdatePedestal.Handler(), PacketRequestUpdatePedestal.class, 1, Side.SERVER);
-        network.registerMessage(new PacketToServerJetpack.Handler(), PacketToServerJetpack.class, 1, Side.SERVER);
-        //network.registerMessage(new PacketUpdateJetpack.Handler(), PacketUpdateJetpack.class, 1, Side.SERVER);
-        //int id = 0;
-        //network.registerMessage(new PacketUpdateCharge.Handler(),PacketUpdateCharge.class,id++, Side.CLIENT);
+        network.registerMessage(new PacketUpdatePedestal.Handler(), PacketUpdatePedestal.class, id++, Side.CLIENT);
+        network.registerMessage(new PacketRequestUpdatePedestal.Handler(), PacketRequestUpdatePedestal.class, id++, Side.SERVER);
+        network.registerMessage(new PacketToServerJetpack.Handler(), PacketToServerJetpack.class, id++, Side.SERVER);
 
         proxy.preInit(event);
     }
