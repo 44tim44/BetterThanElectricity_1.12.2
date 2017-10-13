@@ -64,6 +64,15 @@ public class PacketToServerJetpack implements IMessage {
                         {
                             case (JUMP_BUTTON):
                                 ((IChargeable) chestStackServer.getItem()).decreaseCharge(chestStackServer);
+
+                                double playerY = jetpackPlayer.posY - 1;
+                                double groundY = jetpackPlayer.getEntityWorld().getHeight(jetpackPlayer.getPosition().getX(),jetpackPlayer.getPosition().getZ());
+                                if(jetpackPlayer.fallDistance > ((float) (playerY - groundY)))
+                                {
+                                    jetpackPlayer.fallDistance = ((float) (playerY - groundY));
+                                }
+
+
                                 break;
                             case (FORWARD_BUTTON):
                                 ((IChargeable) chestStackServer.getItem()).decreaseCharge(chestStackServer);
