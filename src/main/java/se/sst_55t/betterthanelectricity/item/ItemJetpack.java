@@ -122,9 +122,9 @@ public class ItemJetpack extends ItemArmorCustom implements IChargeable, ISpecia
                                 entityIn.setVelocity(entityIn.motionX, entityIn.motionY - 0.15F, entityIn.motionZ);
                                 BTEMod.network.sendToServer(new PacketToServerJetpack(3,((EntityPlayer) entityIn).getName()));
                             }
-                            else if (!(entityIn.motionY < 0.15F))
+                            else if ((entityIn.motionY < -0.15F))
                             {
-                                entityIn.setVelocity(entityIn.motionX, entityIn.motionY - 0.15F, entityIn.motionZ);
+                                entityIn.setVelocity(entityIn.motionX, entityIn.motionY + 0.15F, entityIn.motionZ);
                                 BTEMod.network.sendToServer(new PacketToServerJetpack(3,((EntityPlayer) entityIn).getName()));
                             }
                             else
@@ -144,17 +144,64 @@ public class ItemJetpack extends ItemArmorCustom implements IChargeable, ISpecia
                             double calculatedZ;
                             if(Minecraft.getMinecraft().gameSettings.keyBindSprint.isKeyDown())
                             {
-                                calculatedX = (double) (-MathHelper.sin(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.4f);
-                                calculatedZ = (double) (MathHelper.cos(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.4f);
-                                entityIn.setVelocity(calculatedX, entityIn.motionY, calculatedZ);
-                                BTEMod.network.sendToServer(new PacketToServerJetpack(2,((EntityPlayer) entityIn).getName()));
+                                if (!(Math.sqrt(Math.pow(entityIn.motionX,2) + Math.pow(entityIn.motionZ,2)) >= 0.8F))
+                                {
+                                    calculatedX = (double) (-MathHelper.sin(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.2f);
+                                    calculatedZ = (double) (MathHelper.cos(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.2f);
+                                    entityIn.setVelocity(entityIn.motionX + calculatedX, entityIn.motionY, entityIn.motionZ + calculatedZ);
+                                    BTEMod.network.sendToServer(new PacketToServerJetpack(2, ((EntityPlayer) entityIn).getName()));
+                                }
                             }
                             else
                             {
-                                calculatedX = (double) (-MathHelper.sin(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.4f);
-                                calculatedZ = (double) (MathHelper.cos(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.4f);
-                                entityIn.setVelocity(calculatedX, entityIn.motionY, calculatedZ);
-                                BTEMod.network.sendToServer(new PacketToServerJetpack(1,((EntityPlayer) entityIn).getName()));
+                                if (!(Math.sqrt(Math.pow(entityIn.motionX,2) + Math.pow(entityIn.motionZ,2)) >= 0.4F))
+                                {
+                                    calculatedX = (double) (-MathHelper.sin(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.1F);
+                                    calculatedZ = (double) (MathHelper.cos(entityIn.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(entityIn.rotationPitch / 180.0F * (float) Math.PI) * 0.1F);
+                                    entityIn.setVelocity(entityIn.motionX + calculatedX, entityIn.motionY, entityIn.motionZ + calculatedZ);
+                                    BTEMod.network.sendToServer(new PacketToServerJetpack(1, ((EntityPlayer) entityIn).getName()));
+                                }
+                            }
+                        }
+                    }
+
+                    if (Minecraft.getMinecraft().gameSettings.keyBindBack.isKeyDown() && !entityIn.onGround)
+                    {
+                        if (((IChargeable) stack.getItem()).getCharge(stack) > 0)
+                        {
+                            if (!(Math.sqrt(Math.pow(entityIn.motionX,2) + Math.pow(entityIn.motionZ,2)) >= 0.3F))
+                            {
+                                double calculatedX = (double) (-MathHelper.sin((entityIn.rotationYaw - 180) / 180.0F * (float) Math.PI) * 0.1F);
+                                double calculatedZ = (double) (MathHelper.cos((entityIn.rotationYaw - 180) / 180.0F * (float) Math.PI) * 0.1F);
+                                entityIn.setVelocity(entityIn.motionX + calculatedX, entityIn.motionY, entityIn.motionZ + calculatedZ);
+                                BTEMod.network.sendToServer(new PacketToServerJetpack(1, ((EntityPlayer) entityIn).getName()));
+                            }
+                        }
+                    }
+
+                    if (Minecraft.getMinecraft().gameSettings.keyBindLeft.isKeyDown() && !entityIn.onGround)
+                    {
+                        if (((IChargeable) stack.getItem()).getCharge(stack) > 0)
+                        {
+                            if (!(Math.sqrt(Math.pow(entityIn.motionX,2) + Math.pow(entityIn.motionZ,2)) >= 0.3F))
+                            {
+                                double calculatedX = (double) (-MathHelper.sin((entityIn.rotationYaw - 90) / 180.0F * (float) Math.PI) * 0.1F);
+                                double calculatedZ = (double) (MathHelper.cos((entityIn.rotationYaw - 90) / 180.0F * (float) Math.PI) * 0.1F);
+                                entityIn.setVelocity(entityIn.motionX + calculatedX, entityIn.motionY,entityIn.motionZ + calculatedZ);
+                                BTEMod.network.sendToServer(new PacketToServerJetpack(1, ((EntityPlayer) entityIn).getName()));
+                            }
+                        }
+                    }
+
+                    if (Minecraft.getMinecraft().gameSettings.keyBindRight.isKeyDown() && !entityIn.onGround)
+                    {
+                        if (((IChargeable) stack.getItem()).getCharge(stack) > 0)
+                        {
+                            if (!(Math.sqrt(Math.pow(entityIn.motionX,2) + Math.pow(entityIn.motionZ,2)) >= 0.3F)) {
+                                double calculatedX = (double) (-MathHelper.sin((entityIn.rotationYaw + 90) / 180.0F * (float) Math.PI) * 0.1F);
+                                double calculatedZ = (double) (MathHelper.cos((entityIn.rotationYaw + 90) / 180.0F * (float) Math.PI) * 0.1F);
+                                entityIn.setVelocity(entityIn.motionX + calculatedX, entityIn.motionY, entityIn.motionZ + calculatedZ);
+                                BTEMod.network.sendToServer(new PacketToServerJetpack(1, ((EntityPlayer) entityIn).getName()));
                             }
                         }
                     }

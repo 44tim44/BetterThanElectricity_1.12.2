@@ -45,7 +45,7 @@ public class BTEMod {
     public static final String MODID = "betterthanelectricity";
     public static final String MODID_short = "bte";
     public static final String MODNAME = "Better Than Electricity";
-    public static final String VERSION = "1.0.20";
+    public static final String VERSION = "1.0.21";
     public static final String CLIENT_PROXY = "se.sst_55t.betterthanelectricity.proxy.ClientProxy";
     public static final String COMMON_PROXY = "se.sst_55t.betterthanelectricity.proxy.CommonProxy";
 
