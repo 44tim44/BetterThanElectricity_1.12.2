@@ -148,7 +148,7 @@ public class ItemChainsaw extends Item implements IChargeable{
             //int amountOfLogs = 0;
 
             while(!done){
-                if(worldIn.getBlockState(tempPos).getBlock() != Blocks.LOG || worldIn.getBlockState(tempPos).getBlock() != Blocks.LOG2){
+                if(worldIn.getBlockState(tempPos).getBlock() != Blocks.LOG && worldIn.getBlockState(tempPos).getBlock() != Blocks.LOG2){
                     done = true;
                 } else {
                     //amountOfLogs++;

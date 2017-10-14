@@ -13,6 +13,7 @@ import se.sst_55t.betterthanelectricity.network.PacketUpdatePedestal;
 import se.sst_55t.betterthanelectricity.proxy.CommonProxy;
 import se.sst_55t.betterthanelectricity.recipe.ModRecipes;
 import se.sst_55t.betterthanelectricity.util.FallDamageEventHandler;
+import se.sst_55t.betterthanelectricity.util.HUDEventHandler;
 import se.sst_55t.betterthanelectricity.util.OnSpadeUseEventHandler;
 import se.sst_55t.betterthanelectricity.util.WeatherEventHandler;
 import se.sst_55t.betterthanelectricity.world.ModWorldGen;
@@ -99,6 +100,7 @@ public class BTEMod {
         MinecraftForge.EVENT_BUS.register(new FallDamageEventHandler());
         MinecraftForge.EVENT_BUS.register(new WeatherEventHandler());
         MinecraftForge.EVENT_BUS.register(new OnSpadeUseEventHandler());
+        MinecraftForge.EVENT_BUS.register(new HUDEventHandler());
         proxy.init(event);
     }
 
