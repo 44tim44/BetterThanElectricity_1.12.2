@@ -14,6 +14,7 @@ import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import se.sst_55t.betterthanelectricity.BTEMod;
@@ -28,7 +29,9 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.*;
+import se.sst_55t.betterthanelectricity.entity.item.EntitySubmarine;
 import se.sst_55t.betterthanelectricity.item.ModItems;
+import se.sst_55t.betterthanelectricity.util.submarine.SubmarineFactory;
 
 import javax.annotation.Nullable;
 
@@ -48,6 +51,7 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTable.class, new TESRTable());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChargingStation.class, new TESRChargingStation());
         ModelLoader.setCustomStateMapper(ModBlocks.glassDoor, (new StateMap.Builder()).ignore(BlockDoorBase.POWERED).build());
+        RenderingRegistry.registerEntityRenderingHandler(EntitySubmarine.class, SubmarineFactory.INSTANCE);
     }
 
     @Override

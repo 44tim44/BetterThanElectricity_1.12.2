@@ -53,8 +53,8 @@ public class HUDEventHandler {
 
                     int k = getChargeScaled(bootCharge, bootMaxCharge, 11);
 
-                    int x = xMin + 16;
-                    int y = yMax - 16;
+                    int x = xMin + 4;
+                    int y = yMin + 4 + 16 + 4;
 
                     GlStateManager.pushMatrix();
                     GlStateManager.enableBlend();
@@ -76,8 +76,8 @@ public class HUDEventHandler {
 
                     int k = getChargeScaled(chestplateCharge, chestplateMaxCharge, 15);
 
-                    int x = xMin + 16;
-                    int y = yMax - 16 - 16 - 8;
+                    int x = xMin + 4;
+                    int y = yMin + 4;
 
                     GlStateManager.pushMatrix();
                     GlStateManager.enableBlend();

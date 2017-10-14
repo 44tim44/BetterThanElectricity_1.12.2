@@ -6,6 +6,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import se.sst_55t.betterthanelectricity.block.ModBlocks;
 import se.sst_55t.betterthanelectricity.entity.EntitySittableBlock;
+import se.sst_55t.betterthanelectricity.entity.ModEntities;
 import se.sst_55t.betterthanelectricity.item.ModItems;
 import se.sst_55t.betterthanelectricity.network.PacketRequestUpdatePedestal;
 import se.sst_55t.betterthanelectricity.network.PacketToServerJetpack;
@@ -126,6 +127,7 @@ public class BTEMod {
         @SubscribeEvent
         public static void registerEntities(RegistryEvent.Register<EntityEntry> event)
         {
+            ModEntities.register(event.getRegistry());
         }
 
     }
