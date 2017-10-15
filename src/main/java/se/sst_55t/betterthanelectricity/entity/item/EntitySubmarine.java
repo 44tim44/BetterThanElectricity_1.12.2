@@ -39,6 +39,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import se.sst_55t.betterthanelectricity.item.ModItems;
 
 public class EntitySubmarine extends Entity {
     private static final DataParameter<Integer> TIME_SINCE_HIT = EntityDataManager.<Integer>createKey(EntitySubmarine.class, DataSerializers.VARINT);
@@ -188,19 +189,8 @@ public class EntitySubmarine extends Entity {
 
     public Item getItemBoat() {
         switch (this.getBoatType()) {
-            case OAK:
             default:
-                return Items.BOAT;
-            case SPRUCE:
-                return Items.SPRUCE_BOAT;
-            case BIRCH:
-                return Items.BIRCH_BOAT;
-            case JUNGLE:
-                return Items.JUNGLE_BOAT;
-            case ACACIA:
-                return Items.ACACIA_BOAT;
-            case DARK_OAK:
-                return Items.DARK_OAK_BOAT;
+                return ModItems.submarine_item;
         }
     }
 
@@ -584,6 +574,7 @@ public class EntitySubmarine extends Entity {
                 this.momentum = 0.9F;
             } else if (this.status == EntitySubmarine.Status.IN_AIR) {
                 this.momentum = 0.9F;
+                this.motionY += d1;
             } else if (this.status == EntitySubmarine.Status.ON_LAND) {
                 this.momentum = this.boatGlide;
 
@@ -595,16 +586,15 @@ public class EntitySubmarine extends Entity {
             this.motionX *= (double) this.momentum;
             this.motionZ *= (double) this.momentum;
             this.deltaRotation *= this.momentum;
-            /*
-            this.motionY += d1;
 
             if (d2 > 0.0D) {
                 double d3 = 0.65D;
-                this.motionY += d2 * 0.06153846016296973D;
+                //this.motionY += d2 * 0.06153846016296973D;
                 double d4 = 0.75D;
                 this.motionY *= 0.75D;
             }
-            */
+
+
         }
     }
 

@@ -9,12 +9,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import se.sst_55t.betterthanelectricity.BTEMod;
 import se.sst_55t.betterthanelectricity.entity.item.EntitySubmarine;
 
 @SideOnly(Side.CLIENT)
 public class RenderSubmarine extends Render<EntitySubmarine>
 {
-    private static final ResourceLocation[] BOAT_TEXTURES = new ResourceLocation[] {new ResourceLocation("textures/entity/boat/boat_oak.png"), new ResourceLocation("textures/entity/boat/boat_spruce.png"), new ResourceLocation("textures/entity/boat/boat_birch.png"), new ResourceLocation("textures/entity/boat/boat_jungle.png"), new ResourceLocation("textures/entity/boat/boat_acacia.png"), new ResourceLocation("textures/entity/boat/boat_darkoak.png")};
+    private static final ResourceLocation[] BOAT_TEXTURES = new ResourceLocation[] {new ResourceLocation(BTEMod.MODID,"textures/entity/submarine.png"), new ResourceLocation(BTEMod.MODID,"textures/entity/submarine.png"), new ResourceLocation(BTEMod.MODID,"textures/entity/submarine.png"), new ResourceLocation(BTEMod.MODID,"textures/entity/submarine.png"), new ResourceLocation(BTEMod.MODID,"textures/entity/submarine.png"), new ResourceLocation(BTEMod.MODID,"textures/entity/submarine.png")};
     /** instance of ModelBoat for rendering */
     protected ModelBase modelSubmarine = new ModelSubmarine();
 
