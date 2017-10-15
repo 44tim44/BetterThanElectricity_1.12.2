@@ -88,6 +88,7 @@ public class ModItems {
     public static ItemJetpack jetpack = new ItemJetpack(BTEMod.machineArmorMaterial, EntityEquipmentSlot.CHEST,"jetpack");
 
     public static ItemSubmarine submarine_item = (ItemSubmarine) new ItemSubmarine("submarine_item").setCreativeTab(CreativeTabs.TRANSPORTATION);
+    public static ItemBase propeller = new ItemBase("propeller").setCreativeTab(CreativeTabs.MISC);
 
     public static void register(IForgeRegistry<Item> registry) {
         registry.registerAll(
@@ -156,7 +157,9 @@ public class ModItems {
 
                 gravityBoots,
                 jetpack,
-                submarine_item
+
+                submarine_item,
+                propeller
         );
     }
 
@@ -225,7 +228,9 @@ public class ModItems {
 
         gravityBoots.registerItemModel();
         jetpack.registerItemModel();
+
         submarine_item.registerItemModel();
+        propeller.registerItemModel();
     }
 
 }

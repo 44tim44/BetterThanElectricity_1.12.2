@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "betterthanelectricity:submarine_item"
+  },
+  "pattern": [
+    "GGG",
+    "SPS",
+    "SSS"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "S": {
+      "item": "betterthanelectricity:ingot_steel"
+    },
+    "P": {
+      "item": "betterthanelectricity:propeller"
+    }
+  }
+}

@@ -63,6 +63,9 @@ item.steel_boots.name=Steel Boots
 item.gravity_boots.name=Gravity Boots
 item.jetpack.name=Jetpack
 
+item.propeller.name=Propeller
+item.submarine_item.name=Submarine
+
 # Blocks
 tile.ore_copper.name=Copper Ore
 tile.ore_tin.name=Tin Ore

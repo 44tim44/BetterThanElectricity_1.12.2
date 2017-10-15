@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "betterthanelectricity:propeller"
+  },
+  "pattern": [
+    " R ",
+    "RSR",
+    " R "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+      "item": "betterthanelectricity:ingot_steel"
+    },
+    "R": {
+      "item": "betterthanelectricity:steel_rod"
+    }
+  }
+}

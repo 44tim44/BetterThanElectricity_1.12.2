@@ -1,0 +1,16 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "betterthanelectricity:submarine_recipe"
+    ]
+  },
+  "criteria": {
+    "has_touched_water": {
+      "trigger": "minecraft:enter_block",
+      "conditions": {
+        "block": "minecraft:water"
+      }
+    }
+  }
+}

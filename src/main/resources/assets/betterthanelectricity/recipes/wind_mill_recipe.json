@@ -3,7 +3,7 @@
     "item": "betterthanelectricity:wind_mill_block"
   },
   "pattern": [
-    "F",
+    "P",
     "M"
   ],
   "type": "minecraft:crafting_shaped",
@@ -11,8 +11,8 @@
     "M": {
       "item": "betterthanelectricity:machine_block"
     },
-    "F": {
-      "item": "minecraft:feather"
+    "P": {
+      "item": "betterthanelectricity:propeller"
     }
   }
 }
