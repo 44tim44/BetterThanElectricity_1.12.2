@@ -1,6 +1,7 @@
 {
   "result": {
-    "item": "betterthanelectricity:glass_door_item"
+    "item": "betterthanelectricity:glass_door_item",
+    "count": 3
   },
   "pattern": [
     "GG",

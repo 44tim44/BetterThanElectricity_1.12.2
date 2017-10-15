@@ -20,6 +20,11 @@ public class ModEntities {
                 createBuilder("submarine")
                         .entity(EntitySubmarine.class)
                         .tracker(64, 20, false)
+                        .build(),
+
+                createBuilder("mountable_block")
+                        .entity(EntitySittableBlock.class)
+                        .tracker(80, 1, false)
                         .build()
         );
     }

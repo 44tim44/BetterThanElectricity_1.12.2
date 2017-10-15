@@ -96,8 +96,7 @@ public class BTEMod {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event){
         ModRecipes.init();
-        EntityRegistry.registerModEntity(new ResourceLocation("betterthanelectricity:mountable_block"), EntitySittableBlock.class, "MountableBlock", 0, this, 80, 1, false);
-
+        //EntityRegistry.registerModEntity(new ResourceLocation("betterthanelectricity:mountable_block"), EntitySittableBlock.class, "MountableBlock", 0, this, 80, 1, false);
         MinecraftForge.EVENT_BUS.register(new FallDamageEventHandler());
         MinecraftForge.EVENT_BUS.register(new WeatherEventHandler());
         MinecraftForge.EVENT_BUS.register(new OnSpadeUseEventHandler());

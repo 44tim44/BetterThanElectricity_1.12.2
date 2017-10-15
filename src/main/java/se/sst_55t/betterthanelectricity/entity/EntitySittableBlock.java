@@ -1,3 +1,9 @@
+package se.sst_55t.betterthanelectricity.entity;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 /**
  * MrCrayfish's Furniture Mod
@@ -16,12 +22,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-        package se.sst_55t.betterthanelectricity.entity;
-
-        import net.minecraft.entity.Entity;
-        import net.minecraft.nbt.NBTTagCompound;
-        import net.minecraft.util.math.BlockPos;
-        import net.minecraft.world.World;
 
 public class EntitySittableBlock extends Entity
 {
