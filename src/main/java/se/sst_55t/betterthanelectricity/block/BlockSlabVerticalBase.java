@@ -1,5 +1,6 @@
 package se.sst_55t.betterthanelectricity.block;
 
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import se.sst_55t.betterthanelectricity.BTEMod;
@@ -572,24 +573,58 @@ public class BlockSlabVerticalBase extends Block {
         }
     }
 
+    @SideOnly(Side.CLIENT)
+    @Override
+    public BlockRenderLayer getBlockLayer()
+    {
+        if(type == ModEnums.BlockType.GLASS) {
+            return BlockRenderLayer.CUTOUT;
+        }
+        return super.getBlockLayer();
+    }
+
+    @Override
+    public boolean isFullCube(IBlockState state)
+    {
+        if (this.type == ModEnums.BlockType.GLASS )
+        {
+            return false;
+        }
+        return this.isDouble();
+    }
+
     /**
      * Used to determine ambient occlusion and culling when rebuilding chunks for render
      */
     @Override
     public boolean isOpaqueCube(IBlockState state)
     {
-        return this.isDouble();
-    }
-
-    @Override
-    public boolean isFullCube(IBlockState state)
-    {
+        if (this.type == ModEnums.BlockType.GLASS )
+        {
+            return false;
+        }
         return this.isDouble();
     }
 
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {
+        IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
+        Block block = iblockstate.getBlock();
+
+        if (type == ModEnums.BlockType.GLASS )
+        {
+            if (blockState != iblockstate)
+            {
+                return true;
+            }
+
+            if (block == this)
+            {
+                return false;
+            }
+        }
+
         if (this.isDouble())
         {
             return super.shouldSideBeRendered(blockState, blockAccess, pos, side);
@@ -603,6 +638,12 @@ public class BlockSlabVerticalBase extends Block {
 
     @Override
     public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
+
+        if (this.type == ModEnums.BlockType.GLASS )
+        {
+            return false;
+        }
+
         if (net.minecraftforge.common.ForgeModContainer.disableStairSlabCulling)
         {
             return super.doesSideBlockRendering(state, world, pos, face);

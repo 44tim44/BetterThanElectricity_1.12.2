@@ -1,0 +1,18 @@
+{
+    "multipart": [
+        {   "apply": { "model": "betterthanelectricity:wire_fence_post_ends" }},
+        {   "apply": { "model": "betterthanelectricity:wire_fence_post" }},
+        {   "when": { "north": true },
+            "apply": { "model": "betterthanelectricity:wire_fence_side" }
+        },
+        {   "when": { "east": true },
+            "apply": { "model": "betterthanelectricity:wire_fence_side", "y": 90 }
+        },
+        {   "when": { "south": true },
+            "apply": { "model": "betterthanelectricity:wire_fence_side_alt" }
+        },
+        {   "when": { "west": true },
+            "apply": { "model": "betterthanelectricity:wire_fence_side_alt", "y": 90 }
+        }
+    ]
+}

@@ -155,13 +155,17 @@ tile.stoneSlab.stone.name=Stone Tile Slab
 tile.grass_slab.name=Grass Slab
 tile.grass_snowed_slab.name=Snowy Grass Slab
 tile.dirt_slab.name=Dirt Slab
+tile.grass_path_slab.name=Grass Path Slab
+tile.glass_slab.name=Glass Block Slab
 
 tile.smoothstone_vertical_slab.name=Stone Pane
 tile.stone_vertical_slab.name=Stone Tile Pane
+tile.glass_vertical_slab=Glass Block Pane
 
 tile.smoothstone_stairs.name=Stone Stairs
 tile.steel_fence.name=Steel Fence
 tile.corrugated_pane.name=Corrugated Steel Pane
+tile.wire_fence.name=Wire Fence
 
 tile.chair_oak.name=Oak Chair
 tile.chair_spruce.name=Spruce Chair

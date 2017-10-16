@@ -94,6 +94,7 @@ public class EntitySittableBlock extends Entity
         {
             if (!this.isBeingRidden() || this.world.isAirBlock(new BlockPos(blockPosX, blockPosY, blockPosZ)))
             {
+                this.removePassengers();
                 this.setDead();
                 world.updateComparatorOutputLevel(getPosition(), world.getBlockState(getPosition()).getBlock());
             }

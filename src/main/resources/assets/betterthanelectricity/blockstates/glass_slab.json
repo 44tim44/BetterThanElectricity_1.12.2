@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "half=bottom": { "model": "betterthanelectricity:glass_slab_half" },
+    "half=top": { "model": "betterthanelectricity:glass_slab_upper" }
+  }
+}

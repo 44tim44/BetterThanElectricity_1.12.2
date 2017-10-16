@@ -1,5 +1,10 @@
 package se.sst_55t.betterthanelectricity.block;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import se.sst_55t.betterthanelectricity.BTEMod;
 import se.sst_55t.betterthanelectricity.ModEnums.FireType;
 import se.sst_55t.betterthanelectricity.ModEnums.BlockType;
@@ -124,5 +129,71 @@ public class BlockSlabBase extends BlockSlab {
         }
 
         return this;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public BlockRenderLayer getBlockLayer()
+    {
+        if(type == BlockType.GLASS) {
+            return BlockRenderLayer.CUTOUT;
+        }
+        return super.getBlockLayer();
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+    {
+        IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
+        Block block = iblockstate.getBlock();
+
+        if (type == BlockType.GLASS )
+        {
+            if (blockState != iblockstate)
+            {
+                return true;
+            }
+
+            if (block == this)
+            {
+                return false;
+            }
+        }
+
+        return super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+    }
+
+    @Override
+    public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face)
+    {
+        if (this.type == BlockType.GLASS )
+        {
+            return false;
+        }
+        return super.doesSideBlockRendering(state, world, pos, face);
+    }
+
+    @Override
+    public boolean isFullCube(IBlockState state)
+    {
+        if (this.type == BlockType.GLASS )
+        {
+            return false;
+        }
+        return this.isDouble();
+    }
+
+    /**
+     * Used to determine ambient occlusion and culling when rebuilding chunks for render
+     */
+    @Override
+    public boolean isOpaqueCube(IBlockState state)
+    {
+        if (this.type == BlockType.GLASS )
+        {
+            return false;
+        }
+        return this.isDouble();
     }
 }

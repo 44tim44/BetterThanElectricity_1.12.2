@@ -1,0 +1,20 @@
+{
+    "ambientocclusion": false,
+    "textures": {
+        "particle": "betterthanelectricity:blocks/corrugated_steel",
+        "bars": "betterthanelectricity:blocks/wire_fence"
+    },
+    "elements": [
+        {
+            "name": "cube",
+            "from": [ 7, 0, 7 ],
+            "to": [ 9, 16, 9 ],
+            "faces": {
+                "west": { "uv": [ 9, 0, 7, 16 ], "texture": "#bars" },
+                "east": { "uv": [ 7, 0, 9, 16 ], "texture": "#bars" },
+                "north": { "uv": [ 9, 0, 7, 16 ], "texture": "#bars" },
+                "south": { "uv": [ 7, 0, 9, 16 ], "texture": "#bars" }
+            }
+        }
+    ]
+}

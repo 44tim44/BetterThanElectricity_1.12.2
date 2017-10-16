@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "betterthanelectricity:steel_rod"
+    }
+  },
+  "result": {
+    "item": "betterthanelectricity:wire_fence",
+    "count": 16
+  }
+}

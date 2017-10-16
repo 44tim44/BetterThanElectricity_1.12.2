@@ -1,0 +1,8 @@
+{
+  "parent": "betterthanelectricity:block/vertical_slab_nw_corner_inner",
+  "textures": {
+    "particle": "blocks/glass",
+    "front": "blocks/glass",
+    "side": "betterthanelectricity:blocks/glass_slab_vertical"
+  }
+}

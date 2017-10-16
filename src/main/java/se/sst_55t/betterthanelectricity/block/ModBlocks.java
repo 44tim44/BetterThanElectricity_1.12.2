@@ -128,16 +128,22 @@ public class ModBlocks {
     public static BlockSlabDirt dirt_doubleslab = new BlockSlabDoubleDirt(BlockType.DIRT,"dirt_doubleslab");
     public static BlockSlabGrassPath grass_path_slab = new BlockSlabGrassPath("grass_path_slab").setHardness(0.6F);
     public static BlockSlabGrassPath grass_path_doubleslab = new BlockSlabDoubleGrassPath("grass_path_doubleslab").setHardness(0.6F);
+    public static BlockSlabBase glass_slab = new BlockSlabBase(BlockType.GLASS,"glass_slab").setHardness(2.0F).setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+    public static BlockSlabBase glass_doubleslab = new BlockSlabDoubleBase(BlockType.GLASS,"glass_doubleslab").setHardness(2.0F);
 
     public static BlockSlabVerticalBase smoothstone_vertical_slab = new BlockSlabVerticalBase(BlockType.SMOOTHSTONE,"smoothstone_vertical_slab").setHardness(2.0F).setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
     public static BlockSlabVerticalBaseDouble smoothstone_vertical_doubleslab = new BlockSlabVerticalBaseDouble(BlockType.SMOOTHSTONE,"smoothstone_vertical_doubleslab").setHardness(2.0F);
     public static BlockSlabVerticalBase stone_vertical_slab = new BlockSlabVerticalBase(BlockType.VANILLASTONESLAB,"stone_vertical_slab").setHardness(2.0F).setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
     public static BlockSlabVerticalBaseDouble stone_vertical_doubleslab = new BlockSlabVerticalBaseDouble(BlockType.VANILLASTONESLAB,"stone_vertical_doubleslab").setHardness(2.0F);
+    public static BlockSlabVerticalBase glass_vertical_slab = new BlockSlabVerticalBase(BlockType.GLASS,"glass_vertical_slab").setHardness(2.0F).setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+    public static BlockSlabVerticalBaseDouble glass_vertical_doubleslab = new BlockSlabVerticalBaseDouble(BlockType.GLASS,"glass_vertical_doubleslab").setHardness(2.0F);
+
 
     public static BlockStairsBase smoothstone_stairs = new BlockStairsBase(Blocks.STONE.getDefaultState(),"smoothstone_stairs").setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 
     public static BlockFenceBase steel_fence = new BlockFenceBase(Material.IRON,"steel_fence").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(5.0F);
     public static BlockPaneBase corrugated_pane = new BlockPaneBase(Material.IRON,"corrugated_pane",true).setCreativeTab(CreativeTabs.DECORATIONS).setHardness(5.0F);
+    public static BlockPaneBase wire_fence = new BlockPaneBase(Material.IRON,"wire_fence",true).setCreativeTab(CreativeTabs.DECORATIONS).setHardness(5.0F);
 
     /* Other */
     public static BlockCropCorn cropCorn = new BlockCropCorn();
@@ -273,16 +279,21 @@ public class ModBlocks {
                 dirt_doubleslab,
                 grass_path_slab,
                 grass_path_doubleslab,
+                glass_slab,
+                glass_doubleslab,
 
                 smoothstone_vertical_slab,
                 smoothstone_vertical_doubleslab,
                 stone_vertical_slab,
                 stone_vertical_doubleslab,
+                glass_vertical_slab,
+                glass_vertical_doubleslab,
 
                 smoothstone_stairs,
 
                 steel_fence,
                 corrugated_pane,
+                wire_fence,
 
                 /* Other */
                 chairOak,
@@ -401,14 +412,17 @@ public class ModBlocks {
                 grass_snowed_slab.createItemSlab(grass_snowed_slab,grass_snowed_slab,grass_snowed_doubleslab),
                 dirt_slab.createItemSlab(dirt_slab,dirt_slab,dirt_doubleslab),
                 grass_path_slab.createItemSlab(grass_path_slab,grass_path_slab,grass_path_doubleslab),
+                glass_slab.createItemSlab(glass_slab,glass_slab,glass_doubleslab),
 
                 smoothstone_vertical_slab.createItemSlab(smoothstone_vertical_slab,smoothstone_vertical_slab,smoothstone_vertical_doubleslab),
                 stone_vertical_slab.createItemSlab(stone_vertical_slab,stone_vertical_slab,stone_vertical_doubleslab),
+                glass_vertical_slab.createItemSlab(glass_vertical_slab,glass_vertical_slab,glass_vertical_doubleslab),
 
                 smoothstone_stairs.createItemBlock(),
 
                 steel_fence.createItemBlock(),
                 corrugated_pane.createItemBlock(),
+                wire_fence.createItemBlock(),
 
                 /* Other */
                 chairOak.createItemBlock(),
@@ -511,14 +525,17 @@ public class ModBlocks {
         grass_snowed_slab.registerItemModel(Item.getItemFromBlock(grass_snowed_slab));
         dirt_slab.registerItemModel(Item.getItemFromBlock(dirt_slab));
         grass_path_slab.registerItemModel(Item.getItemFromBlock(grass_path_slab));
+        glass_slab.registerItemModel(Item.getItemFromBlock(glass_slab));
 
         smoothstone_vertical_slab.registerItemModel(Item.getItemFromBlock(smoothstone_vertical_slab));
         stone_vertical_slab.registerItemModel(Item.getItemFromBlock(stone_vertical_slab));
+        glass_vertical_slab.registerItemModel(Item.getItemFromBlock(glass_vertical_slab));
 
         smoothstone_stairs.registerItemModel(Item.getItemFromBlock(smoothstone_stairs));
 
         steel_fence.registerItemModel(Item.getItemFromBlock(steel_fence));
         corrugated_pane.registerItemModel(Item.getItemFromBlock(corrugated_pane));
+        wire_fence.registerItemModel(Item.getItemFromBlock(wire_fence));
 
         chairOak.registerItemModel(Item.getItemFromBlock(chairOak));
         chairSpruce.registerItemModel(Item.getItemFromBlock(chairSpruce));
