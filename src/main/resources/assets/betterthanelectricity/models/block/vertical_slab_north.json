@@ -3,6 +3,7 @@
 	"textures": {
 		"side": "#all",
 		"front": "#all",
+		"top": "#all",
 		"particle": "#all"
 	},
 	"display": {
@@ -59,8 +60,8 @@
 					"uv": [0, 0, 8, 16],
 					"texture": "#side"
 				},
-				"up": {"uv": [0, 0, 16, 8], "texture": "#side"},
-				"down": {"uv": [0, 0, 16, 8], "texture": "#side"}
+				"up": {"uv": [0, 0, 16, 8], "texture": "#top"},
+				"down": {"uv": [0, 0, 16, 8], "texture": "#top"}
 			}
 		}
 	],

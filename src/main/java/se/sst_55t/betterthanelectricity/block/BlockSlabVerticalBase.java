@@ -1,5 +1,6 @@
 package se.sst_55t.betterthanelectricity.block;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -380,76 +381,6 @@ public class BlockSlabVerticalBase extends Block {
         }
     }
 
-
-    /*
-    @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
-        if (this.isDouble())
-        {
-            return FULL_BLOCK_AABB;
-        }
-        else
-        {
-            switch (state.getValue(POSITION)){
-                case NORTH:
-                    switch (state.getValue(SHAPE)) {
-                        case STRAIGHT:
-                            return AABB_NORTH_HALF;
-                        case OUTER_CORNER_LEFT:
-                            return AABB_NORTHWEST_OUTER_CORNER;
-                        case OUTER_CORNER_RIGHT:
-                            return AABB_NORTHEAST_OUTER_CORNER;
-                        case INNER_CORNER_LEFT:
-                            return FULL_BLOCK_AABB;
-                        case INNER_CORNER_RIGHT:
-                            return FULL_BLOCK_AABB;
-                    }
-                case SOUTH:
-                    switch (state.getValue(SHAPE)) {
-                        case STRAIGHT:
-                            return AABB_SOUTH_HALF;
-                        case OUTER_CORNER_LEFT:
-                            return AABB_SOUTHEAST_OUTER_CORNER;
-                        case OUTER_CORNER_RIGHT:
-                            return AABB_SOUTHWEST_OUTER_CORNER;
-                        case INNER_CORNER_LEFT:
-                            return FULL_BLOCK_AABB;
-                        case INNER_CORNER_RIGHT:
-                            return FULL_BLOCK_AABB;
-                    }
-                case EAST:
-                    switch (state.getValue(SHAPE)) {
-                        case STRAIGHT:
-                            return AABB_EAST_HALF;
-                        case OUTER_CORNER_LEFT:
-                            return AABB_NORTHEAST_OUTER_CORNER;
-                        case OUTER_CORNER_RIGHT:
-                            return AABB_SOUTHEAST_OUTER_CORNER;
-                        case INNER_CORNER_LEFT:
-                            return FULL_BLOCK_AABB;
-                        case INNER_CORNER_RIGHT:
-                            return FULL_BLOCK_AABB;
-                    }
-                case WEST:
-                    switch (state.getValue(SHAPE)) {
-                        case STRAIGHT:
-                            return AABB_WEST_HALF;
-                        case OUTER_CORNER_LEFT:
-                            return AABB_SOUTHWEST_OUTER_CORNER;
-                        case OUTER_CORNER_RIGHT:
-                            return AABB_NORTHWEST_OUTER_CORNER;
-                        case INNER_CORNER_LEFT:
-                            return FULL_BLOCK_AABB;
-                        case INNER_CORNER_RIGHT:
-                            return FULL_BLOCK_AABB;
-                    }
-            }
-        }
-        return AABB_NORTH_HALF;
-    }
-    */
-
     /**
      * Return an AABB (in world coords!) that should be highlighted when the player is targeting this Block
      */
@@ -573,16 +504,6 @@ public class BlockSlabVerticalBase extends Block {
         }
     }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public BlockRenderLayer getBlockLayer()
-    {
-        if(type == ModEnums.BlockType.GLASS) {
-            return BlockRenderLayer.CUTOUT;
-        }
-        return super.getBlockLayer();
-    }
-
     @Override
     public boolean isFullCube(IBlockState state)
     {
@@ -607,24 +528,19 @@ public class BlockSlabVerticalBase extends Block {
     }
 
     @SideOnly(Side.CLIENT)
+    @Override
+    public BlockRenderLayer getBlockLayer()
+    {
+        if(type == ModEnums.BlockType.GLASS) {
+            return BlockRenderLayer.CUTOUT;
+        }
+        return super.getBlockLayer();
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {
-        IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
-        Block block = iblockstate.getBlock();
-
-        if (type == ModEnums.BlockType.GLASS )
-        {
-            if (blockState != iblockstate)
-            {
-                return true;
-            }
-
-            if (block == this)
-            {
-                return false;
-            }
-        }
-
         if (this.isDouble())
         {
             return super.shouldSideBeRendered(blockState, blockAccess, pos, side);
@@ -638,11 +554,6 @@ public class BlockSlabVerticalBase extends Block {
 
     @Override
     public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
-
-        if (this.type == ModEnums.BlockType.GLASS )
-        {
-            return false;
-        }
 
         if (net.minecraftforge.common.ForgeModContainer.disableStairSlabCulling)
         {

@@ -155,7 +155,7 @@ public class BlockSlabBase extends BlockSlab {
                 return true;
             }
 
-            if (block == this)
+            if (block == ModBlocks.glass_slab)
             {
                 return false;
             }

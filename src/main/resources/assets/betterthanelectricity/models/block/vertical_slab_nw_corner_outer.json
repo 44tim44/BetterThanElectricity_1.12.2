@@ -27,8 +27,8 @@
 					"uv": [0, 0, 8, 16],
 					"texture": "#side"
 				},
-				"up": {"uv": [0, 0, 8, 8], "texture": "#all"},
-				"down": {"uv": [0, 8, 8, 16], "texture": "#all"}
+				"up": {"uv": [0, 0, 8, 8], "texture": "#side"},
+				"down": {"uv": [0, 8, 8, 16], "texture": "#side"}
 			}
 		}
 	],

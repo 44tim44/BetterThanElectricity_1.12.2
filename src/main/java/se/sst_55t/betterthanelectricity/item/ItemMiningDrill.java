@@ -105,7 +105,7 @@ public class ItemMiningDrill extends Item implements IChargeable{
                 Block block = iblockstate.getBlock();
                 Material material = iblockstate.getMaterial();
 
-                if (block != Blocks.BEDROCK && (material == Material.ROCK || material == Material.GROUND || material == Material.GRASS || block == Blocks.GRAVEL || block == Blocks.SAND || block == Blocks.CLAY))
+                if (block != Blocks.BEDROCK && (material == Material.ROCK || material == Material.GROUND || material == Material.GRASS || block == Blocks.GRAVEL || material == Material.SAND || block == Blocks.CLAY))
                 {
                     this.mineBlock(itemstack, player, worldIn, pos, iblockstate);
                     return EnumActionResult.SUCCESS;
