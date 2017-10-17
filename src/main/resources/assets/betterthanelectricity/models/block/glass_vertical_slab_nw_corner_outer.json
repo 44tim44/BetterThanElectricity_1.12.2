@@ -3,6 +3,7 @@
   "textures": {
     "particle": "blocks/glass",
     "front": "blocks/glass",
-    "side": "betterthanelectricity:blocks/glass_slab_vertical"
+    "side": "betterthanelectricity:blocks/glass_slab_vertical",
+    "top": "blocks/glass"
   }
 }

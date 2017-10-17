@@ -171,8 +171,8 @@ public class ItemJetpack extends ItemArmorCustom implements IChargeable, ISpecia
                         {
                             if (!(Math.sqrt(Math.pow(entityIn.motionX,2) + Math.pow(entityIn.motionZ,2)) >= 0.3F))
                             {
-                                double calculatedX = (double) (-MathHelper.sin((entityIn.rotationYaw - 180) / 180.0F * (float) Math.PI) * 0.1F);
-                                double calculatedZ = (double) (MathHelper.cos((entityIn.rotationYaw - 180) / 180.0F * (float) Math.PI) * 0.1F);
+                                double calculatedX = (double) (-MathHelper.sin((entityIn.rotationYaw - 180) / 180.0F * (float) Math.PI) * 0.05F);
+                                double calculatedZ = (double) (MathHelper.cos((entityIn.rotationYaw - 180) / 180.0F * (float) Math.PI) * 0.05F);
                                 entityIn.setVelocity(entityIn.motionX + calculatedX, entityIn.motionY, entityIn.motionZ + calculatedZ);
                                 BTEMod.network.sendToServer(new PacketToServerJetpack(1, ((EntityPlayer) entityIn).getName()));
                             }
@@ -185,8 +185,8 @@ public class ItemJetpack extends ItemArmorCustom implements IChargeable, ISpecia
                         {
                             if (!(Math.sqrt(Math.pow(entityIn.motionX,2) + Math.pow(entityIn.motionZ,2)) >= 0.3F))
                             {
-                                double calculatedX = (double) (-MathHelper.sin((entityIn.rotationYaw - 90) / 180.0F * (float) Math.PI) * 0.1F);
-                                double calculatedZ = (double) (MathHelper.cos((entityIn.rotationYaw - 90) / 180.0F * (float) Math.PI) * 0.1F);
+                                double calculatedX = (double) (-MathHelper.sin((entityIn.rotationYaw - 90) / 180.0F * (float) Math.PI) * 0.05F);
+                                double calculatedZ = (double) (MathHelper.cos((entityIn.rotationYaw - 90) / 180.0F * (float) Math.PI) * 0.05F);
                                 entityIn.setVelocity(entityIn.motionX + calculatedX, entityIn.motionY,entityIn.motionZ + calculatedZ);
                                 BTEMod.network.sendToServer(new PacketToServerJetpack(1, ((EntityPlayer) entityIn).getName()));
                             }
@@ -198,8 +198,8 @@ public class ItemJetpack extends ItemArmorCustom implements IChargeable, ISpecia
                         if (((IChargeable) stack.getItem()).getCharge(stack) > 0)
                         {
                             if (!(Math.sqrt(Math.pow(entityIn.motionX,2) + Math.pow(entityIn.motionZ,2)) >= 0.3F)) {
-                                double calculatedX = (double) (-MathHelper.sin((entityIn.rotationYaw + 90) / 180.0F * (float) Math.PI) * 0.1F);
-                                double calculatedZ = (double) (MathHelper.cos((entityIn.rotationYaw + 90) / 180.0F * (float) Math.PI) * 0.1F);
+                                double calculatedX = (double) (-MathHelper.sin((entityIn.rotationYaw + 90) / 180.0F * (float) Math.PI) * 0.05F);
+                                double calculatedZ = (double) (MathHelper.cos((entityIn.rotationYaw + 90) / 180.0F * (float) Math.PI) * 0.05F);
                                 entityIn.setVelocity(entityIn.motionX + calculatedX, entityIn.motionY, entityIn.motionZ + calculatedZ);
                                 BTEMod.network.sendToServer(new PacketToServerJetpack(1, ((EntityPlayer) entityIn).getName()));
                             }
