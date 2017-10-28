@@ -6,6 +6,7 @@ package se.sst_55t.betterthanelectricity.block;
 
 import net.minecraft.init.Blocks;
 import se.sst_55t.betterthanelectricity.ModEnums.BlockType;
+import se.sst_55t.betterthanelectricity.block.cable.BlockCable;
 import se.sst_55t.betterthanelectricity.block.chargingstation.BlockChargingStation;
 import se.sst_55t.betterthanelectricity.block.compactor.BlockCompactor;
 import se.sst_55t.betterthanelectricity.block.counter.BlockCounter;
@@ -170,6 +171,8 @@ public class ModBlocks {
 
     public static BlockBase barbedLog = new BlockBarbedLog(Material.WOOD,"barbed_log").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
 
+    public static BlockCable block_cable = (BlockCable) new BlockCable().setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
+
     public static void register(IForgeRegistry<Block> registry) {
         registry.registerAll(
                 /* Ores */
@@ -314,7 +317,9 @@ public class ModBlocks {
                 electricLamp,
                 electricLamp_on,
 
-                barbedLog
+                barbedLog,
+
+                block_cable
 
         );
 
@@ -326,6 +331,7 @@ public class ModBlocks {
         GameRegistry.registerTileEntity(chargingStation.getTileEntityClass(),chargingStation.getRegistryName().toString());
         GameRegistry.registerTileEntity(compactor.getTileEntityClass(),compactor.getRegistryName().toString());
         GameRegistry.registerTileEntity(tableOak.getTileEntityClass(), tableOak.getRegistryName().toString());
+        GameRegistry.registerTileEntity(block_cable.getTileEntityClass(), block_cable.getRegistryName().toString());
     }
 
     public static void registerItemBlocks(IForgeRegistry<Item> registry) {
@@ -441,7 +447,9 @@ public class ModBlocks {
                 electricLamp.createItemBlock(),
                 electricLamp_on.createItemBlock(),
 
-                barbedLog.createItemBlock()
+                barbedLog.createItemBlock(),
+
+                block_cable.createItemBlock()
         );
     }
 
@@ -555,6 +563,7 @@ public class ModBlocks {
 
         barbedLog.registerItemModel(Item.getItemFromBlock(barbedLog));
 
+        block_cable.registerItemModel(Item.getItemFromBlock(block_cable));
     }
 
 }

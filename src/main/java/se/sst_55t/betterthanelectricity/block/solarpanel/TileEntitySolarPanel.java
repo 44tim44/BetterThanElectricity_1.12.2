@@ -1,6 +1,9 @@
 package se.sst_55t.betterthanelectricity.block.solarpanel;
 
-import net.minecraft.world.biome.BiomeDesert;
+import se.sst_55t.betterthanelectricity.block.ICable;
+import se.sst_55t.betterthanelectricity.block.IConsumer;
+import se.sst_55t.betterthanelectricity.block.IGenerator;
+import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
 import se.sst_55t.betterthanelectricity.item.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,16 +19,18 @@ import javax.annotation.Nullable;
 /**
  * Created by Timeout on 2017-08-22.
  */
-public class TileEntitySolarPanel extends TileEntity implements ITickable {
+public class TileEntitySolarPanel extends TileEntity implements ITickable, IGenerator {
 
     private static final int BASE_CHARGE_RATE = 20; // Amount of ticks required to charge 1 energy.
     private int chargeTime;
     private int totalChargeTime;
     private ItemStackHandler inventory = new ItemStackHandler(1);
+    private boolean canChargeCable;
 
     public void update ()
     {
         ItemStack itemstack = inventory.getStackInSlot(0);
+        TileEntity te = getInputTE();
 
         if (isCharging() && (itemstack.getItem() instanceof IBattery || itemstack.getItem() instanceof IChargeable))
         {
@@ -33,6 +38,7 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable {
 
             if (this.chargeTime == this.totalChargeTime)
             {
+                canChargeCable = false;
                 this.chargeTime = 0;
                 this.totalChargeTime = this.getItemChargeTime(itemstack);
                 if(itemstack.getItem() instanceof IBattery)
@@ -43,6 +49,18 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable {
                 {
                     ((IChargeable)itemstack.getItem()).increaseCharge(itemstack);
                 }
+            }
+        }
+        else if(isCharging() && te instanceof IConsumer)
+        {
+            ++this.chargeTime;
+
+            if (this.chargeTime == this.totalChargeTime)
+            {
+                this.chargeTime = 0;
+                this.totalChargeTime = this.getItemChargeTime(itemstack);
+
+                //((IConsumer)te).increaseCharge();
             }
         }
         else
@@ -142,5 +160,59 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable {
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T)inventory : super.getCapability(capability, facing);
+    }
+
+    public TileEntity getConnectedBlockTE(EnumFacing facing)
+    {
+        if(( world.getTileEntity(this.pos.offset(facing)) instanceof ICable ) && isConnected())
+        {
+            return world.getTileEntity(this.pos.offset(facing));
+        }
+        return null;
+    }
+
+    public boolean isConnected()
+    {
+        int amountOfConnections = 0;
+        for (EnumFacing facing : EnumFacing.VALUES)
+        {
+            if( world.getTileEntity(this.pos.offset(facing)) instanceof ICable )
+            {
+                amountOfConnections++;
+            }
+        }
+        return amountOfConnections == 1;
+    }
+
+    @Override
+    public TileEntity getInputTE() {
+        TileEntity inputTE;
+        for (EnumFacing facing : EnumFacing.VALUES)
+        {
+            inputTE = getConnectedBlockTE(facing);
+
+            if (inputTE != null)
+            {
+                if(inputTE instanceof TileEntityCable)
+                {
+                    return ((TileEntityCable) inputTE).getInputTE(facing.getOpposite());
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public int getChargeRate()
+    {
+        ItemStack batteryStack = inventory.getStackInSlot(0);
+        if(batteryStack.isEmpty() ||  ((IChargeable) batteryStack.getItem()).getCharge(batteryStack) == ((IChargeable) batteryStack.getItem()).getMaxCharge(batteryStack))
+        {
+            if (isCharging())
+            {
+                return getItemChargeTime(null);
+            }
+        }
+        return 0;
     }
 }

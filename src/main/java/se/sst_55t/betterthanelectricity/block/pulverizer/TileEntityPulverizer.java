@@ -1,9 +1,13 @@
 package se.sst_55t.betterthanelectricity.block.pulverizer;
 
+import net.minecraft.tileentity.TileEntity;
+import se.sst_55t.betterthanelectricity.block.ICable;
+import se.sst_55t.betterthanelectricity.block.IConsumer;
+import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
+import se.sst_55t.betterthanelectricity.block.IGenerator;
+import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
 import se.sst_55t.betterthanelectricity.block.inventory.SlotBattery;
 import se.sst_55t.betterthanelectricity.item.IBattery;
-import se.sst_55t.betterthanelectricity.item.ItemBattery;
-import se.sst_55t.betterthanelectricity.item.ModItems;
 import se.sst_55t.betterthanelectricity.recipe.PulverizerRecipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -26,8 +30,10 @@ import javax.annotation.Nullable;
 /**
  * Created by Timmy on 2016-11-27.
  */
-public class TileEntityPulverizer extends TileEntityLockable implements ITickable, ISidedInventory
+public class TileEntityPulverizer extends TileEntityLockable implements ITickable, ISidedInventory, IConsumer
 {
+    public static final int BASE_CONSUME_RATE = 20;
+
     private static final int[] SLOTS_TOP = new int[] {0};
     private static final int[] SLOTS_BOTTOM = new int[] {2, 1};
     private static final int[] SLOTS_SIDES = new int[] {1};
@@ -206,28 +212,35 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
 
         if (!this.world.isRemote)
         {
-            ItemStack itemstack = this.pulverizerItemStacks.get(1);
+            ItemStack batteryStack = this.pulverizerItemStacks.get(1);
+            TileEntity te = getOutputTE();
 
-            if (this.isBurning() || !itemstack.isEmpty() && !((ItemStack)this.pulverizerItemStacks.get(0)).isEmpty())
+            if (this.isBurning() || !batteryStack.isEmpty() && !((ItemStack)this.pulverizerItemStacks.get(0)).isEmpty() || (te != null && (te instanceof IGenerator && ((IGenerator)te).getChargeRate() <= BASE_CONSUME_RATE && ((IGenerator)te).getChargeRate() != 0)))
             {
                 if (!this.isBurning() && this.canPulverize())
                 {
-                    this.furnaceBurnTime = getItemBurnTime(itemstack);
+                    //this.furnaceBurnTime = getItemBurnTime(batteryStack);
+                    this.furnaceBurnTime = BASE_CONSUME_RATE;
                     this.currentItemBurnTime = this.furnaceBurnTime;
 
                     if (this.isBurning())
                     {
                         flag1 = true;
 
-                        if (!itemstack.isEmpty())
+                        if (!batteryStack.isEmpty())
                         {
-                            ((IBattery)itemstack.getItem()).decreaseCharge(itemstack);
+                            ((IBattery)batteryStack.getItem()).decreaseCharge(batteryStack);
+                        }
+                        else if( te instanceof IElectricityStorage)
+                        {
+                            ((IElectricityStorage) getOutputTE()).decreaseCharge();
                         }
                     }
                 }
 
                 if (this.isBurning() && this.canPulverize())
                 {
+                    System.out.println("isBurning && canPulverize");
                     ++this.cookTime;
 
                     if (this.cookTime == this.totalCookTime)
@@ -352,7 +365,7 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
             {
                 if(((IBattery)stack.getItem()).getCharge(stack) > 0)
                 {
-                    return 20;
+                    return BASE_CONSUME_RATE;
                 }
             }
             else
@@ -512,4 +525,50 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
                 return (T) handlerSide;
         return super.getCapability(capability, facing);
     }
+
+    public TileEntity getConnectedBlockTE(EnumFacing facing)
+    {
+        if(( world.getTileEntity(this.pos.offset(facing)) instanceof ICable) && isConnected())
+        {
+            return world.getTileEntity(this.pos.offset(facing));
+        }
+        return null;
+    }
+
+    public boolean isConnected()
+    {
+        int amountOfConnections = 0;
+        for (EnumFacing facing : EnumFacing.VALUES)
+        {
+            if( world.getTileEntity(this.pos.offset(facing)) instanceof ICable )
+            {
+                amountOfConnections++;
+            }
+        }
+        return amountOfConnections == 1;
+    }
+
+    @Override
+    public TileEntity getOutputTE() {
+        TileEntity outputTE;
+        for (EnumFacing facing : EnumFacing.VALUES)
+        {
+            outputTE = getConnectedBlockTE(facing);
+
+            if (outputTE != null)
+            {
+                if(outputTE instanceof TileEntityCable)
+                {
+                    return ((TileEntityCable) outputTE).getOutputTE(facing.getOpposite());
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public int getConsumeRate() {
+        return BASE_CONSUME_RATE;
+    }
+
 }
