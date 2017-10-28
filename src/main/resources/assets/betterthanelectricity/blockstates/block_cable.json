@@ -1,0 +1,23 @@
+{
+    "multipart": [
+        {   "apply": { "model": "betterthanelectricity:cable_core_model" }},
+        {   "when": { "north": true },
+            "apply": { "model": "betterthanelectricity:cable_north_model" }
+        },
+        {   "when": { "east": true },
+            "apply": { "model": "betterthanelectricity:cable_east_model" }
+        },
+        {   "when": { "south": true },
+            "apply": { "model": "betterthanelectricity:cable_south_model" }
+        },
+        {   "when": { "west": true },
+            "apply": { "model": "betterthanelectricity:cable_west_model" }
+        },
+        {   "when": { "up": true },
+            "apply": { "model": "betterthanelectricity:cable_up_model" }
+        },
+        {   "when": { "down": true },
+            "apply": { "model": "betterthanelectricity:cable_down_model" }
+        }
+    ]
+}
