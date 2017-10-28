@@ -85,14 +85,18 @@ public class ModWorldGen implements IWorldGenerator {
     private void generatePlant(IBlockState plant, World world, Random rand,
                               int x, int z)
     {
-        if(rand.nextInt(30) == 0) {
+        x += 8;
+        z += 8;
+        if(rand.nextInt(30) == 0)
+        {
             int plantsInGroup = 3 + rand.nextInt(3); //between 7 and 14 plants per group.
-            for(int i = 0; i < plantsInGroup; i++) {
+            for(int i = 0; i < plantsInGroup; i++)
+            {
                 x = x + rand.nextInt(4);
                 z = z + rand.nextInt(4);
                 int y = world.getHeight(x, z);
                 if(y > 0 && BlockCropCorn.canGrowOn(world.getBlockState(new BlockPos(x, y - 1, z)))) {
-                    world.setBlockState(new BlockPos(x, y, z), plant.withProperty(BlockCrops.AGE,7));
+                    world.setBlockState(new BlockPos(x, y, z), plant.withProperty(BlockCrops.AGE,7),16);
                 }
             }
         }
@@ -101,15 +105,20 @@ public class ModWorldGen implements IWorldGenerator {
     private void generateCorn(World world, Random rand,
                                int x, int z)
     {
-        if(rand.nextInt(30) == 0) {
+        x += 8;
+        z += 8;
+        if(rand.nextInt(30) == 0)
+        {
             int plantsInGroup = 3 + rand.nextInt(3); //between 7 and 14 plants per group.
-            for(int i = 0; i < plantsInGroup; i++) {
+            for(int i = 0; i < plantsInGroup; i++)
+            {
                 x = x + rand.nextInt(4);
                 z = z + rand.nextInt(4);
                 int y = world.getHeight(x, z);
-                if(y > 0 && BlockPlantCorn.canGrowOn(world.getBlockState(new BlockPos(x, y - 1, z))) && world.isAirBlock(new BlockPos(x, y + 1, z))) {
-                    world.setBlockState(new BlockPos(x, y, z), ModBlocks.plantCorn.getDefaultState().withProperty(HALF, BlockDoublePlant.EnumBlockHalf.LOWER));
-                    world.setBlockState(new BlockPos(x, y+1, z), ModBlocks.plantCorn.getDefaultState().withProperty(HALF, BlockDoublePlant.EnumBlockHalf.UPPER));
+                if(y > 0 && BlockPlantCorn.canGrowOn(world.getBlockState(new BlockPos(x, y - 1, z))) && world.isAirBlock(new BlockPos(x, y + 1, z)))
+                {
+                    world.setBlockState(new BlockPos(x, y, z), ModBlocks.plantCorn.getDefaultState().withProperty(HALF, BlockDoublePlant.EnumBlockHalf.LOWER),16);
+                    world.setBlockState(new BlockPos(x, y+1, z), ModBlocks.plantCorn.getDefaultState().withProperty(HALF, BlockDoublePlant.EnumBlockHalf.UPPER),16);
                 }
             }
         }
