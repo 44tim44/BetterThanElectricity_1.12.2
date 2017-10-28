@@ -12,6 +12,7 @@ import se.sst_55t.betterthanelectricity.block.compactor.BlockCompactor;
 import se.sst_55t.betterthanelectricity.block.counter.BlockCounter;
 import se.sst_55t.betterthanelectricity.block.electricfurnace.BlockElectricFurnace;
 import se.sst_55t.betterthanelectricity.block.fuelgenerator.BlockFuelGenerator;
+import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketIn;
 import se.sst_55t.betterthanelectricity.block.pulverizer.BlockPulverizer;
 import se.sst_55t.betterthanelectricity.block.solarpanel.BlockSolarPanel;
 import se.sst_55t.betterthanelectricity.block.table.BlockTable;
@@ -172,6 +173,7 @@ public class ModBlocks {
     public static BlockBase barbedLog = new BlockBarbedLog(Material.WOOD,"barbed_log").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
 
     public static BlockCable block_cable = (BlockCable) new BlockCable().setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
+    public static BlockMultiSocketIn block_multi_socket_in = (BlockMultiSocketIn) new BlockMultiSocketIn().setCreativeTab(CreativeTabs.MISC).setHardness(5.0F);
 
     public static void register(IForgeRegistry<Block> registry) {
         registry.registerAll(
@@ -319,7 +321,8 @@ public class ModBlocks {
 
                 barbedLog,
 
-                block_cable
+                block_cable,
+                block_multi_socket_in
 
         );
 
@@ -332,6 +335,7 @@ public class ModBlocks {
         GameRegistry.registerTileEntity(compactor.getTileEntityClass(),compactor.getRegistryName().toString());
         GameRegistry.registerTileEntity(tableOak.getTileEntityClass(), tableOak.getRegistryName().toString());
         GameRegistry.registerTileEntity(block_cable.getTileEntityClass(), block_cable.getRegistryName().toString());
+        GameRegistry.registerTileEntity(block_multi_socket_in.getTileEntityClass(), block_multi_socket_in.getRegistryName().toString());
     }
 
     public static void registerItemBlocks(IForgeRegistry<Item> registry) {
@@ -449,7 +453,8 @@ public class ModBlocks {
 
                 barbedLog.createItemBlock(),
 
-                block_cable.createItemBlock()
+                block_cable.createItemBlock(),
+                block_multi_socket_in.createItemBlock()
         );
     }
 
@@ -564,6 +569,7 @@ public class ModBlocks {
         barbedLog.registerItemModel(Item.getItemFromBlock(barbedLog));
 
         block_cable.registerItemModel(Item.getItemFromBlock(block_cable));
+        block_multi_socket_in.registerItemModel(Item.getItemFromBlock(block_multi_socket_in));
     }
 
 }

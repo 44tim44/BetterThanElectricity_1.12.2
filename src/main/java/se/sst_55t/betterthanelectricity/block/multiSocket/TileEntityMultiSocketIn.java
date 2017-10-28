@@ -54,40 +54,20 @@ public class TileEntityMultiSocketIn extends TileEntity implements IGenerator, I
                 amountOfConnections++;
             }
         }
-        return amountOfConnections == 2;
+        EnumFacing inputSide = this.world.getBlockState(this.pos).getValue(BlockMultiSocketIn.FACING);
+        return (amountOfConnections >= 2) && world.getTileEntity(this.pos.offset(inputSide)) instanceof ICable;
     }
 
     /**
-     * The block this is is getting energy FROM
+     * The blocks this is is getting energy FROM
      *
      * @return
      */
-    public TileEntity getOutputTE(@Nullable EnumFacing ignoreSide)
-    {
-        TileEntity outputTE = null;
-        for (EnumFacing facing : EnumFacing.VALUES)
-        {
-            if(facing != ignoreSide)
-            {
-                outputTE = getConnectedBlockTE(facing);
-            }
-
-            if (outputTE != null)
-            {
-                if(outputTE instanceof TileEntityCable)
-                {
-                    return ((TileEntityCable) outputTE).getOutputTE(facing.getOpposite());
-                }
-            }
-        }
-        return null;
-    }
-
-    public ArrayList<TileEntity> getOutputTEList(@Nullable EnumFacing ignoreSide)
+    public TileEntity[] getOutputTEList(@Nullable EnumFacing ignoreSide)
     {
         TileEntity outputTE = null;
         int index = 0;
-        ArrayList<TileEntity> outputTEList = new ArrayList<>();
+        TileEntity[] outputTEList = new TileEntity[6];
         for (EnumFacing facing : EnumFacing.VALUES)
         {
             if(facing != ignoreSide)
@@ -99,7 +79,7 @@ public class TileEntityMultiSocketIn extends TileEntity implements IGenerator, I
             {
                 if(outputTE instanceof TileEntityCable)
                 {
-                    outputTEList.add(index,((TileEntityCable)outputTE).getOutputTE(facing.getOpposite()));
+                    outputTEList[index] = ((TileEntityCable)outputTE).getOutputTE(facing.getOpposite());
                 }
             }
             index++;
@@ -107,46 +87,25 @@ public class TileEntityMultiSocketIn extends TileEntity implements IGenerator, I
         return outputTEList;
     }
 
+    @Override
+    public TileEntity getOutputTE() {
+        return null;
+    }
+
     /**
      * The block this is giving energy TO
      *
      * @return
      */
-    public TileEntity getInputTE(@Nullable EnumFacing ignoreSide)
-    {
-        TileEntity inputTE = null;
-        for (EnumFacing facing : EnumFacing.VALUES)
-        {
-            if(facing != ignoreSide)
-            {
-                inputTE = getConnectedBlockTE(facing);
-            }
-
-            if (inputTE != null)
-            {
-                if(inputTE instanceof TileEntityCable)
-                {
-                    return ((TileEntityCable) inputTE).getInputTE(facing.getOpposite());
-                }
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public TileEntity getOutputTE() {
-        return getOutputTE(null);
-    }
-
     @Override
     public TileEntity getInputTE() {
-        EnumFacing facing = this.world.getBlockState(this.pos).getValue(BlockMultiSocketIn.FACING);
-        TileEntity inputTE = getConnectedBlockTE(facing);
+        EnumFacing inputSide = this.world.getBlockState(this.pos).getValue(BlockMultiSocketIn.FACING);
+        TileEntity inputTE = getConnectedBlockTE(inputSide);
         if (inputTE != null)
         {
             if(inputTE instanceof TileEntityCable)
             {
-                return ((TileEntityCable) inputTE).getInputTE(facing.getOpposite());
+                return ((TileEntityCable) inputTE).getInputTE(inputSide.getOpposite());
             }
         }
         return null;
@@ -160,56 +119,14 @@ public class TileEntityMultiSocketIn extends TileEntity implements IGenerator, I
     @Override
     public int getChargeRate() {
         int total = 0;
-        ArrayList<TileEntity> outputTEList = getOutputTEList(null);
+        EnumFacing inputSide = this.world.getBlockState(this.pos).getValue(BlockMultiSocketIn.FACING);
+        TileEntity[] outputTEList = getOutputTEList(inputSide);
         for(int i = 0; i < 6; i++){
-            if(outputTEList.get(i) != null){
-                total += ((IGenerator)outputTEList.get(i)).getChargeRate();
+            if(outputTEList[i] != null){
+                total += ((IGenerator)outputTEList[i]).getChargeRate();
             }
         }
         return total;
     }
 
-    //@Override
-    public void decreaseCharge()
-    {
-        currentCharge--;
-        this.markDirty();
-    }
-
-    //@Override
-    public void increaseCharge()
-    {
-        currentCharge++;
-        this.markDirty();
-    }
-
-    //@Override
-    public void setCharge(int value)
-    {
-        if(value > this.maxCharge)
-        {
-            currentCharge = maxCharge;
-            this.markDirty();
-        }
-        else if(value < 0)
-        {
-            currentCharge = 0;
-            this.markDirty();
-        }
-        else
-        {
-            currentCharge = value;
-            this.markDirty();
-        }
-    }
-
-    //@Override
-    public int getCharge(){
-        return currentCharge;
-    }
-
-    //@Override
-    public int getMaxCharge(){
-        return maxCharge;
-    }
 }
