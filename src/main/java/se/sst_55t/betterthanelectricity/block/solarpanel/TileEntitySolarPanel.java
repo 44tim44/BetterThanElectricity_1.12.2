@@ -64,7 +64,10 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable, IGene
                 {
                     if(((IElectricityStorage) te).getCharge() < ((IElectricityStorage) te).getMaxCharge())
                     {
-                        ((IElectricityStorage) te).increaseCharge();
+                        if (!this.world.isRemote)
+                        {
+                            ((IElectricityStorage) te).increaseCharge();
+                        }
                     }
                 }
             }
