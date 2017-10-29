@@ -7,6 +7,8 @@ import net.minecraft.tileentity.TileEntity;
  */
 public interface IConsumer {
 
+    boolean isConnected();
+
     TileEntity getOutputTE();
 
     float getConsumeRate();

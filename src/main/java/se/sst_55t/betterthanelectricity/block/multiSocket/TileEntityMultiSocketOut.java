@@ -167,10 +167,14 @@ public class TileEntityMultiSocketOut extends TileEntity implements IGenerator, 
                 count++;
             }
         }
-        Random rand = new Random();
-        int randomNumber = rand.nextInt(count);
-        if(inputTEList[countedIndex[randomNumber]] instanceof IElectricityStorage){
-            ((IElectricityStorage)inputTEList[countedIndex[randomNumber]]).increaseCharge();
+        if(count > 0)
+        {
+            Random rand = new Random();
+            int randomNumber = rand.nextInt(count);
+            if (inputTEList[countedIndex[randomNumber]] instanceof IElectricityStorage)
+            {
+                ((IElectricityStorage) inputTEList[countedIndex[randomNumber]]).increaseCharge();
+            }
         }
     }
 

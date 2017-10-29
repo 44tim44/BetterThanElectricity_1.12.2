@@ -7,7 +7,10 @@ import net.minecraft.tileentity.TileEntity;
  */
 public interface IGenerator {
 
+    boolean isConnected();
+
     TileEntity getInputTE();
 
     float getChargeRate();
+
 }

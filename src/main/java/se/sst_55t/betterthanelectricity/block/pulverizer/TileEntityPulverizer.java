@@ -217,7 +217,7 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
 
             if(te != null) System.out.println("Charge Rate: " + ((IGenerator)te).getChargeRate());
 
-            if (this.isBurning() || !batteryStack.isEmpty() && !((ItemStack)this.pulverizerItemStacks.get(0)).isEmpty() || (te != null && (te instanceof IGenerator && ((IGenerator)te).getChargeRate() >= getConsumeRate() && ((IGenerator)te).getChargeRate() != 0)))
+            if (this.isBurning() || !batteryStack.isEmpty() && !((ItemStack)this.pulverizerItemStacks.get(0)).isEmpty() || (te != null && (te instanceof IGenerator && ((IGenerator)te).isConnected() && ((IGenerator)te).getChargeRate() >= getConsumeRate() && ((IGenerator)te).getChargeRate() != 0)))
             {
                 if (!this.isBurning() && this.canPulverize())
                 {
