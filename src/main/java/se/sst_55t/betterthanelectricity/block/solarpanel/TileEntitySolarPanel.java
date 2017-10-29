@@ -26,10 +26,10 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable, IGene
     private int chargeTime;
     private int totalChargeTime;
     private ItemStackHandler inventory = new ItemStackHandler(1);
-    private boolean canChargeCable;
 
     public void update ()
     {
+        this.totalChargeTime = this.getItemChargeTime(null);
         ItemStack itemstack = inventory.getStackInSlot(0);
         TileEntity te = getInputTE();
 
@@ -39,9 +39,7 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable, IGene
 
             if (this.chargeTime == this.totalChargeTime)
             {
-                canChargeCable = false;
                 this.chargeTime = 0;
-                this.totalChargeTime = this.getItemChargeTime(itemstack);
                 if(itemstack.getItem() instanceof IBattery)
                 {
                     ((IBattery)itemstack.getItem()).increaseCharge(itemstack);
@@ -59,7 +57,6 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable, IGene
             if (this.chargeTime == this.totalChargeTime)
             {
                 this.chargeTime = 0;
-                this.totalChargeTime = this.getItemChargeTime(itemstack);
                 if (te instanceof IElectricityStorage)
                 {
                     if(((IElectricityStorage) te).getCharge() < ((IElectricityStorage) te).getMaxCharge())
@@ -118,7 +115,6 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable, IGene
             if (!this.world.provider.isNether() && this.world.canBlockSeeSky(this.pos.offset(EnumFacing.UP)) && !this.world.isRaining() && world.getWorldTime()%24000 < 12000 && world.getWorldTime()%24000 > 0) {
                 return true;
             }
-            else return false;
         }
         return false;
     }
