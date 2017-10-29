@@ -9,5 +9,5 @@ public interface IGenerator {
 
     TileEntity getInputTE();
 
-    int getChargeRate();
+    float getChargeRate();
 }

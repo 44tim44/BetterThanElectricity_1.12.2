@@ -12,6 +12,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.block.material.Material;
 import se.sst_55t.betterthanelectricity.block.BlockTileEntity;
+import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketIn;
+import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketOut;
 import se.sst_55t.betterthanelectricity.block.pulverizer.BlockPulverizer;
 import se.sst_55t.betterthanelectricity.block.solarpanel.BlockSolarPanel;
 
@@ -30,9 +32,12 @@ public class BlockCable extends BlockTileEntity<TileEntityCable>
     public static final PropertyBool UP = PropertyBool.create("up");
     public static final PropertyBool DOWN = PropertyBool.create("down");
 
-    public BlockCable()
+    public int color;
+
+    public BlockCable(String name, int color)
     {
-        super(Material.CIRCUITS, "block_cable");
+        super(Material.CIRCUITS, name);
+        this.color = color;
         this.setDefaultState(this.blockState.getBaseState().withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false)).withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false)).withProperty(UP, Boolean.valueOf(false)).withProperty(DOWN, Boolean.valueOf(false)));
     }
 
@@ -54,9 +59,11 @@ public class BlockCable extends BlockTileEntity<TileEntityCable>
     public final boolean attachesTo(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing facing)
     {
         Block block = state.getBlock();
-        if(block instanceof BlockCable) return true;
+        if(block instanceof BlockCable && ((BlockCable) block).color == this.color) return true;
         if(block instanceof BlockSolarPanel) return true;
         if(block instanceof BlockPulverizer) return true;
+        if(block instanceof BlockMultiSocketOut) return true;
+        if(block instanceof BlockMultiSocketIn) return true;
         return false;
     }
 

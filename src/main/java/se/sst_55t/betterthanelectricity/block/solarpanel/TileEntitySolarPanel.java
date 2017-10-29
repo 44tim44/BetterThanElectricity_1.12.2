@@ -203,14 +203,14 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable, IGene
     }
 
     @Override
-    public int getChargeRate()
+    public float getChargeRate()
     {
         ItemStack batteryStack = inventory.getStackInSlot(0);
         if(batteryStack.isEmpty() ||  ((IChargeable) batteryStack.getItem()).getCharge(batteryStack) == ((IChargeable) batteryStack.getItem()).getMaxCharge(batteryStack))
         {
             if (isCharging())
             {
-                return getItemChargeTime(null);
+                return (1.0F / (getItemChargeTime(null) / 20.0F));
             }
         }
         return 0;

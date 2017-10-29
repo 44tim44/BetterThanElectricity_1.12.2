@@ -7,12 +7,14 @@ package se.sst_55t.betterthanelectricity.block;
 import net.minecraft.init.Blocks;
 import se.sst_55t.betterthanelectricity.ModEnums.BlockType;
 import se.sst_55t.betterthanelectricity.block.cable.BlockCable;
+import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
 import se.sst_55t.betterthanelectricity.block.chargingstation.BlockChargingStation;
 import se.sst_55t.betterthanelectricity.block.compactor.BlockCompactor;
 import se.sst_55t.betterthanelectricity.block.counter.BlockCounter;
 import se.sst_55t.betterthanelectricity.block.electricfurnace.BlockElectricFurnace;
 import se.sst_55t.betterthanelectricity.block.fuelgenerator.BlockFuelGenerator;
 import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketIn;
+import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketOut;
 import se.sst_55t.betterthanelectricity.block.pulverizer.BlockPulverizer;
 import se.sst_55t.betterthanelectricity.block.solarpanel.BlockSolarPanel;
 import se.sst_55t.betterthanelectricity.block.table.BlockTable;
@@ -172,8 +174,25 @@ public class ModBlocks {
 
     public static BlockBase barbedLog = new BlockBarbedLog(Material.WOOD,"barbed_log").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
 
-    public static BlockCable block_cable = (BlockCable) new BlockCable().setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
+    public static BlockBase block_cable_white =        new BlockCable("block_cable_white",0).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
+    public static BlockBase block_cable_orange =        new BlockCable("block_cable_orange",1).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
+    public static BlockBase block_cable_magenta =       new BlockCable("block_cable_magenta",2).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
+    public static BlockBase block_cable_lightblue =     new BlockCable("block_cable_lightblue",3).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
+    public static BlockBase block_cable_yellow =        new BlockCable("block_cable_yellow",4).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
+    public static BlockBase block_cable_lime =          new BlockCable("block_cable_lime",5).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
+    public static BlockBase block_cable_pink =          new BlockCable("block_cable_pink",6).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
+    public static BlockBase block_cable_gray =          new BlockCable("block_cable_gray",7).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
+    public static BlockBase block_cable_lightgray =     new BlockCable("block_cable_lightgray",8).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
+    public static BlockBase block_cable_cyan =          new BlockCable("block_cable_cyan",9).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
+    public static BlockBase block_cable_purple =        new BlockCable("block_cable_purple",10).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
+    public static BlockBase block_cable_blue =          new BlockCable("block_cable_blue",11).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
+    public static BlockBase block_cable_brown =         new BlockCable("block_cable_brown",12).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
+    public static BlockBase block_cable_green =         new BlockCable("block_cable_green",13).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
+    public static BlockBase block_cable_red =           new BlockCable("block_cable_red",14).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
+    public static BlockBase block_cable_black =         new BlockCable("block_cable_black",15).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
+
     public static BlockMultiSocketIn block_multi_socket_in = (BlockMultiSocketIn) new BlockMultiSocketIn().setCreativeTab(CreativeTabs.MISC).setHardness(5.0F);
+    public static BlockMultiSocketOut block_multi_socket_out = (BlockMultiSocketOut) new BlockMultiSocketOut().setCreativeTab(CreativeTabs.MISC).setHardness(5.0F);
 
     public static void register(IForgeRegistry<Block> registry) {
         registry.registerAll(
@@ -321,8 +340,25 @@ public class ModBlocks {
 
                 barbedLog,
 
-                block_cable,
-                block_multi_socket_in
+                block_cable_white,
+                block_cable_orange,
+                block_cable_magenta,
+                block_cable_lightblue,
+                block_cable_yellow,
+                block_cable_lime,
+                block_cable_pink,
+                block_cable_gray,
+                block_cable_lightgray,
+                block_cable_cyan,
+                block_cable_purple,
+                block_cable_blue,
+                block_cable_brown,
+                block_cable_green,
+                block_cable_red,
+                block_cable_black,
+
+                block_multi_socket_in,
+                block_multi_socket_out
 
         );
 
@@ -334,8 +370,11 @@ public class ModBlocks {
         GameRegistry.registerTileEntity(chargingStation.getTileEntityClass(),chargingStation.getRegistryName().toString());
         GameRegistry.registerTileEntity(compactor.getTileEntityClass(),compactor.getRegistryName().toString());
         GameRegistry.registerTileEntity(tableOak.getTileEntityClass(), tableOak.getRegistryName().toString());
-        GameRegistry.registerTileEntity(block_cable.getTileEntityClass(), block_cable.getRegistryName().toString());
+
+        GameRegistry.registerTileEntity(((BlockCable)block_cable_white).getTileEntityClass(),block_cable_white.getRegistryName().toString());
+
         GameRegistry.registerTileEntity(block_multi_socket_in.getTileEntityClass(), block_multi_socket_in.getRegistryName().toString());
+        GameRegistry.registerTileEntity(block_multi_socket_out.getTileEntityClass(), block_multi_socket_out.getRegistryName().toString());
     }
 
     public static void registerItemBlocks(IForgeRegistry<Item> registry) {
@@ -453,8 +492,25 @@ public class ModBlocks {
 
                 barbedLog.createItemBlock(),
 
-                block_cable.createItemBlock(),
-                block_multi_socket_in.createItemBlock()
+                block_cable_white.createItemBlock(),
+                block_cable_orange.createItemBlock(),
+                block_cable_magenta.createItemBlock(),
+                block_cable_lightblue.createItemBlock(),
+                block_cable_yellow.createItemBlock(),
+                block_cable_lime.createItemBlock(),
+                block_cable_pink.createItemBlock(),
+                block_cable_gray.createItemBlock(),
+                block_cable_lightgray.createItemBlock(),
+                block_cable_cyan.createItemBlock(),
+                block_cable_purple.createItemBlock(),
+                block_cable_blue.createItemBlock(),
+                block_cable_brown.createItemBlock(),
+                block_cable_green.createItemBlock(),
+                block_cable_red.createItemBlock(),
+                block_cable_black.createItemBlock(),
+
+                block_multi_socket_in.createItemBlock(),
+                block_multi_socket_out.createItemBlock()
         );
     }
 
@@ -568,8 +624,25 @@ public class ModBlocks {
 
         barbedLog.registerItemModel(Item.getItemFromBlock(barbedLog));
 
-        block_cable.registerItemModel(Item.getItemFromBlock(block_cable));
+        block_cable_white.registerItemModel(Item.getItemFromBlock(block_cable_white));
+        block_cable_orange.registerItemModel(Item.getItemFromBlock(block_cable_orange));
+        block_cable_magenta.registerItemModel(Item.getItemFromBlock(block_cable_magenta));
+        block_cable_lightblue.registerItemModel(Item.getItemFromBlock(block_cable_lightblue));
+        block_cable_yellow.registerItemModel(Item.getItemFromBlock(block_cable_yellow));
+        block_cable_lime.registerItemModel(Item.getItemFromBlock(block_cable_lime));
+        block_cable_pink.registerItemModel(Item.getItemFromBlock(block_cable_pink));
+        block_cable_gray.registerItemModel(Item.getItemFromBlock(block_cable_gray));
+        block_cable_lightgray.registerItemModel(Item.getItemFromBlock(block_cable_lightgray));
+        block_cable_cyan.registerItemModel(Item.getItemFromBlock(block_cable_cyan));
+        block_cable_purple.registerItemModel(Item.getItemFromBlock(block_cable_purple));
+        block_cable_blue.registerItemModel(Item.getItemFromBlock(block_cable_blue));
+        block_cable_brown.registerItemModel(Item.getItemFromBlock(block_cable_brown));
+        block_cable_green.registerItemModel(Item.getItemFromBlock(block_cable_green));
+        block_cable_red.registerItemModel(Item.getItemFromBlock(block_cable_red));
+        block_cable_black.registerItemModel(Item.getItemFromBlock(block_cable_black));
+
         block_multi_socket_in.registerItemModel(Item.getItemFromBlock(block_multi_socket_in));
+        block_multi_socket_out.registerItemModel(Item.getItemFromBlock(block_multi_socket_out));
     }
 
 }

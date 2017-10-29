@@ -1,17 +1,14 @@
 package se.sst_55t.betterthanelectricity.block.multiSocket;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import se.sst_55t.betterthanelectricity.block.ICable;
 import se.sst_55t.betterthanelectricity.block.IConsumer;
-import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
 import se.sst_55t.betterthanelectricity.block.IGenerator;
 import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 
 /**
  * Created by Timeout on 2017-10-27.
@@ -70,16 +67,37 @@ public class TileEntityMultiSocketIn extends TileEntity implements IGenerator, I
         TileEntity[] outputTEList = new TileEntity[6];
         for (EnumFacing facing : EnumFacing.VALUES)
         {
+            outputTE = null;
             if(facing != ignoreSide)
             {
                 outputTE = getConnectedBlockTE(facing);
+                if(outputTE != null)
+                {
+                    if(outputTE == this)
+                    {
+                        outputTE = null;
+                    }
+                    else if(outputTE == getInputTE())
+                    {
+                        outputTE = null;
+                    }
+                }
             }
 
             if (outputTE != null)
             {
                 if(outputTE instanceof TileEntityCable)
                 {
-                    outputTEList[index] = ((TileEntityCable)outputTE).getOutputTE(facing.getOpposite());
+                    TileEntity outputTEEnd = ((TileEntityCable)outputTE).getOutputTE(facing.getOpposite());
+                    if(outputTEEnd == this)
+                    {
+                        outputTEEnd = null;
+                    }
+                    else if(outputTEEnd == getInputTE())
+                    {
+                        outputTEEnd = null;
+                    }
+                    outputTEList[index] = outputTEEnd;
                 }
             }
             index++;
@@ -112,13 +130,13 @@ public class TileEntityMultiSocketIn extends TileEntity implements IGenerator, I
     }
 
     @Override
-    public int getConsumeRate() {
+    public float getConsumeRate() {
         return ((IConsumer)getInputTE()).getConsumeRate();
     }
 
     @Override
-    public int getChargeRate() {
-        int total = 0;
+    public float getChargeRate() {
+        float total = 0;
         EnumFacing inputSide = this.world.getBlockState(this.pos).getValue(BlockMultiSocketIn.FACING);
         TileEntity[] outputTEList = getOutputTEList(inputSide);
         for(int i = 0; i < 6; i++){

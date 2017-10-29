@@ -215,10 +215,13 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
             ItemStack batteryStack = this.pulverizerItemStacks.get(1);
             TileEntity te = getOutputTE();
 
-            if (this.isBurning() || !batteryStack.isEmpty() && !((ItemStack)this.pulverizerItemStacks.get(0)).isEmpty() || (te != null && (te instanceof IGenerator && ((IGenerator)te).getChargeRate() <= BASE_CONSUME_RATE && ((IGenerator)te).getChargeRate() != 0)))
+            if(te != null) System.out.println("Charge Rate: " + ((IGenerator)te).getChargeRate());
+
+            if (this.isBurning() || !batteryStack.isEmpty() && !((ItemStack)this.pulverizerItemStacks.get(0)).isEmpty() || (te != null && (te instanceof IGenerator && ((IGenerator)te).getChargeRate() >= getConsumeRate() && ((IGenerator)te).getChargeRate() != 0)))
             {
                 if (!this.isBurning() && this.canPulverize())
                 {
+                    System.out.println("!isBurning && canPulverize");
                     //this.furnaceBurnTime = getItemBurnTime(batteryStack);
                     this.furnaceBurnTime = BASE_CONSUME_RATE;
                     this.currentItemBurnTime = this.furnaceBurnTime;
@@ -567,8 +570,8 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
     }
 
     @Override
-    public int getConsumeRate() {
-        return BASE_CONSUME_RATE;
+    public float getConsumeRate() {
+        return (1.0F / (BASE_CONSUME_RATE / 20.0F));
     }
 
 }

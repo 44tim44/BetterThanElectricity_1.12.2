@@ -1,0 +1,60 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "all": "betterthanelectricity:blocks/cable/cable_pink"
+        },
+        "model": "betterthanelectricity:cable_core_model"
+    },
+    "variants": {
+        "north": {
+            "true": {
+                "submodel": "betterthanelectricity:cable_north_model"
+            },
+            "false":{
+
+            }
+        },
+        "east": {
+            "true": {
+                "submodel": "betterthanelectricity:cable_east_model"
+            },
+            "false":{
+
+            }
+        },
+        "south": {
+            "true": {
+                "submodel": "betterthanelectricity:cable_south_model"
+            },
+            "false":{
+
+            }
+        },
+        "west": {
+            "true": {
+                "submodel": "betterthanelectricity:cable_west_model"
+            },
+            "false":{
+
+            }
+        },
+        "up": {
+            "true": {
+                "submodel": "betterthanelectricity:cable_up_model"
+            },
+            "false":{
+
+            }
+        },
+        "down": {
+            "true": {
+                "submodel": "betterthanelectricity:cable_down_model"
+            },
+            "false":{
+
+            }
+        },
+        "inventory": { "model": "betterthanelectricity:cable_core_model" }
+    }
+}

@@ -27,7 +27,7 @@ public class TileEntityCable extends TileEntity implements ICable {
         if(isConnected()) {
             if (    world.getTileEntity(this.pos.offset(facing)) instanceof IConsumer ||
                     world.getTileEntity(this.pos.offset(facing)) instanceof IGenerator ||
-                    world.getTileEntity(this.pos.offset(facing)) instanceof ICable )
+                    world.getTileEntity(this.pos.offset(facing)) instanceof ICable && ((BlockCable)world.getBlockState(this.pos.offset(facing)).getBlock()).color == ((BlockCable)world.getBlockState(this.pos).getBlock()).color )
             {
                 return world.getTileEntity(this.pos.offset(facing));
             }
@@ -42,7 +42,7 @@ public class TileEntityCable extends TileEntity implements ICable {
         {
             if(     world.getTileEntity(this.pos.offset(facing)) instanceof IConsumer ||
                     world.getTileEntity(this.pos.offset(facing)) instanceof IGenerator ||
-                    world.getTileEntity(this.pos.offset(facing)) instanceof ICable )
+                    world.getTileEntity(this.pos.offset(facing)) instanceof ICable && ((BlockCable)world.getBlockState(this.pos.offset(facing)).getBlock()).color == ((BlockCable)world.getBlockState(this.pos).getBlock()).color )
             {
                 amountOfConnections++;
             }
@@ -57,9 +57,10 @@ public class TileEntityCable extends TileEntity implements ICable {
      */
     public TileEntity getOutputTE(EnumFacing ignoreSide)
     {
-        TileEntity outputTE = null;
+        TileEntity outputTE;
         for (EnumFacing facing : EnumFacing.VALUES)
         {
+            outputTE = null;
             if(facing != ignoreSide)
             {
                 outputTE = getConnectedBlockTE(facing);
@@ -69,16 +70,6 @@ public class TileEntityCable extends TileEntity implements ICable {
             {
                 if(outputTE instanceof TileEntityCable)
                 {
-                    /*
-                    if (((TileEntityCable) outputTE).getOutputTE() == this)
-                    {
-                        outputTE = null;
-                    }
-                    else
-                    {
-                        return ((TileEntityCable) outputTE).getOutputTE();
-                    }
-                    */
                     return ((TileEntityCable) outputTE).getOutputTE(facing.getOpposite());
                 }
                 else if(outputTE instanceof IGenerator)
@@ -97,9 +88,10 @@ public class TileEntityCable extends TileEntity implements ICable {
      */
     public TileEntity getInputTE(EnumFacing ignoreSide)
     {
-        TileEntity inputTE = null;
+        TileEntity inputTE;
         for (EnumFacing facing : EnumFacing.VALUES)
         {
+            inputTE = null;
             if(facing != ignoreSide) {
                 inputTE = getConnectedBlockTE(facing);
             }
@@ -108,16 +100,6 @@ public class TileEntityCable extends TileEntity implements ICable {
             {
                 if(inputTE instanceof TileEntityCable)
                 {
-                    /*
-                    if (((TileEntityCable) inputTE).getInputTE() == this)
-                    {
-                        inputTE = null;
-                    }
-                    else
-                    {
-                        return ((TileEntityCable) inputTE).getInputTE();
-                    }
-                    */
                     return ((TileEntityCable) inputTE).getInputTE(facing.getOpposite());
                 }
                 else if(inputTE instanceof IConsumer)

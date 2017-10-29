@@ -1,8 +1,9 @@
 {
     "variants": {
-        "facing=north": { "model": "betterthanelectricity:electric_furnace_block" },
-        "facing=south": { "model": "betterthanelectricity:electric_furnace_block", "y": 180 },
-        "facing=west":  { "model": "betterthanelectricity:electric_furnace_block", "y": 270 },
-        "facing=east":  { "model": "betterthanelectricity:electric_furnace_block", "y": 90 }
+        "facing=north": { "model": "betterthanelectricity:block_socket_in" },
+        "facing=south": { "model": "betterthanelectricity:block_socket_in", "y": 180 },
+        "facing=west":  { "model": "betterthanelectricity:block_socket_in", "y": 270 },
+        "facing=east":  { "model": "betterthanelectricity:block_socket_in", "y": 90 },
+        "inventory": { "model": "betterthanelectricity:block_socket_in" }
     }
 }

@@ -9,6 +9,6 @@ public interface IConsumer {
 
     TileEntity getOutputTE();
 
-    int getConsumeRate();
+    float getConsumeRate();
 
 }
