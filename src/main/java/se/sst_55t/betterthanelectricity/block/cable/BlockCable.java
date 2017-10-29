@@ -12,6 +12,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.block.material.Material;
 import se.sst_55t.betterthanelectricity.block.BlockTileEntity;
+import se.sst_55t.betterthanelectricity.block.chargingstation.BlockChargingStation;
 import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketIn;
 import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketOut;
 import se.sst_55t.betterthanelectricity.block.pulverizer.BlockPulverizer;
@@ -62,6 +63,7 @@ public class BlockCable extends BlockTileEntity<TileEntityCable>
         if(block instanceof BlockCable && ((BlockCable) block).color == this.color) return true;
         if(block instanceof BlockSolarPanel) return true;
         if(block instanceof BlockPulverizer) return true;
+        if(block instanceof BlockChargingStation) return true;
         if(block instanceof BlockMultiSocketOut) return true;
         if(block instanceof BlockMultiSocketIn) return true;
         return false;

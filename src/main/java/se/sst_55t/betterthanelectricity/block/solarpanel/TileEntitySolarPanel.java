@@ -2,6 +2,7 @@ package se.sst_55t.betterthanelectricity.block.solarpanel;
 
 import se.sst_55t.betterthanelectricity.block.ICable;
 import se.sst_55t.betterthanelectricity.block.IConsumer;
+import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
 import se.sst_55t.betterthanelectricity.block.IGenerator;
 import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
 import se.sst_55t.betterthanelectricity.item.*;
@@ -59,8 +60,13 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable, IGene
             {
                 this.chargeTime = 0;
                 this.totalChargeTime = this.getItemChargeTime(itemstack);
-
-                //((IConsumer)te).increaseCharge();
+                if (te instanceof IElectricityStorage)
+                {
+                    if(((IElectricityStorage) te).getCharge() < ((IElectricityStorage) te).getMaxCharge())
+                    {
+                        ((IElectricityStorage) te).increaseCharge();
+                    }
+                }
             }
         }
         else

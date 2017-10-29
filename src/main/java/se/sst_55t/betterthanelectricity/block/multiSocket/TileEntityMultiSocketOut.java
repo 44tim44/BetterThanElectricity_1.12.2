@@ -5,15 +5,17 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import se.sst_55t.betterthanelectricity.block.ICable;
 import se.sst_55t.betterthanelectricity.block.IConsumer;
+import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
 import se.sst_55t.betterthanelectricity.block.IGenerator;
 import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 /**
  * Created by Timeout on 2017-10-27.
  */
-public class TileEntityMultiSocketOut extends TileEntity implements IGenerator, IConsumer
+public class TileEntityMultiSocketOut extends TileEntity implements IGenerator, IConsumer, IElectricityStorage
 {
 
     @Override
@@ -138,7 +140,7 @@ public class TileEntityMultiSocketOut extends TileEntity implements IGenerator, 
             return 0;
         }
         float totalChargeRate = ((IGenerator)getOutputTE()).getChargeRate();
-        EnumFacing outputSide = this.world.getBlockState(this.pos).getValue(BlockMultiSocketIn.FACING);
+        EnumFacing outputSide = this.world.getBlockState(this.pos).getValue(BlockMultiSocketOut.FACING);
 
         float count = 0;
         TileEntity[] inputTEList = getInputTEList(outputSide);
@@ -153,4 +155,46 @@ public class TileEntityMultiSocketOut extends TileEntity implements IGenerator, 
         return totalChargeRate/count;
     }
 
+    @Override
+    public void increaseCharge() {
+        int count = 0;
+        int[] countedIndex = new int[6];
+        EnumFacing outputSide = this.world.getBlockState(this.pos).getValue(BlockMultiSocketOut.FACING);
+        TileEntity[] inputTEList = getInputTEList(outputSide);
+        for(int i = 0; i < 6; i++){
+            if(inputTEList[i] != null){
+                countedIndex[count] = i;
+                count++;
+            }
+        }
+        Random rand = new Random();
+        int randomNumber = rand.nextInt(count);
+        if(inputTEList[countedIndex[randomNumber]] instanceof IElectricityStorage){
+            ((IElectricityStorage)inputTEList[countedIndex[randomNumber]]).increaseCharge();
+        }
+    }
+
+    @Override
+    public void decreaseCharge() {
+        TileEntity outputTE = getOutputTE();
+        if(outputTE != null && outputTE instanceof IElectricityStorage)
+        {
+            ((IElectricityStorage) outputTE).decreaseCharge();
+        }
+    }
+
+    @Override
+    public void setCharge(int value) {
+
+    }
+
+    @Override
+    public int getCharge() {
+        return 1;
+    }
+
+    @Override
+    public int getMaxCharge() {
+        return 2;
+    }
 }

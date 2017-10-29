@@ -10,6 +10,7 @@ import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -21,6 +22,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.sst_55t.betterthanelectricity.BTEMod;
+import se.sst_55t.betterthanelectricity.block.ICable;
+import se.sst_55t.betterthanelectricity.block.IConsumer;
+import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
+import se.sst_55t.betterthanelectricity.block.IGenerator;
+import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
 import se.sst_55t.betterthanelectricity.item.IBattery;
 import se.sst_55t.betterthanelectricity.item.IChargeable;
 import se.sst_55t.betterthanelectricity.item.ItemBattery;
@@ -31,7 +37,7 @@ import javax.annotation.Nullable;
 /**
  * Created by Timmy on 2016-11-27.
  */
-public class TileEntityChargingStation extends TileEntityLockable implements ITickable, ISidedInventory
+public class TileEntityChargingStation extends TileEntityLockable implements ITickable, ISidedInventory, IElectricityStorage, IConsumer
 {
     private static final int BASE_CHARGE_RATE = 2; // Amount of ticks required to charge 1 energy.
     private static final int[] SLOTS_TOP = new int[] {0};
@@ -51,13 +57,14 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
 
     public void decreaseCharge()
     {
-        currentCharge--;
+        this.currentCharge--;
         this.markDirty();
     }
 
     public void increaseCharge()
     {
-        currentCharge++;
+        System.out.println("is increasing");
+        this.currentCharge++;
         this.markDirty();
     }
 
@@ -65,17 +72,17 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
     {
         if(value > this.maxCharge)
         {
-            currentCharge = maxCharge;
+            this.currentCharge = maxCharge;
             this.markDirty();
         }
         else if(value < 0)
         {
-            currentCharge = 0;
+            this.currentCharge = 0;
             this.markDirty();
         }
         else
         {
-            currentCharge = value;
+            this.currentCharge = value;
             this.markDirty();
         }
     }
@@ -532,5 +539,58 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
     public static boolean isBlockAboveAir(TileEntityChargingStation te){
         BlockPos blockPos = te.getPos();
         return te.getWorld().isAirBlock(blockPos.offset(EnumFacing.UP));
+    }
+
+    public TileEntity getConnectedBlockTE(EnumFacing facing)
+    {
+        if(( world.getTileEntity(this.pos.offset(facing)) instanceof ICable) && isConnected())
+        {
+            return world.getTileEntity(this.pos.offset(facing));
+        }
+        return null;
+    }
+
+    public boolean isConnected()
+    {
+        int amountOfConnections = 0;
+        for (EnumFacing facing : EnumFacing.VALUES)
+        {
+            if( world.getTileEntity(this.pos.offset(facing)) instanceof ICable )
+            {
+                amountOfConnections++;
+            }
+        }
+        return amountOfConnections == 1 ;
+    }
+
+    @Override
+    public TileEntity getOutputTE() {
+        TileEntity outputTE;
+        for (EnumFacing facing : EnumFacing.VALUES)
+        {
+            outputTE = getConnectedBlockTE(facing);
+
+            if (outputTE != null)
+            {
+                if(outputTE instanceof TileEntityCable)
+                {
+                    return ((TileEntityCable) outputTE).getOutputTE(facing.getOpposite());
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public float getConsumeRate() {
+        ItemStack batteryStack = this.chargingStationItemStacks.get(1);
+        if(batteryStack.isEmpty() ||  ((IChargeable) batteryStack.getItem()).getCharge(batteryStack) == 0)
+        {
+            if (this.currentCharge < maxCharge)
+            {
+                return (1.0F / (BASE_CHARGE_RATE / 20.0F));
+            }
+        }
+        return 0;
     }
 }

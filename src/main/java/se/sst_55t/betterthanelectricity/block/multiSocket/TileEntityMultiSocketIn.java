@@ -5,19 +5,19 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import se.sst_55t.betterthanelectricity.block.ICable;
 import se.sst_55t.betterthanelectricity.block.IConsumer;
+import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
 import se.sst_55t.betterthanelectricity.block.IGenerator;
 import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 /**
  * Created by Timeout on 2017-10-27.
  */
-public class TileEntityMultiSocketIn extends TileEntity implements IGenerator, IConsumer {
+public class TileEntityMultiSocketIn extends TileEntity implements IGenerator, IConsumer, IElectricityStorage {
 
-    private int currentChargeRate;
-
-    private static final int maxCharge = 6400;
+    private static final int maxCharge = 10;
     private int currentCharge;
 
     @Override
@@ -147,4 +147,46 @@ public class TileEntityMultiSocketIn extends TileEntity implements IGenerator, I
         return total;
     }
 
+    @Override
+    public void increaseCharge() {
+        TileEntity inputTE = getInputTE();
+        if(inputTE != null && inputTE instanceof IElectricityStorage)
+        {
+            ((IElectricityStorage) inputTE).increaseCharge();
+        }
+    }
+
+    @Override
+    public void decreaseCharge() {
+        int count = 0;
+        int[] countedIndex = new int[6];
+        EnumFacing inputSide = this.world.getBlockState(this.pos).getValue(BlockMultiSocketIn.FACING);
+        TileEntity[] outputTEList = getOutputTEList(inputSide);
+        for(int i = 0; i < 6; i++){
+            if(outputTEList[i] != null){
+                countedIndex[count] = i;
+                count++;
+            }
+        }
+        Random rand = new Random();
+        int randomNumber = rand.nextInt(count);
+        if(outputTEList[countedIndex[randomNumber]] instanceof IElectricityStorage){
+            ((IElectricityStorage)outputTEList[countedIndex[randomNumber]]).decreaseCharge();
+        }
+    }
+
+    @Override
+    public void setCharge(int value) {
+
+    }
+
+    @Override
+    public int getCharge() {
+        return 1;
+    }
+
+    @Override
+    public int getMaxCharge() {
+        return 2;
+    }
 }
