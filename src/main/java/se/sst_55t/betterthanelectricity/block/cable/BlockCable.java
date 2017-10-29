@@ -13,10 +13,14 @@ import net.minecraft.world.World;
 import net.minecraft.block.material.Material;
 import se.sst_55t.betterthanelectricity.block.BlockTileEntity;
 import se.sst_55t.betterthanelectricity.block.chargingstation.BlockChargingStation;
+import se.sst_55t.betterthanelectricity.block.compactor.BlockCompactor;
+import se.sst_55t.betterthanelectricity.block.electricfurnace.BlockElectricFurnace;
+import se.sst_55t.betterthanelectricity.block.fuelgenerator.BlockFuelGenerator;
 import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketIn;
 import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketOut;
 import se.sst_55t.betterthanelectricity.block.pulverizer.BlockPulverizer;
 import se.sst_55t.betterthanelectricity.block.solarpanel.BlockSolarPanel;
+import se.sst_55t.betterthanelectricity.block.windmill.BlockWindMill;
 
 import javax.annotation.Nullable;
 
@@ -60,12 +64,25 @@ public class BlockCable extends BlockTileEntity<TileEntityCable>
     public final boolean attachesTo(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing facing)
     {
         Block block = state.getBlock();
+
+        // Cables
         if(block instanceof BlockCable && ((BlockCable) block).color == this.color) return true;
+
+        // Generator Machines
         if(block instanceof BlockSolarPanel) return true;
+        if(block instanceof BlockWindMill) return true;
+        if(block instanceof BlockFuelGenerator) return true;
+
+        // Consumer Machines
         if(block instanceof BlockPulverizer) return true;
         if(block instanceof BlockChargingStation) return true;
+        if(block instanceof BlockElectricFurnace) return true;
+        if(block instanceof BlockCompactor) return true;
+
+        // Sockets
         if(block instanceof BlockMultiSocketOut) return true;
         if(block instanceof BlockMultiSocketIn) return true;
+
         return false;
     }
 
