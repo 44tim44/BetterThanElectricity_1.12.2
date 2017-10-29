@@ -117,7 +117,7 @@ public class ContainerElectricFurnace extends Container
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
     {
         ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = (Slot)this.inventorySlots.get(index);
+        Slot slot = this.inventorySlots.get(index);
 
         if (slot != null && slot.getHasStack())
         {
@@ -138,6 +138,18 @@ public class ContainerElectricFurnace extends Container
                 if (!FurnaceRecipes.instance().getSmeltingResult(itemstack1).isEmpty())
                 {
                     if (!this.mergeItemStack(itemstack1, 0, 1, false))
+                    {
+                        return ItemStack.EMPTY;
+                    }
+                    else if (!this.mergeItemStack(itemstack1, 3, 4, false))
+                    {
+                        return ItemStack.EMPTY;
+                    }
+                    else if (!this.mergeItemStack(itemstack1, 4, 5, false))
+                    {
+                        return ItemStack.EMPTY;
+                    }
+                    else if (!this.mergeItemStack(itemstack1, 5, 6, false))
                     {
                         return ItemStack.EMPTY;
                     }

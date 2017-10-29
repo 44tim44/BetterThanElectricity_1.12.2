@@ -1,5 +1,11 @@
 package se.sst_55t.betterthanelectricity.block.electricfurnace;
 
+import net.minecraft.tileentity.TileEntity;
+import se.sst_55t.betterthanelectricity.block.ICable;
+import se.sst_55t.betterthanelectricity.block.IConsumer;
+import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
+import se.sst_55t.betterthanelectricity.block.IGenerator;
+import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
 import se.sst_55t.betterthanelectricity.item.IBattery;
 import se.sst_55t.betterthanelectricity.item.ItemBattery;
 import se.sst_55t.betterthanelectricity.item.ModItems;
@@ -26,8 +32,10 @@ import javax.annotation.Nullable;
 /**
  * Created by Timmy on 2016-11-27.
  */
-public class TileEntityElectricFurnace extends TileEntityLockable implements ITickable, ISidedInventory
+public class TileEntityElectricFurnace extends TileEntityLockable implements ITickable, ISidedInventory, IConsumer
 {
+    public static final int BASE_CONSUME_RATE = 20;
+
     private static final int[] SLOTS_TOP = new int[] {0};
     private static final int[] SLOTS_BOTTOM = new int[] {2, 1};
     private static final int[] SLOTS_SIDES = new int[] {1};
@@ -206,14 +214,15 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
 
         if (!this.world.isRemote)
         {
-            ItemStack itemstack0 = this.furnaceItemStacks.get(0);
-            ItemStack itemstack1 = this.furnaceItemStacks.get(1);
+            ItemStack cookSlotStack = this.furnaceItemStacks.get(0);
+            ItemStack batteryStack = this.furnaceItemStacks.get(1);
             ItemStack itemstack2 = this.furnaceItemStacks.get(2);
             ItemStack itemstack3 = this.furnaceItemStacks.get(3);
             ItemStack itemstack4 = this.furnaceItemStacks.get(4);
             ItemStack itemstack5 = this.furnaceItemStacks.get(5);
+            TileEntity te = getOutputTE();
 
-            if (itemstack0.isEmpty())
+            if (cookSlotStack.isEmpty())
             {
                 if (itemstack5.isEmpty())
                 {
@@ -222,16 +231,13 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
                         if(!itemstack3.isEmpty()) {
                             this.furnaceItemStacks.set(4, itemstack3.copy());
                             this.furnaceItemStacks.set(3, ItemStack.EMPTY);
-                            //itemstack3.setCount(0);
                         }
                     }
                     this.furnaceItemStacks.set(5, itemstack4.copy());
                     this.furnaceItemStacks.set(4, ItemStack.EMPTY);
-                    //itemstack4.setCount(0);
                 }
                 this.furnaceItemStacks.set(0, itemstack5.copy());
                 this.furnaceItemStacks.set(5, ItemStack.EMPTY);
-                //itemstack5.setCount(0);
             }
             if (itemstack5.isEmpty())
             {
@@ -240,38 +246,37 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
                     if(!itemstack3.isEmpty()) {
                         this.furnaceItemStacks.set(4, itemstack3.copy());
                         this.furnaceItemStacks.set(3, ItemStack.EMPTY);
-                        //itemstack3.setCount(0);
                     }
                 }
                 this.furnaceItemStacks.set(5,itemstack4.copy());
                 this.furnaceItemStacks.set(4, ItemStack.EMPTY);
-                //itemstack4.setCount(0);
             }
             if (itemstack4.isEmpty())
             {
                 if(!itemstack3.isEmpty()) {
                     this.furnaceItemStacks.set(4, itemstack3.copy());
                     this.furnaceItemStacks.set(3, ItemStack.EMPTY);
-                    //itemstack3.setCount(0);
                 }
 
             }
-            if (this.isBurning() || !itemstack1.isEmpty() && !itemstack0.isEmpty())
+            if (this.isBurning() || !batteryStack.isEmpty() && !cookSlotStack.isEmpty() || (te != null && (te instanceof IGenerator && ((IGenerator)te).isConnected() && ((IGenerator)te).getChargeRate() >= getConsumeRate() && ((IGenerator)te).getChargeRate() != 0)))
             {
                 if (!this.isBurning() && this.canSmelt())
                 {
-                    this.furnaceBurnTime = getItemBurnTime(itemstack1);
+                    this.furnaceBurnTime = BASE_CONSUME_RATE;
                     this.currentItemBurnTime = this.furnaceBurnTime;
 
                     if (this.isBurning())
                     {
                         flag1 = true;
 
-                        if (!itemstack1.isEmpty())
+                        if (!batteryStack.isEmpty() && ((IBattery)batteryStack.getItem()).getCharge(batteryStack) > 0)
                         {
-                            //if(((IBattery)itemstack1.getItem()).getCharge(itemstack1) < ((IBattery)itemstack1.getItem()).getMaxCharge(itemstack1)) {
-                                ((IBattery)itemstack1.getItem()).decreaseCharge(itemstack1);
-                            //}
+                            ((IBattery)batteryStack.getItem()).decreaseCharge(batteryStack);
+                        }
+                        else if( te instanceof IElectricityStorage)
+                        {
+                            ((IElectricityStorage) getOutputTE()).decreaseCharge();
                         }
                     }
                 }
@@ -356,8 +361,6 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
                 {
                     return itemstack1.getCount() + itemstack.getCount() <= itemstack.getMaxStackSize(); // Forge fix: make furnace respect stack sizes in furnace recipes
                 }
-                //int result = furnaceItemStacks[2].stackSize + itemstack.stackSize;
-                //return result <= getInventoryStackLimit() && result <= this.furnaceItemStacks[2].getMaxStackSize(); //Forge BugFix: Make it respect stack sizes properly.
             }
         }
     }
@@ -432,14 +435,6 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
                 itemstack2.grow(itemstack.getCount()); // Forge BugFix: Results may have multiple items
             }
 
-            /*
-            if (itemstack0.getItem() == Item.getItemFromBlock(Blocks.SPONGE) && furnaceItemStacks.get(0).getMetadata() == 1 && !furnaceItemStacks.get(1).isEmpty() && furnaceItemStacks.get(1).getItem() == Items.BUCKET)
-            {
-                //itemstack1 = new ItemStack(Items.WATER_BUCKET);
-                this.furnaceItemStacks.set(1,new ItemStack(Items.WATER_BUCKET));
-            }
-            */
-
             itemstack0.shrink(1);
 
             if (itemstack0.isEmpty())
@@ -451,25 +446,21 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
                         if (itemstack3.isEmpty())
                         {
                             this.furnaceItemStacks.set(0, ItemStack.EMPTY);
-                            //itemstack0.setCount(0);
                         }
                         else
                         {
                             this.furnaceItemStacks.set(0, itemstack3.copy());
                             this.furnaceItemStacks.set(3, ItemStack.EMPTY);
-                            //itemstack3.setCount(0);
                         }
                     }
                     else{
                         this.furnaceItemStacks.set(0, itemstack4.copy());
                         this.furnaceItemStacks.set(4, ItemStack.EMPTY);
-                        //itemstack4.setCount(0);
                     }
                 }
                 else{
                     this.furnaceItemStacks.set(0, itemstack5.copy());
                     this.furnaceItemStacks.set(5, ItemStack.EMPTY);
-                    //itemstack5.setCount(0);
                 }
             }
         }
@@ -493,7 +484,7 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
             {
                 if(((IBattery)stack.getItem()).getCharge(stack) > 0)
                 {
-                    return 20;
+                    return BASE_CONSUME_RATE;
                 }
             }
             else
@@ -652,5 +643,70 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
             else
                 return (T) handlerSide;
         return super.getCapability(capability, facing);
+    }
+
+    public TileEntity getConnectedBlockTE(EnumFacing facing)
+    {
+        if(( world.getTileEntity(this.pos.offset(facing)) instanceof ICable) && isConnected())
+        {
+            return world.getTileEntity(this.pos.offset(facing));
+        }
+        return null;
+    }
+
+    public boolean isConnected()
+    {
+        int amountOfConnections = 0;
+        for (EnumFacing facing : EnumFacing.VALUES)
+        {
+            if( world.getTileEntity(this.pos.offset(facing)) instanceof ICable )
+            {
+                amountOfConnections++;
+            }
+        }
+        return amountOfConnections == 1;
+    }
+
+    @Override
+    public TileEntity getOutputTE() {
+        TileEntity outputTE;
+        for (EnumFacing facing : EnumFacing.VALUES)
+        {
+            outputTE = getConnectedBlockTE(facing);
+
+            if (outputTE != null)
+            {
+                if(outputTE instanceof TileEntityCable)
+                {
+                    return ((TileEntityCable) outputTE).getOutputTE(facing.getOpposite());
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public float getConsumeRate() {
+        return (1.0F / (BASE_CONSUME_RATE / 20.0F));
+    }
+
+    public float getGUIChargeRatio()
+    {
+        ItemStack batteryStack = this.furnaceItemStacks.get(1);
+        if(!batteryStack.isEmpty() && batteryStack.getItem() instanceof IBattery && ((IBattery)batteryStack.getItem()).getCharge(batteryStack) > 0)
+        {
+            return 1.0F;
+        }
+
+        TileEntity te = getOutputTE();
+        if(te != null && te instanceof IGenerator)
+        {
+            float chargeRatio = ((IGenerator)te).getChargeRate() / getConsumeRate();
+            if(chargeRatio < 0.0F) return 0.0F;
+            if(chargeRatio > 1.0F) return 1.0F;
+            return chargeRatio;
+        }
+
+        return 0.0F;
     }
 }

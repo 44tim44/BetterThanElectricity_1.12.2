@@ -9,6 +9,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import se.sst_55t.betterthanelectricity.block.ICable;
+import se.sst_55t.betterthanelectricity.block.IConsumer;
+import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
+import se.sst_55t.betterthanelectricity.block.IGenerator;
+import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
 import se.sst_55t.betterthanelectricity.block.pulverizer.BlockPulverizer;
 import se.sst_55t.betterthanelectricity.item.*;
 
@@ -19,7 +24,7 @@ import static se.sst_55t.betterthanelectricity.block.windmill.BlockWindMill.FACI
 /**
  * Created by Timeout on 2017-08-22.
  */
-public class TileEntityWindMill extends TileEntity implements ITickable {
+public class TileEntityWindMill extends TileEntity implements ITickable, IGenerator {
 
     private static final int BASE_CHARGE_RATE = 20; // Amount of ticks required to charge 1 energy.
     private int chargeTime;
@@ -30,7 +35,9 @@ public class TileEntityWindMill extends TileEntity implements ITickable {
     {
         BlockWindMill.setState(this.isCharging(), this.world, this.pos);
 
+        this.totalChargeTime = this.getItemChargeTime(null);
         ItemStack itemstack = inventory.getStackInSlot(0);
+        TileEntity te = getInputTE();
 
         if (isCharging() && (itemstack.getItem() instanceof IBattery || itemstack.getItem() instanceof IChargeable))
         {
@@ -39,7 +46,6 @@ public class TileEntityWindMill extends TileEntity implements ITickable {
             if (this.chargeTime == this.totalChargeTime)
             {
                 this.chargeTime = 0;
-                this.totalChargeTime = this.getItemChargeTime(itemstack);
                 if(itemstack.getItem() instanceof IBattery)
                 {
                     ((IBattery)itemstack.getItem()).increaseCharge(itemstack);
@@ -47,6 +53,25 @@ public class TileEntityWindMill extends TileEntity implements ITickable {
                 else if(itemstack.getItem() instanceof IChargeable)
                 {
                     ((IChargeable)itemstack.getItem()).increaseCharge(itemstack);
+                }
+            }
+        }
+        else if(isCharging() && te instanceof IConsumer)
+        {
+            ++this.chargeTime;
+
+            if (this.chargeTime == this.totalChargeTime)
+            {
+                this.chargeTime = 0;
+                if (te instanceof IElectricityStorage)
+                {
+                    if(((IElectricityStorage) te).getCharge() < ((IElectricityStorage) te).getMaxCharge())
+                    {
+                        if (!this.world.isRemote)
+                        {
+                            ((IElectricityStorage) te).increaseCharge();
+                        }
+                    }
                 }
             }
         }
@@ -183,5 +208,59 @@ public class TileEntityWindMill extends TileEntity implements ITickable {
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T)inventory : super.getCapability(capability, facing);
+    }
+
+    public TileEntity getConnectedBlockTE(EnumFacing facing)
+    {
+        if(( world.getTileEntity(this.pos.offset(facing)) instanceof ICable) && isConnected())
+        {
+            return world.getTileEntity(this.pos.offset(facing));
+        }
+        return null;
+    }
+
+    public boolean isConnected()
+    {
+        int amountOfConnections = 0;
+        for (EnumFacing facing : EnumFacing.VALUES)
+        {
+            if( world.getTileEntity(this.pos.offset(facing)) instanceof ICable )
+            {
+                amountOfConnections++;
+            }
+        }
+        return amountOfConnections == 1;
+    }
+
+    @Override
+    public TileEntity getInputTE() {
+        TileEntity inputTE;
+        for (EnumFacing facing : EnumFacing.VALUES)
+        {
+            inputTE = getConnectedBlockTE(facing);
+
+            if (inputTE != null)
+            {
+                if(inputTE instanceof TileEntityCable)
+                {
+                    return ((TileEntityCable) inputTE).getInputTE(facing.getOpposite());
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public float getChargeRate()
+    {
+        ItemStack batteryStack = inventory.getStackInSlot(0);
+        if(batteryStack.isEmpty() ||  ((IChargeable) batteryStack.getItem()).getCharge(batteryStack) == ((IChargeable) batteryStack.getItem()).getMaxCharge(batteryStack))
+        {
+            if (isCharging())
+            {
+                return (1.0F / (getItemChargeTime(null) / 20.0F));
+            }
+        }
+        return 0;
     }
 }

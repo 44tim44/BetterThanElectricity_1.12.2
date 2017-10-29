@@ -18,9 +18,9 @@ public class GuiElectricFurnace extends GuiContainer
 
     /** The player inventory bound to this GUI. */
     private final InventoryPlayer playerInventory;
-    private final IInventory tileFurnace;
+    private final TileEntityElectricFurnace tileFurnace;
 
-    public GuiElectricFurnace(InventoryPlayer playerInv, IInventory furnaceInv)
+    public GuiElectricFurnace(InventoryPlayer playerInv, TileEntityElectricFurnace furnaceInv)
     {
         super(new ContainerElectricFurnace(playerInv, furnaceInv));
         this.playerInventory = playerInv;
@@ -58,11 +58,8 @@ public class GuiElectricFurnace extends GuiContainer
         int j = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
 
-        if (TileEntityElectricFurnace.isBurning(this.tileFurnace))
-        {
-            int k = this.getBurnLeftScaled(13);
-            this.drawTexturedModalRect(i + 56, j + 36 + 12 - k, 176, 12 - k, 14, k + 1);
-        }
+        int k = this.getBurnLeftScaled(14);
+        this.drawTexturedModalRect(i + 56, j + 36 + 14 - k, 176, 14 - k, 14, k);
 
         int l = this.getCookProgressScaled(24);
         this.drawTexturedModalRect(i + 79, j + 34, 176, 14, l + 1, 16);
@@ -77,13 +74,6 @@ public class GuiElectricFurnace extends GuiContainer
 
     private int getBurnLeftScaled(int pixels)
     {
-        int i = this.tileFurnace.getField(1);
-
-        if (i == 0)
-        {
-            i = 200;
-        }
-
-        return this.tileFurnace.getField(0) * pixels / i;
+        return Math.round(this.tileFurnace.getGUIChargeRatio() * pixels);
     }
 }

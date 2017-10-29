@@ -3,7 +3,6 @@ package se.sst_55t.betterthanelectricity.block.fuelgenerator;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -46,7 +45,7 @@ public class GuiFuelGenerator extends GuiContainer
         String s = this.tileFuelGenerator.getDisplayName().getUnformattedText();
         this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
         this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
-        float chargeRate = this.tileFuelGenerator.getCookTime((ItemStack)null);
+        float chargeRate = this.tileFuelGenerator.getItemChargeTime((ItemStack)null);
         if (tileFuelGenerator.isBurning()) {
             fontRenderer.drawString(String.format("%.2f", 1.0F / (chargeRate / 20.0F)) + " Energy/sec", 85, ySize - 94, 0x404040);
         } else {

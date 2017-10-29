@@ -12,6 +12,7 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -22,17 +23,20 @@ import net.minecraft.util.datafix.walkers.ItemStackDataLists;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import se.sst_55t.betterthanelectricity.block.ICable;
+import se.sst_55t.betterthanelectricity.block.IConsumer;
+import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
+import se.sst_55t.betterthanelectricity.block.IGenerator;
+import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
 import se.sst_55t.betterthanelectricity.item.IBattery;
 import se.sst_55t.betterthanelectricity.item.IChargeable;
-import se.sst_55t.betterthanelectricity.item.ItemBattery;
-import se.sst_55t.betterthanelectricity.item.ModItems;
 
 import javax.annotation.Nullable;
 
 /**
  * Created by Timmy on 2016-11-27.
  */
-public class TileEntityFuelGenerator extends TileEntityLockable implements ITickable, ISidedInventory
+public class TileEntityFuelGenerator extends TileEntityLockable implements ITickable, ISidedInventory, IGenerator
 {
     private static final int BASE_CHARGE_RATE = 8; // Amount of ticks required to charge 1 energy.
     private static final int[] SLOTS_TOP = new int[] {0};
@@ -112,7 +116,7 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
 
         if (index == 0 && !flag)
         {
-            this.totalCookTime = this.getCookTime(stack);
+            this.totalCookTime = this.getItemChargeTime(stack);
             this.cookTime = 0;
             this.markDirty();
         }
@@ -214,8 +218,9 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
         if (!this.world.isRemote)
         {
             ItemStack itemstackFuel = this.fuelGeneratorItemStacks.get(1);
+            TileEntity te = getInputTE();
 
-            if (this.isBurning() || !itemstackFuel.isEmpty() && !((ItemStack)this.fuelGeneratorItemStacks.get(0)).isEmpty())
+            if (this.isBurning() || !itemstackFuel.isEmpty() && (!this.fuelGeneratorItemStacks.get(0).isEmpty() || (te != null && te instanceof IConsumer)))
             {
                 if (!this.isBurning() && this.canGenerate())
                 {
@@ -247,7 +252,7 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
                     if (this.cookTime == this.totalCookTime)
                     {
                         this.cookTime = 0;
-                        this.totalCookTime = this.getCookTime(this.fuelGeneratorItemStacks.get(0));
+                        this.totalCookTime = this.getItemChargeTime(this.fuelGeneratorItemStacks.get(0));
 
                         ItemStack itemstack = fuelGeneratorItemStacks.get(0);
                         if(itemstack.getItem() instanceof IBattery)
@@ -257,6 +262,10 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
                         else if(itemstack.getItem() instanceof IChargeable)
                         {
                             ((IChargeable)itemstack.getItem()).increaseCharge(itemstack);
+                        }
+                        else if(te instanceof IElectricityStorage)
+                        {
+                            ((IElectricityStorage) te).increaseCharge();
                         }
 
                         flag1 = true;
@@ -289,7 +298,7 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
      * Time to cook:
      * Lower number = faster.
      */
-    public int getCookTime(@Nullable ItemStack stack)
+    public int getItemChargeTime(@Nullable ItemStack stack)
     {
         return BASE_CHARGE_RATE;
     }
@@ -300,11 +309,8 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
     private boolean canGenerate()
     {
         ItemStack itemstack = ((ItemStack)this.fuelGeneratorItemStacks.get(0));
-        if (itemstack.isEmpty())
-        {
-            return false;
-        }
-        else
+        TileEntity te = getInputTE();
+        if (!itemstack.isEmpty())
         {
             if(itemstack.getItem() instanceof IBattery)
             {
@@ -312,7 +318,6 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
                 {
                     return true;
                 }
-                return false;
             }
             else if(itemstack.getItem() instanceof IChargeable)
             {
@@ -320,10 +325,15 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
                 {
                     return true;
                 }
-                return false;
             }
-            return false;
         }
+
+        if(te != null && te instanceof IConsumer)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -566,5 +576,59 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
             else
                 return (T) handlerSide;
         return super.getCapability(capability, facing);
+    }
+
+    public TileEntity getConnectedBlockTE(EnumFacing facing)
+    {
+        if(( world.getTileEntity(this.pos.offset(facing)) instanceof ICable) && isConnected())
+        {
+            return world.getTileEntity(this.pos.offset(facing));
+        }
+        return null;
+    }
+
+    public boolean isConnected()
+    {
+        int amountOfConnections = 0;
+        for (EnumFacing facing : EnumFacing.VALUES)
+        {
+            if( world.getTileEntity(this.pos.offset(facing)) instanceof ICable )
+            {
+                amountOfConnections++;
+            }
+        }
+        return amountOfConnections == 1;
+    }
+
+    @Override
+    public TileEntity getInputTE() {
+        TileEntity inputTE;
+        for (EnumFacing facing : EnumFacing.VALUES)
+        {
+            inputTE = getConnectedBlockTE(facing);
+
+            if (inputTE != null)
+            {
+                if(inputTE instanceof TileEntityCable)
+                {
+                    return ((TileEntityCable) inputTE).getInputTE(facing.getOpposite());
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public float getChargeRate()
+    {
+        ItemStack batteryStack = fuelGeneratorItemStacks.get(0);
+        if(batteryStack.isEmpty() ||  ((IChargeable) batteryStack.getItem()).getCharge(batteryStack) == ((IChargeable) batteryStack.getItem()).getMaxCharge(batteryStack))
+        {
+            if (isBurning())
+            {
+                return (1.0F / (getItemChargeTime(null) / 20.0F));
+            }
+        }
+        return 0;
     }
 }

@@ -58,11 +58,8 @@ public class GuiCompactor extends GuiContainer
         int j = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
 
-        if (TileEntityCompactor.isBurning(this.tileCompactor))
-        {
-            int k = this.getBurnLeftScaled(13);
-            this.drawTexturedModalRect(i + 56, j + 36 + 13 - k, 176, 13 - k, 14, k + 1);
-        }
+        int k = this.getBurnLeftScaled(14);
+        this.drawTexturedModalRect(i + 56, j + 36 + 14 - k, 176, 14 - k, 14, k);
 
         int l = this.getCookProgressScaled(24);
         this.drawTexturedModalRect(i + 79, j + 34, 176, 14, l + 1, 16);
@@ -77,13 +74,6 @@ public class GuiCompactor extends GuiContainer
 
     private int getBurnLeftScaled(int pixels)
     {
-        int i = this.tileCompactor.getField(1);
-
-        if (i == 0)
-        {
-            i = 200;
-        }
-
-        return this.tileCompactor.getField(0) * pixels / i;
+        return Math.round(this.tileCompactor.getGUIChargeRatio() * pixels);
     }
 }

@@ -9,6 +9,7 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -19,6 +20,11 @@ import net.minecraft.util.datafix.walkers.ItemStackDataLists;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import se.sst_55t.betterthanelectricity.block.ICable;
+import se.sst_55t.betterthanelectricity.block.IConsumer;
+import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
+import se.sst_55t.betterthanelectricity.block.IGenerator;
+import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
 import se.sst_55t.betterthanelectricity.block.inventory.SlotBattery;
 import se.sst_55t.betterthanelectricity.item.IBattery;
 import se.sst_55t.betterthanelectricity.item.ItemBattery;
@@ -30,8 +36,10 @@ import javax.annotation.Nullable;
 /**
  * Created by Timmy on 2016-11-27.
  */
-public class TileEntityCompactor extends TileEntityLockable implements ITickable, ISidedInventory
+public class TileEntityCompactor extends TileEntityLockable implements ITickable, ISidedInventory, IConsumer
 {
+    public static final int BASE_CONSUME_RATE = 20;
+
     private static final int[] SLOTS_TOP = new int[] {0};
     private static final int[] SLOTS_BOTTOM = new int[] {2, 1};
     private static final int[] SLOTS_SIDES = new int[] {1};
@@ -210,22 +218,27 @@ public class TileEntityCompactor extends TileEntityLockable implements ITickable
 
         if (!this.world.isRemote)
         {
-            ItemStack itemstack = this.compactorItemStacks.get(1);
+            ItemStack batteryStack = this.compactorItemStacks.get(1);
+            TileEntity te = getOutputTE();
 
-            if (this.isBurning() || !itemstack.isEmpty() && !((ItemStack)this.compactorItemStacks.get(0)).isEmpty())
+            if (this.isBurning() || !batteryStack.isEmpty() && !this.compactorItemStacks.get(0).isEmpty())
             {
                 if (!this.isBurning() && this.canCompact())
                 {
-                    this.furnaceBurnTime = getItemBurnTime(itemstack);
+                    this.furnaceBurnTime = BASE_CONSUME_RATE;
                     this.currentItemBurnTime = this.furnaceBurnTime;
 
                     if (this.isBurning())
                     {
                         flag1 = true;
 
-                        if (!itemstack.isEmpty())
+                        if (!batteryStack.isEmpty() && ((IBattery)batteryStack.getItem()).getCharge(batteryStack) > 0)
                         {
-                            ((IBattery)itemstack.getItem()).decreaseCharge(itemstack);
+                            ((IBattery)batteryStack.getItem()).decreaseCharge(batteryStack);
+                        }
+                        else if( te instanceof IElectricityStorage)
+                        {
+                            ((IElectricityStorage) getOutputTE()).decreaseCharge();
                         }
                     }
                 }
@@ -515,5 +528,70 @@ public class TileEntityCompactor extends TileEntityLockable implements ITickable
             else
                 return (T) handlerSide;
         return super.getCapability(capability, facing);
+    }
+
+    public TileEntity getConnectedBlockTE(EnumFacing facing)
+    {
+        if(( world.getTileEntity(this.pos.offset(facing)) instanceof ICable) && isConnected())
+        {
+            return world.getTileEntity(this.pos.offset(facing));
+        }
+        return null;
+    }
+
+    public boolean isConnected()
+    {
+        int amountOfConnections = 0;
+        for (EnumFacing facing : EnumFacing.VALUES)
+        {
+            if( world.getTileEntity(this.pos.offset(facing)) instanceof ICable )
+            {
+                amountOfConnections++;
+            }
+        }
+        return amountOfConnections == 1;
+    }
+
+    @Override
+    public TileEntity getOutputTE() {
+        TileEntity outputTE;
+        for (EnumFacing facing : EnumFacing.VALUES)
+        {
+            outputTE = getConnectedBlockTE(facing);
+
+            if (outputTE != null)
+            {
+                if(outputTE instanceof TileEntityCable)
+                {
+                    return ((TileEntityCable) outputTE).getOutputTE(facing.getOpposite());
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public float getConsumeRate() {
+        return (1.0F / (BASE_CONSUME_RATE / 20.0F));
+    }
+
+    public float getGUIChargeRatio()
+    {
+        ItemStack batteryStack = this.compactorItemStacks.get(1);
+        if(!batteryStack.isEmpty() && batteryStack.getItem() instanceof IBattery && ((IBattery)batteryStack.getItem()).getCharge(batteryStack) > 0)
+        {
+            return 1.0F;
+        }
+
+        TileEntity te = getOutputTE();
+        if(te != null && te instanceof IGenerator)
+        {
+            float chargeRatio = ((IGenerator)te).getChargeRate() / getConsumeRate();
+            if(chargeRatio < 0.0F) return 0.0F;
+            if(chargeRatio > 1.0F) return 1.0F;
+            return chargeRatio;
+        }
+
+        return 0.0F;
     }
 }

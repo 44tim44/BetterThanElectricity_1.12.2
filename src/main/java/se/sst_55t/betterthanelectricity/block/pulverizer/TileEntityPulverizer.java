@@ -215,7 +215,7 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
             ItemStack batteryStack = this.pulverizerItemStacks.get(1);
             TileEntity te = getOutputTE();
 
-            if (this.isBurning() || !batteryStack.isEmpty() && !((ItemStack)this.pulverizerItemStacks.get(0)).isEmpty() || (te != null && (te instanceof IGenerator && ((IGenerator)te).isConnected() && ((IGenerator)te).getChargeRate() >= getConsumeRate() && ((IGenerator)te).getChargeRate() != 0)))
+            if (this.isBurning() || !batteryStack.isEmpty() && !this.pulverizerItemStacks.get(0).isEmpty() || (te != null && (te instanceof IGenerator && ((IGenerator)te).isConnected() && ((IGenerator)te).getChargeRate() >= getConsumeRate() && ((IGenerator)te).getChargeRate() != 0)))
             {
                 if (!this.isBurning() && this.canPulverize())
                 {
@@ -226,7 +226,7 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
                     {
                         flag1 = true;
 
-                        if (!batteryStack.isEmpty())
+                        if (!batteryStack.isEmpty() && ((IBattery)batteryStack.getItem()).getCharge(batteryStack) > 0)
                         {
                             ((IBattery)batteryStack.getItem()).decreaseCharge(batteryStack);
                         }
