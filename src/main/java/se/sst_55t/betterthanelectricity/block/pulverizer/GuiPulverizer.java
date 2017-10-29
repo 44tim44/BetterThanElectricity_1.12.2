@@ -1,5 +1,6 @@
 package se.sst_55t.betterthanelectricity.block.pulverizer;
 
+import net.minecraft.tileentity.TileEntity;
 import se.sst_55t.betterthanelectricity.BTEMod;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -18,13 +19,13 @@ public class GuiPulverizer extends GuiContainer
 
     /** The player inventory bound to this GUI. */
     private final InventoryPlayer playerInventory;
-    private final IInventory tileFurnace;
+    private final TileEntityPulverizer tilePulverizer;
 
-    public GuiPulverizer(InventoryPlayer playerInv, IInventory furnaceInv)
+    public GuiPulverizer(InventoryPlayer playerInv, TileEntityPulverizer pulverizerInv)
     {
-        super(new ContainerPulverizer(playerInv, furnaceInv));
+        super(new ContainerPulverizer(playerInv, pulverizerInv));
         this.playerInventory = playerInv;
-        this.tileFurnace = furnaceInv;
+        this.tilePulverizer = pulverizerInv;
     }
 
     /**
@@ -42,7 +43,7 @@ public class GuiPulverizer extends GuiContainer
      */
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
     {
-        String s = this.tileFurnace.getDisplayName().getUnformattedText();
+        String s = this.tilePulverizer.getDisplayName().getUnformattedText();
         this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
         this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
     }
@@ -58,11 +59,8 @@ public class GuiPulverizer extends GuiContainer
         int j = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
 
-        if (TileEntityPulverizer.isBurning(this.tileFurnace))
-        {
-            int k = this.getBurnLeftScaled(13);
-            this.drawTexturedModalRect(i + 56, j + 36 + 13 - k, 176, 13 - k, 14, k + 1);
-        }
+        int k = this.getBurnLeftScaled(14);
+        this.drawTexturedModalRect(i + 56, j + 36 + 14 - k, 176, 14 - k, 14, k);
 
         int l = this.getCookProgressScaled(24);
         this.drawTexturedModalRect(i + 79, j + 34, 176, 14, l + 1, 16);
@@ -70,20 +68,13 @@ public class GuiPulverizer extends GuiContainer
 
     private int getCookProgressScaled(int pixels)
     {
-        int i = this.tileFurnace.getField(2);
-        int j = this.tileFurnace.getField(3);
+        int i = this.tilePulverizer.getField(2);
+        int j = this.tilePulverizer.getField(3);
         return j != 0 && i != 0 ? i * pixels / j : 0;
     }
 
     private int getBurnLeftScaled(int pixels)
     {
-        int i = this.tileFurnace.getField(1);
-
-        if (i == 0)
-        {
-            i = 200;
-        }
-
-        return this.tileFurnace.getField(0) * pixels / i;
+        return Math.round(this.tilePulverizer.getGUIChargeRatio() * pixels);
     }
 }

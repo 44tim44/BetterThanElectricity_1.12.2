@@ -150,8 +150,6 @@ public class TileEntityMultiSocketOut extends TileEntity implements IGenerator, 
                 count ++;
             }
         }
-        System.out.println("TotalCharge: " + totalChargeRate);
-        System.out.println("Count: " + count);
         return totalChargeRate/count;
     }
 

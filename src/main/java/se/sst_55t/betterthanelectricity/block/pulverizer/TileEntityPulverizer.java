@@ -215,14 +215,10 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
             ItemStack batteryStack = this.pulverizerItemStacks.get(1);
             TileEntity te = getOutputTE();
 
-            if(te != null) System.out.println("Charge Rate: " + ((IGenerator)te).getChargeRate());
-
             if (this.isBurning() || !batteryStack.isEmpty() && !((ItemStack)this.pulverizerItemStacks.get(0)).isEmpty() || (te != null && (te instanceof IGenerator && ((IGenerator)te).isConnected() && ((IGenerator)te).getChargeRate() >= getConsumeRate() && ((IGenerator)te).getChargeRate() != 0)))
             {
                 if (!this.isBurning() && this.canPulverize())
                 {
-                    System.out.println("!isBurning && canPulverize");
-                    //this.furnaceBurnTime = getItemBurnTime(batteryStack);
                     this.furnaceBurnTime = BASE_CONSUME_RATE;
                     this.currentItemBurnTime = this.furnaceBurnTime;
 
@@ -243,7 +239,6 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
 
                 if (this.isBurning() && this.canPulverize())
                 {
-                    System.out.println("isBurning && canPulverize");
                     ++this.cookTime;
 
                     if (this.cookTime == this.totalCookTime)
@@ -574,4 +569,23 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
         return (1.0F / (BASE_CONSUME_RATE / 20.0F));
     }
 
+    public float getGUIChargeRatio()
+    {
+        ItemStack batteryStack = this.pulverizerItemStacks.get(1);
+        if(!batteryStack.isEmpty() && batteryStack.getItem() instanceof IBattery && ((IBattery)batteryStack.getItem()).getCharge(batteryStack) > 0)
+        {
+            return 1.0F;
+        }
+
+        TileEntity te = getOutputTE();
+        if(te != null && te instanceof IGenerator)
+        {
+            float chargeRatio = ((IGenerator)te).getChargeRate() / getConsumeRate();
+            if(chargeRatio < 0.0F) return 0.0F;
+            if(chargeRatio > 1.0F) return 1.0F;
+            return chargeRatio;
+        }
+
+        return 0.0F;
+    }
 }
