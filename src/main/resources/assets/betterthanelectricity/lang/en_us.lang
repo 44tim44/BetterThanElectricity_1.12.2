@@ -184,3 +184,23 @@ tile.table_dark_oak.name=Dark Oak Table
 tile.electric_lamp.name=Electric Lamp
 
 tile.barbed_log.name=Barbed Log
+
+tile.block_cable_white.name=Electric Cable (White)
+tile.block_cable_orange.name=Electric Cable (Orange)
+tile.block_cable_magenta.name=Electric Cable (Magenta)
+tile.block_cable_lightblue.name=Electric Cable (Light Blue)
+tile.block_cable_yellow.name=Electric Cable (Yellow)
+tile.block_cable_lime.name=Electric Cable (Lime)
+tile.block_cable_pink.name=Electric Cable (Pink)
+tile.block_cable_gray.name=Electric Cable (Gray)
+tile.block_cable_lightgray.name=Electric Cable (Light Gray)
+tile.block_cable_cyan.name=Electric Cable (Cyan)
+tile.block_cable_purple.name=Electric Cable (Purple)
+tile.block_cable_blue.name=Electric Cable (Blue)
+tile.block_cable_brown.name=Electric Cable (Brown)
+tile.block_cable_green.name=Electric Cable (Green)
+tile.block_cable_red.name=Electric Cable (Red)
+tile.block_cable_black.name=Electric Cable (Black)
+
+block_multi_socket_in.name=Electric Socket (Input)
+block_multi_socket_out.name=Electric Socket (Output)
