@@ -636,4 +636,38 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
         }
         return 0;
     }
+
+    public float getGUIChargeRatio()
+    {
+        ItemStack batteryStack = this.chargingStationItemStacks.get(1);
+        if(!batteryStack.isEmpty() && batteryStack.getItem() instanceof IBattery && ((IBattery)batteryStack.getItem()).getCharge(batteryStack) > 0)
+        {
+            return 1.0F;
+        }
+
+        TileEntity te = getOutputTE();
+        if(te != null && te instanceof IGenerator)
+        {
+            return 1.0F;
+        }
+
+        return 0.0F;
+    }
+
+    public float getGUIDischargeRatio()
+    {
+        ItemStack batteryStack = this.chargingStationItemStacks.get(0);
+        if(!batteryStack.isEmpty() && batteryStack.getItem() instanceof IBattery && ((IBattery)batteryStack.getItem()).getCharge(batteryStack) < ((IBattery)batteryStack.getItem()).getMaxCharge(batteryStack))
+        {
+            return 1.0F;
+        }
+
+        TileEntity te = getInputTE();
+        if(te != null && te instanceof IConsumer)
+        {
+            return 1.0F;
+        }
+
+        return 0.0F;
+    }
 }

@@ -4,16 +4,16 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 import se.sst_55t.betterthanelectricity.BTEMod;
+import se.sst_55t.betterthanelectricity.block.IGenerator;
+import se.sst_55t.betterthanelectricity.item.IBattery;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,6 +39,7 @@ public class GuiChargingStation extends GuiContainer
     public void initGui() {
         super.initGui();
         buttonList.add(new HintButton(0, this.guiLeft + 143, this.guiTop + 22));
+        buttonList.add(new HintButton(1, this.guiLeft + 98, this.guiTop + 49));
     }
 
     /**
@@ -55,10 +56,32 @@ public class GuiChargingStation extends GuiContainer
                 GuiButton btn = (GuiButton) buttonList.get(i);
                 if (btn.isMouseOver())
                 {
-                    String[] desc = { "Charge: " +  tileChargingStation.getCharge() + "/" + tileChargingStation.getMaxCharge()};
-                    @SuppressWarnings("rawtypes")
-                    List temp = Arrays.asList(desc);
-                    drawHoveringText(temp, mouseX, mouseY, fontRenderer);
+                    if(i == 0)
+                    {
+                        String[] desc = {"Charge: " + tileChargingStation.getCharge() + "/" + tileChargingStation.getMaxCharge()};
+                        @SuppressWarnings("rawtypes")
+                        List temp = Arrays.asList(desc);
+                        drawHoveringText(temp, mouseX, mouseY, fontRenderer);
+                    }
+
+                    if(i == 1)
+                    {
+                        float charge = 0;
+                        TileEntity te = tileChargingStation.getOutputTE();
+                        ItemStack batteryStack = tileChargingStation.getStackInSlot(1);
+                        if(te != null && te instanceof IGenerator)
+                        {
+                            charge = ((IGenerator)te).getChargeRate();
+                        }
+                        if(!batteryStack.isEmpty() && batteryStack.getItem() instanceof IBattery && ((IBattery)batteryStack.getItem()).getCharge(batteryStack) > 0)
+                        {
+                            charge = tileChargingStation.getConsumeRate();
+                        }
+                        String[] desc = { "Current Charge/sec: " +  charge};
+                        @SuppressWarnings("rawtypes")
+                        List temp = Arrays.asList(desc);
+                        drawHoveringText(temp, mouseX, mouseY, fontRenderer);
+                    }
                 }
             }
         }
@@ -87,20 +110,40 @@ public class GuiChargingStation extends GuiContainer
         int y = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
 
+        int l = this.getChargeRatioScaled(14);
+        this.drawTexturedModalRect(x + 98, y + 49 + 14 - l, 176, 14 - l, 14, l);
+        if(l > 0) this.drawTexturedModalRect(x + 115, y + 49, 206, 14, 23, 14);
+
+        int m = this.getDischargeRatioScaled(14);
+        this.drawTexturedModalRect(x + 98, y + 23 + 14 - m, 176, 14 - m, 14, m);
+        if(m > 0) this.drawTexturedModalRect(x + 115, y + 23, 206, 0, 23, 14);
+        /*
         if (TileEntityChargingStation.isTakingCharge(this.tileChargingStation))
         {
-            //int k = this.getBurnLeftScaled(14);
+            //int k = this.getChargeRatioScaled(14);
             this.drawTexturedModalRect(x + 98, y + 49, 176, 0, 14, 14);
             this.drawTexturedModalRect(x + 115, y + 49, 206, 14, 23, 14);
         }
+
         if (TileEntityChargingStation.isGivingCharge(this.tileChargingStation))
         {
             //int l = this.getCookProgressScaled(14);
             this.drawTexturedModalRect(x + 98, y + 23, 176, 0, 14, 14);
             this.drawTexturedModalRect(x + 115, y + 23, 206, 0, 23, 14);
         }
+        */
         int k = this.getChargeBar(42);
         this.drawTexturedModalRect(x + 143, y + 22 + 42 - k, 190, 0, 16, k);
+    }
+
+    private int getChargeRatioScaled(int pixels)
+    {
+        return Math.round(this.tileChargingStation.getGUIChargeRatio() * pixels);
+    }
+
+    private int getDischargeRatioScaled(int pixels)
+    {
+        return Math.round(this.tileChargingStation.getGUIDischargeRatio() * pixels);
     }
 
     private int getChargeBar(int pixels)

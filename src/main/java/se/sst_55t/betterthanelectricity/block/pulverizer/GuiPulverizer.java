@@ -68,7 +68,7 @@ public class GuiPulverizer extends GuiContainer
                     {
                         charge = tilePulverizer.getConsumeRate();
                     }
-                    String[] desc = { "Current Charge: " +  charge + "\nRequired Charge: " + tilePulverizer.getConsumeRate()};
+                    String[] desc = { "Current Charge: " +  charge, "Required Charge: " + tilePulverizer.getConsumeRate()};
                     @SuppressWarnings("rawtypes")
                     List temp = Arrays.asList(desc);
                     drawHoveringText(temp, mouseX, mouseY, fontRenderer);
