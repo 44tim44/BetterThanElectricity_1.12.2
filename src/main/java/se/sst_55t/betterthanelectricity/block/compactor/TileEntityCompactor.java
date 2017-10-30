@@ -27,8 +27,6 @@ import se.sst_55t.betterthanelectricity.block.IGenerator;
 import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
 import se.sst_55t.betterthanelectricity.block.inventory.SlotBattery;
 import se.sst_55t.betterthanelectricity.item.IBattery;
-import se.sst_55t.betterthanelectricity.item.ItemBattery;
-import se.sst_55t.betterthanelectricity.item.ModItems;
 import se.sst_55t.betterthanelectricity.recipe.CompactorRecipes;
 
 import javax.annotation.Nullable;
@@ -219,7 +217,7 @@ public class TileEntityCompactor extends TileEntityLockable implements ITickable
         if (!this.world.isRemote)
         {
             ItemStack batteryStack = this.compactorItemStacks.get(1);
-            TileEntity te = getOutputTE();
+            TileEntity te = getGeneratorTE();
 
             if (this.isBurning() || !batteryStack.isEmpty() && !this.compactorItemStacks.get(0).isEmpty() || (te != null && (te instanceof IGenerator && ((IGenerator)te).isConnected() && ((IGenerator)te).getChargeRate() >= getConsumeRate() && ((IGenerator)te).getChargeRate() != 0)))
             {
@@ -238,7 +236,7 @@ public class TileEntityCompactor extends TileEntityLockable implements ITickable
                         }
                         else if( te instanceof IElectricityStorage)
                         {
-                            ((IElectricityStorage) getOutputTE()).decreaseCharge();
+                            ((IElectricityStorage) getGeneratorTE()).decreaseCharge();
                         }
                     }
                 }
@@ -553,7 +551,7 @@ public class TileEntityCompactor extends TileEntityLockable implements ITickable
     }
 
     @Override
-    public TileEntity getOutputTE() {
+    public TileEntity getGeneratorTE() {
         TileEntity outputTE;
         for (EnumFacing facing : EnumFacing.VALUES)
         {
@@ -583,7 +581,7 @@ public class TileEntityCompactor extends TileEntityLockable implements ITickable
             return 1.0F;
         }
 
-        TileEntity te = getOutputTE();
+        TileEntity te = getGeneratorTE();
         if(te != null && te instanceof IGenerator)
         {
             float chargeRatio = ((IGenerator)te).getChargeRate() / getConsumeRate();

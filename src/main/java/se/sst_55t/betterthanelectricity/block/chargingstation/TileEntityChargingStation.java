@@ -3,7 +3,6 @@ package se.sst_55t.betterthanelectricity.block.chargingstation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.*;
@@ -21,17 +20,13 @@ import net.minecraft.util.datafix.walkers.ItemStackDataLists;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import se.sst_55t.betterthanelectricity.BTEMod;
 import se.sst_55t.betterthanelectricity.block.ICable;
 import se.sst_55t.betterthanelectricity.block.IConsumer;
 import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
 import se.sst_55t.betterthanelectricity.block.IGenerator;
 import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
-import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketIn;
 import se.sst_55t.betterthanelectricity.item.IBattery;
 import se.sst_55t.betterthanelectricity.item.IChargeable;
-import se.sst_55t.betterthanelectricity.item.ItemBattery;
-import se.sst_55t.betterthanelectricity.item.ModItems;
 
 import javax.annotation.Nullable;
 
@@ -578,7 +573,7 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
     }
 
     @Override
-    public TileEntity getOutputTE()
+    public TileEntity getGeneratorTE()
     {
         EnumFacing facing = getBackSide();
 
@@ -595,7 +590,7 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
     }
 
     @Override
-    public TileEntity getInputTE()
+    public TileEntity getConsumerTE()
     {
         EnumFacing facing = getFrontSide();
 
@@ -645,7 +640,7 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
             return 1.0F;
         }
 
-        TileEntity te = getOutputTE();
+        TileEntity te = getGeneratorTE();
         if(te != null && te instanceof IGenerator)
         {
             return 1.0F;
@@ -662,7 +657,7 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
             return 1.0F;
         }
 
-        TileEntity te = getInputTE();
+        TileEntity te = getConsumerTE();
         if(te != null && te instanceof IConsumer)
         {
             return 1.0F;

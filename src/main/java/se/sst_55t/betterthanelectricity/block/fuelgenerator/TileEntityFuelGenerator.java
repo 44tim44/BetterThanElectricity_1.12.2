@@ -218,7 +218,7 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
         if (!this.world.isRemote)
         {
             ItemStack itemstackFuel = this.fuelGeneratorItemStacks.get(1);
-            TileEntity te = getInputTE();
+            TileEntity te = getConsumerTE();
 
             if (this.isBurning() || !itemstackFuel.isEmpty() && (!this.fuelGeneratorItemStacks.get(0).isEmpty() || (te != null && te instanceof IConsumer)))
             {
@@ -309,7 +309,7 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
     private boolean canGenerate()
     {
         ItemStack itemstack = ((ItemStack)this.fuelGeneratorItemStacks.get(0));
-        TileEntity te = getInputTE();
+        TileEntity te = getConsumerTE();
         if (!itemstack.isEmpty())
         {
             if(itemstack.getItem() instanceof IBattery)
@@ -601,7 +601,7 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
     }
 
     @Override
-    public TileEntity getInputTE() {
+    public TileEntity getConsumerTE() {
         TileEntity inputTE;
         for (EnumFacing facing : EnumFacing.VALUES)
         {

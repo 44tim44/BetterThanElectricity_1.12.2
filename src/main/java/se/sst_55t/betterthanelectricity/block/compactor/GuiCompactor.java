@@ -5,7 +5,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -13,7 +12,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.sst_55t.betterthanelectricity.BTEMod;
 import se.sst_55t.betterthanelectricity.block.IGenerator;
-import se.sst_55t.betterthanelectricity.block.electricfurnace.GuiElectricFurnace;
 import se.sst_55t.betterthanelectricity.item.IBattery;
 
 import java.util.Arrays;
@@ -58,7 +56,7 @@ public class GuiCompactor extends GuiContainer
                 if (btn.isMouseOver())
                 {
                     float charge = 0;
-                    TileEntity te = tileCompactor.getOutputTE();
+                    TileEntity te = tileCompactor.getGeneratorTE();
                     ItemStack batteryStack = tileCompactor.getStackInSlot(1);
                     if(te != null && te instanceof IGenerator)
                     {

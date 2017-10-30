@@ -9,7 +9,7 @@ public interface IGenerator {
 
     boolean isConnected();
 
-    TileEntity getInputTE();
+    TileEntity getConsumerTE();
 
     float getChargeRate();
 

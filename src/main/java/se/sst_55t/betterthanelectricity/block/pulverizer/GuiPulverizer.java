@@ -8,12 +8,10 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.sst_55t.betterthanelectricity.block.IGenerator;
-import se.sst_55t.betterthanelectricity.block.chargingstation.GuiChargingStation;
 import se.sst_55t.betterthanelectricity.item.IBattery;
 
 import java.util.Arrays;
@@ -58,7 +56,7 @@ public class GuiPulverizer extends GuiContainer
                 if (btn.isMouseOver())
                 {
                     float charge = 0;
-                    TileEntity te = tilePulverizer.getOutputTE();
+                    TileEntity te = tilePulverizer.getGeneratorTE();
                     ItemStack batteryStack = tilePulverizer.getStackInSlot(1);
                     if(te != null && te instanceof IGenerator)
                     {

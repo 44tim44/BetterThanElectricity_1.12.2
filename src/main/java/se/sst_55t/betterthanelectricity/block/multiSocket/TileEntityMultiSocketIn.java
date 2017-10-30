@@ -10,7 +10,6 @@ import se.sst_55t.betterthanelectricity.block.IGenerator;
 import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 
 /**
  * Created by Timeout on 2017-10-27.
@@ -19,6 +18,8 @@ public class TileEntityMultiSocketIn extends TileEntity implements IGenerator, I
 
     private static final int maxCharge = 10;
     private int currentCharge;
+
+    private int counter;
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
@@ -60,7 +61,7 @@ public class TileEntityMultiSocketIn extends TileEntity implements IGenerator, I
      *
      * @return
      */
-    public TileEntity[] getOutputTEList(@Nullable EnumFacing ignoreSide)
+    public TileEntity[] getGeneratorTEList(@Nullable EnumFacing ignoreSide)
     {
         TileEntity outputTE = null;
         int index = 0;
@@ -77,7 +78,7 @@ public class TileEntityMultiSocketIn extends TileEntity implements IGenerator, I
                     {
                         outputTE = null;
                     }
-                    else if(outputTE == getInputTE())
+                    else if(outputTE == getConsumerTE())
                     {
                         outputTE = null;
                     }
@@ -93,7 +94,7 @@ public class TileEntityMultiSocketIn extends TileEntity implements IGenerator, I
                     {
                         outputTEEnd = null;
                     }
-                    else if(outputTEEnd == getInputTE())
+                    else if(outputTEEnd == getConsumerTE())
                     {
                         outputTEEnd = null;
                     }
@@ -106,7 +107,7 @@ public class TileEntityMultiSocketIn extends TileEntity implements IGenerator, I
     }
 
     @Override
-    public TileEntity getOutputTE() {
+    public TileEntity getGeneratorTE() {
         return null;
     }
 
@@ -116,7 +117,7 @@ public class TileEntityMultiSocketIn extends TileEntity implements IGenerator, I
      * @return
      */
     @Override
-    public TileEntity getInputTE() {
+    public TileEntity getConsumerTE() {
         EnumFacing inputSide = this.world.getBlockState(this.pos).getValue(BlockMultiSocketIn.FACING);
         TileEntity inputTE = getConnectedBlockTE(inputSide);
         if (inputTE != null)
@@ -131,17 +132,34 @@ public class TileEntityMultiSocketIn extends TileEntity implements IGenerator, I
 
     @Override
     public float getConsumeRate() {
-        return ((IConsumer)getInputTE()).getConsumeRate();
+        return ((IConsumer) getConsumerTE()).getConsumeRate();
     }
 
     @Override
-    public float getChargeRate() {
+    public float getChargeRate()
+    {
         float total = 0;
         EnumFacing inputSide = this.world.getBlockState(this.pos).getValue(BlockMultiSocketIn.FACING);
-        TileEntity[] outputTEList = getOutputTEList(inputSide);
-        for(int i = 0; i < 6; i++){
-            if(outputTEList[i] != null){
-                total += ((IGenerator)outputTEList[i]).getChargeRate();
+        TileEntity[] generatorTEList = getGeneratorTEList(inputSide);
+        for(int i = 0; i < 6; i++)
+        {
+            if(generatorTEList[i] != null && generatorTEList[i] instanceof IGenerator)
+            {
+                if(generatorTEList[i] instanceof TileEntityMultiSocketOut)
+                {
+                    TileEntity[] consumerTEList = ((TileEntityMultiSocketOut) generatorTEList[i]).getConsumerTEList(null);
+                    for(TileEntity consumerTE : consumerTEList)
+                    {
+                        if(consumerTE == this)
+                        {
+                            total += ((IGenerator) generatorTEList[i]).getChargeRate();
+                        }
+                    }
+                }
+                else if(((IGenerator)generatorTEList[i]).getConsumerTE() == this)
+                {
+                    total += ((IGenerator) generatorTEList[i]).getChargeRate();
+                }
             }
         }
         return total;
@@ -149,7 +167,7 @@ public class TileEntityMultiSocketIn extends TileEntity implements IGenerator, I
 
     @Override
     public void increaseCharge() {
-        TileEntity inputTE = getInputTE();
+        TileEntity inputTE = getConsumerTE();
         if(inputTE != null && inputTE instanceof IElectricityStorage)
         {
             ((IElectricityStorage) inputTE).increaseCharge();
@@ -161,36 +179,94 @@ public class TileEntityMultiSocketIn extends TileEntity implements IGenerator, I
         int count = 0;
         int[] countedIndex = new int[6];
         EnumFacing inputSide = this.world.getBlockState(this.pos).getValue(BlockMultiSocketIn.FACING);
-        TileEntity[] outputTEList = getOutputTEList(inputSide);
+        TileEntity[] outputTEList = getGeneratorTEList(inputSide);
         for(int i = 0; i < 6; i++){
-            if(outputTEList[i] != null){
+            if(outputTEList[i] != null && outputTEList[i] instanceof IElectricityStorage){
                 countedIndex[count] = i;
                 count++;
             }
         }
         if(count > 0)
         {
-            Random rand = new Random();
-            int randomNumber = rand.nextInt(count);
-            if (outputTEList[countedIndex[randomNumber]] instanceof IElectricityStorage)
+            this.counter++;
+            if(this.counter > 5) this.counter = 0;
+            int index = counter % count;
+
+            for(int i = 0; i < count; i++)
             {
-                ((IElectricityStorage) outputTEList[countedIndex[randomNumber]]).decreaseCharge();
+                if(!(((IElectricityStorage) outputTEList[countedIndex[index]]).getCharge() > 0))
+                {
+                    this.counter++;
+                    if (this.counter > 5) this.counter = 0;
+                    index = counter % count;
+                }
+            }
+            if(((IElectricityStorage) outputTEList[countedIndex[index]]).getCharge() > 0)
+            {
+                ((IElectricityStorage) outputTEList[countedIndex[index]]).decreaseCharge();
             }
         }
     }
 
     @Override
     public void setCharge(int value) {
-
     }
 
     @Override
     public int getCharge() {
-        return 1;
+        int total = 0;
+        EnumFacing inputSide = this.world.getBlockState(this.pos).getValue(BlockMultiSocketIn.FACING);
+        TileEntity[] generatorTEList = getGeneratorTEList(inputSide);
+        for(int i = 0; i < 6; i++)
+        {
+            if(generatorTEList[i] != null && generatorTEList[i] instanceof IElectricityStorage)
+            {
+                if(generatorTEList[i] instanceof TileEntityMultiSocketOut)
+                {
+                    TileEntity[] consumerTEList = ((TileEntityMultiSocketOut) generatorTEList[i]).getConsumerTEList(null);
+                    for(TileEntity consumerTE : consumerTEList)
+                    {
+                        if(consumerTE == this)
+                        {
+                            total += ((IElectricityStorage) generatorTEList[i]).getCharge();
+                        }
+                    }
+                }
+                else if(((IGenerator)generatorTEList[i]).getConsumerTE() == this)
+                {
+                    total += ((IElectricityStorage) generatorTEList[i]).getCharge();
+                }
+            }
+        }
+        return total;
     }
 
     @Override
     public int getMaxCharge() {
-        return 2;
+        int total = 0;
+        EnumFacing inputSide = this.world.getBlockState(this.pos).getValue(BlockMultiSocketIn.FACING);
+        TileEntity[] outputTEList = getGeneratorTEList(inputSide);
+        for(int i = 0; i < 6; i++)
+        {
+            if(outputTEList[i] != null && outputTEList[i] instanceof IElectricityStorage)
+            {
+                if(outputTEList[i] instanceof TileEntityMultiSocketOut)
+                {
+                    TileEntity[] inputlist = ((TileEntityMultiSocketOut) outputTEList[i]).getConsumerTEList(null);
+                    for(TileEntity inputTe : inputlist)
+                    {
+                        if(inputTe == this)
+                        {
+                            total += ((IElectricityStorage) outputTEList[i]).getMaxCharge();
+                        }
+                    }
+                }
+                else if(((IGenerator)outputTEList[i]).getConsumerTE() == this)
+                {
+                    total += ((IElectricityStorage) outputTEList[i]).getMaxCharge();
+                }
+            }
+        }
+        return total;
     }
 }

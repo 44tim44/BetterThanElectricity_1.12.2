@@ -7,8 +7,6 @@ import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
 import se.sst_55t.betterthanelectricity.block.IGenerator;
 import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
 import se.sst_55t.betterthanelectricity.item.IBattery;
-import se.sst_55t.betterthanelectricity.item.ItemBattery;
-import se.sst_55t.betterthanelectricity.item.ModItems;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -220,7 +218,7 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
             ItemStack itemstack3 = this.furnaceItemStacks.get(3);
             ItemStack itemstack4 = this.furnaceItemStacks.get(4);
             ItemStack itemstack5 = this.furnaceItemStacks.get(5);
-            TileEntity te = getOutputTE();
+            TileEntity te = getGeneratorTE();
 
             if (cookSlotStack.isEmpty())
             {
@@ -277,7 +275,7 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
                         }
                         else if( te instanceof IElectricityStorage)
                         {
-                            ((IElectricityStorage) getOutputTE()).decreaseCharge();
+                            ((IElectricityStorage) getGeneratorTE()).decreaseCharge();
                         }
                     }
                 }
@@ -669,7 +667,7 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
     }
 
     @Override
-    public TileEntity getOutputTE() {
+    public TileEntity getGeneratorTE() {
         TileEntity outputTE;
         for (EnumFacing facing : EnumFacing.VALUES)
         {
@@ -699,7 +697,7 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
             return 1.0F;
         }
 
-        TileEntity te = getOutputTE();
+        TileEntity te = getGeneratorTE();
         if(te != null && te instanceof IGenerator)
         {
             float chargeRatio = ((IGenerator)te).getChargeRate() / getConsumeRate();

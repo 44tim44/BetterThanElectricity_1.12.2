@@ -9,7 +9,7 @@ public interface IConsumer {
 
     boolean isConnected();
 
-    TileEntity getOutputTE();
+    TileEntity getGeneratorTE();
 
     float getConsumeRate();
 

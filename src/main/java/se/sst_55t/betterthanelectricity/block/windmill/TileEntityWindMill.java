@@ -14,7 +14,6 @@ import se.sst_55t.betterthanelectricity.block.IConsumer;
 import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
 import se.sst_55t.betterthanelectricity.block.IGenerator;
 import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
-import se.sst_55t.betterthanelectricity.block.pulverizer.BlockPulverizer;
 import se.sst_55t.betterthanelectricity.item.*;
 
 import javax.annotation.Nullable;
@@ -37,7 +36,7 @@ public class TileEntityWindMill extends TileEntity implements ITickable, IGenera
 
         this.totalChargeTime = this.getItemChargeTime(null);
         ItemStack itemstack = inventory.getStackInSlot(0);
-        TileEntity te = getInputTE();
+        TileEntity te = getConsumerTE();
 
         if (isCharging() && (itemstack.getItem() instanceof IBattery || itemstack.getItem() instanceof IChargeable))
         {
@@ -233,7 +232,7 @@ public class TileEntityWindMill extends TileEntity implements ITickable, IGenera
     }
 
     @Override
-    public TileEntity getInputTE() {
+    public TileEntity getConsumerTE() {
         TileEntity inputTE;
         for (EnumFacing facing : EnumFacing.VALUES)
         {

@@ -196,7 +196,7 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable, IGene
     }
 
     @Override
-    public TileEntity getInputTE() {
+    public TileEntity getConsumerTE() {
         TileEntity inputTE;
         for (EnumFacing facing : EnumFacing.VALUES)
         {

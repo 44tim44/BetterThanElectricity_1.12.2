@@ -7,6 +7,7 @@ import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
 import se.sst_55t.betterthanelectricity.block.IGenerator;
 import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
 import se.sst_55t.betterthanelectricity.block.inventory.SlotBattery;
+import se.sst_55t.betterthanelectricity.block.multiSocket.TileEntityMultiSocketOut;
 import se.sst_55t.betterthanelectricity.item.IBattery;
 import se.sst_55t.betterthanelectricity.recipe.PulverizerRecipes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -111,7 +112,7 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
 
         if (index == 0 && !flag)
         {
-            this.totalCookTime = this.getCookTime(stack);
+            this.totalCookTime = this.getPulverizeItemTime();
             this.cookTime = 0;
             this.markDirty();
         }
@@ -197,6 +198,39 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
         return inventory.getField(0) > 0;
     }
 
+    public boolean canStartBurn(ItemStack batteryStack, TileEntity teOutput)
+    {
+        if(!batteryStack.isEmpty() && batteryStack.getItem() instanceof IBattery)
+        {
+            if(((IBattery)batteryStack.getItem()).getCharge(batteryStack) > 0)
+            {
+                return true;
+            }
+        }
+
+        if(teOutput != null && teOutput instanceof IGenerator && ((IGenerator)teOutput).isConnected())
+        {
+            if(teOutput instanceof TileEntityMultiSocketOut)
+            {
+                TileEntity[] inputlist = ((TileEntityMultiSocketOut) teOutput).getConsumerTEList(null);
+                for(TileEntity inputTe : inputlist)
+                {
+                    if(inputTe == this && ((IElectricityStorage)teOutput).getCharge() > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            else if(((IGenerator) teOutput).getConsumerTE() == this && ((IElectricityStorage)teOutput).getCharge() > 0)
+            {
+                return true;
+            }
+
+        }
+
+        return false;
+    }
+
     /**
      * Like the old updateEntity(), except more generic.
      */
@@ -212,10 +246,11 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
 
         if (!this.world.isRemote)
         {
+            ItemStack pulverizeStack = this.pulverizerItemStacks.get(0);
             ItemStack batteryStack = this.pulverizerItemStacks.get(1);
-            TileEntity te = getOutputTE();
+            TileEntity te = getGeneratorTE();
 
-            if (this.isBurning() || !batteryStack.isEmpty() && !this.pulverizerItemStacks.get(0).isEmpty() || (te != null && (te instanceof IGenerator && ((IGenerator)te).isConnected() && ((IGenerator)te).getChargeRate() >= getConsumeRate() && ((IGenerator)te).getChargeRate() != 0)))
+            if (this.isBurning() || canStartBurn(batteryStack, te) && !pulverizeStack.isEmpty() )
             {
                 if (!this.isBurning() && this.canPulverize())
                 {
@@ -230,9 +265,9 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
                         {
                             ((IBattery)batteryStack.getItem()).decreaseCharge(batteryStack);
                         }
-                        else if( te instanceof IElectricityStorage)
+                        else if(te instanceof IElectricityStorage  && ((IElectricityStorage)te).getCharge() > 0)
                         {
-                            ((IElectricityStorage) getOutputTE()).decreaseCharge();
+                            ((IElectricityStorage) getGeneratorTE()).decreaseCharge();
                         }
                     }
                 }
@@ -244,8 +279,8 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
                     if (this.cookTime == this.totalCookTime)
                     {
                         this.cookTime = 0;
-                        this.totalCookTime = this.getCookTime(this.pulverizerItemStacks.get(0));
-                        this.smeltItem();
+                        this.totalCookTime = this.getPulverizeItemTime();
+                        this.pulverizeItem();
                         flag1 = true;
                     }
                 }
@@ -276,7 +311,7 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
      * Time to cook:
      * Lower number = faster.
      */
-    public int getCookTime(@Nullable ItemStack stack)
+    public int getPulverizeItemTime()
     {
         return 200;
     }
@@ -286,7 +321,7 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
      */
     private boolean canPulverize()
     {
-        if (((ItemStack)this.pulverizerItemStacks.get(0)).isEmpty())
+        if ((this.pulverizerItemStacks.get(0)).isEmpty())
         {
             return false;
         }
@@ -324,24 +359,24 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
     /**
      * Turn one item from the furnace source stack into the appropriate smelted item in the furnace result stack
      */
-    public void smeltItem()
+    public void pulverizeItem()
     {
         if (this.canPulverize())
         {
-            ItemStack itemstack = this.pulverizerItemStacks.get(0);
-            ItemStack itemstack1 = PulverizerRecipes.instance().getSmeltingResult(itemstack);
-            ItemStack itemstack2 = this.pulverizerItemStacks.get(2);
+            ItemStack inputStack = this.pulverizerItemStacks.get(0);
+            ItemStack resultStack = PulverizerRecipes.instance().getSmeltingResult(inputStack);
+            ItemStack outputStack = this.pulverizerItemStacks.get(2);
 
-            if (itemstack2.isEmpty())
+            if (outputStack.isEmpty())
             {
-                this.pulverizerItemStacks.set(2, itemstack1.copy());
+                this.pulverizerItemStacks.set(2, resultStack.copy());
             }
-            else if (itemstack2.getItem() == itemstack1.getItem())
+            else if (outputStack.getItem() == resultStack.getItem())
             {
-                itemstack2.grow(itemstack1.getCount());
+                outputStack.grow(resultStack.getCount());
             }
 
-            itemstack.shrink(1);
+            inputStack.shrink(1);
         }
     }
 
@@ -365,10 +400,6 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
                 {
                     return BASE_CONSUME_RATE;
                 }
-            }
-            else
-            {
-                return 0;
             }
             return 0;
         }
@@ -547,7 +578,7 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
     }
 
     @Override
-    public TileEntity getOutputTE() {
+    public TileEntity getGeneratorTE() {
         TileEntity outputTE;
         for (EnumFacing facing : EnumFacing.VALUES)
         {
@@ -577,7 +608,7 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
             return 1.0F;
         }
 
-        TileEntity te = getOutputTE();
+        TileEntity te = getGeneratorTE();
         if(te != null && te instanceof IGenerator)
         {
             float chargeRatio = ((IGenerator)te).getChargeRate() / getConsumeRate();

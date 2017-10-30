@@ -67,7 +67,7 @@ public class GuiChargingStation extends GuiContainer
                     if(i == 1)
                     {
                         float charge = 0;
-                        TileEntity te = tileChargingStation.getOutputTE();
+                        TileEntity te = tileChargingStation.getGeneratorTE();
                         ItemStack batteryStack = tileChargingStation.getStackInSlot(1);
                         if(te != null && te instanceof IGenerator)
                         {
