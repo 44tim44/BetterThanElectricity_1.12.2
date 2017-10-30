@@ -21,7 +21,7 @@ public class ContainerSolarPanel extends Container {
             @Override
             public void onSlotChanged()
             {
-                solarPanel.setTotalChargeTime(solarPanel.getItemChargeTime(inventory.getStackInSlot(0)));
+                solarPanel.setTotalChargeTime(solarPanel.getItemChargeTime());
                 solarPanel.setChargeTime(0);
                 solarPanel.markDirty();
             }

@@ -46,9 +46,9 @@ public class GuiSolarPanel extends GuiContainer{
             //this.drawTexturedModalRect(x + 80, y + 36, 176, 0, 14, 14);
             this.drawTexturedModalRect(x + 61, y + 34, 176, 14, 18, 18);
             int k = this.getChargeLeftScaled(14);
-            int charge = this.tileSolar.getCharge();
+            int charge = -1; //this.tileSolar.getCharge();
             if(charge != -1){
-                if(this.tileSolar.getItemChargeTime(null) <= 20){
+                if(this.tileSolar.getItemChargeTime() <= 20){
                     this.drawTexturedModalRect(x + 80, y + 36, 176, 0, 14, 14);
                 } else {
                     this.drawTexturedModalRect(x + 80, y + 36 + 14 - k, 176, 14 - k, 14, k);
@@ -71,7 +71,7 @@ public class GuiSolarPanel extends GuiContainer{
         String name = I18n.format(ModBlocks.solarPanel.getUnlocalizedName() + ".name");
         fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6, 0x404040);
         fontRenderer.drawString(playerInv.getDisplayName().getUnformattedText(), 8, ySize - 94, 0x404040);
-        float chargeRate = this.tileSolar.getItemChargeTime(null);
+        float chargeRate = this.tileSolar.getItemChargeTime();
         if (tileSolar.isCharging()) {
             fontRenderer.drawString(String.format("%.2f", 1.0F / (chargeRate / 20.0F)) + " Energy/sec", 85, ySize - 94, 0x404040);
         } else {

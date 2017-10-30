@@ -1,7 +1,6 @@
 package se.sst_55t.betterthanelectricity.block.solarpanel;
 
 import se.sst_55t.betterthanelectricity.block.ICable;
-import se.sst_55t.betterthanelectricity.block.IConsumer;
 import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
 import se.sst_55t.betterthanelectricity.block.IGenerator;
 import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
@@ -20,66 +19,51 @@ import javax.annotation.Nullable;
 /**
  * Created by Timeout on 2017-08-22.
  */
-public class TileEntitySolarPanel extends TileEntity implements ITickable, IGenerator {
+public class TileEntitySolarPanel extends TileEntity implements ITickable, IGenerator, IElectricityStorage {
 
     private static final int BASE_CHARGE_RATE = 20; // Amount of ticks required to charge 1 energy.
     private int chargeTime;
     private int totalChargeTime;
     private ItemStackHandler inventory = new ItemStackHandler(1);
+    private static final int maxCharge = 1;
+    private int currentCharge;
 
     public void update ()
     {
-        this.totalChargeTime = this.getItemChargeTime(null);
+        this.totalChargeTime = this.getItemChargeTime();
         ItemStack itemstack = inventory.getStackInSlot(0);
-        TileEntity te = getInputTE();
 
-        if (isCharging() && (itemstack.getItem() instanceof IBattery || itemstack.getItem() instanceof IChargeable))
+        if (this.currentCharge > 0)
         {
-            ++this.chargeTime;
-
-            if (this.chargeTime == this.totalChargeTime)
+            if ((itemstack.getItem() instanceof IBattery || itemstack.getItem() instanceof IChargeable))
             {
-                this.chargeTime = 0;
-                if(itemstack.getItem() instanceof IBattery)
-                {
-                    ((IBattery)itemstack.getItem()).increaseCharge(itemstack);
-                }
-                else if(itemstack.getItem() instanceof IChargeable)
-                {
-                    ((IChargeable)itemstack.getItem()).increaseCharge(itemstack);
-                }
+                ((IChargeable) itemstack.getItem()).increaseCharge(itemstack);
+                if(!this.world.isRemote) this.decreaseCharge();
             }
         }
-        else if(isCharging() && te instanceof IConsumer)
+
+        if (isCharging() && this.currentCharge < maxCharge)
         {
             ++this.chargeTime;
 
             if (this.chargeTime == this.totalChargeTime)
             {
                 this.chargeTime = 0;
-                if (te instanceof IElectricityStorage)
-                {
-                    if(((IElectricityStorage) te).getCharge() < ((IElectricityStorage) te).getMaxCharge())
-                    {
-                        if (!this.world.isRemote)
-                        {
-                            ((IElectricityStorage) te).increaseCharge();
-                        }
-                    }
-                }
+                if(!this.world.isRemote) this.increaseCharge();
             }
         }
         else
         {
             this.chargeTime = 0;
         }
+
     }
 
     /**
      * Time to cook:
      * Lower number = faster.
      */
-    public int getItemChargeTime(@Nullable ItemStack stack)
+    public int getItemChargeTime()
     {
        float temp = world.getBiome(this.pos).getTemperature();
        if(temp < 0.5F)
@@ -89,23 +73,45 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable, IGene
         return Math.round((float)BASE_CHARGE_RATE / temp);
     }
 
-    public int getCharge(){
-        ItemStack itemstack = inventory.getStackInSlot(0);
-        if (itemstack.isEmpty()){
-            return -1;
-        }
-        else if (itemstack.getItem() instanceof IBattery)
+    @Override
+    public void increaseCharge() {
+        if(this.currentCharge < maxCharge) this.currentCharge++;
+        this.markDirty();
+    }
+
+    @Override
+    public void decreaseCharge() {
+        if(this.currentCharge > 0) this.currentCharge--;
+        this.markDirty();
+    }
+
+    @Override
+    public void setCharge(int value) {
+        if(value > maxCharge)
         {
-            return ((IBattery)itemstack.getItem()).getCharge(itemstack);
+            this.currentCharge = maxCharge;
+            this.markDirty();
         }
-        else if (itemstack.getItem() instanceof IChargeable)
+        else if(value < 0)
         {
-            return ((IChargeable)itemstack.getItem()).getCharge(itemstack);
+            this.currentCharge = 0;
+            this.markDirty();
         }
         else
         {
-            return -1;
+            this.currentCharge = value;
+            this.markDirty();
         }
+    }
+
+    public int getCharge()
+    {
+        return this.currentCharge;
+    }
+
+    @Override
+    public int getMaxCharge() {
+        return maxCharge;
     }
 
     public boolean isCharging()
@@ -210,13 +216,9 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable, IGene
     @Override
     public float getChargeRate()
     {
-        ItemStack batteryStack = inventory.getStackInSlot(0);
-        if(batteryStack.isEmpty() ||  ((IChargeable) batteryStack.getItem()).getCharge(batteryStack) == ((IChargeable) batteryStack.getItem()).getMaxCharge(batteryStack))
+        if (isCharging())
         {
-            if (isCharging())
-            {
-                return (1.0F / (getItemChargeTime(null) / 20.0F));
-            }
+            return (1.0F / (getItemChargeTime() / 20.0F));
         }
         return 0;
     }
