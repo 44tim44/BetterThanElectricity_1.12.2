@@ -29,6 +29,7 @@ public class TileEntityCable extends TileEntity implements ICable {
                     world.getTileEntity(this.pos.offset(facing)) instanceof IGenerator ||
                     world.getTileEntity(this.pos.offset(facing)) instanceof ICable && ((BlockCable)world.getBlockState(this.pos.offset(facing)).getBlock()).color == ((BlockCable)world.getBlockState(this.pos).getBlock()).color )
             {
+
                 return world.getTileEntity(this.pos.offset(facing));
             }
         }
@@ -74,7 +75,7 @@ public class TileEntityCable extends TileEntity implements ICable {
                 }
                 else if(outputTE instanceof IGenerator)
                 {
-                    return outputTE;
+                    if(((IGenerator) outputTE).isConnected()) return outputTE;
                 }
             }
         }
@@ -104,7 +105,7 @@ public class TileEntityCable extends TileEntity implements ICable {
                 }
                 else if(inputTE instanceof IConsumer)
                 {
-                    return inputTE;
+                    if(((IConsumer) inputTE).isConnected()) return inputTE;
                 }
             }
         }

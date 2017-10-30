@@ -141,15 +141,7 @@ public class ContainerElectricFurnace extends Container
                     {
                         return ItemStack.EMPTY;
                     }
-                    else if (!this.mergeItemStack(itemstack1, 3, 4, false))
-                    {
-                        return ItemStack.EMPTY;
-                    }
-                    else if (!this.mergeItemStack(itemstack1, 4, 5, false))
-                    {
-                        return ItemStack.EMPTY;
-                    }
-                    else if (!this.mergeItemStack(itemstack1, 5, 6, false))
+                    if (!this.mergeItemStack(itemstack1, 3, 6, false))
                     {
                         return ItemStack.EMPTY;
                     }

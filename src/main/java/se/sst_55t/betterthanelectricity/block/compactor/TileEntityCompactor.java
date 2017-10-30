@@ -221,7 +221,7 @@ public class TileEntityCompactor extends TileEntityLockable implements ITickable
             ItemStack batteryStack = this.compactorItemStacks.get(1);
             TileEntity te = getOutputTE();
 
-            if (this.isBurning() || !batteryStack.isEmpty() && !this.compactorItemStacks.get(0).isEmpty())
+            if (this.isBurning() || !batteryStack.isEmpty() && !this.compactorItemStacks.get(0).isEmpty() || (te != null && (te instanceof IGenerator && ((IGenerator)te).isConnected() && ((IGenerator)te).getChargeRate() >= getConsumeRate() && ((IGenerator)te).getChargeRate() != 0)))
             {
                 if (!this.isBurning() && this.canCompact())
                 {

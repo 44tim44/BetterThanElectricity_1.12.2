@@ -27,6 +27,7 @@ import se.sst_55t.betterthanelectricity.block.IConsumer;
 import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
 import se.sst_55t.betterthanelectricity.block.IGenerator;
 import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
+import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketIn;
 import se.sst_55t.betterthanelectricity.item.IBattery;
 import se.sst_55t.betterthanelectricity.item.IChargeable;
 import se.sst_55t.betterthanelectricity.item.ItemBattery;
@@ -37,7 +38,7 @@ import javax.annotation.Nullable;
 /**
  * Created by Timmy on 2016-11-27.
  */
-public class TileEntityChargingStation extends TileEntityLockable implements ITickable, ISidedInventory, IElectricityStorage, IConsumer
+public class TileEntityChargingStation extends TileEntityLockable implements ITickable, ISidedInventory, IElectricityStorage, IConsumer, IGenerator
 {
     private static final int BASE_CHARGE_RATE = 2; // Amount of ticks required to charge 1 energy.
     private static final int[] SLOTS_TOP = new int[] {0};
@@ -541,6 +542,16 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
         return te.getWorld().isAirBlock(blockPos.offset(EnumFacing.UP));
     }
 
+    private EnumFacing getFrontSide(){
+        EnumFacing frontSide = this.world.getBlockState(this.pos).getValue(BlockChargingStation.FACING);
+        return frontSide;
+    }
+
+    private EnumFacing getBackSide(){
+        EnumFacing frontSide = this.world.getBlockState(this.pos).getValue(BlockChargingStation.FACING);
+        return frontSide.getOpposite();
+    }
+
     public TileEntity getConnectedBlockTE(EnumFacing facing)
     {
         if(( world.getTileEntity(this.pos.offset(facing)) instanceof ICable) && isConnected())
@@ -557,28 +568,60 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
         {
             if( world.getTileEntity(this.pos.offset(facing)) instanceof ICable )
             {
-                amountOfConnections++;
-            }
-        }
-        return amountOfConnections == 1 ;
-    }
-
-    @Override
-    public TileEntity getOutputTE() {
-        TileEntity outputTE;
-        for (EnumFacing facing : EnumFacing.VALUES)
-        {
-            outputTE = getConnectedBlockTE(facing);
-
-            if (outputTE != null)
-            {
-                if(outputTE instanceof TileEntityCable)
+                if (facing != getBackSide() && facing != getFrontSide())
                 {
-                    return ((TileEntityCable) outputTE).getOutputTE(facing.getOpposite());
+                    amountOfConnections++;
                 }
             }
         }
+        return amountOfConnections == 0 && ((world.getTileEntity(this.pos.offset(getFrontSide())) instanceof ICable) || (world.getTileEntity(this.pos.offset(getBackSide())) instanceof ICable));
+    }
+
+    @Override
+    public TileEntity getOutputTE()
+    {
+        EnumFacing facing = getBackSide();
+
+        TileEntity outputTE = getConnectedBlockTE(facing);
+
+        if (outputTE != null)
+        {
+            if(outputTE instanceof TileEntityCable)
+            {
+                return ((TileEntityCable) outputTE).getOutputTE(facing.getOpposite());
+            }
+        }
         return null;
+    }
+
+    @Override
+    public TileEntity getInputTE()
+    {
+        EnumFacing facing = getFrontSide();
+
+        TileEntity inputTE = getConnectedBlockTE(facing);
+
+        if (inputTE != null)
+        {
+            if(inputTE instanceof TileEntityCable)
+            {
+                return ((TileEntityCable) inputTE).getInputTE(facing.getOpposite());
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public float getChargeRate() {
+        ItemStack batteryStack = this.chargingStationItemStacks.get(0);
+        if(batteryStack.isEmpty() ||  ((IChargeable) batteryStack.getItem()).getCharge(batteryStack) == ((IChargeable) batteryStack.getItem()).getMaxCharge(batteryStack))
+        {
+            if (this.currentCharge > 0)
+            {
+                return (1.0F / (BASE_CHARGE_RATE / 20.0F));
+            }
+        }
+        return 0;
     }
 
     @Override

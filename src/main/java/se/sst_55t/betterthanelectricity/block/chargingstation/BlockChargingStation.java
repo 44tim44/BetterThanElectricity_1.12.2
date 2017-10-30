@@ -146,38 +146,6 @@ public class BlockChargingStation extends BlockContainerBase {
         return true;
     }
 
-    /*
-    public static void setState(boolean active, World worldIn, BlockPos pos)
-    {
-        IBlockState iblockstate = worldIn.getBlockState(pos);
-        TileEntity tileentity = worldIn.getTileEntity(pos);
-        keepInventory = true;
-
-        if (active)
-        {
-            worldIn.setBlockState(pos, ModBlocks.chargingStation_on.getDefaultState()
-                    .withProperty(FACING, iblockstate.getValue(FACING)), 3);
-            worldIn.setBlockState(pos, ModBlocks.chargingStation_on.getDefaultState()
-                    .withProperty(FACING, iblockstate.getValue(FACING)), 3);
-        }
-        else
-        {
-            worldIn.setBlockState(pos, ModBlocks.chargingStation.getDefaultState()
-                    .withProperty(FACING, iblockstate.getValue(FACING)), 3);
-            worldIn.setBlockState(pos, ModBlocks.chargingStation.getDefaultState()
-                    .withProperty(FACING, iblockstate.getValue(FACING)), 3);
-        }
-
-        keepInventory = false;
-
-        if (tileentity != null)
-        {
-            tileentity.validate();
-            worldIn.setTileEntity(pos, tileentity);
-        }
-    }
-    */
-
     public Class<TileEntityChargingStation> getTileEntityClass() {
         return TileEntityChargingStation.class;
     }

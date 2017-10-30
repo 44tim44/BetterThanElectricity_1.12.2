@@ -259,8 +259,9 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
                 }
 
             }
-            if (this.isBurning() || !batteryStack.isEmpty() && !cookSlotStack.isEmpty() || (te != null && (te instanceof IGenerator && ((IGenerator)te).isConnected() && ((IGenerator)te).getChargeRate() >= getConsumeRate() && ((IGenerator)te).getChargeRate() != 0)))
+            if (this.isBurning() || !batteryStack.isEmpty() && !cookSlotStack.isEmpty() || (te != null && te instanceof IGenerator && ((IGenerator)te).isConnected() && ((IGenerator)te).getChargeRate() >= getConsumeRate() && ((IGenerator)te).getChargeRate() != 0))
             {
+                if(te != null) System.out.println(((IGenerator)te).getChargeRate() + ">=" + getConsumeRate());
                 if (!this.isBurning() && this.canSmelt())
                 {
                     this.furnaceBurnTime = BASE_CONSUME_RATE;
