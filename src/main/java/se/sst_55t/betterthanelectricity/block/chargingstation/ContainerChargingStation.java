@@ -12,11 +12,13 @@ import se.sst_55t.betterthanelectricity.item.ModItems;
 
 public class ContainerChargingStation extends Container
 {
+    private static final int BASE_CHARGE_RATE = 2; // Amount of ticks required to charge 1 energy.
+
     private final IInventory tileChargingStation;
     private int outChargeTime;
     private int totalOutChargeTime;
     private int inChargeTime;
-    private int totalInChargeTime;
+    private int totalInChargeTime = BASE_CHARGE_RATE;
     private int currentCharge;
 
     public ContainerChargingStation(InventoryPlayer playerInventory, IInventory furnaceInventory)
@@ -24,7 +26,6 @@ public class ContainerChargingStation extends Container
         this.tileChargingStation = furnaceInventory;
         this.addSlotToContainer(new Slot(furnaceInventory, 0, 80, 22));
         this.addSlotToContainer(new Slot(furnaceInventory, 1, 80, 48));
-        //this.addSlotToContainer(new SlotFurnaceOutput(playerInventory.player, furnaceInventory, 2, 116, 35));
 
         for (int i = 0; i < 3; ++i)
         {

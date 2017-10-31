@@ -56,26 +56,26 @@ public class TileEntityCable extends TileEntity implements ICable {
      *
      * @return
      */
-    public TileEntity getOutputTE(EnumFacing ignoreSide)
+    public TileEntity getGeneratorTE(EnumFacing ignoreSide)
     {
-        TileEntity outputTE;
+        TileEntity generatorTE;
         for (EnumFacing facing : EnumFacing.VALUES)
         {
-            outputTE = null;
+            generatorTE = null;
             if(facing != ignoreSide)
             {
-                outputTE = getConnectedBlockTE(facing);
+                generatorTE = getConnectedBlockTE(facing);
             }
 
-            if (outputTE != null)
+            if (generatorTE != null)
             {
-                if(outputTE instanceof TileEntityCable)
+                if(generatorTE instanceof TileEntityCable)
                 {
-                    return ((TileEntityCable) outputTE).getOutputTE(facing.getOpposite());
+                    return ((TileEntityCable) generatorTE).getGeneratorTE(facing.getOpposite());
                 }
-                else if(outputTE instanceof IGenerator)
+                else if(generatorTE instanceof IGenerator)
                 {
-                    if(((IGenerator) outputTE).isConnected()) return outputTE;
+                    if(((IGenerator) generatorTE).isConnected()) return generatorTE;
                 }
             }
         }
@@ -87,25 +87,25 @@ public class TileEntityCable extends TileEntity implements ICable {
      *
      * @return
      */
-    public TileEntity getInputTE(EnumFacing ignoreSide)
+    public TileEntity getConsumerTE(EnumFacing ignoreSide)
     {
-        TileEntity inputTE;
+        TileEntity consumerTE;
         for (EnumFacing facing : EnumFacing.VALUES)
         {
-            inputTE = null;
+            consumerTE = null;
             if(facing != ignoreSide) {
-                inputTE = getConnectedBlockTE(facing);
+                consumerTE = getConnectedBlockTE(facing);
             }
 
-            if (inputTE != null)
+            if (consumerTE != null)
             {
-                if(inputTE instanceof TileEntityCable)
+                if(consumerTE instanceof TileEntityCable)
                 {
-                    return ((TileEntityCable) inputTE).getInputTE(facing.getOpposite());
+                    return ((TileEntityCable) consumerTE).getConsumerTE(facing.getOpposite());
                 }
-                else if(inputTE instanceof IConsumer)
+                else if(consumerTE instanceof IConsumer)
                 {
-                    if(((IConsumer) inputTE).isConnected()) return inputTE;
+                    if(((IConsumer) consumerTE).isConnected()) return consumerTE;
                 }
             }
         }

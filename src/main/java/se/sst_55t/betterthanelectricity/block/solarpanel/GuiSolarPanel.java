@@ -45,14 +45,10 @@ public class GuiSolarPanel extends GuiContainer{
         {
             //this.drawTexturedModalRect(x + 80, y + 36, 176, 0, 14, 14);
             this.drawTexturedModalRect(x + 61, y + 34, 176, 14, 18, 18);
-            int k = this.getChargeLeftScaled(14);
-            int charge = -1; //this.tileSolar.getCharge();
-            if(charge != -1){
-                if(this.tileSolar.getItemChargeTime() <= 20){
-                    this.drawTexturedModalRect(x + 80, y + 36, 176, 0, 14, 14);
-                } else {
-                    this.drawTexturedModalRect(x + 80, y + 36 + 14 - k, 176, 14 - k, 14, k);
-                }
+            //int k = this.getChargeLeftScaled(14);
+            if(this.tileSolar.isGivingCharge())
+            {
+                this.drawTexturedModalRect(x + 80, y + 36, 176, 0, 14, 14);
             }
             else
             {

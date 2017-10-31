@@ -89,7 +89,7 @@ public class TileEntityMultiSocketIn extends TileEntity implements IGenerator, I
             {
                 if(outputTE instanceof TileEntityCable)
                 {
-                    TileEntity outputTEEnd = ((TileEntityCable)outputTE).getOutputTE(facing.getOpposite());
+                    TileEntity outputTEEnd = ((TileEntityCable)outputTE).getGeneratorTE(facing.getOpposite());
                     if(outputTEEnd == this)
                     {
                         outputTEEnd = null;
@@ -124,7 +124,7 @@ public class TileEntityMultiSocketIn extends TileEntity implements IGenerator, I
         {
             if(inputTE instanceof TileEntityCable)
             {
-                return ((TileEntityCable) inputTE).getInputTE(inputSide.getOpposite());
+                return ((TileEntityCable) inputTE).getConsumerTE(inputSide.getOpposite());
             }
         }
         return null;
@@ -245,25 +245,25 @@ public class TileEntityMultiSocketIn extends TileEntity implements IGenerator, I
     public int getMaxCharge() {
         int total = 0;
         EnumFacing inputSide = this.world.getBlockState(this.pos).getValue(BlockMultiSocketIn.FACING);
-        TileEntity[] outputTEList = getGeneratorTEList(inputSide);
+        TileEntity[] generatorTEList = getGeneratorTEList(inputSide);
         for(int i = 0; i < 6; i++)
         {
-            if(outputTEList[i] != null && outputTEList[i] instanceof IElectricityStorage)
+            if(generatorTEList[i] != null && generatorTEList[i] instanceof IElectricityStorage)
             {
-                if(outputTEList[i] instanceof TileEntityMultiSocketOut)
+                if(generatorTEList[i] instanceof TileEntityMultiSocketOut)
                 {
-                    TileEntity[] inputlist = ((TileEntityMultiSocketOut) outputTEList[i]).getConsumerTEList(null);
-                    for(TileEntity inputTe : inputlist)
+                    TileEntity[] consumerTEList = ((TileEntityMultiSocketOut) generatorTEList[i]).getConsumerTEList(null);
+                    for(TileEntity consumerTE : consumerTEList)
                     {
-                        if(inputTe == this)
+                        if(consumerTE == this)
                         {
-                            total += ((IElectricityStorage) outputTEList[i]).getMaxCharge();
+                            total += ((IElectricityStorage) generatorTEList[i]).getMaxCharge();
                         }
                     }
                 }
-                else if(((IGenerator)outputTEList[i]).getConsumerTE() == this)
+                else if(((IGenerator)generatorTEList[i]).getConsumerTE() == this)
                 {
-                    total += ((IElectricityStorage) outputTEList[i]).getMaxCharge();
+                    total += ((IElectricityStorage) generatorTEList[i]).getMaxCharge();
                 }
             }
         }

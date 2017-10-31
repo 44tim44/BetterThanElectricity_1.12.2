@@ -139,12 +139,12 @@ public class ContainerElectricFurnace extends Container
                 {
                     if (!this.mergeItemStack(itemstack1, 0, 1, false))
                     {
-                        return ItemStack.EMPTY;
+                        if (!this.mergeItemStack(itemstack1, 3, 6, false))
+                        {
+                            return ItemStack.EMPTY;
+                        }
                     }
-                    if (!this.mergeItemStack(itemstack1, 3, 6, false))
-                    {
-                        return ItemStack.EMPTY;
-                    }
+
                 }
                 else if (TileEntityElectricFurnace.isItemFuel(itemstack1) || itemstack1.getItem() instanceof IBattery)
                 {

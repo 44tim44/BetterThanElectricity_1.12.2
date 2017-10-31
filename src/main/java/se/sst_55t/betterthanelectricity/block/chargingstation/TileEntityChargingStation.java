@@ -18,13 +18,12 @@ import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.datafix.FixTypes;
 import net.minecraft.util.datafix.walkers.ItemStackDataLists;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import se.sst_55t.betterthanelectricity.block.ICable;
 import se.sst_55t.betterthanelectricity.block.IConsumer;
 import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
 import se.sst_55t.betterthanelectricity.block.IGenerator;
 import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
+import se.sst_55t.betterthanelectricity.block.multiSocket.TileEntityMultiSocketOut;
 import se.sst_55t.betterthanelectricity.item.IBattery;
 import se.sst_55t.betterthanelectricity.item.IChargeable;
 
@@ -45,7 +44,7 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
     private int outChargeTime;
     private int totalOutChargeTime;
     private int inChargeTime;
-    private int totalInChargeTime;
+    private int totalInChargeTime = BASE_CHARGE_RATE;
     private String furnaceCustomName;
     private static final int maxCharge = 6400;
     private int currentCharge;
@@ -59,7 +58,6 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
 
     public void increaseCharge()
     {
-        System.out.println("is increasing");
         this.currentCharge++;
         this.markDirty();
     }
@@ -84,7 +82,7 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
     }
 
     public int getCharge(){
-        return currentCharge;
+        return this.currentCharge;
     }
 
     public int getMaxCharge(){
@@ -155,14 +153,14 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
 
         if (index == 0 && !flag)
         {
-            this.totalOutChargeTime = this.getOutputRate(stack);
+            this.totalOutChargeTime = this.getOutputRate();
             this.outChargeTime = 0;
             this.markDirty();
         }
 
         if (index == 1 && !flag)
         {
-            this.totalInChargeTime = this.getOutputRate(stack);
+            this.totalInChargeTime = this.getOutputRate();
             this.inChargeTime = 0;
             this.markDirty();
         }
@@ -246,18 +244,26 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
 
         if (!this.world.isRemote)
         {
-            if(this.currentCharge < this.getMaxCharge() && this.canTakeCharge()){
+            ItemStack batteryOutputStack = chargingStationItemStacks.get(0);
+            ItemStack batteryInputStack = chargingStationItemStacks.get(1);
+            TileEntity generatorTE = getGeneratorTE();
+
+            if(this.currentCharge < maxCharge && this.canTakeCharge(batteryInputStack,generatorTE))
+            {
                 ++this.inChargeTime;
 
                 if (this.inChargeTime == this.totalInChargeTime)
                 {
                     this.inChargeTime = 0;
-                    this.totalInChargeTime = this.getOutputRate(this.chargingStationItemStacks.get(1));
 
-                    ItemStack itemstack = chargingStationItemStacks.get(1);
-                    if(itemstack.getItem() instanceof IBattery)
+                    if(batteryInputStack.getItem() instanceof IBattery)
                     {
-                        ((IBattery)itemstack.getItem()).decreaseCharge(itemstack);
+                        ((IBattery)batteryInputStack.getItem()).decreaseCharge(batteryInputStack);
+                        this.increaseCharge();
+                    }
+                    else if(generatorTE instanceof IElectricityStorage  && ((IElectricityStorage)generatorTE).getCharge() > 0)
+                    {
+                        ((IElectricityStorage) getGeneratorTE()).decreaseCharge();
                         this.increaseCharge();
                     }
 
@@ -276,17 +282,16 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
                 if (this.outChargeTime == this.totalOutChargeTime)
                 {
                     this.outChargeTime = 0;
-                    this.totalOutChargeTime = this.getOutputRate(this.chargingStationItemStacks.get(0));
+                    this.totalOutChargeTime = this.getOutputRate();
 
-                    ItemStack itemstack = chargingStationItemStacks.get(0);
-                    if(itemstack.getItem() instanceof IBattery)
+                    if(batteryOutputStack.getItem() instanceof IBattery)
                     {
-                        ((IBattery)itemstack.getItem()).increaseCharge(itemstack);
+                        ((IBattery)batteryOutputStack.getItem()).increaseCharge(batteryOutputStack);
                         this.decreaseCharge();
                     }
-                    else if(itemstack.getItem() instanceof IChargeable)
+                    else if(batteryOutputStack.getItem() instanceof IChargeable)
                     {
-                        ((IChargeable)itemstack.getItem()).increaseCharge(itemstack);
+                        ((IChargeable)batteryOutputStack.getItem()).increaseCharge(batteryOutputStack);
                         this.decreaseCharge();
                     }
 
@@ -309,7 +314,7 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
      * Time to cook:
      * Lower number = faster.
      */
-    public int getOutputRate(@Nullable ItemStack stack)
+    public int getOutputRate()
     {
         return BASE_CHARGE_RATE;
     }
@@ -319,65 +324,79 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
      */
     private boolean canGiveCharge()
     {
-        ItemStack itemstack = ((ItemStack)this.chargingStationItemStacks.get(0));
-        if (itemstack.isEmpty())
+        ItemStack itemstack = this.chargingStationItemStacks.get(0);
+
+        if(currentCharge > 0)
         {
-            return false;
-        }
-        else
-        {
-            if(currentCharge > 0) {
-                if (itemstack.getItem() instanceof IBattery) {
-                    if (((IBattery) itemstack.getItem()).getCharge(itemstack) < ((IBattery) itemstack.getItem()).getMaxCharge(itemstack)) {
-                        return true;
-                    }
-                    return false;
-                } else if (itemstack.getItem() instanceof IChargeable) {
-                    if (((IChargeable) itemstack.getItem()).getCharge(itemstack) < ((IChargeable) itemstack.getItem()).getMaxCharge(itemstack)) {
-                        return true;
-                    }
-                    return false;
+            if (!itemstack.isEmpty() && itemstack.getItem() instanceof IBattery)
+            {
+                if (((IBattery) itemstack.getItem()).getCharge(itemstack) < ((IBattery) itemstack.getItem()).getMaxCharge(itemstack))
+                {
+                    return true;
                 }
             }
-            return false;
+            if (!itemstack.isEmpty() && itemstack.getItem() instanceof IChargeable)
+            {
+                if (((IChargeable) itemstack.getItem()).getCharge(itemstack) < ((IChargeable) itemstack.getItem()).getMaxCharge(itemstack))
+                {
+                    return true;
+                }
+            }
         }
+        return false;
     }
 
+    /*
     @SideOnly(Side.CLIENT)
     public static boolean isGivingCharge(TileEntityChargingStation tecs)
     {
         return tecs.canGiveCharge();
     }
+    */
 
     /**
-     * Returns true if the furnace can smelt an item, i.e. has a source item, destination stack isn't full, etc.
+     * Returns true if the Charging Station has a battery in the input slot or if it is connected to a Generator in the input-face
      */
-    private boolean canTakeCharge()
+    private boolean canTakeCharge(ItemStack batteryInputStack, TileEntity generatorTE)
     {
-        ItemStack itemstack = ((ItemStack)this.chargingStationItemStacks.get(1));
-        if (itemstack.isEmpty())
+        //ItemStack batteryInputStack = this.chargingStationItemStacks.get(1);
+        if (!batteryInputStack.isEmpty() && batteryInputStack.getItem() instanceof IBattery)
         {
-            return false;
+            if (((IBattery) batteryInputStack.getItem()).getCharge(batteryInputStack) > 0)
+            {
+                return true;
+            }
         }
-        else
+
+        //TileEntity generatorTE = getGeneratorTE();
+        if (generatorTE != null && generatorTE instanceof IGenerator && ((IGenerator)generatorTE).isConnected())
         {
-            if (currentCharge < maxCharge) {
-                if (itemstack.getItem() instanceof IBattery) {
-                    if (((IBattery) itemstack.getItem()).getCharge(itemstack) > 0) {
+            if(generatorTE instanceof TileEntityMultiSocketOut)
+            {
+                TileEntity[] consumerTEList = ((TileEntityMultiSocketOut) generatorTE).getConsumerTEList(null);
+                for(TileEntity consumerTE : consumerTEList)
+                {
+                    if(consumerTE == this && ((IElectricityStorage)generatorTE).getCharge() > 0)
+                    {
                         return true;
                     }
-                    return false;
                 }
             }
-            return false;
+            else if(((IGenerator) generatorTE).getConsumerTE() == this && ((IElectricityStorage)generatorTE).getCharge() > 0)
+            {
+                return true;
+            }
         }
+        return false;
     }
 
+    /*
     @SideOnly(Side.CLIENT)
     public static boolean isTakingCharge(TileEntityChargingStation tecs)
     {
         return tecs.canTakeCharge();
     }
+    */
 
     /**
      * Don't rename this method to canInteractWith due to conflicts with Container
@@ -583,7 +602,7 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
         {
             if(outputTE instanceof TileEntityCable)
             {
-                return ((TileEntityCable) outputTE).getOutputTE(facing.getOpposite());
+                return ((TileEntityCable) outputTE).getGeneratorTE(facing.getOpposite());
             }
         }
         return null;
@@ -600,7 +619,7 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
         {
             if(inputTE instanceof TileEntityCable)
             {
-                return ((TileEntityCable) inputTE).getInputTE(facing.getOpposite());
+                return ((TileEntityCable) inputTE).getConsumerTE(facing.getOpposite());
             }
         }
         return null;
@@ -608,12 +627,38 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
 
     @Override
     public float getChargeRate() {
-        ItemStack batteryStack = this.chargingStationItemStacks.get(0);
-        if(batteryStack.isEmpty() ||  ((IChargeable) batteryStack.getItem()).getCharge(batteryStack) == ((IChargeable) batteryStack.getItem()).getMaxCharge(batteryStack))
+        ItemStack batteryOutputStack = this.chargingStationItemStacks.get(0);
+        if(batteryOutputStack.isEmpty() ||  ((IChargeable) batteryOutputStack.getItem()).getCharge(batteryOutputStack) == ((IChargeable) batteryOutputStack.getItem()).getMaxCharge(batteryOutputStack))
         {
             if (this.currentCharge > 0)
             {
-                return (1.0F / (BASE_CHARGE_RATE / 20.0F));
+                TileEntity generatorTE = getGeneratorTE();
+                float outerChargeRate = 0;
+                if(generatorTE != null && generatorTE instanceof IGenerator)
+                {
+                    if (generatorTE instanceof TileEntityMultiSocketOut)
+                    {
+                        TileEntity[] consumerTEList = ((TileEntityMultiSocketOut) generatorTE).getConsumerTEList(null);
+                        for (TileEntity consumerTE : consumerTEList)
+                        {
+                            if (consumerTE == this)
+                            {
+                                outerChargeRate = ((IGenerator) generatorTE).getChargeRate();
+                            }
+                        }
+                    }
+                    else if (((IGenerator) generatorTE).getConsumerTE() == this)
+                    {
+                        outerChargeRate = ((IGenerator) generatorTE).getChargeRate();
+                    }
+
+                    if (this.currentCharge < outerChargeRate)
+                    {
+                        return outerChargeRate;
+                    }
+                }
+
+                return getCharge();
             }
         }
         return 0;
@@ -621,8 +666,8 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
 
     @Override
     public float getConsumeRate() {
-        ItemStack batteryStack = this.chargingStationItemStacks.get(1);
-        if(batteryStack.isEmpty() ||  ((IChargeable) batteryStack.getItem()).getCharge(batteryStack) == 0)
+        ItemStack batteryInputStack = this.chargingStationItemStacks.get(1);
+        if(batteryInputStack.isEmpty() ||  ((IChargeable) batteryInputStack.getItem()).getCharge(batteryInputStack) == 0)
         {
             if (this.currentCharge < maxCharge)
             {

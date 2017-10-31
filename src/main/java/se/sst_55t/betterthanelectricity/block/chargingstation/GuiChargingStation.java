@@ -38,8 +38,8 @@ public class GuiChargingStation extends GuiContainer
     @Override
     public void initGui() {
         super.initGui();
-        buttonList.add(new HintButton(0, this.guiLeft + 143, this.guiTop + 22));
-        buttonList.add(new HintButton(1, this.guiLeft + 98, this.guiTop + 49));
+        buttonList.add(new HintButton(0, this.guiLeft + 143, this.guiTop + 22, 16, 42));
+        buttonList.add(new HintButton(1, this.guiLeft + 98, this.guiTop + 49, 16, 16));
     }
 
     /**
@@ -95,7 +95,7 @@ public class GuiChargingStation extends GuiContainer
         String s = this.tileChargingStation.getDisplayName().getUnformattedText();
         this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
         this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
-        float chargeRate = this.tileChargingStation.getOutputRate((ItemStack)null);
+        float chargeRate = this.tileChargingStation.getOutputRate();
         fontRenderer.drawString(String.format("%.2f", 1.0F / (chargeRate / 20.0F)) + " Energy/sec", 80, ySize - 94, 0x404040);
     }
 
@@ -157,8 +157,8 @@ public class GuiChargingStation extends GuiContainer
     static class HintButton extends GuiButton {
         private static final String __OBFID = "CL_00000743";
 
-        protected HintButton(int buttonID, int posx, int posy) {
-            super(buttonID, posx, posy, 16, 42, "");
+        protected HintButton(int buttonID, int posx, int posy, int height, int width) {
+            super(buttonID, posx, posy, height, width, "");
         }
 
         public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {

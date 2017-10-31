@@ -6,6 +6,7 @@ import se.sst_55t.betterthanelectricity.block.IConsumer;
 import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
 import se.sst_55t.betterthanelectricity.block.IGenerator;
 import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
+import se.sst_55t.betterthanelectricity.block.multiSocket.TileEntityMultiSocketOut;
 import se.sst_55t.betterthanelectricity.item.IBattery;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -197,13 +198,46 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
         return inventory.getField(0) > 0;
     }
 
+    public boolean canStartBurn(ItemStack batteryStack, TileEntity generatorTE)
+    {
+        if(!batteryStack.isEmpty() && batteryStack.getItem() instanceof IBattery)
+        {
+            if(((IBattery)batteryStack.getItem()).getCharge(batteryStack) > 0)
+            {
+                return true;
+            }
+        }
+
+        if(generatorTE != null && generatorTE instanceof IGenerator && ((IGenerator)generatorTE).isConnected())
+        {
+            if(generatorTE instanceof TileEntityMultiSocketOut)
+            {
+                TileEntity[] consumerTEList = ((TileEntityMultiSocketOut) generatorTE).getConsumerTEList(null);
+                for(TileEntity consumerTE : consumerTEList)
+                {
+                    if(consumerTE == this && ((IElectricityStorage)generatorTE).getCharge() > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            else if(((IGenerator) generatorTE).getConsumerTE() == this && ((IElectricityStorage)generatorTE).getCharge() > 0)
+            {
+                return true;
+            }
+
+        }
+
+        return false;
+    }
+
     /**
      * Like the old updateEntity(), except more generic.
      */
     public void update()
     {
         boolean flag = this.isBurning();
-        boolean flag1 = false;
+        boolean isDirty = false;
 
         if (this.isBurning())
         {
@@ -257,9 +291,8 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
                 }
 
             }
-            if (this.isBurning() || !batteryStack.isEmpty() && !cookSlotStack.isEmpty() || (te != null && te instanceof IGenerator && ((IGenerator)te).isConnected() && ((IGenerator)te).getChargeRate() >= getConsumeRate() && ((IGenerator)te).getChargeRate() != 0))
+            if (this.isBurning() || canStartBurn(batteryStack,te) && !cookSlotStack.isEmpty() )
             {
-                if(te != null) System.out.println(((IGenerator)te).getChargeRate() + ">=" + getConsumeRate());
                 if (!this.isBurning() && this.canSmelt())
                 {
                     this.furnaceBurnTime = BASE_CONSUME_RATE;
@@ -267,13 +300,13 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
 
                     if (this.isBurning())
                     {
-                        flag1 = true;
+                        isDirty = true;
 
                         if (!batteryStack.isEmpty() && ((IBattery)batteryStack.getItem()).getCharge(batteryStack) > 0)
                         {
                             ((IBattery)batteryStack.getItem()).decreaseCharge(batteryStack);
                         }
-                        else if( te instanceof IElectricityStorage)
+                        else if( te instanceof IElectricityStorage && ((IElectricityStorage)te).getCharge() > 0)
                         {
                             ((IElectricityStorage) getGeneratorTE()).decreaseCharge();
                         }
@@ -289,7 +322,7 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
                         this.cookTime = 0;
                         this.totalCookTime = this.getCookTime(this.furnaceItemStacks.get(0));
                         this.smeltItem();
-                        flag1 = true;
+                        isDirty = true;
                     }
                 }
                 else
@@ -304,12 +337,12 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
 
             if (flag != this.isBurning())
             {
-                flag1 = true;
+                isDirty = true;
                 BlockElectricFurnace.setState(this.isBurning(), this.world, this.pos);
             }
         }
 
-        if (flag1)
+        if (isDirty)
         {
             this.markDirty();
         }
@@ -667,7 +700,8 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
     }
 
     @Override
-    public TileEntity getGeneratorTE() {
+    public TileEntity getGeneratorTE()
+    {
         TileEntity outputTE;
         for (EnumFacing facing : EnumFacing.VALUES)
         {
@@ -677,11 +711,44 @@ public class TileEntityElectricFurnace extends TileEntityLockable implements ITi
             {
                 if(outputTE instanceof TileEntityCable)
                 {
-                    return ((TileEntityCable) outputTE).getOutputTE(facing.getOpposite());
+                    return ((TileEntityCable) outputTE).getGeneratorTE(facing.getOpposite());
                 }
             }
         }
         return null;
+    }
+
+    /**
+     * Returns the charge given to this block from its generator.
+     */
+    public float getChargeRate()
+    {
+        ItemStack batteryStack = this.furnaceItemStacks.get(1);
+        if(!batteryStack.isEmpty() && batteryStack.getItem() instanceof IBattery && ((IBattery)batteryStack.getItem()).getCharge(batteryStack) > 0)
+        {
+            return getConsumeRate();
+        }
+
+        TileEntity generatorTE = getGeneratorTE();
+        if(generatorTE != null && generatorTE instanceof IGenerator)
+        {
+            if (generatorTE instanceof TileEntityMultiSocketOut)
+            {
+                TileEntity[] consumerTEList = ((TileEntityMultiSocketOut) generatorTE).getConsumerTEList(null);
+                for (TileEntity consumerTE : consumerTEList)
+                {
+                    if (consumerTE == this)
+                    {
+                        return ((IGenerator) generatorTE).getChargeRate();
+                    }
+                }
+            }
+            else if (((IGenerator) generatorTE).getConsumerTE() == this)
+            {
+                return ((IGenerator) generatorTE).getChargeRate();
+            }
+        }
+        return 0;
     }
 
     @Override

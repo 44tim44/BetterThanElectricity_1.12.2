@@ -86,7 +86,7 @@ public class TileEntityMultiSocketOut extends TileEntity implements IGenerator, 
             {
                 if(inputTE instanceof TileEntityCable)
                 {
-                    TileEntity inputTEEnd = ((TileEntityCable)inputTE).getInputTE(facing.getOpposite());
+                    TileEntity inputTEEnd = ((TileEntityCable)inputTE).getConsumerTE(facing.getOpposite());
                     if(inputTEEnd == this)
                     {
                         inputTEEnd = null;
@@ -121,7 +121,7 @@ public class TileEntityMultiSocketOut extends TileEntity implements IGenerator, 
         {
             if(outputTE instanceof TileEntityCable)
             {
-                return ((TileEntityCable) outputTE).getOutputTE(outputSide.getOpposite());
+                return ((TileEntityCable) outputTE).getGeneratorTE(outputSide.getOpposite());
             }
         }
         return null;
@@ -129,7 +129,7 @@ public class TileEntityMultiSocketOut extends TileEntity implements IGenerator, 
 
     @Override
     public float getConsumeRate() {
-        return 0; //((IConsumer)getInputTE()).getConsumeRate();
+        return 0; //((IConsumer)getConsumerTE()).getConsumeRate();
     }
 
     @Override

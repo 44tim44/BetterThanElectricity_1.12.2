@@ -21,7 +21,7 @@ public class ContainerWindMill extends Container {
             @Override
             public void onSlotChanged()
             {
-                windMill.setTotalChargeTime(windMill.getItemChargeTime(inventory.getStackInSlot(0)));
+                windMill.setTotalChargeTime(windMill.getItemChargeTime());
                 windMill.setChargeTime(0);
                 windMill.markDirty();
             }

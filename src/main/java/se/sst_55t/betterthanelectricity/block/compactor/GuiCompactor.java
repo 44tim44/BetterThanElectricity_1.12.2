@@ -55,17 +55,7 @@ public class GuiCompactor extends GuiContainer
                 GuiButton btn = (GuiButton) buttonList.get(i);
                 if (btn.isMouseOver())
                 {
-                    float charge = 0;
-                    TileEntity te = tileCompactor.getGeneratorTE();
-                    ItemStack batteryStack = tileCompactor.getStackInSlot(1);
-                    if(te != null && te instanceof IGenerator)
-                    {
-                        charge = ((IGenerator)te).getChargeRate();
-                    }
-                    if(!batteryStack.isEmpty() && batteryStack.getItem() instanceof IBattery && ((IBattery)batteryStack.getItem()).getCharge(batteryStack) > 0)
-                    {
-                        charge = tileCompactor.getConsumeRate();
-                    }
+                    float charge = this.tileCompactor.getChargeRate();
                     String[] desc = { "Current Charge: " +  charge , "Required Charge: " + tileCompactor.getConsumeRate()};
                     @SuppressWarnings("rawtypes")
                     List temp = Arrays.asList(desc);
@@ -120,7 +110,7 @@ public class GuiCompactor extends GuiContainer
         private static final String __OBFID = "CL_00000743";
 
         protected HintButton(int buttonID, int posx, int posy) {
-            super(buttonID, posx, posy, 16, 42, "");
+            super(buttonID, posx, posy, 16, 16, "");
         }
 
         public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {

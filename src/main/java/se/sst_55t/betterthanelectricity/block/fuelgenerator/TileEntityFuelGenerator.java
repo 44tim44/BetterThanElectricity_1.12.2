@@ -611,7 +611,7 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
             {
                 if(inputTE instanceof TileEntityCable)
                 {
-                    return ((TileEntityCable) inputTE).getInputTE(facing.getOpposite());
+                    return ((TileEntityCable) inputTE).getConsumerTE(facing.getOpposite());
                 }
             }
         }

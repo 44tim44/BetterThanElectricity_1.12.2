@@ -1,9 +1,11 @@
 package se.sst_55t.betterthanelectricity.block.solarpanel;
 
 import se.sst_55t.betterthanelectricity.block.ICable;
+import se.sst_55t.betterthanelectricity.block.IConsumer;
 import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
 import se.sst_55t.betterthanelectricity.block.IGenerator;
 import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
+import se.sst_55t.betterthanelectricity.block.multiSocket.TileEntityMultiSocketIn;
 import se.sst_55t.betterthanelectricity.item.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -206,7 +208,7 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable, IGene
             {
                 if(inputTE instanceof TileEntityCable)
                 {
-                    return ((TileEntityCable) inputTE).getInputTE(facing.getOpposite());
+                    return ((TileEntityCable) inputTE).getConsumerTE(facing.getOpposite());
                 }
             }
         }
@@ -221,5 +223,48 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable, IGene
             return (1.0F / (getItemChargeTime() / 20.0F));
         }
         return 0;
+    }
+
+    /**
+     * Returns true if a battery is currently being charged, or if a consumer is given energy by this block.
+     * Used for GUI.
+     *
+     */
+    public boolean isGivingCharge()
+    {
+        if(!isCharging())
+        {
+            return false;
+        }
+
+        ItemStack batteryStack = inventory.getStackInSlot(0);
+        if ((batteryStack.getItem() instanceof IBattery || batteryStack.getItem() instanceof IChargeable))
+        {
+            if(((IChargeable)batteryStack.getItem()).getCharge(batteryStack) < ((IChargeable)batteryStack.getItem()).getMaxCharge(batteryStack))
+            {
+                return true;
+            }
+        }
+
+        TileEntity consumerTE = getConsumerTE();
+        if(consumerTE != null)
+        {
+            if (consumerTE instanceof TileEntityMultiSocketIn)
+            {
+                TileEntity[] generatorTEList = ((TileEntityMultiSocketIn) consumerTE).getGeneratorTEList(null);
+                for (TileEntity generatorTE : generatorTEList)
+                {
+                    if (generatorTE == this) {
+                        return true;
+                    }
+                }
+            }
+            else if (((IConsumer) consumerTE).getGeneratorTE() == this)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

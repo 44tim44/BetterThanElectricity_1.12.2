@@ -8,8 +8,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.sst_55t.betterthanelectricity.block.inventory.SlotBattery;
 import se.sst_55t.betterthanelectricity.item.IBattery;
-import se.sst_55t.betterthanelectricity.item.ModItems;
-import se.sst_55t.betterthanelectricity.recipe.PulverizerRecipes;
+import se.sst_55t.betterthanelectricity.recipe.CompactorRecipes;
 
 public class ContainerCompactor extends Container
 {
@@ -122,7 +121,7 @@ public class ContainerCompactor extends Container
             }
             else if (index != 1 && index != 0)
             {
-                if (!PulverizerRecipes.instance().getSmeltingResult(itemstack1).isEmpty())
+                if (!CompactorRecipes.instance().getSmeltingResult(itemstack1).isEmpty())
                 {
                     if (!this.mergeItemStack(itemstack1, 0, 1, false))
                     {
