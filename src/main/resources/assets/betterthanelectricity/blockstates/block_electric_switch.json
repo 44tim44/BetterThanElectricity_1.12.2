@@ -1,0 +1,17 @@
+{
+    "variants": {
+        "facing=north,powered=false": { "model": "betterthanelectricity:electric_switch" },
+        "facing=south,powered=false": { "model": "betterthanelectricity:electric_switch", "y": 180 },
+        "facing=west,powered=false":  { "model": "betterthanelectricity:electric_switch", "y": 270 },
+        "facing=east,powered=false":  { "model": "betterthanelectricity:electric_switch", "y": 90 },
+        "facing=up,powered=false":    { "model": "betterthanelectricity:electric_switch_up" },
+        "facing=down,powered=false":  { "model": "betterthanelectricity:electric_switch_down" },
+        "facing=north,powered=true":  { "model": "betterthanelectricity:electric_switch" },
+        "facing=south,powered=true":  { "model": "betterthanelectricity:electric_switch", "y": 180 },
+        "facing=west,powered=true":   { "model": "betterthanelectricity:electric_switch", "y": 270 },
+        "facing=east,powered=true":   { "model": "betterthanelectricity:electric_switch", "y": 90 },
+        "facing=up,powered=true":     { "model": "betterthanelectricity:electric_switch_up" },
+        "facing=down,powered=true":   { "model": "betterthanelectricity:electric_switch_down" },
+        "inventory":                  { "model": "betterthanelectricity:electric_switch" }
+    }
+}

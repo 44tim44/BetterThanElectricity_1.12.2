@@ -7,10 +7,7 @@ import se.sst_55t.betterthanelectricity.block.ICable;
 import se.sst_55t.betterthanelectricity.block.IConsumer;
 import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
 import se.sst_55t.betterthanelectricity.block.IGenerator;
-import se.sst_55t.betterthanelectricity.block.cable.BlockCable;
 import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
-import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketIn;
-import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketOut;
 import se.sst_55t.betterthanelectricity.block.multiSocket.TileEntityMultiSocketOut;
 
 /**
@@ -41,15 +38,12 @@ public class TileEntityElectricSwitch extends TileEntity implements IConsumer, I
 
     public boolean isConnected()
     {
-        int amountOfConnections = 0;
-        for (EnumFacing facing : EnumFacing.VALUES)
-        {
-            if(world.getTileEntity(this.pos.offset(facing)) instanceof ICable )
-            {
-                amountOfConnections++;
-            }
-        }
-        return amountOfConnections == 2 && world.getBlockState(this.pos).getValue(BlockElectricSwitch.POWERED);
+        EnumFacing consumerSide = this.world.getBlockState(this.pos).getValue(BlockElectricSwitch.FACING);
+        EnumFacing generatorSide = consumerSide.getOpposite();
+        TileEntity consumerSideTE = world.getTileEntity(this.pos.offset(consumerSide));
+        TileEntity generatorSideTE = world.getTileEntity(this.pos.offset(generatorSide));
+
+        return (consumerSideTE instanceof ICable && generatorSideTE instanceof ICable) && world.getBlockState(this.pos).getValue(BlockElectricSwitch.POWERED);
     }
 
     /**
@@ -60,9 +54,11 @@ public class TileEntityElectricSwitch extends TileEntity implements IConsumer, I
     @Override
     public TileEntity getGeneratorTE()
     {
+        EnumFacing facing = this.world.getBlockState(this.pos).getValue(BlockElectricSwitch.FACING);
+        facing = facing.getOpposite();
         TileEntity generatorTE;
-        for (EnumFacing facing : EnumFacing.VALUES)
-        {
+        //for (EnumFacing facing : EnumFacing.VALUES)
+        //{
             generatorTE = getConnectedBlockTE(facing);
 
             if (generatorTE != null && generatorTE instanceof TileEntityCable)
@@ -71,7 +67,7 @@ public class TileEntityElectricSwitch extends TileEntity implements IConsumer, I
                     return ((TileEntityCable) generatorTE).getGeneratorTE(facing.getOpposite());
                 }
             }
-        }
+        //}
         return null;
     }
 
@@ -87,9 +83,10 @@ public class TileEntityElectricSwitch extends TileEntity implements IConsumer, I
      */
     @Override
     public TileEntity getConsumerTE() {
+        EnumFacing facing = this.world.getBlockState(this.pos).getValue(BlockElectricSwitch.FACING);
         TileEntity consumerTE;
-        for (EnumFacing facing : EnumFacing.VALUES)
-        {
+        //for (EnumFacing facing : EnumFacing.VALUES)
+        //{
             consumerTE = getConnectedBlockTE(facing);
 
             if (consumerTE != null && consumerTE instanceof TileEntityCable) {
@@ -98,7 +95,7 @@ public class TileEntityElectricSwitch extends TileEntity implements IConsumer, I
                     return ((TileEntityCable) consumerTE).getConsumerTE(facing.getOpposite());
                 }
             }
-        }
+        //}
         return null;
     }
 

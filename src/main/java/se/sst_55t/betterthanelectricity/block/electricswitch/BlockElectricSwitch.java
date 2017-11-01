@@ -1,14 +1,22 @@
 package se.sst_55t.betterthanelectricity.block.electricswitch;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDirectional;
+import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import se.sst_55t.betterthanelectricity.block.BlockTileEntity;
+import se.sst_55t.betterthanelectricity.block.ModBlocks;
 
 import javax.annotation.Nullable;
 
@@ -17,6 +25,8 @@ import javax.annotation.Nullable;
  */
 public class BlockElectricSwitch extends BlockTileEntity<TileEntityElectricSwitch>
 {
+    public static final PropertyDirection FACING = BlockDirectional.FACING;
+
     public static final PropertyBool POWERED = PropertyBool.create("powered");
 
     public BlockElectricSwitch()
@@ -43,9 +53,18 @@ public class BlockElectricSwitch extends BlockTileEntity<TileEntityElectricSwitc
         }
     }
 
+    /**
+     * Called by ItemBlocks after a block is set in the world, to allow post-place logic
+     */
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+    {
+        worldIn.setBlockState(pos, state.withProperty(FACING, EnumFacing.getDirectionFromEntityLiving(pos, placer)), 2);
+    }
+
+
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {POWERED});
+        return new BlockStateContainer(this, new IProperty[] {FACING, POWERED});
     }
 
     /**
@@ -53,7 +72,11 @@ public class BlockElectricSwitch extends BlockTileEntity<TileEntityElectricSwitc
      */
     public IBlockState getStateFromMeta(int meta)
     {
-        return this.getDefaultState().withProperty(POWERED, Boolean.valueOf((meta & 2) > 0));
+        boolean flag = (meta & 8) > 0;
+        meta -= 8;
+        IBlockState iblockstate = this.getDefaultState();
+        iblockstate = iblockstate.withProperty(FACING, EnumFacing.getFront(meta));
+        return iblockstate.withProperty(POWERED, Boolean.valueOf(flag));
     }
 
     /**
@@ -61,10 +84,10 @@ public class BlockElectricSwitch extends BlockTileEntity<TileEntityElectricSwitc
      */
     public int getMetaFromState(IBlockState state)
     {
-        int i = 0;
+        int i = ((EnumFacing)state.getValue(FACING)).getIndex();
         if (state.getValue(POWERED).booleanValue())
         {
-            i |= 2;
+            i |= 8;
         }
         return i;
     }

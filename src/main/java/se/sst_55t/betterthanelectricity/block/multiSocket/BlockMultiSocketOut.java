@@ -1,5 +1,6 @@
 package se.sst_55t.betterthanelectricity.block.multiSocket;
 
+import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -20,7 +21,7 @@ import javax.annotation.Nullable;
  */
 public class BlockMultiSocketOut extends BlockTileEntity<TileEntityMultiSocketOut> {
 
-    public static final PropertyDirection FACING = BlockHorizontal.FACING;
+    public static final PropertyDirection FACING = BlockDirectional.FACING;
 
     public BlockMultiSocketOut()
     {
@@ -32,7 +33,7 @@ public class BlockMultiSocketOut extends BlockTileEntity<TileEntityMultiSocketOu
      */
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
     {
-        worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
+        worldIn.setBlockState(pos, state.withProperty(FACING, EnumFacing.getDirectionFromEntityLiving(pos, placer)), 2);
     }
 
     protected BlockStateContainer createBlockState()
@@ -46,12 +47,6 @@ public class BlockMultiSocketOut extends BlockTileEntity<TileEntityMultiSocketOu
     public IBlockState getStateFromMeta(int meta)
     {
         EnumFacing enumfacing = EnumFacing.getFront(meta);
-
-        if (enumfacing.getAxis() == EnumFacing.Axis.Y)
-        {
-            enumfacing = EnumFacing.NORTH;
-        }
-
         return this.getDefaultState().withProperty(FACING, enumfacing);
     }
 

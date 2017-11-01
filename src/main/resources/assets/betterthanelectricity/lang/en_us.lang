@@ -202,5 +202,6 @@ tile.block_cable_green.name=Electric Cable (Green)
 tile.block_cable_red.name=Electric Cable (Red)
 tile.block_cable_black.name=Electric Cable (Black)
 
-block_multi_socket_in.name=Electric Socket (Input)
-block_multi_socket_out.name=Electric Socket (Output)
+tile.block_multi_socket_in.name=Electric Socket (Input)
+tile.block_multi_socket_out.name=Electric Socket (Output)
+tile.block_electric_switch.name=Electric Switch

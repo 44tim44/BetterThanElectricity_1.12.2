@@ -4,6 +4,8 @@
         "facing=south": { "model": "betterthanelectricity:block_socket_out", "y": 180 },
         "facing=west":  { "model": "betterthanelectricity:block_socket_out", "y": 270 },
         "facing=east":  { "model": "betterthanelectricity:block_socket_out", "y": 90 },
+        "facing=up": { "model": "betterthanelectricity:block_socket_out_up" },
+        "facing=down": { "model": "betterthanelectricity:block_socket_out_down" },
         "inventory": { "model": "betterthanelectricity:block_socket_out" }
     }
 }
