@@ -199,16 +199,16 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable, IGene
 
     @Override
     public TileEntity getConsumerTE() {
-        TileEntity inputTE;
+        TileEntity consumerTE;
         for (EnumFacing facing : EnumFacing.VALUES)
         {
-            inputTE = getConnectedBlockTE(facing);
+            consumerTE = getConnectedBlockTE(facing);
 
-            if (inputTE != null)
+            if (consumerTE != null)
             {
-                if(inputTE instanceof TileEntityCable)
+                if(consumerTE instanceof TileEntityCable)
                 {
-                    return ((TileEntityCable) inputTE).getConsumerTE(facing.getOpposite());
+                    return ((TileEntityCable) consumerTE).getConsumerTE(facing.getOpposite());
                 }
             }
         }

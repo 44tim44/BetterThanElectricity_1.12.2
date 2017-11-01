@@ -611,6 +611,7 @@ public class TileEntityCompactor extends TileEntityLockable implements ITickable
             return getConsumeRate();
         }
 
+        /*
         TileEntity generatorTE = getGeneratorTE();
         if(generatorTE != null && generatorTE instanceof IGenerator)
         {
@@ -630,6 +631,13 @@ public class TileEntityCompactor extends TileEntityLockable implements ITickable
                 return ((IGenerator) generatorTE).getChargeRate();
             }
         }
+        */
+        TileEntity te = getGeneratorTE();
+        if(te != null && te instanceof IGenerator)
+        {
+            return ((IGenerator)te).getChargeRate();
+        }
+
         return 0;
     }
 

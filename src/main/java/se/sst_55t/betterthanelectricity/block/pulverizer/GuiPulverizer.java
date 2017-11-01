@@ -102,7 +102,7 @@ public class GuiPulverizer extends GuiContainer
 
     private int getBurnLeftScaled(int pixels)
     {
-        return Math.round(getGUIChargeRatio() * pixels);
+        return Math.round(tilePulverizer.getGUIChargeRatio() * pixels);
     }
 
     @SideOnly(Side.CLIENT)
@@ -124,11 +124,4 @@ public class GuiPulverizer extends GuiContainer
 
     }
 
-    public float getGUIChargeRatio()
-    {
-        float chargeRatio = (this.tilePulverizer.getChargeRate() / this.tilePulverizer.getConsumeRate());
-        if(chargeRatio < 0.0F) return 0.0F;
-        if(chargeRatio > 1.0F) return 1.0F;
-        return chargeRatio;
-    }
 }

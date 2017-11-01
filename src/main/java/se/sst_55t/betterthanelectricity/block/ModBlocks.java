@@ -12,6 +12,7 @@ import se.sst_55t.betterthanelectricity.block.chargingstation.BlockChargingStati
 import se.sst_55t.betterthanelectricity.block.compactor.BlockCompactor;
 import se.sst_55t.betterthanelectricity.block.counter.BlockCounter;
 import se.sst_55t.betterthanelectricity.block.electricfurnace.BlockElectricFurnace;
+import se.sst_55t.betterthanelectricity.block.electricswitch.BlockElectricSwitch;
 import se.sst_55t.betterthanelectricity.block.fuelgenerator.BlockFuelGenerator;
 import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketIn;
 import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketOut;
@@ -193,6 +194,7 @@ public class ModBlocks {
 
     public static BlockMultiSocketIn block_multi_socket_in = (BlockMultiSocketIn) new BlockMultiSocketIn().setCreativeTab(CreativeTabs.MISC).setHardness(5.0F);
     public static BlockMultiSocketOut block_multi_socket_out = (BlockMultiSocketOut) new BlockMultiSocketOut().setCreativeTab(CreativeTabs.MISC).setHardness(5.0F);
+    public static BlockElectricSwitch block_electric_switch = (BlockElectricSwitch) new BlockElectricSwitch().setCreativeTab(CreativeTabs.MISC).setHardness(5.0F);
 
     public static void register(IForgeRegistry<Block> registry) {
         registry.registerAll(
@@ -358,7 +360,8 @@ public class ModBlocks {
                 block_cable_black,
 
                 block_multi_socket_in,
-                block_multi_socket_out
+                block_multi_socket_out,
+                block_electric_switch
 
         );
 
@@ -375,6 +378,7 @@ public class ModBlocks {
 
         GameRegistry.registerTileEntity(block_multi_socket_in.getTileEntityClass(), block_multi_socket_in.getRegistryName().toString());
         GameRegistry.registerTileEntity(block_multi_socket_out.getTileEntityClass(), block_multi_socket_out.getRegistryName().toString());
+        GameRegistry.registerTileEntity(block_electric_switch.getTileEntityClass(), block_electric_switch.getRegistryName().toString());
     }
 
     public static void registerItemBlocks(IForgeRegistry<Item> registry) {
@@ -510,7 +514,8 @@ public class ModBlocks {
                 block_cable_black.createItemBlock(),
 
                 block_multi_socket_in.createItemBlock(),
-                block_multi_socket_out.createItemBlock()
+                block_multi_socket_out.createItemBlock(),
+                block_electric_switch.createItemBlock()
         );
     }
 
@@ -643,6 +648,7 @@ public class ModBlocks {
 
         block_multi_socket_in.registerItemModel(Item.getItemFromBlock(block_multi_socket_in));
         block_multi_socket_out.registerItemModel(Item.getItemFromBlock(block_multi_socket_out));
+        block_electric_switch.registerItemModel(Item.getItemFromBlock(block_electric_switch));
     }
 
 }

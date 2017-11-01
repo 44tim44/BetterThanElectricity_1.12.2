@@ -23,10 +23,7 @@ import net.minecraft.util.datafix.walkers.ItemStackDataLists;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import se.sst_55t.betterthanelectricity.block.ICable;
-import se.sst_55t.betterthanelectricity.block.IConsumer;
-import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
-import se.sst_55t.betterthanelectricity.block.IGenerator;
+import se.sst_55t.betterthanelectricity.block.*;
 import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
 import se.sst_55t.betterthanelectricity.block.multiSocket.TileEntityMultiSocketIn;
 import se.sst_55t.betterthanelectricity.block.multiSocket.TileEntityMultiSocketOut;
@@ -640,7 +637,8 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
     @Override
     public float getChargeRate()
     {
-        if (isBurning())
+        //if (isBurning())
+        if(world.getBlockState(this.pos).getBlock() == ModBlocks.fuelGenerator_on)
         {
             return (1.0F / (getItemChargeTime() / 20.0F));
         }
