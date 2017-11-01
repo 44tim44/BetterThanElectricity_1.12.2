@@ -525,6 +525,7 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
                 break;
             case 3:
                 this.totalCookTime = value;
+                break;
         }
     }
 

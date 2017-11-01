@@ -2,7 +2,6 @@ package se.sst_55t.betterthanelectricity.block.pulverizer;
 
 import se.sst_55t.betterthanelectricity.block.inventory.SlotBattery;
 import se.sst_55t.betterthanelectricity.item.IBattery;
-import se.sst_55t.betterthanelectricity.item.ModItems;
 import se.sst_55t.betterthanelectricity.recipe.PulverizerRecipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -13,18 +12,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerPulverizer extends Container
 {
-    private final IInventory tileFurnace;
+    private final IInventory tilePulverizer;
     private int cookTime;
     private int totalCookTime;
     private int furnaceBurnTime;
     private int currentItemBurnTime;
 
-    public ContainerPulverizer(InventoryPlayer playerInventory, IInventory furnaceInventory)
+    public ContainerPulverizer(InventoryPlayer playerInventory, IInventory pulverizerInventory)
     {
-        this.tileFurnace = furnaceInventory;
-        this.addSlotToContainer(new Slot(furnaceInventory, 0, 56, 17));
-        this.addSlotToContainer(new SlotBattery(furnaceInventory, 1, 56, 53));
-        this.addSlotToContainer(new SlotFurnaceOutput(playerInventory.player, furnaceInventory, 2, 116, 35));
+        this.tilePulverizer = pulverizerInventory;
+        this.addSlotToContainer(new Slot(pulverizerInventory, 0, 56, 17));
+        this.addSlotToContainer(new SlotBattery(pulverizerInventory, 1, 56, 53));
+        this.addSlotToContainer(new SlotFurnaceOutput(playerInventory.player, pulverizerInventory, 2, 116, 35));
 
         for (int i = 0; i < 3; ++i)
         {
@@ -43,7 +42,7 @@ public class ContainerPulverizer extends Container
     public void addListener(IContainerListener listener)
     {
         super.addListener(listener);
-        listener.sendAllWindowProperties(this, this.tileFurnace);
+        listener.sendAllWindowProperties(this, this.tilePulverizer);
     }
 
     /**
@@ -57,37 +56,37 @@ public class ContainerPulverizer extends Container
         {
             IContainerListener icontainerlistener = (IContainerListener)this.listeners.get(i);
 
-            if (this.cookTime != this.tileFurnace.getField(2))
+            if (this.cookTime != this.tilePulverizer.getField(2))
             {
-                icontainerlistener.sendWindowProperty(this, 2, this.tileFurnace.getField(2));
+                icontainerlistener.sendWindowProperty(this, 2, this.tilePulverizer.getField(2));
             }
 
-            if (this.furnaceBurnTime != this.tileFurnace.getField(0))
+            if (this.furnaceBurnTime != this.tilePulverizer.getField(0))
             {
-                icontainerlistener.sendWindowProperty(this, 0, this.tileFurnace.getField(0));
+                icontainerlistener.sendWindowProperty(this, 0, this.tilePulverizer.getField(0));
             }
 
-            if (this.currentItemBurnTime != this.tileFurnace.getField(1))
+            if (this.currentItemBurnTime != this.tilePulverizer.getField(1))
             {
-                icontainerlistener.sendWindowProperty(this, 1, this.tileFurnace.getField(1));
+                icontainerlistener.sendWindowProperty(this, 1, this.tilePulverizer.getField(1));
             }
 
-            if (this.totalCookTime != this.tileFurnace.getField(3))
+            if (this.totalCookTime != this.tilePulverizer.getField(3))
             {
-                icontainerlistener.sendWindowProperty(this, 3, this.tileFurnace.getField(3));
+                icontainerlistener.sendWindowProperty(this, 3, this.tilePulverizer.getField(3));
             }
         }
 
-        this.cookTime = this.tileFurnace.getField(2);
-        this.furnaceBurnTime = this.tileFurnace.getField(0);
-        this.currentItemBurnTime = this.tileFurnace.getField(1);
-        this.totalCookTime = this.tileFurnace.getField(3);
+        this.cookTime = this.tilePulverizer.getField(2);
+        this.furnaceBurnTime = this.tilePulverizer.getField(0);
+        this.currentItemBurnTime = this.tilePulverizer.getField(1);
+        this.totalCookTime = this.tilePulverizer.getField(3);
     }
 
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int id, int data)
     {
-        this.tileFurnace.setField(id, data);
+        this.tilePulverizer.setField(id, data);
     }
 
     /**
@@ -95,7 +94,7 @@ public class ContainerPulverizer extends Container
      */
     public boolean canInteractWith(EntityPlayer playerIn)
     {
-        return this.tileFurnace.isUsableByPlayer(playerIn);
+        return this.tilePulverizer.isUsableByPlayer(playerIn);
     }
 
     /**

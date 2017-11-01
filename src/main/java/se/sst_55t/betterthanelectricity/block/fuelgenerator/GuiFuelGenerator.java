@@ -3,7 +3,6 @@ package se.sst_55t.betterthanelectricity.block.fuelgenerator;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -45,7 +44,7 @@ public class GuiFuelGenerator extends GuiContainer
         String s = this.tileFuelGenerator.getDisplayName().getUnformattedText();
         this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
         this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
-        float chargeRate = this.tileFuelGenerator.getItemChargeTime((ItemStack)null);
+        float chargeRate = this.tileFuelGenerator.getItemChargeTime();
         if (tileFuelGenerator.isBurning()) {
             fontRenderer.drawString(String.format("%.2f", 1.0F / (chargeRate / 20.0F)) + " Energy/sec", 85, ySize - 94, 0x404040);
         } else {
@@ -71,8 +70,15 @@ public class GuiFuelGenerator extends GuiContainer
             this.drawTexturedModalRect(x + 71, y + 36 + 14 - k, 176, 28 - k, 14, k);
         }
 
-        int l = this.getCookProgressScaled(14);
-        this.drawTexturedModalRect(x + 89, y + 36 + 14 - l, 176, 14 - l, 14, l);
+        //int l = this.getCookProgressScaled(14);
+        if(tileFuelGenerator.isGivingCharge())
+        {
+            this.drawTexturedModalRect(x + 89, y + 36, 176, 0, 14, 14);
+        }
+        else
+        {
+            this.drawTexturedModalRect(x + 89, y + 36, 176, 0, 0, 0);
+        }
     }
 
     private int getCookProgressScaled(int pixels)

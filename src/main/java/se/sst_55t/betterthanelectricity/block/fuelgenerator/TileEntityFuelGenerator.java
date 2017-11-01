@@ -28,6 +28,8 @@ import se.sst_55t.betterthanelectricity.block.IConsumer;
 import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
 import se.sst_55t.betterthanelectricity.block.IGenerator;
 import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
+import se.sst_55t.betterthanelectricity.block.multiSocket.TileEntityMultiSocketIn;
+import se.sst_55t.betterthanelectricity.block.multiSocket.TileEntityMultiSocketOut;
 import se.sst_55t.betterthanelectricity.item.IBattery;
 import se.sst_55t.betterthanelectricity.item.IChargeable;
 
@@ -36,7 +38,7 @@ import javax.annotation.Nullable;
 /**
  * Created by Timmy on 2016-11-27.
  */
-public class TileEntityFuelGenerator extends TileEntityLockable implements ITickable, ISidedInventory, IGenerator
+public class TileEntityFuelGenerator extends TileEntityLockable implements ITickable, ISidedInventory, IGenerator, IElectricityStorage
 {
     private static final int BASE_CHARGE_RATE = 8; // Amount of ticks required to charge 1 energy.
     private static final int[] SLOTS_TOP = new int[] {0};
@@ -51,6 +53,8 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
     private int cookTime;
     private int totalCookTime;
     private String furnaceCustomName;
+    private static final int maxCharge = 1;
+    private int currentCharge;
 
     /**
      * Returns the number of slots in the inventory.
@@ -116,7 +120,7 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
 
         if (index == 0 && !flag)
         {
-            this.totalCookTime = this.getItemChargeTime(stack);
+            this.totalCookTime = this.getItemChargeTime();
             this.cookTime = 0;
             this.markDirty();
         }
@@ -202,13 +206,48 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
         return inventory.getField(0) > 0;
     }
 
+    public boolean canStartBurn(ItemStack batteryStack, TileEntity consumerTE)
+    {
+        if(!batteryStack.isEmpty() && (batteryStack.getItem() instanceof IBattery || batteryStack.getItem() instanceof IChargeable))
+        {
+            if(((IBattery)batteryStack.getItem()).getCharge(batteryStack) < ((IBattery)batteryStack.getItem()).getMaxCharge(batteryStack))
+            {
+                return true;
+            }
+        }
+
+        if(consumerTE != null && consumerTE instanceof IConsumer && ((IConsumer)consumerTE).isConnected())
+        {
+            if(consumerTE instanceof TileEntityMultiSocketIn)
+            {
+                TileEntity[] generatorTEList = ((TileEntityMultiSocketIn) consumerTE).getGeneratorTEList(null);
+                for(TileEntity generatorTE : generatorTEList)
+                {
+                    if(generatorTE == this)
+                    {
+                        return true;
+                    }
+                }
+            }
+            else if(((IConsumer) consumerTE).getGeneratorTE() == this)
+            {
+                return true;
+            }
+
+        }
+
+        return false;
+    }
+
     /**
      * Like the old updateEntity(), except more generic.
      */
     public void update()
     {
+        this.totalCookTime = this.getItemChargeTime();
+
         boolean flag = this.isBurning();
-        boolean flag1 = false;
+        boolean isDirty = false;
 
         if (this.isBurning())
         {
@@ -217,10 +256,11 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
 
         if (!this.world.isRemote)
         {
+            ItemStack batteryStack = fuelGeneratorItemStacks.get(0);
             ItemStack itemstackFuel = this.fuelGeneratorItemStacks.get(1);
             TileEntity te = getConsumerTE();
 
-            if (this.isBurning() || !itemstackFuel.isEmpty() && (!this.fuelGeneratorItemStacks.get(0).isEmpty() || (te != null && te instanceof IConsumer)))
+            if (this.isBurning() || !itemstackFuel.isEmpty() && canStartBurn(batteryStack, te))
             {
                 if (!this.isBurning() && this.canGenerate())
                 {
@@ -229,7 +269,7 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
 
                     if (this.isBurning())
                     {
-                        flag1 = true;
+                        isDirty = true;
 
                         if (!itemstackFuel.isEmpty())
                         {
@@ -252,23 +292,23 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
                     if (this.cookTime == this.totalCookTime)
                     {
                         this.cookTime = 0;
-                        this.totalCookTime = this.getItemChargeTime(this.fuelGeneratorItemStacks.get(0));
+                        this.totalCookTime = this.getItemChargeTime();
 
-                        ItemStack itemstack = fuelGeneratorItemStacks.get(0);
-                        if(itemstack.getItem() instanceof IBattery)
+
+                        if(batteryStack.getItem() instanceof IBattery && ((IBattery) batteryStack.getItem()).getCharge(batteryStack) < ((IBattery) batteryStack.getItem()).getMaxCharge(batteryStack))
                         {
-                            ((IBattery)itemstack.getItem()).increaseCharge(itemstack);
+                            ((IBattery)batteryStack.getItem()).increaseCharge(batteryStack);
                         }
-                        else if(itemstack.getItem() instanceof IChargeable)
+                        else if(batteryStack.getItem() instanceof IChargeable && ((IChargeable) batteryStack.getItem()).getCharge(batteryStack) < ((IChargeable) batteryStack.getItem()).getMaxCharge(batteryStack))
                         {
-                            ((IChargeable)itemstack.getItem()).increaseCharge(itemstack);
+                            ((IChargeable)batteryStack.getItem()).increaseCharge(batteryStack);
                         }
-                        else if(te instanceof IElectricityStorage)
+                        else
                         {
-                            ((IElectricityStorage) te).increaseCharge();
+                            if(!this.world.isRemote) this.increaseCharge();
                         }
 
-                        flag1 = true;
+                        isDirty = true;
                     }
                 }
                 else
@@ -283,12 +323,12 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
 
             if (flag != this.isBurning())
             {
-                flag1 = true;
+                isDirty = true;
                 BlockFuelGenerator.setState(this.isBurning(), this.world, this.pos);
             }
         }
 
-        if (flag1)
+        if (isDirty)
         {
             this.markDirty();
         }
@@ -298,7 +338,7 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
      * Time to cook:
      * Lower number = faster.
      */
-    public int getItemChargeTime(@Nullable ItemStack stack)
+    public int getItemChargeTime()
     {
         return BASE_CHARGE_RATE;
     }
@@ -308,31 +348,10 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
      */
     private boolean canGenerate()
     {
-        ItemStack itemstack = ((ItemStack)this.fuelGeneratorItemStacks.get(0));
-        TileEntity te = getConsumerTE();
-        if (!itemstack.isEmpty())
-        {
-            if(itemstack.getItem() instanceof IBattery)
-            {
-                if(((IBattery)itemstack.getItem()).getCharge(itemstack) < ((IBattery)itemstack.getItem()).getMaxCharge(itemstack))
-                {
-                    return true;
-                }
-            }
-            else if(itemstack.getItem() instanceof IChargeable)
-            {
-                if(((IChargeable)itemstack.getItem()).getCharge(itemstack) < ((IChargeable)itemstack.getItem()).getMaxCharge(itemstack))
-                {
-                    return true;
-                }
-            }
-        }
-
-        if(te != null && te instanceof IConsumer)
+        if(this.currentCharge < maxCharge)
         {
             return true;
         }
-
         return false;
     }
 
@@ -621,14 +640,101 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
     @Override
     public float getChargeRate()
     {
-        ItemStack batteryStack = fuelGeneratorItemStacks.get(0);
-        if(batteryStack.isEmpty() ||  ((IChargeable) batteryStack.getItem()).getCharge(batteryStack) == ((IChargeable) batteryStack.getItem()).getMaxCharge(batteryStack))
+        if (isBurning())
         {
-            if (isBurning())
-            {
-                return (1.0F / (getItemChargeTime(null) / 20.0F));
-            }
+            return (1.0F / (getItemChargeTime() / 20.0F));
         }
         return 0;
+    }
+
+    /**
+     * Returns true if a battery is currently being charged, or if a consumer is given energy by this block.
+     * Used for GUI.
+     *
+     */
+    public boolean isGivingCharge()
+    {
+        if(!isBurning())
+        {
+            return false;
+        }
+
+        ItemStack batteryStack = fuelGeneratorItemStacks.get(0);
+        if (batteryStack.getItem() instanceof IChargeable)
+        {
+            if(((IChargeable)batteryStack.getItem()).getCharge(batteryStack) < ((IChargeable)batteryStack.getItem()).getMaxCharge(batteryStack))
+            {
+                return true;
+            }
+        }
+        else if (batteryStack.getItem() instanceof IBattery)
+        {
+            if(((IBattery)batteryStack.getItem()).getCharge(batteryStack) < ((IBattery)batteryStack.getItem()).getMaxCharge(batteryStack))
+            {
+                return true;
+            }
+        }
+
+        TileEntity consumerTE = getConsumerTE();
+        if(consumerTE != null)
+        {
+            if (consumerTE instanceof TileEntityMultiSocketIn)
+            {
+                TileEntity[] generatorTEList = ((TileEntityMultiSocketIn) consumerTE).getGeneratorTEList(null);
+                for (TileEntity generatorTE : generatorTEList)
+                {
+                    if (generatorTE == this) {
+                        return true;
+                    }
+                }
+            }
+            else if (((IConsumer) consumerTE).getGeneratorTE() == this)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public void increaseCharge() {
+        if(this.currentCharge < maxCharge) this.currentCharge++;
+        this.markDirty();
+    }
+
+    @Override
+    public void decreaseCharge() {
+        if(this.currentCharge > 0) this.currentCharge--;
+        this.markDirty();
+    }
+
+    @Override
+    public void setCharge(int value) {
+        if(value > maxCharge)
+        {
+            this.currentCharge = maxCharge;
+            this.markDirty();
+        }
+        else if(value < 0)
+        {
+            this.currentCharge = 0;
+            this.markDirty();
+        }
+        else
+        {
+            this.currentCharge = value;
+            this.markDirty();
+        }
+    }
+
+    public int getCharge()
+    {
+        return this.currentCharge;
+    }
+
+    @Override
+    public int getMaxCharge() {
+        return maxCharge;
     }
 }

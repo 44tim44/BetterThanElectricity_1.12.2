@@ -25,7 +25,6 @@ public class ContainerFuelGenerator extends Container
         this.tileFurnace = furnaceInventory;
         this.addSlotToContainer(new Slot(furnaceInventory, 0, 107, 35));
         this.addSlotToContainer(new SlotFurnaceFuel(furnaceInventory, 1, 53, 35));
-        //this.addSlotToContainer(new SlotFurnaceOutput(playerInventory.player, furnaceInventory, 2, 116, 35));
 
         for (int i = 0; i < 3; ++i)
         {
