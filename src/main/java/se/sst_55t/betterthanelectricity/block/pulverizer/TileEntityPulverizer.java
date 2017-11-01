@@ -609,25 +609,12 @@ public class TileEntityPulverizer extends TileEntityLockable implements ITickabl
             return getConsumeRate();
         }
 
-        TileEntity generatorTE = getGeneratorTE();
-        if(generatorTE != null && generatorTE instanceof IGenerator)
+        TileEntity te = getGeneratorTE();
+        if(te != null && te instanceof IGenerator)
         {
-            if (generatorTE instanceof TileEntityMultiSocketOut)
-            {
-                TileEntity[] consumerTEList = ((TileEntityMultiSocketOut) generatorTE).getConsumerTEList(null);
-                for (TileEntity consumerTE : consumerTEList)
-                {
-                    if (consumerTE == this)
-                    {
-                        return ((IGenerator) generatorTE).getChargeRate();
-                    }
-                }
-            }
-            else if (((IGenerator) generatorTE).getConsumerTE() == this)
-            {
-                return ((IGenerator) generatorTE).getChargeRate();
-            }
+            return ((IGenerator)te).getChargeRate();
         }
+
         return 0;
     }
 

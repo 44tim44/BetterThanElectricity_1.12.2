@@ -611,27 +611,6 @@ public class TileEntityCompactor extends TileEntityLockable implements ITickable
             return getConsumeRate();
         }
 
-        /*
-        TileEntity generatorTE = getGeneratorTE();
-        if(generatorTE != null && generatorTE instanceof IGenerator)
-        {
-            if (generatorTE instanceof TileEntityMultiSocketOut)
-            {
-                TileEntity[] consumerTEList = ((TileEntityMultiSocketOut) generatorTE).getConsumerTEList(null);
-                for (TileEntity consumerTE : consumerTEList)
-                {
-                    if (consumerTE == this)
-                    {
-                        return ((IGenerator) generatorTE).getChargeRate();
-                    }
-                }
-            }
-            else if (((IGenerator) generatorTE).getConsumerTE() == this)
-            {
-                return ((IGenerator) generatorTE).getChargeRate();
-            }
-        }
-        */
         TileEntity te = getGeneratorTE();
         if(te != null && te instanceof IGenerator)
         {
