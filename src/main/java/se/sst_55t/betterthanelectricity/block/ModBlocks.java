@@ -196,6 +196,8 @@ public class ModBlocks {
     public static BlockMultiSocketOut block_multi_socket_out = (BlockMultiSocketOut) new BlockMultiSocketOut().setCreativeTab(CreativeTabs.MISC).setHardness(5.0F);
     public static BlockElectricSwitch block_electric_switch = (BlockElectricSwitch) new BlockElectricSwitch().setCreativeTab(CreativeTabs.MISC).setHardness(5.0F);
 
+    public static BlockLogBase dry_acacia_log = new BlockLogBase("dry_acacia_log");
+
     public static void register(IForgeRegistry<Block> registry) {
         registry.registerAll(
                 /* Ores */
@@ -361,7 +363,9 @@ public class ModBlocks {
 
                 block_multi_socket_in,
                 block_multi_socket_out,
-                block_electric_switch
+                block_electric_switch,
+
+                dry_acacia_log
 
         );
 
@@ -515,7 +519,9 @@ public class ModBlocks {
 
                 block_multi_socket_in.createItemBlock(),
                 block_multi_socket_out.createItemBlock(),
-                block_electric_switch.createItemBlock()
+                block_electric_switch.createItemBlock(),
+
+                dry_acacia_log.createItemBlock()
         );
     }
 
@@ -649,6 +655,8 @@ public class ModBlocks {
         block_multi_socket_in.registerItemModel(Item.getItemFromBlock(block_multi_socket_in));
         block_multi_socket_out.registerItemModel(Item.getItemFromBlock(block_multi_socket_out));
         block_electric_switch.registerItemModel(Item.getItemFromBlock(block_electric_switch));
+
+        dry_acacia_log.registerItemModel(Item.getItemFromBlock(dry_acacia_log));
     }
 
 }

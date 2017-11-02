@@ -40,6 +40,7 @@ public class CompactorRecipes
                 (Items.FLINT,2), 0.1F);
         this.addSmeltingRecipeForBlock(Blocks.WATERLILY, new ItemStack
                 (Items.SLIME_BALL,1), 0.1F);
+        this.addSmelting(ModItems.woodSap, new ItemStack(ModItems.rubber,1),0.1F);
     }
 
     /**

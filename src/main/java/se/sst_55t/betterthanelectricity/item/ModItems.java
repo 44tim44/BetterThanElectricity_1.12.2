@@ -34,6 +34,9 @@ public class ModItems {
     public static ItemBase coalLump = new ItemBase("coal_lump").setCreativeTab(CreativeTabs.MATERIALS);
     public static ItemBase coalChunk = new ItemBase("coal_chunk").setCreativeTab(CreativeTabs.MATERIALS);
 
+    public static ItemBase woodSap = new ItemBase("wood_sap").setCreativeTab(CreativeTabs.MISC);
+    public static ItemBase rubber = new ItemBase("rubber").setCreativeTab(CreativeTabs.MISC);
+
     //Tools
     public static ItemBase steelRod = new ItemBase("steel_rod").setCreativeTab(CreativeTabs.MATERIALS);
 
@@ -55,6 +58,8 @@ public class ModItems {
 
     public static ItemShovel steelShovel = new ItemShovel(BTEMod.steelToolMaterial,"steel_shovel");
     public static ItemShovel bronzeShovel = new ItemShovel(BTEMod.bronzeToolMaterial,"bronze_shovel");
+
+    public static ItemWoodTap woodTap = new ItemWoodTap("wood_tap");
 
     // Food and crops
     public static ItemCornSeed cornSeed = new ItemCornSeed();
@@ -112,6 +117,9 @@ public class ModItems {
                 coalLump,
                 coalChunk,
 
+                woodSap,
+                rubber,
+
                 steelRod,
 
                 moraKnife,
@@ -130,6 +138,8 @@ public class ModItems {
                 bronzeAxe,
                 steelShovel,
                 bronzeShovel,
+
+                woodTap,
 
                 cornSeed,
                 corn,
@@ -183,6 +193,8 @@ public class ModItems {
 
         coalLump.registerItemModel();
         coalChunk.registerItemModel();
+        woodSap.registerItemModel();
+        rubber.registerItemModel();
 
         steelRod.registerItemModel();
 
@@ -202,11 +214,14 @@ public class ModItems {
         steelShovel.registerItemModel();
         bronzeShovel.registerItemModel();
 
+        woodTap.registerItemModel();
+
         cornSeed.registerItemModel();
         corn.registerItemModel();
         cornCooked.registerItemModel();
         popcorn.registerItemModel();
         cookedEgg.registerItemModel();
+
 
         battery.registerItemModel();
         batteryPack.registerItemModel();

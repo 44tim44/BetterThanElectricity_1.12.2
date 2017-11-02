@@ -1,7 +1,7 @@
 {
-    "parent": "betterthanelectricity:block/machine_block_template",
+    "parent": "betterthanelectricity:block/electric_switch_template",
     "textures": {
-        "front": "betterthanelectricity:blocks/block_charging_station_front",
-        "back": "betterthanelectricity:blocks/block_charging_station_back"
+        "front": "betterthanelectricity:blocks/block_machine_side_output",
+        "back": "betterthanelectricity:blocks/block_machine_side_input"
     }
 }

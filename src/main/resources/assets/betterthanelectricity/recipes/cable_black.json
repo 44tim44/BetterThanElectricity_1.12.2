@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "III",
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "item": "betterthanelectricity:rubber"
+    },
+    "I": {
+      "item": "betterthanelectricity:ingot_copper"
+    }
+  },
+  "result": {
+    "item": "betterthanelectricity:block_cable_black",
+    "count": 6
+  }
+}
