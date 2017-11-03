@@ -10,7 +10,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "I": {
-      "item": "betterthanelectricity:iron_ingot"
+      "item": "minecraft:iron_ingot"
     },
     "S": {
       "item": "minecraft:stone_slab",
