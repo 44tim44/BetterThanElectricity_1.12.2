@@ -53,7 +53,8 @@ public class ItemWoodTap extends ItemBase {
                     double d0 = (double) (worldIn.rand.nextFloat() * 0.5F) + 0.25D;
                     double d1 = (double) (worldIn.rand.nextFloat() * 0.5F) + 0.25D;
                     double d2 = (double) (worldIn.rand.nextFloat() * 0.5F) + 0.25D;
-                    EntityItem entityitem = new EntityItem(worldIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, stack);
+                    BlockPos newPos = pos.offset(facing);
+                    EntityItem entityitem = new EntityItem(worldIn, (double) newPos.getX() + d0, (double) newPos.getY() + d1, (double) newPos.getZ() + d2, stack);
                     entityitem.setDefaultPickupDelay();
                     worldIn.spawnEntity(entityitem);
                 }
