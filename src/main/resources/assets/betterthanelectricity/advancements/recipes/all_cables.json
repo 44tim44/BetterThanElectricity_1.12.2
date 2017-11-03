@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "betterthanelectricity:cable_black",
+      "betterthanelectricity:cable_blue",
+      "betterthanelectricity:cable_brown",
+      "betterthanelectricity:cable_cyan",
+      "betterthanelectricity:cable_gray",
+      "betterthanelectricity:cable_green",
+      "betterthanelectricity:cable_lightblue",
+      "betterthanelectricity:cable_lightgray",
+      "betterthanelectricity:cable_lime",
+      "betterthanelectricity:cable_magenta",
+      "betterthanelectricity:cable_orange",
+      "betterthanelectricity:cable_pink",
+      "betterthanelectricity:cable_purple",
+      "betterthanelectricity:cable_red",
+      "betterthanelectricity:cable_white",
+      "betterthanelectricity:cable_yellow"
+    ]
+  },
+  "criteria": {
+    "has_rubber": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betterthanelectricity:rubber"
+          }
+        ]
+      }
+    }
+  }
+}

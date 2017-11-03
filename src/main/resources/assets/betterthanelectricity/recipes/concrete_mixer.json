@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "betterthanelectricity:concrete_mixer"
+  },
+  "pattern": [
+    "I I",
+    "III",
+    "SSS"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": {
+      "item": "betterthanelectricity:iron_ingot"
+    },
+    "S": {
+      "item": "minecraft:stone_slab",
+      "data": 0
+    }
+  }
+}

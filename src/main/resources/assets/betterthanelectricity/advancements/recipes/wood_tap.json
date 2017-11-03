@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "betterthanelectricity:wood_tap"
+    ]
+  },
+  "criteria": {
+    "has_acacia_wood": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:log2",
+            "data": 0
+          }
+        ]
+      }
+    }
+  }
+}
