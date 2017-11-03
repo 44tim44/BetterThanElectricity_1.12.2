@@ -7,7 +7,6 @@ package se.sst_55t.betterthanelectricity.block;
 import net.minecraft.init.Blocks;
 import se.sst_55t.betterthanelectricity.ModEnums.BlockType;
 import se.sst_55t.betterthanelectricity.block.cable.BlockCable;
-import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
 import se.sst_55t.betterthanelectricity.block.cementmixer.BlockConcreteMixer;
 import se.sst_55t.betterthanelectricity.block.chargingstation.BlockChargingStation;
 import se.sst_55t.betterthanelectricity.block.compactor.BlockCompactor;

@@ -12,6 +12,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import se.sst_55t.betterthanelectricity.block.BlockLogBase;
 import se.sst_55t.betterthanelectricity.block.ModBlocks;
 import se.sst_55t.betterthanelectricity.item.ItemBase;
 import se.sst_55t.betterthanelectricity.item.ModItems;
@@ -35,15 +36,15 @@ public class ItemWoodTap extends ItemBase {
                 player.getHeldItem(hand).damageItem(1,player);
                 if(worldIn.getBlockState(pos).getValue(BlockNewLog.LOG_AXIS) == BlockLog.EnumAxis.Y)
                 {
-                    worldIn.setBlockState(pos, ModBlocks.dry_acacia_log.getDefaultState().withProperty(BlockNewLog.LOG_AXIS,  BlockLog.EnumAxis.Y));
+                    worldIn.setBlockState(pos, ModBlocks.dry_acacia_log.getDefaultState().withProperty(BlockLogBase.LOG_AXIS,  BlockLog.EnumAxis.Y));
                 }
                 else if (worldIn.getBlockState(pos).getValue(BlockNewLog.LOG_AXIS) == BlockLog.EnumAxis.X)
                 {
-                    worldIn.setBlockState(pos, ModBlocks.dry_acacia_log.getDefaultState().withProperty(BlockNewLog.LOG_AXIS,  BlockLog.EnumAxis.X));
+                    worldIn.setBlockState(pos, ModBlocks.dry_acacia_log.getDefaultState().withProperty(BlockLogBase.LOG_AXIS,  BlockLog.EnumAxis.X));
                 }
                 else if (worldIn.getBlockState(pos).getValue(BlockNewLog.LOG_AXIS) == BlockLog.EnumAxis.Z)
                 {
-                    worldIn.setBlockState(pos, ModBlocks.dry_acacia_log.getDefaultState().withProperty(BlockNewLog.LOG_AXIS,  BlockLog.EnumAxis.Z));
+                    worldIn.setBlockState(pos, ModBlocks.dry_acacia_log.getDefaultState().withProperty(BlockLogBase.LOG_AXIS,  BlockLog.EnumAxis.Z));
                 }
 
                 if(!worldIn.isRemote)
