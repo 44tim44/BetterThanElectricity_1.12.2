@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "betterthanelectricity:block_cable_black"
+    },
+    {
+      "item": "betterthanelectricity:block_cable_black"
+    },
+    {
+      "item": "betterthanelectricity:block_cable_black"
+    },
+    {
+      "item": "betterthanelectricity:block_cable_black"
+    },
+    {
+      "item": "betterthanelectricity:block_cable_black"
+    },
+    {
+      "item": "betterthanelectricity:block_cable_black"
+    },
+    {
+      "item": "betterthanelectricity:block_cable_black"
+    },
+    {
+      "item": "betterthanelectricity:block_cable_black"
+    },
+    {
+      "item": "minecraft:dye",
+      "data": 8
+    }
+  ],
+  "result": {
+    "item": "betterthanelectricity:block_cable_gray",
+    "count": 8
+  }
+}

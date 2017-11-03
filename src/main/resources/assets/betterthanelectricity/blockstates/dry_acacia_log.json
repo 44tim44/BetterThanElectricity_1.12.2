@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "axis=y,variant=acacia":  { "model": "betterthanelectricity:dry_acacia_log" },
+        "axis=z,variant=acacia":   { "model": "betterthanelectricity:dry_acacia_log", "x": 90 },
+        "axis=x,variant=acacia":   { "model": "betterthanelectricity:dry_acacia_log", "x": 90, "y": 90 },
+        "axis=none,variant=acacia": { "model": "betterthanelectricity:dry_acacia_log" },
+        "inventory":  { "model": "betterthanelectricity:dry_acacia_log" }
+    }
+}

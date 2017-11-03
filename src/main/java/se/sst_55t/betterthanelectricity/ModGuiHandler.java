@@ -1,5 +1,8 @@
 package se.sst_55t.betterthanelectricity;
 
+import se.sst_55t.betterthanelectricity.block.cementmixer.ContainerConcreteMixer;
+import se.sst_55t.betterthanelectricity.block.cementmixer.GuiConcreteMixer;
+import se.sst_55t.betterthanelectricity.block.cementmixer.TileEntityConcreteMixer;
 import se.sst_55t.betterthanelectricity.block.chargingstation.ContainerChargingStation;
 import se.sst_55t.betterthanelectricity.block.chargingstation.GuiChargingStation;
 import se.sst_55t.betterthanelectricity.block.chargingstation.TileEntityChargingStation;
@@ -41,6 +44,7 @@ public class ModGuiHandler implements IGuiHandler {
     public static final int FUELGENERATOR = 4;
     public static final int CHARGINGSTATION = 5;
     public static final int COMPACTOR = 6;
+    public static final int CONCRETEMIXER = 7;
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -59,6 +63,8 @@ public class ModGuiHandler implements IGuiHandler {
                 return new ContainerChargingStation(player.inventory, (TileEntityChargingStation)world.getTileEntity(new BlockPos(x, y, z)));
             case COMPACTOR:
                 return new ContainerCompactor(player.inventory, (TileEntityCompactor)world.getTileEntity(new BlockPos(x, y, z)));
+            case CONCRETEMIXER:
+                return new ContainerConcreteMixer(player.inventory, (TileEntityConcreteMixer)world.getTileEntity(new BlockPos(x, y, z)));
             default:
                 return null;
         }
@@ -90,6 +96,9 @@ public class ModGuiHandler implements IGuiHandler {
             case COMPACTOR:
                 TileEntityCompactor tec = (TileEntityCompactor) te;
                 return new GuiCompactor(player.inventory, tec);
+            case CONCRETEMIXER:
+                TileEntityConcreteMixer tecm = (TileEntityConcreteMixer) te;
+                return new GuiConcreteMixer(player.inventory,tecm);
             default:
                 return null;
         }

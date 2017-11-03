@@ -18,7 +18,7 @@ item.sapphire.name=Sapphire
 
 item.coal_lump.name=Coal Lump
 item.coal_chunk.name=Coal Chunk
-item.woodSap.name=Resin
+item.wood_sap.name=Resin
 item.rubber.name=Rubber
 
 item.steel_rod.name=Steel Rod
@@ -40,7 +40,7 @@ item.steel_axe.name=Steel Axe
 item.bronze_shovel.name=Bronze Shovel
 item.steel_shovel.name=Steel Shovel
 
-item.woodTap.name=Tap
+item.wood_tap.name=Tap
 
 item.corn.name=Corn
 item.corn_seed.name=Corn Seed
@@ -97,6 +97,9 @@ container.charging_station=Charging Station
 
 tile.compactor_block.name=Compactor
 container.compactor=Compactor
+
+tile.concrete_mixer.name=Concrete Mixer
+container.concrete_mixer=Concrete Mixer
 
 tile.machine_block.name=Machine Block
 
@@ -209,4 +212,4 @@ tile.block_cable_black.name=Electric Cable (Black)
 tile.block_multi_socket_in.name=Electric Socket (Input)
 tile.block_multi_socket_out.name=Electric Socket (Output)
 tile.block_electric_switch.name=Electric Switch
-tile.dry_acacia_log=Dry Acacia Log
+tile.dry_acacia_log.name=Dry Acacia Log

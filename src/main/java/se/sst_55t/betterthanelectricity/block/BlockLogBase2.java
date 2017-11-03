@@ -4,7 +4,6 @@ package se.sst_55t.betterthanelectricity.block;
  * Created by Timeout on 2017-08-20.
  */
 
-import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockNewLog;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.creativetab.CreativeTabs;
@@ -12,17 +11,17 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import se.sst_55t.betterthanelectricity.BTEMod;
 
-public class BlockLogBase extends BlockNewLog {
+public class BlockLogBase2 extends BlockNewLog {
 
     protected String name;
 
-    public BlockLogBase(String name) {
+    public BlockLogBase2(String name) {
         super();
 
         this.name = name;
         setUnlocalizedName(name);
         setRegistryName(name);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, BlockPlanks.EnumType.ACACIA).withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, BlockPlanks.EnumType.ACACIA).withProperty(LOG_AXIS, EnumAxis.Y));
     }
 
     /*
@@ -42,7 +41,7 @@ public class BlockLogBase extends BlockNewLog {
     }
 
     @Override
-    public BlockLogBase setCreativeTab(CreativeTabs tab) {
+    public BlockLogBase2 setCreativeTab(CreativeTabs tab) {
         super.setCreativeTab(tab);
         return this;
     }
@@ -51,7 +50,7 @@ public class BlockLogBase extends BlockNewLog {
      * Sets how many hits it takes to break a block.
      */
     @Override
-    public BlockLogBase setHardness(float hardness)
+    public BlockLogBase2 setHardness(float hardness)
     {
         this.blockHardness = hardness;
 

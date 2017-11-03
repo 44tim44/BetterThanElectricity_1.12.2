@@ -8,6 +8,7 @@ import net.minecraft.init.Blocks;
 import se.sst_55t.betterthanelectricity.ModEnums.BlockType;
 import se.sst_55t.betterthanelectricity.block.cable.BlockCable;
 import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
+import se.sst_55t.betterthanelectricity.block.cementmixer.BlockConcreteMixer;
 import se.sst_55t.betterthanelectricity.block.chargingstation.BlockChargingStation;
 import se.sst_55t.betterthanelectricity.block.compactor.BlockCompactor;
 import se.sst_55t.betterthanelectricity.block.counter.BlockCounter;
@@ -198,6 +199,9 @@ public class ModBlocks {
 
     public static BlockLogBase dry_acacia_log = new BlockLogBase("dry_acacia_log");
 
+    public static BlockConcreteMixer concrete_mixer = (BlockConcreteMixer) new BlockConcreteMixer(false,"concrete_mixer").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(5.0F);
+    public static BlockConcreteMixer concrete_mixer_on = (BlockConcreteMixer) new BlockConcreteMixer(true,"concrete_mixer_on").setHardness(5.0F);
+
     public static void register(IForgeRegistry<Block> registry) {
         registry.registerAll(
                 /* Ores */
@@ -365,7 +369,9 @@ public class ModBlocks {
                 block_multi_socket_out,
                 block_electric_switch,
 
-                dry_acacia_log
+                dry_acacia_log,
+                concrete_mixer,
+                concrete_mixer_on
 
         );
 
@@ -379,10 +385,11 @@ public class ModBlocks {
         GameRegistry.registerTileEntity(tableOak.getTileEntityClass(), tableOak.getRegistryName().toString());
 
         GameRegistry.registerTileEntity(((BlockCable)block_cable_white).getTileEntityClass(),block_cable_white.getRegistryName().toString());
-
         GameRegistry.registerTileEntity(block_multi_socket_in.getTileEntityClass(), block_multi_socket_in.getRegistryName().toString());
         GameRegistry.registerTileEntity(block_multi_socket_out.getTileEntityClass(), block_multi_socket_out.getRegistryName().toString());
         GameRegistry.registerTileEntity(block_electric_switch.getTileEntityClass(), block_electric_switch.getRegistryName().toString());
+
+        GameRegistry.registerTileEntity(concrete_mixer.getTileEntityClass(), concrete_mixer.getRegistryName().toString());
     }
 
     public static void registerItemBlocks(IForgeRegistry<Item> registry) {
@@ -521,7 +528,9 @@ public class ModBlocks {
                 block_multi_socket_out.createItemBlock(),
                 block_electric_switch.createItemBlock(),
 
-                dry_acacia_log.createItemBlock()
+                dry_acacia_log.createItemBlock(),
+                concrete_mixer.createItemBlock(),
+                concrete_mixer_on.createItemBlock()
         );
     }
 
@@ -657,6 +666,8 @@ public class ModBlocks {
         block_electric_switch.registerItemModel(Item.getItemFromBlock(block_electric_switch));
 
         dry_acacia_log.registerItemModel(Item.getItemFromBlock(dry_acacia_log));
+        concrete_mixer.registerItemModel(Item.getItemFromBlock(concrete_mixer));
+        concrete_mixer_on.registerItemModel(Item.getItemFromBlock(concrete_mixer_on));
     }
 
 }

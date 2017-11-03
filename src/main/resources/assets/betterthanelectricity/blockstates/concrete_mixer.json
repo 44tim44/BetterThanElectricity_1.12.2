@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "normal": { "model": "betterthanelectricity:concrete_mixer" },
+        "inventory": { "model": "betterthanelectricity:concrete_mixer" }
+    }
+}

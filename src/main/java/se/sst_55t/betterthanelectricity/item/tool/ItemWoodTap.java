@@ -33,15 +33,29 @@ public class ItemWoodTap extends ItemBase {
             if(player.getHeldItem(hand).getItem() == ModItems.woodTap)
             {
                 player.getHeldItem(hand).damageItem(1,player);
-                worldIn.setBlockState(pos, ModBlocks.dry_acacia_log.getDefaultState().withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Z));
+                if(worldIn.getBlockState(pos).getValue(BlockNewLog.LOG_AXIS) == BlockLog.EnumAxis.Y)
+                {
+                    worldIn.setBlockState(pos, ModBlocks.dry_acacia_log.getDefaultState().withProperty(BlockNewLog.LOG_AXIS,  BlockLog.EnumAxis.Y));
+                }
+                else if (worldIn.getBlockState(pos).getValue(BlockNewLog.LOG_AXIS) == BlockLog.EnumAxis.X)
+                {
+                    worldIn.setBlockState(pos, ModBlocks.dry_acacia_log.getDefaultState().withProperty(BlockNewLog.LOG_AXIS,  BlockLog.EnumAxis.X));
+                }
+                else if (worldIn.getBlockState(pos).getValue(BlockNewLog.LOG_AXIS) == BlockLog.EnumAxis.Z)
+                {
+                    worldIn.setBlockState(pos, ModBlocks.dry_acacia_log.getDefaultState().withProperty(BlockNewLog.LOG_AXIS,  BlockLog.EnumAxis.Z));
+                }
 
-                ItemStack stack = new ItemStack(ModItems.woodSap);
-                double d0 = (double)(worldIn.rand.nextFloat() * 0.5F) + 0.25D;
-                double d1 = (double)(worldIn.rand.nextFloat() * 0.5F) + 0.25D;
-                double d2 = (double)(worldIn.rand.nextFloat() * 0.5F) + 0.25D;
-                EntityItem entityitem = new EntityItem(worldIn, (double)pos.getX() + d0, (double)pos.getY() + d1, (double)pos.getZ() + d2, stack);
-                entityitem.setDefaultPickupDelay();
-                worldIn.spawnEntity(entityitem);
+                if(!worldIn.isRemote)
+                {
+                    ItemStack stack = new ItemStack(ModItems.woodSap);
+                    double d0 = (double) (worldIn.rand.nextFloat() * 0.5F) + 0.25D;
+                    double d1 = (double) (worldIn.rand.nextFloat() * 0.5F) + 0.25D;
+                    double d2 = (double) (worldIn.rand.nextFloat() * 0.5F) + 0.25D;
+                    EntityItem entityitem = new EntityItem(worldIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, stack);
+                    entityitem.setDefaultPickupDelay();
+                    worldIn.spawnEntity(entityitem);
+                }
 
                 return EnumActionResult.SUCCESS;
             }

@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "betterthanelectricity:blocks/log_acacia_top_dry",
+        "side": "betterthanelectricity:blocks/log_acacia_dry"
+    }
+}
