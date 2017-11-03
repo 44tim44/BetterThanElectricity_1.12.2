@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "betterthanelectricity:concrete_powder",
+            "item": "minecraft:concrete_powder",
             "data": 32767
           }
         ]
