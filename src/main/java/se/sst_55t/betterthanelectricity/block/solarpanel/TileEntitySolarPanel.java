@@ -37,7 +37,12 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable, IGene
 
         if (this.currentCharge > 0)
         {
-            if ((itemstack.getItem() instanceof IBattery || itemstack.getItem() instanceof IChargeable))
+            if (itemstack.getItem() instanceof IBattery )
+            {
+                ((IBattery) itemstack.getItem()).increaseCharge(itemstack);
+                if(!this.world.isRemote) this.decreaseCharge();
+            }
+            else if (itemstack.getItem() instanceof IChargeable)
             {
                 ((IChargeable) itemstack.getItem()).increaseCharge(itemstack);
                 if(!this.world.isRemote) this.decreaseCharge();

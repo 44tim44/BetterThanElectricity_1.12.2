@@ -205,11 +205,19 @@ public class TileEntityFuelGenerator extends TileEntityLockable implements ITick
 
     public boolean canStartBurn(ItemStack batteryStack, TileEntity consumerTE)
     {
-        if(!batteryStack.isEmpty() && (batteryStack.getItem() instanceof IBattery || batteryStack.getItem() instanceof IChargeable))
+        if(!batteryStack.isEmpty())
         {
-            if(((IBattery)batteryStack.getItem()).getCharge(batteryStack) < ((IBattery)batteryStack.getItem()).getMaxCharge(batteryStack))
+            if(batteryStack.getItem() instanceof IBattery)
             {
-                return true;
+                if (((IBattery) batteryStack.getItem()).getCharge(batteryStack) < ((IBattery) batteryStack.getItem()).getMaxCharge(batteryStack)) {
+                    return true;
+                }
+            }
+            else if(batteryStack.getItem() instanceof IBattery)
+            {
+                if (((IChargeable) batteryStack.getItem()).getCharge(batteryStack) < ((IChargeable) batteryStack.getItem()).getMaxCharge(batteryStack)) {
+                    return true;
+                }
             }
         }
 
