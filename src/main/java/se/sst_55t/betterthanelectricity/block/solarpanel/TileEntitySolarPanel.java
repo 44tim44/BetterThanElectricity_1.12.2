@@ -243,7 +243,14 @@ public class TileEntitySolarPanel extends TileEntity implements ITickable, IGene
         }
 
         ItemStack batteryStack = inventory.getStackInSlot(0);
-        if ((batteryStack.getItem() instanceof IBattery || batteryStack.getItem() instanceof IChargeable))
+        if (batteryStack.getItem() instanceof IBattery )
+        {
+            if(((IBattery)batteryStack.getItem()).getCharge(batteryStack) < ((IBattery)batteryStack.getItem()).getMaxCharge(batteryStack))
+            {
+                return true;
+            }
+        }
+        else if( batteryStack.getItem() instanceof IChargeable)
         {
             if(((IChargeable)batteryStack.getItem()).getCharge(batteryStack) < ((IChargeable)batteryStack.getItem()).getMaxCharge(batteryStack))
             {
