@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import se.sst_55t.betterthanelectricity.BTEMod;
+import se.sst_55t.betterthanelectricity.block.BlockLogBase;
 import se.sst_55t.betterthanelectricity.util.ModSoundEvents;
 
 import javax.annotation.Nullable;
@@ -104,7 +105,7 @@ public class ItemChainsaw extends Item implements IChargeable{
                 Block block = iblockstate.getBlock();
                 Material material = iblockstate.getMaterial();
 
-                if (block == Blocks.LOG || block == Blocks.LOG2)
+                if (block == Blocks.LOG || block == Blocks.LOG2 || block instanceof BlockLogBase)
                 {
                     this.fellTree(itemstack, player, worldIn, pos, iblockstate);
                     return EnumActionResult.SUCCESS;
