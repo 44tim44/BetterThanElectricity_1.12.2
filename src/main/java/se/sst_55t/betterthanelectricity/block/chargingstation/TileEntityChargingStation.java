@@ -335,7 +335,7 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
                     return true;
                 }
             }
-            if (!itemstack.isEmpty() && itemstack.getItem() instanceof IChargeable)
+            else if (!itemstack.isEmpty() && itemstack.getItem() instanceof IChargeable)
             {
                 if (((IChargeable) itemstack.getItem()).getCharge(itemstack) < ((IChargeable) itemstack.getItem()).getMaxCharge(itemstack))
                 {
@@ -667,7 +667,9 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
     @Override
     public float getConsumeRate() {
         ItemStack batteryInputStack = this.chargingStationItemStacks.get(1);
-        if(batteryInputStack.isEmpty() ||  ((IChargeable) batteryInputStack.getItem()).getCharge(batteryInputStack) == 0)
+        if(batteryInputStack.isEmpty() ||
+                (batteryInputStack.getItem() instanceof IChargeable && ((IChargeable) batteryInputStack.getItem()).getCharge(batteryInputStack) > 0) ||
+                (batteryInputStack.getItem() instanceof IBattery && ((IBattery) batteryInputStack.getItem()).getCharge(batteryInputStack) > 0) )
         {
             if (this.currentCharge < maxCharge)
             {
