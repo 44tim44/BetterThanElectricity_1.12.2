@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "betterthanelectricity:electric_socket_out_recipe",
+      "betterthanelectricity:electric_socket_in_recipe"
+    ]
+  },
+  "criteria": {
+    "has_cable": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betterthanelectricity:cable_black"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "betterthanelectricity:block_multi_socket_out"
+  },
+  "pattern": [
+    " C ",
+    "GMG",
+    " G "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": {
+      "item": "betterthanelectricity:machine_block"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "C": {
+      "item": "betterthanelectricity:ingot_copper"
+    }
+  }
+}
