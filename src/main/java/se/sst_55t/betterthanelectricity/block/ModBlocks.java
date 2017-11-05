@@ -154,19 +154,19 @@ public class ModBlocks {
     public static BlockCropCorn cropCorn = new BlockCropCorn();
     public static BlockPlantCorn plantCorn = new BlockPlantCorn("plant_corn");
 
-    public static BlockChair chairOak = new BlockChair(Material.WOOD, SoundType.WOOD,"chair_oak");
-    public static BlockChair chairSpruce = new BlockChair(Material.WOOD, SoundType.WOOD,"chair_spruce");
-    public static BlockChair chairBirch = new BlockChair(Material.WOOD, SoundType.WOOD,"chair_birch");
-    public static BlockChair chairJungle = new BlockChair(Material.WOOD, SoundType.WOOD,"chair_jungle");
-    public static BlockChair chairAcacia = new BlockChair(Material.WOOD, SoundType.WOOD,"chair_acacia");
-    public static BlockChair chairDarkOak = new BlockChair(Material.WOOD, SoundType.WOOD,"chair_dark_oak");
+    public static BlockChair chairOak = new BlockChair(Material.WOOD, SoundType.WOOD, "chair_oak");
+    public static BlockChair chairSpruce = new BlockChair(Material.WOOD, SoundType.WOOD, "chair_spruce");
+    public static BlockChair chairBirch = new BlockChair(Material.WOOD, SoundType.WOOD, "chair_birch");
+    public static BlockChair chairJungle = new BlockChair(Material.WOOD, SoundType.WOOD, "chair_jungle");
+    public static BlockChair chairAcacia = new BlockChair(Material.WOOD, SoundType.WOOD, "chair_acacia");
+    public static BlockChair chairDarkOak = new BlockChair(Material.WOOD, SoundType.WOOD, "chair_dark_oak");
 
-    public static BlockTable tableOak = new BlockTable(Material.WOOD,"table_oak");
-    public static BlockTable tableSpruce = new BlockTable(Material.WOOD,"table_spruce");
-    public static BlockTable tableBirch = new BlockTable(Material.WOOD,"table_birch");
-    public static BlockTable tableJungle = new BlockTable(Material.WOOD,"table_jungle");
-    public static BlockTable tableAcacia = new BlockTable(Material.WOOD,"table_acacia");
-    public static BlockTable tableDarkOak = new BlockTable(Material.WOOD,"table_dark_oak");
+    public static BlockTable tableOak = new BlockTable(Material.WOOD, SoundType.WOOD, "table_oak");
+    public static BlockTable tableSpruce = new BlockTable(Material.WOOD, SoundType.WOOD, "table_spruce");
+    public static BlockTable tableBirch = new BlockTable(Material.WOOD, SoundType.WOOD, "table_birch");
+    public static BlockTable tableJungle = new BlockTable(Material.WOOD, SoundType.WOOD, "table_jungle");
+    public static BlockTable tableAcacia = new BlockTable(Material.WOOD, SoundType.WOOD, "table_acacia");
+    public static BlockTable tableDarkOak = new BlockTable(Material.WOOD, SoundType.WOOD, "table_dark_oak");
 
     public static BlockBase glassDoor = new BlockDoorBase(Material.IRON,"glass_door",true).setHardness(5.0F);
 

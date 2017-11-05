@@ -213,3 +213,8 @@ tile.block_multi_socket_in.name=Electric Socket (Input)
 tile.block_multi_socket_out.name=Electric Socket (Output)
 tile.block_electric_switch.name=Electric Switch
 tile.dry_acacia_log.name=Dry Acacia Log
+
+# Subtitles
+
+betterthanelectricity.subtitle.drill=Mining Drill whirrs
+betterthanelectricity.subtitle.slide_door=Sliding Door opens

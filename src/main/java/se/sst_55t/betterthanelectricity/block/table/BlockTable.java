@@ -1,5 +1,6 @@
 package se.sst_55t.betterthanelectricity.block.table;
 
+import net.minecraft.block.SoundType;
 import se.sst_55t.betterthanelectricity.block.BlockTileEntity;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -20,8 +21,10 @@ import javax.annotation.Nullable;
 
 public class BlockTable extends BlockTileEntity<TileEntityTable> {
 
-    public BlockTable(Material material, String name) {
+    public BlockTable(Material material, SoundType sound, String name) {
         super(material, name);
+        this.setHardness(1.0F);
+        this.setSoundType(sound);
         this.setCreativeTab(CreativeTabs.DECORATIONS);
     }
 

@@ -1,0 +1,18 @@
+{
+  "result": {
+    "item": "betterthanelectricity:block_electric_switch"
+  },
+  "pattern": [
+    "L",
+    "M"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": {
+      "item": "betterthanelectricity:machine_block"
+    },
+    "L": {
+      "item": "minecraft:lever"
+    }
+  }
+}

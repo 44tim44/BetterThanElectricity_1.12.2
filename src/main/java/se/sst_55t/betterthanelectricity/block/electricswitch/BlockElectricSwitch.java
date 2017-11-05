@@ -31,7 +31,7 @@ public class BlockElectricSwitch extends BlockTileEntity<TileEntityElectricSwitc
 
     public BlockElectricSwitch()
     {
-        super(Material.IRON, "block_electric_switch");
+        super(Material.ROCK, "block_electric_switch");
         this.setDefaultState(this.blockState.getBaseState().withProperty(POWERED,Boolean.valueOf(false)));
     }
 

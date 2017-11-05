@@ -703,6 +703,10 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
         {
             return 1.0F;
         }
+        if(!batteryStack.isEmpty() && batteryStack.getItem() instanceof IChargeable && ((IChargeable)batteryStack.getItem()).getCharge(batteryStack) < ((IChargeable)batteryStack.getItem()).getMaxCharge(batteryStack))
+        {
+            return 1.0F;
+        }
 
         TileEntity te = getConsumerTE();
         if(te != null && te instanceof IConsumer)
