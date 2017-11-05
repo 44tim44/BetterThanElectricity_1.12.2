@@ -25,7 +25,7 @@ public class BlockMultiSocketOut extends BlockTileEntity<TileEntityMultiSocketOu
 
     public BlockMultiSocketOut()
     {
-        super(Material.CIRCUITS, "block_multi_socket_out");
+        super(Material.ROCK, "block_multi_socket_out");
     }
 
     /**

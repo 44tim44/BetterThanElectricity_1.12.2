@@ -42,6 +42,7 @@ public class BlockCable extends BlockTileEntity<TileEntityCable>
     public BlockCable(String name, int color)
     {
         super(Material.CIRCUITS, name);
+        this.setHardness(1.0F);
         this.color = color;
         this.setDefaultState(this.blockState.getBaseState().withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false)).withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false)).withProperty(UP, Boolean.valueOf(false)).withProperty(DOWN, Boolean.valueOf(false)));
     }

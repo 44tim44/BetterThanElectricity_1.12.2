@@ -175,22 +175,22 @@ public class ModBlocks {
 
     public static BlockBase barbedLog = new BlockBarbedLog(Material.WOOD,"barbed_log").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
 
-    public static BlockBase block_cable_white =        new BlockCable("block_cable_white",0).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
-    public static BlockBase block_cable_orange =        new BlockCable("block_cable_orange",1).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
-    public static BlockBase block_cable_magenta =       new BlockCable("block_cable_magenta",2).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
-    public static BlockBase block_cable_lightblue =     new BlockCable("block_cable_lightblue",3).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
-    public static BlockBase block_cable_yellow =        new BlockCable("block_cable_yellow",4).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
-    public static BlockBase block_cable_lime =          new BlockCable("block_cable_lime",5).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
-    public static BlockBase block_cable_pink =          new BlockCable("block_cable_pink",6).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
-    public static BlockBase block_cable_gray =          new BlockCable("block_cable_gray",7).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
-    public static BlockBase block_cable_lightgray =     new BlockCable("block_cable_lightgray",8).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
-    public static BlockBase block_cable_cyan =          new BlockCable("block_cable_cyan",9).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
-    public static BlockBase block_cable_purple =        new BlockCable("block_cable_purple",10).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
-    public static BlockBase block_cable_blue =          new BlockCable("block_cable_blue",11).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
-    public static BlockBase block_cable_brown =         new BlockCable("block_cable_brown",12).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
-    public static BlockBase block_cable_green =         new BlockCable("block_cable_green",13).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
-    public static BlockBase block_cable_red =           new BlockCable("block_cable_red",14).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
-    public static BlockBase block_cable_black =         new BlockCable("block_cable_black",15).setCreativeTab(CreativeTabs.MISC).setHardness(1.0F);
+    public static BlockBase block_cable_white =        new BlockCable("block_cable_white",0).setCreativeTab(CreativeTabs.MISC);
+    public static BlockBase block_cable_orange =        new BlockCable("block_cable_orange",1).setCreativeTab(CreativeTabs.MISC);
+    public static BlockBase block_cable_magenta =       new BlockCable("block_cable_magenta",2).setCreativeTab(CreativeTabs.MISC);
+    public static BlockBase block_cable_lightblue =     new BlockCable("block_cable_lightblue",3).setCreativeTab(CreativeTabs.MISC);
+    public static BlockBase block_cable_yellow =        new BlockCable("block_cable_yellow",4).setCreativeTab(CreativeTabs.MISC);
+    public static BlockBase block_cable_lime =          new BlockCable("block_cable_lime",5).setCreativeTab(CreativeTabs.MISC);
+    public static BlockBase block_cable_pink =          new BlockCable("block_cable_pink",6).setCreativeTab(CreativeTabs.MISC);
+    public static BlockBase block_cable_gray =          new BlockCable("block_cable_gray",7).setCreativeTab(CreativeTabs.MISC);
+    public static BlockBase block_cable_lightgray =     new BlockCable("block_cable_lightgray",8).setCreativeTab(CreativeTabs.MISC);
+    public static BlockBase block_cable_cyan =          new BlockCable("block_cable_cyan",9).setCreativeTab(CreativeTabs.MISC);
+    public static BlockBase block_cable_purple =        new BlockCable("block_cable_purple",10).setCreativeTab(CreativeTabs.MISC);
+    public static BlockBase block_cable_blue =          new BlockCable("block_cable_blue",11).setCreativeTab(CreativeTabs.MISC);
+    public static BlockBase block_cable_brown =         new BlockCable("block_cable_brown",12).setCreativeTab(CreativeTabs.MISC);
+    public static BlockBase block_cable_green =         new BlockCable("block_cable_green",13).setCreativeTab(CreativeTabs.MISC);
+    public static BlockBase block_cable_red =           new BlockCable("block_cable_red",14).setCreativeTab(CreativeTabs.MISC);
+    public static BlockBase block_cable_black =         new BlockCable("block_cable_black",15).setCreativeTab(CreativeTabs.MISC);
 
     public static BlockMultiSocketIn block_multi_socket_in = (BlockMultiSocketIn) new BlockMultiSocketIn().setCreativeTab(CreativeTabs.MISC).setHardness(5.0F);
     public static BlockMultiSocketOut block_multi_socket_out = (BlockMultiSocketOut) new BlockMultiSocketOut().setCreativeTab(CreativeTabs.MISC).setHardness(5.0F);

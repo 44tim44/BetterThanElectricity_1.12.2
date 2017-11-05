@@ -28,7 +28,7 @@ public class BlockMultiSocketIn extends BlockTileEntity<TileEntityMultiSocketIn>
 
     public BlockMultiSocketIn()
     {
-        super(Material.CIRCUITS, "block_multi_socket_in");
+        super(Material.ROCK, "block_multi_socket_in");
     }
 
     /**
