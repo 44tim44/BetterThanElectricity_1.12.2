@@ -20,7 +20,8 @@ public class ModEnums
         BRONZE("bronze",MaterialType.IRON),
         STEEL("steel",MaterialType.IRON),
         VANILLASTONESLAB("stone",MaterialType.ROCK),
-        GLASS("glass",MaterialType.GLASS);
+        GLASS("glass",MaterialType.GLASS),
+        COBBLESTONE("cobblestone",MaterialType.ROCK);
 
         final String name;
         final MaterialType materialType;

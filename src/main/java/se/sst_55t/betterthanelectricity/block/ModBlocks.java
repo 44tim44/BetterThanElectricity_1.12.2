@@ -142,6 +142,8 @@ public class ModBlocks {
     public static BlockSlabVerticalBaseDouble stone_vertical_doubleslab = new BlockSlabVerticalBaseDouble(BlockType.VANILLASTONESLAB,"stone_vertical_doubleslab").setHardness(2.0F);
     public static BlockSlabVerticalBase glass_vertical_slab = new BlockSlabVerticalBase(BlockType.GLASS,"glass_vertical_slab").setHardness(2.0F).setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
     public static BlockSlabVerticalBaseDouble glass_vertical_doubleslab = new BlockSlabVerticalBaseDouble(BlockType.GLASS,"glass_vertical_doubleslab").setHardness(2.0F);
+    public static BlockSlabVerticalBase cobblestone_vertical_slab = new BlockSlabVerticalBase(BlockType.SMOOTHSTONE,"cobblestone_vertical_slab").setHardness(2.0F).setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+    public static BlockSlabVerticalBaseDouble cobblestone_vertical_doubleslab = new BlockSlabVerticalBaseDouble(BlockType.SMOOTHSTONE,"cobblestone_vertical_doubleslab").setHardness(2.0F);
 
 
     public static BlockStairsBase smoothstone_stairs = new BlockStairsBase(Blocks.STONE.getDefaultState(),"smoothstone_stairs").setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
@@ -319,6 +321,8 @@ public class ModBlocks {
                 stone_vertical_doubleslab,
                 glass_vertical_slab,
                 glass_vertical_doubleslab,
+                cobblestone_vertical_slab,
+                cobblestone_vertical_doubleslab,
 
                 smoothstone_stairs,
 
@@ -480,6 +484,7 @@ public class ModBlocks {
                 smoothstone_vertical_slab.createItemSlab(smoothstone_vertical_slab,smoothstone_vertical_slab,smoothstone_vertical_doubleslab),
                 stone_vertical_slab.createItemSlab(stone_vertical_slab,stone_vertical_slab,stone_vertical_doubleslab),
                 glass_vertical_slab.createItemSlab(glass_vertical_slab,glass_vertical_slab,glass_vertical_doubleslab),
+                cobblestone_vertical_slab.createItemSlab(cobblestone_vertical_slab,cobblestone_vertical_slab,cobblestone_vertical_doubleslab),
 
                 smoothstone_stairs.createItemBlock(),
 
@@ -618,6 +623,7 @@ public class ModBlocks {
         smoothstone_vertical_slab.registerItemModel(Item.getItemFromBlock(smoothstone_vertical_slab));
         stone_vertical_slab.registerItemModel(Item.getItemFromBlock(stone_vertical_slab));
         glass_vertical_slab.registerItemModel(Item.getItemFromBlock(glass_vertical_slab));
+        cobblestone_vertical_slab.registerItemModel(Item.getItemFromBlock(cobblestone_vertical_slab));
 
         smoothstone_stairs.registerItemModel(Item.getItemFromBlock(smoothstone_stairs));
 

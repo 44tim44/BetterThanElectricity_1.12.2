@@ -168,6 +168,7 @@ tile.glass_slab.name=Glass Block Slab
 tile.smoothstone_vertical_slab.name=Stone Pane
 tile.stone_vertical_slab.name=Stone Tile Pane
 tile.glass_vertical_slab=Glass Block Pane
+tile.cobblestone_vertical_slab.name=Cobblestone Pane
 
 tile.smoothstone_stairs.name=Stone Stairs
 tile.steel_fence.name=Steel Fence
