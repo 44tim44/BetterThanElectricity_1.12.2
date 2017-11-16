@@ -125,33 +125,97 @@ public class BlockCable extends BlockTileEntity<TileEntityCable>
 
     @Override
     public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
-        /*
+
+        return FULL_BLOCK_AABB.offset(pos);
+        /**
+        // all sides (NWSEUD)
+        if(state.getValue(NORTH) && state.getValue(SOUTH) && state.getValue(WEST) && state.getValue(EAST) && state.getValue(UP) && state.getValue(DOWN) )
+        {
+            return FULL_BLOCK_AABB.offset(pos);
+        }
+
+        // all except NORTH (WSEUD)
+        if(!state.getValue(NORTH) && state.getValue(SOUTH) && state.getValue(WEST) && state.getValue(EAST) && state.getValue(UP) && state.getValue(DOWN) )
+        {
+            return new AxisAlignedBB(0.0D, 0.0D, 0.3125D, 1.0D, 1.0D, 1.0D).offset(pos);
+        }
+        // all except SOUTH (NWEUD)
+        if(state.getValue(NORTH) && !state.getValue(SOUTH) && state.getValue(WEST) && state.getValue(EAST) && state.getValue(UP) && state.getValue(DOWN) )
+        {
+            return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.6875D).offset(pos);
+        }
+        // all except WEST (NSEUD)
+        if(state.getValue(NORTH) && state.getValue(SOUTH) && !state.getValue(WEST) && state.getValue(EAST) && state.getValue(UP) && state.getValue(DOWN) )
+        {
+            return new AxisAlignedBB(0.3125D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D).offset(pos);
+        }
+        // all except EAST (NWSUD)
+        if(state.getValue(NORTH) && state.getValue(SOUTH) && state.getValue(WEST) && !state.getValue(EAST) && state.getValue(UP) && state.getValue(DOWN) )
+        {
+            return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.6875D, 1.0D, 1.0D).offset(pos);
+        }
+        // all except UP (NWSED)
+        if(state.getValue(NORTH) && state.getValue(SOUTH) && state.getValue(WEST) && state.getValue(EAST) && !state.getValue(UP) && state.getValue(DOWN) )
+        {
+            return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.6875D, 1.0D).offset(pos);
+        }
+        // all except DOWN (NWSEU)
+        if(state.getValue(NORTH) && state.getValue(SOUTH) && state.getValue(WEST) && state.getValue(EAST) && !state.getValue(UP) && state.getValue(DOWN) )
+        {
+            return new AxisAlignedBB(0.0D, 0.3125D, 0.0D, 1.0D, 1.0D, 1.0D).offset(pos);
+        }
+
+        // all except NORTH & SOUTH (WEUD)
+        if(!state.getValue(NORTH) && !state.getValue(SOUTH) && state.getValue(WEST) && state.getValue(EAST) && state.getValue(UP) && state.getValue(DOWN) )
+        {
+            return new AxisAlignedBB(0.0D, 0.0D, 0.3125D, 1.0D, 1.0D, 0.6875D).offset(pos);
+        }
+        // all except WEST & EAST (NSUD)
+        if(state.getValue(NORTH) && state.getValue(SOUTH) && !state.getValue(WEST) && !state.getValue(EAST) && state.getValue(UP) && state.getValue(DOWN) )
+        {
+            return new AxisAlignedBB(0.3125D, 0.0D, 0.0D, 0.6875D, 1.0D, 1.0D).offset(pos);
+        }
+        // all except UP & DOWN (NWSE)
+        if(state.getValue(NORTH) && state.getValue(SOUTH) && state.getValue(WEST) && state.getValue(EAST) && !state.getValue(UP) && !state.getValue(DOWN) )
+        {
+            return new AxisAlignedBB(0.0D, 0.3125D, 0.0D, 1.0D, 0.6875D, 1.0D).offset(pos);
+        }
+
+
+        // only NORTH
         if(state.getValue(NORTH))
         {
-            return FULL_BLOCK_AABB.offset(pos);
+            return new AxisAlignedBB(0.3125D,     0.3125D,    0.0D,      0.6875D,    0.6875D,    0.6875D).offset(pos);
         }
+        // only SOUTH
         if(state.getValue(SOUTH))
         {
-            return FULL_BLOCK_AABB.offset(pos);
+            return new AxisAlignedBB(0.3125D,     0.3125D,    0.3125D,      0.6875D,    0.6875D,    1.0D).offset(pos);
         }
+        // only WEST
         if(state.getValue(WEST))
         {
-            return FULL_BLOCK_AABB.offset(pos);
+            return new AxisAlignedBB(0.0D, 0.3125D, 0.3125D, 0.6875D, 0.6875D, 0.6875D).offset(pos);
         }
+        // only EAST
         if(state.getValue(EAST))
         {
-            return FULL_BLOCK_AABB.offset(pos);
+            return new AxisAlignedBB(0.3125D, 0.3125D, 0.3125D, 1.0D, 0.6875D, 0.6875D).offset(pos);
         }
+        // only UP
         if(state.getValue(UP))
         {
-            return FULL_BLOCK_AABB.offset(pos);
+            return new AxisAlignedBB(0.3125D, 0.3125D, 0.3125D, 0.6875D, 1.0D, 0.6875D).offset(pos);
         }
+        // only DOWN
         if(state.getValue(DOWN))
         {
-            return FULL_BLOCK_AABB.offset(pos);
+            return new AxisAlignedBB(0.3125D, 0.0D, 0.3125D, 0.6875D, 0.6875D, 0.6875D).offset(pos);
         }
-        */
+
+        // only core
         return AABB_CORE.offset(pos);
+    */
     }
 
     /**
