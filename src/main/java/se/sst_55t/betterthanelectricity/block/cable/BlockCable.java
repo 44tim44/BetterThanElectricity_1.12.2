@@ -43,14 +43,14 @@ public class BlockCable extends BlockTileEntity<TileEntityCable>
     public static final PropertyBool UP = PropertyBool.create("up");
     public static final PropertyBool DOWN = PropertyBool.create("down");
 
-    //                                                                  X0          Y0          Z0         X1          Y2          Z2
-    public static final AxisAlignedBB AABB_CORE =    new AxisAlignedBB(0.3125D,     0.3125D,    0.3125D,   0.6875D,    0.6875D,    0.6875D);
-    public static final AxisAlignedBB AABB_SOUTH =   new AxisAlignedBB(0.3125D,     0.3125D,    0.6875D,   0.6875D,    0.6875D,    1.0D);
-    public static final AxisAlignedBB AABB_WEST =    new AxisAlignedBB(0.0D,        0.3125D,    0.3125D,   0.3125D,    0.6875D,    0.6875D);
-    public static final AxisAlignedBB AABB_NORTH =   new AxisAlignedBB(0.3125D,     0.3125D,    0.0D,      0.6875D,    0.6875D,    0.3125D);
-    public static final AxisAlignedBB AABB_EAST =    new AxisAlignedBB(0.6875D,     0.3125D,    0.3125D,   1.0D,       0.6875D,    0.6875D);
-    public static final AxisAlignedBB AABB_UP =      new AxisAlignedBB(0.3125D,     0.6875D,    0.3125D,   0.6875D,    1.0D,       0.6875D);
-    public static final AxisAlignedBB AABB_DOWN =    new AxisAlignedBB(0.3125D,     0.0D,       0.3125D,   0.6875D,    0.3125D,    0.6875D);
+    //                                                                      X0           Y0          Z0         X1          Y2          Z2
+    protected static final AxisAlignedBB AABB_CORE =    new AxisAlignedBB(  0.3125D,     0.3125D,    0.3125D,   0.6875D,    0.6875D,    0.6875D );
+    protected static final AxisAlignedBB AABB_SOUTH =   new AxisAlignedBB(  0.3125D,     0.3125D,    0.6875D,   0.6875D,    0.6875D,    1.0D    );
+    protected static final AxisAlignedBB AABB_WEST =    new AxisAlignedBB(  0.0D,        0.3125D,    0.3125D,   0.3125D,    0.6875D,    0.6875D );
+    protected static final AxisAlignedBB AABB_NORTH =   new AxisAlignedBB(  0.3125D,     0.3125D,    0.0D,      0.6875D,    0.6875D,    0.3125D );
+    protected static final AxisAlignedBB AABB_EAST =    new AxisAlignedBB(  0.6875D,     0.3125D,    0.3125D,   1.0D,       0.6875D,    0.6875D );
+    protected static final AxisAlignedBB AABB_UP =      new AxisAlignedBB(  0.3125D,     0.6875D,    0.3125D,   0.6875D,    1.0D,       0.6875D );
+    protected static final AxisAlignedBB AABB_DOWN =    new AxisAlignedBB(  0.3125D,     0.0D,       0.3125D,   0.6875D,    0.3125D,    0.6875D );
 
     public int color;
 
@@ -63,8 +63,9 @@ public class BlockCable extends BlockTileEntity<TileEntityCable>
     }
 
     @Override
-    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_)
+    public void addCollisionBoxToList(IBlockState iBlockState, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_)
     {
+        IBlockState state = this.getActualState(iBlockState, worldIn, pos);
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_CORE);
         if(state.getValue(NORTH))
         {
