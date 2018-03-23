@@ -24,6 +24,7 @@ import se.sst_55t.betterthanelectricity.block.fuelgenerator.BlockFuelGenerator;
 import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketIn;
 import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketOut;
 import se.sst_55t.betterthanelectricity.block.pulverizer.BlockPulverizer;
+import se.sst_55t.betterthanelectricity.block.quarry.BlockQuarry;
 import se.sst_55t.betterthanelectricity.block.solarpanel.BlockSolarPanel;
 import se.sst_55t.betterthanelectricity.block.windmill.BlockWindMill;
 
@@ -285,6 +286,7 @@ public class BlockCable extends BlockTileEntity<TileEntityCable>
         if(block instanceof BlockChargingStation) return true;
         if(block instanceof BlockElectricFurnace) return true;
         if(block instanceof BlockCompactor) return true;
+        if(block instanceof BlockQuarry) return true;
 
         // Sockets
         if(block instanceof BlockMultiSocketOut) return true;

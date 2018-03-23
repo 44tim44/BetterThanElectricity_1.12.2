@@ -18,6 +18,9 @@ import se.sst_55t.betterthanelectricity.block.fuelgenerator.TileEntityFuelGenera
 import se.sst_55t.betterthanelectricity.block.pulverizer.ContainerPulverizer;
 import se.sst_55t.betterthanelectricity.block.pulverizer.TileEntityPulverizer;
 import se.sst_55t.betterthanelectricity.block.pulverizer.GuiPulverizer;
+import se.sst_55t.betterthanelectricity.block.quarry.ContainerQuarry;
+import se.sst_55t.betterthanelectricity.block.quarry.GuiQuarry;
+import se.sst_55t.betterthanelectricity.block.quarry.TileEntityQuarry;
 import se.sst_55t.betterthanelectricity.block.solarpanel.ContainerSolarPanel;
 import se.sst_55t.betterthanelectricity.block.solarpanel.GuiSolarPanel;
 import se.sst_55t.betterthanelectricity.block.solarpanel.TileEntitySolarPanel;
@@ -45,6 +48,7 @@ public class ModGuiHandler implements IGuiHandler {
     public static final int CHARGINGSTATION = 5;
     public static final int COMPACTOR = 6;
     public static final int CONCRETEMIXER = 7;
+    public static final int QUARRY = 8;
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -65,6 +69,8 @@ public class ModGuiHandler implements IGuiHandler {
                 return new ContainerCompactor(player.inventory, (TileEntityCompactor)world.getTileEntity(new BlockPos(x, y, z)));
             case CONCRETEMIXER:
                 return new ContainerConcreteMixer(player.inventory, (TileEntityConcreteMixer)world.getTileEntity(new BlockPos(x, y, z)));
+            case QUARRY:
+                return new ContainerQuarry(player.inventory, (TileEntityQuarry)world.getTileEntity(new BlockPos(x, y, z)));
             default:
                 return null;
         }
@@ -99,6 +105,9 @@ public class ModGuiHandler implements IGuiHandler {
             case CONCRETEMIXER:
                 TileEntityConcreteMixer tecm = (TileEntityConcreteMixer) te;
                 return new GuiConcreteMixer(player.inventory,tecm);
+            case QUARRY:
+                TileEntityQuarry teq = (TileEntityQuarry) te;
+                return new GuiQuarry(player.inventory,teq);
             default:
                 return null;
         }
