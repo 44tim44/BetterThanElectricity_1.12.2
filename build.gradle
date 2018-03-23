@@ -34,9 +34,14 @@ minecraft {
 }
 
 repositories {
+    maven {
+        url = 'https://repo.elytradev.com/'
+    }
 }
 
 dependencies {
+    compile 'com.elytradev:mirage:2.0.3-rc3-SNAPSHOT'
+    compile 'elucent:albedo:2.0-SNAPSHOT'
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"

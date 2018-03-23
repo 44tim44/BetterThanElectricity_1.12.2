@@ -12,6 +12,7 @@ import se.sst_55t.betterthanelectricity.block.chargingstation.BlockChargingStati
 import se.sst_55t.betterthanelectricity.block.compactor.BlockCompactor;
 import se.sst_55t.betterthanelectricity.block.counter.BlockCounter;
 import se.sst_55t.betterthanelectricity.block.electricfurnace.BlockElectricFurnace;
+import se.sst_55t.betterthanelectricity.block.electriclamp.BlockElectricLamp;
 import se.sst_55t.betterthanelectricity.block.electricswitch.BlockElectricSwitch;
 import se.sst_55t.betterthanelectricity.block.fuelgenerator.BlockFuelGenerator;
 import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketIn;
@@ -175,8 +176,18 @@ public class ModBlocks {
 
     public static BlockBase glassDoor = new BlockDoorBase(Material.IRON,"glass_door",true).setHardness(5.0F);
 
-    public static BlockBase electricLamp = new BlockElectricLamp(Material.CIRCUITS,"electric_lamp",false).setCreativeTab(CreativeTabs.DECORATIONS);
-    public static BlockBase electricLamp_on = new BlockElectricLamp(Material.CIRCUITS,"electric_lamp_on",true);
+    public static BlockElectricLamp electricLamp = (BlockElectricLamp) new BlockElectricLamp(Material.CIRCUITS,"electric_lamp",false,0).setCreativeTab(CreativeTabs.DECORATIONS);
+    public static BlockElectricLamp electricLamp_on = (BlockElectricLamp) new BlockElectricLamp(Material.CIRCUITS,"electric_lamp_on",true,0);
+    public static BlockElectricLamp electricLampYellow = (BlockElectricLamp) new BlockElectricLamp(Material.CIRCUITS,"electric_lamp_yellow",false,4).setCreativeTab(CreativeTabs.DECORATIONS);
+    public static BlockElectricLamp electricLampYellow_on = (BlockElectricLamp) new BlockElectricLamp(Material.CIRCUITS,"electric_lamp_yellow_on",true,4);
+    public static BlockElectricLamp electricLampBlue = (BlockElectricLamp) new BlockElectricLamp(Material.CIRCUITS,"electric_lamp_blue",false,11).setCreativeTab(CreativeTabs.DECORATIONS);
+    public static BlockElectricLamp electricLampBlue_on = (BlockElectricLamp) new BlockElectricLamp(Material.CIRCUITS,"electric_lamp_blue_on",true,11);
+    public static BlockElectricLamp electricLampBrown = (BlockElectricLamp) new BlockElectricLamp(Material.CIRCUITS,"electric_lamp_brown",false,12).setCreativeTab(CreativeTabs.DECORATIONS);
+    public static BlockElectricLamp electricLampBrown_on = (BlockElectricLamp) new BlockElectricLamp(Material.CIRCUITS,"electric_lamp_brown_on",true,12);
+    public static BlockElectricLamp electricLampGreen = (BlockElectricLamp) new BlockElectricLamp(Material.CIRCUITS,"electric_lamp_green",false,13).setCreativeTab(CreativeTabs.DECORATIONS);
+    public static BlockElectricLamp electricLampGreen_on = (BlockElectricLamp) new BlockElectricLamp(Material.CIRCUITS,"electric_lamp_green_on",true,13);
+    public static BlockElectricLamp electricLampRed = (BlockElectricLamp) new BlockElectricLamp(Material.CIRCUITS,"electric_lamp_red",false,14).setCreativeTab(CreativeTabs.DECORATIONS);
+    public static BlockElectricLamp electricLampRed_on = (BlockElectricLamp) new BlockElectricLamp(Material.CIRCUITS,"electric_lamp_red_on",true,14);
 
     public static BlockBase barbedLog = new BlockBarbedLog(Material.WOOD,"barbed_log").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
 
@@ -353,6 +364,16 @@ public class ModBlocks {
 
                 electricLamp,
                 electricLamp_on,
+                electricLampYellow,
+                electricLampYellow_on,
+                electricLampBlue,
+                electricLampBlue_on,
+                electricLampBrown,
+                electricLampBrown_on,
+                electricLampGreen,
+                electricLampGreen_on,
+                electricLampRed,
+                electricLampRed_on,
 
                 barbedLog,
 
@@ -392,6 +413,8 @@ public class ModBlocks {
         GameRegistry.registerTileEntity(compactor.getTileEntityClass(),compactor.getRegistryName().toString());
         GameRegistry.registerTileEntity(quarry.getTileEntityClass(),quarry.getRegistryName().toString());
         GameRegistry.registerTileEntity(tableOak.getTileEntityClass(), tableOak.getRegistryName().toString());
+
+        GameRegistry.registerTileEntity(electricLamp_on.getTileEntityClass(), electricLamp_on.getRegistryName().toString());
 
         GameRegistry.registerTileEntity(((BlockCable)block_cable_white).getTileEntityClass(),block_cable_white.getRegistryName().toString());
         GameRegistry.registerTileEntity(block_multi_socket_in.getTileEntityClass(), block_multi_socket_in.getRegistryName().toString());
@@ -516,6 +539,16 @@ public class ModBlocks {
 
                 electricLamp.createItemBlock(),
                 electricLamp_on.createItemBlock(),
+                electricLampYellow.createItemBlock(),
+                electricLampYellow_on.createItemBlock(),
+                electricLampBlue.createItemBlock(),
+                electricLampBlue_on.createItemBlock(),
+                electricLampBrown.createItemBlock(),
+                electricLampBrown_on.createItemBlock(),
+                electricLampGreen.createItemBlock(),
+                electricLampGreen_on.createItemBlock(),
+                electricLampRed.createItemBlock(),
+                electricLampRed_on.createItemBlock(),
 
                 barbedLog.createItemBlock(),
 
@@ -657,6 +690,16 @@ public class ModBlocks {
 
         electricLamp.registerItemModel(Item.getItemFromBlock(electricLamp));
         electricLamp_on.registerItemModel(Item.getItemFromBlock(electricLamp_on));
+        electricLampYellow.registerItemModel(Item.getItemFromBlock(electricLampYellow));
+        electricLampYellow_on.registerItemModel(Item.getItemFromBlock(electricLampYellow_on));
+        electricLampBlue.registerItemModel(Item.getItemFromBlock(electricLampBlue));
+        electricLampBlue_on.registerItemModel(Item.getItemFromBlock(electricLampBlue_on));
+        electricLampBrown.registerItemModel(Item.getItemFromBlock(electricLampBrown));
+        electricLampBrown_on.registerItemModel(Item.getItemFromBlock(electricLampBrown_on));
+        electricLampGreen.registerItemModel(Item.getItemFromBlock(electricLampGreen));
+        electricLampGreen_on.registerItemModel(Item.getItemFromBlock(electricLampGreen_on));
+        electricLampRed.registerItemModel(Item.getItemFromBlock(electricLampRed));
+        electricLampRed_on.registerItemModel(Item.getItemFromBlock(electricLampRed_on));
 
         barbedLog.registerItemModel(Item.getItemFromBlock(barbedLog));
 

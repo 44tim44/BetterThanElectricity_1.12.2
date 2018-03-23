@@ -3,6 +3,7 @@ package se.sst_55t.betterthanelectricity.block.cable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.fml.common.Optional;
 import se.sst_55t.betterthanelectricity.block.ICable;
 import se.sst_55t.betterthanelectricity.block.IConsumer;
 import se.sst_55t.betterthanelectricity.block.IGenerator;
@@ -111,4 +112,5 @@ public class TileEntityCable extends TileEntity implements ICable {
         }
         return null;
     }
+
 }
