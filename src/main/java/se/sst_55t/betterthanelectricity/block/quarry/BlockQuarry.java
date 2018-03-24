@@ -55,6 +55,15 @@ public class BlockQuarry extends BlockContainerBase {
         return Item.getItemFromBlock(ModBlocks.quarry);
     }
 
+    @Override
+    public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
+        if(world.getTileEntity(pos) instanceof TileEntityQuarry)
+        {
+            ((TileEntityQuarry) world.getTileEntity(pos)).removeScaffold();
+        }
+        return super.removedByPlayer(state, world, pos, player, willHarvest);
+    }
+
     /**
      * Called after the block is set in the Chunk data, but before the Tile Entity is set
      */

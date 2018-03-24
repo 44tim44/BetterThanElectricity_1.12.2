@@ -56,6 +56,7 @@ item.electric_circuit.name=Electric Circuit
 item.electric_circuit_advanced.name=Advanced Electric Circuit
 item.drill_head.name=Drill Head
 item.chainsaw_head.name=Chainsaw Head
+item.construction_frame.name=Construction Frame
 
 item.glass_door_item.name=Glass Door
 

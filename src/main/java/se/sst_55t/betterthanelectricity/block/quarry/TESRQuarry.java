@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexBuffer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityBeacon;
 import net.minecraft.util.ResourceLocation;
@@ -155,11 +156,16 @@ public class TESRQuarry extends FastTESR<TileEntityQuarry> {
         IBlockAccess world = te.getWorld();//MinecraftForgeClient.getRegionRenderCache(te.getWorld(), minerPos);
         IBlockState state = world.getBlockState(minerPos);
 
-        IBakedModel model = blockRenderer.getBlockModelShapes().getModelForState(ModBlocks.quarry_miner.getDefaultState());
-
-        buffer.setTranslation(x - pos.getX(), y - pos.getY(), z - pos.getZ());
-
-        blockRenderer.getBlockModelRenderer().renderModel(world, model, state, minerPos, buffer, false);
+        if(world.getBlockState(minerPos).getBlock() == Blocks.AIR ||
+                world.getBlockState(minerPos).getBlock() == Blocks.WATER ||
+                world.getBlockState(minerPos).getBlock() == Blocks.FLOWING_WATER ||
+                world.getBlockState(minerPos).getBlock() == Blocks.LAVA ||
+                world.getBlockState(minerPos).getBlock() == Blocks.FLOWING_LAVA)
+        {
+            IBakedModel model = blockRenderer.getBlockModelShapes().getModelForState(ModBlocks.quarry_miner.getDefaultState());
+            buffer.setTranslation(x - pos.getX(), y - pos.getY(), z - pos.getZ());
+            blockRenderer.getBlockModelRenderer().renderModel(world, model, state, minerPos, buffer, false);
+        }
     }
 
     @Override

@@ -441,6 +441,32 @@ public class TileEntityQuarry extends TileEntityLockable implements ITickable, I
         }
     }
 
+    public void removeScaffold()
+    {
+        for(int x = getMinX()-1; x <= getMaxX()+1; x++)
+        {
+            if (world.getBlockState(new BlockPos(x, this.pos.getY(), getMinZ()).north()).getBlock() == ModBlocks.quarry_scaffold)
+            {
+                world.setBlockState(new BlockPos(x, this.pos.getY(), getMinZ()).north(), Blocks.AIR.getDefaultState());
+            }
+            if (world.getBlockState(new BlockPos(x, this.pos.getY(), getMaxZ()).south()).getBlock() == ModBlocks.quarry_scaffold)
+            {
+                world.setBlockState(new BlockPos(x, this.pos.getY(), getMaxZ()).south(), Blocks.AIR.getDefaultState());
+            }
+        }
+        for(int z = getMinZ()-1; z <= getMaxZ()+1; z++)
+        {
+            if (world.getBlockState(new BlockPos(getMinX(), this.pos.getY(), z).west()).getBlock() == ModBlocks.quarry_scaffold)
+            {
+                world.setBlockState(new BlockPos(getMinX(), this.pos.getY(), z).west(), Blocks.AIR.getDefaultState());
+            }
+            if (world.getBlockState(new BlockPos(getMaxX(), this.pos.getY(), z).east()).getBlock() == ModBlocks.quarry_scaffold)
+            {
+                world.setBlockState(new BlockPos(getMaxX(), this.pos.getY(), z).east(), Blocks.AIR.getDefaultState());
+            }
+        }
+    }
+
     protected boolean updateItemTransfer()
     {
         if (this.world != null && !this.world.isRemote)
@@ -491,10 +517,25 @@ public class TileEntityQuarry extends TileEntityLockable implements ITickable, I
         {
             return false;
         }
-        else if(world.getBlockState(minerPosition).getBlock() != Blocks.BEDROCK){
+        else if(world.getBlockState(minerPosition).getBlock() == Blocks.WATER){
+            return false;
+        }
+        else if(world.getBlockState(minerPosition).getBlock() == Blocks.FLOWING_WATER){
+            return false;
+        }
+        else if(world.getBlockState(minerPosition).getBlock() == Blocks.LAVA){
+            return false;
+        }
+        else if(world.getBlockState(minerPosition).getBlock() == Blocks.FLOWING_LAVA){
+            return false;
+        }
+        else if(world.getBlockState(minerPosition).getBlock() == Blocks.BEDROCK){
+            return false;
+        }
+        else
+        {
             return true;
         }
-        return false;
     }
 
     /**
