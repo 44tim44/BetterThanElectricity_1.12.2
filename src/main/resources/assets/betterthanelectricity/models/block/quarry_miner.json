@@ -1,0 +1,36 @@
+{
+  "credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
+  "textures": {
+    "0": "betterthanelectricity:blocks/quarry_miner",
+    "particle": "betterthanelectricity:blocks/quarry_miner"
+  },
+  "elements": [
+    {
+      "name": "cube",
+      "from": [6, 0, 6],
+      "to": [10, 8, 10],
+      "faces": {
+        "north": {"uv": [12, 8, 16, 16], "texture": "#0"},
+        "east": {"uv": [8, 8, 12, 16], "texture": "#0"},
+        "south": {"uv": [4, 8, 8, 16], "texture": "#0"},
+        "west": {"uv": [0, 8, 4, 16], "texture": "#0"},
+        "up": {"uv": [0, 0, 4, 4], "texture": "#0"},
+        "down": {"uv": [6, 2, 10, 6], "texture": "#0"}
+      }
+    },
+    {
+      "name": "cube",
+      "from": [4, 8, 4],
+      "to": [12, 16, 12],
+      "faces": {
+        "north": {"uv": [4, 0, 12, 8], "texture": "#0"},
+        "east": {"uv": [4, 0, 12, 8], "texture": "#0"},
+        "south": {"uv": [4, 0, 12, 8], "texture": "#0"},
+        "west": {"uv": [4, 0, 12, 8], "texture": "#0"},
+        "up": {"uv": [4, 0, 12, 8], "texture": "#0"},
+        "down": {"uv": [4, 0, 12, 8], "texture": "#0"}
+      }
+    }
+  ],
+  "groups": [1, 0]
+}

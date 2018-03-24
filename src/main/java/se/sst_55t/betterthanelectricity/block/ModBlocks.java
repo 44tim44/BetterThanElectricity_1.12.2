@@ -19,6 +19,8 @@ import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketIn;
 import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketOut;
 import se.sst_55t.betterthanelectricity.block.pulverizer.BlockPulverizer;
 import se.sst_55t.betterthanelectricity.block.quarry.BlockQuarry;
+import se.sst_55t.betterthanelectricity.block.quarry.BlockQuarryMiner;
+import se.sst_55t.betterthanelectricity.block.quarry.BlockQuarryScaffold;
 import se.sst_55t.betterthanelectricity.block.solarpanel.BlockSolarPanel;
 import se.sst_55t.betterthanelectricity.block.table.BlockTable;
 import net.minecraft.block.Block;
@@ -220,6 +222,7 @@ public class ModBlocks {
     // Special Blocks
 
     public static BlockQuarryScaffold quarry_scaffold = (BlockQuarryScaffold) new BlockQuarryScaffold("quarry_scaffold").setHardness(5.0F);
+    public static BlockQuarryMiner quarry_miner = (BlockQuarryMiner) new BlockQuarryMiner("quarry_miner").setHardness(5.0F);
 
     public static void register(IForgeRegistry<Block> registry) {
         registry.registerAll(
@@ -406,7 +409,8 @@ public class ModBlocks {
                 concrete_mixer,
                 concrete_mixer_on,
 
-                quarry_scaffold
+                quarry_scaffold,
+                quarry_miner
 
         );
 
@@ -583,7 +587,8 @@ public class ModBlocks {
                 concrete_mixer.createItemBlock(),
                 concrete_mixer_on.createItemBlock(),
 
-                quarry_scaffold.createItemBlock()
+                quarry_scaffold.createItemBlock(),
+                quarry_miner.createItemBlock()
         );
     }
 
@@ -737,6 +742,7 @@ public class ModBlocks {
         concrete_mixer_on.registerItemModel(Item.getItemFromBlock(concrete_mixer_on));
 
         quarry_scaffold.registerItemModel(Item.getItemFromBlock(quarry_scaffold));
+        quarry_miner.registerItemModel(Item.getItemFromBlock(quarry_miner));
     }
 
 }

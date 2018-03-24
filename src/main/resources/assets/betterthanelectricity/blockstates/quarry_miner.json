@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "normal": {
+      "model": "betterthanelectricity:quarry_miner"
+    },
+    "inventory": {
+      "model": "betterthanelectricity:quarry_miner"
+    }
+  }
+}

@@ -101,6 +101,9 @@ container.compactor=Compactor
 tile.concrete_mixer.name=Concrete Mixer
 container.concrete_mixer=Concrete Mixer
 
+tile.quarry_block.name=Excavator
+container.quarry=Excavator
+
 tile.machine_block.name=Machine Block
 
 
@@ -215,7 +218,12 @@ tile.block_multi_socket_out.name=Electric Socket (Output)
 tile.block_electric_switch.name=Electric Switch
 tile.dry_acacia_log.name=Dry Acacia Log
 
+tile.quarry_scaffold.name=Excavator Scaffolding
+tile.quarry_miner.name=Excavator Drill
+
 # Subtitles
 
-betterthanelectricity.subtitle.drill=Mining Drill whirrs
+betterthanelectricity.subtitle.drill=Mining Drill whirs
 betterthanelectricity.subtitle.slide_door=Sliding Door opens
+betterthanelectricity.subtitle.jetpack_thrust=Jetpack thrusters roars
+betterthanelectricity.subtitle.chainsaw_use=Chainsaw buzzes

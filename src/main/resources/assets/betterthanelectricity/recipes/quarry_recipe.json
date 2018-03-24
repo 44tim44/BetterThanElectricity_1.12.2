@@ -1,0 +1,28 @@
+{
+  "result": {
+    "item": "betterthanelectricity:quarry"
+  },
+  "pattern": [
+    "CDC",
+    "SMS",
+    "CHC"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": {
+      "item": "betterthanelectricity:electric_circuit_advanced"
+    },
+    "D": {
+      "item": "betterthanelectricity:drill_head"
+    },
+    "S": {
+      "item": "betterthanelectricity:construction_frame"
+    },
+    "M": {
+      "item": "betterthanelectricity:machine_block"
+    },
+    "H": {
+      "item": "minecraft:hopper"
+    }
+  }
+}

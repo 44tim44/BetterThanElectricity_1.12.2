@@ -22,6 +22,8 @@ import se.sst_55t.betterthanelectricity.block.BlockDoorBase;
 import se.sst_55t.betterthanelectricity.block.ModBlocks;
 import se.sst_55t.betterthanelectricity.block.chargingstation.TESRChargingStation;
 import se.sst_55t.betterthanelectricity.block.chargingstation.TileEntityChargingStation;
+import se.sst_55t.betterthanelectricity.block.quarry.TESRQuarry;
+import se.sst_55t.betterthanelectricity.block.quarry.TileEntityQuarry;
 import se.sst_55t.betterthanelectricity.block.table.TESRTable;
 import se.sst_55t.betterthanelectricity.block.table.TileEntityTable;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -52,6 +54,7 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChargingStation.class, new TESRChargingStation());
         ModelLoader.setCustomStateMapper(ModBlocks.glassDoor, (new StateMap.Builder()).ignore(BlockDoorBase.POWERED).build());
         RenderingRegistry.registerEntityRenderingHandler(EntitySubmarine.class, SubmarineFactory.INSTANCE);
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityQuarry.class, new TESRQuarry());
     }
 
     @Override

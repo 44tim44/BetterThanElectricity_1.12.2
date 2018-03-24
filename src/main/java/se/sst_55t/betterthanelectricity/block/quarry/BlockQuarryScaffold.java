@@ -1,4 +1,4 @@
-package se.sst_55t.betterthanelectricity.block;
+package se.sst_55t.betterthanelectricity.block.quarry;
 
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
@@ -9,8 +9,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -21,17 +19,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
-import se.sst_55t.betterthanelectricity.block.chargingstation.BlockChargingStation;
-import se.sst_55t.betterthanelectricity.block.compactor.BlockCompactor;
-import se.sst_55t.betterthanelectricity.block.electricfurnace.BlockElectricFurnace;
-import se.sst_55t.betterthanelectricity.block.fuelgenerator.BlockFuelGenerator;
-import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketIn;
-import se.sst_55t.betterthanelectricity.block.multiSocket.BlockMultiSocketOut;
-import se.sst_55t.betterthanelectricity.block.pulverizer.BlockPulverizer;
-import se.sst_55t.betterthanelectricity.block.quarry.BlockQuarry;
-import se.sst_55t.betterthanelectricity.block.solarpanel.BlockSolarPanel;
-import se.sst_55t.betterthanelectricity.block.windmill.BlockWindMill;
+import se.sst_55t.betterthanelectricity.block.BlockBase;
 
 import javax.annotation.Nullable;
 import java.util.List;

@@ -25,7 +25,6 @@ import se.sst_55t.betterthanelectricity.BTEMod;
 import se.sst_55t.betterthanelectricity.ModGuiHandler;
 import se.sst_55t.betterthanelectricity.block.BlockContainerBase;
 import se.sst_55t.betterthanelectricity.block.ModBlocks;
-import se.sst_55t.betterthanelectricity.block.pulverizer.TileEntityPulverizer;
 
 import javax.annotation.Nullable;
 import java.util.Random;

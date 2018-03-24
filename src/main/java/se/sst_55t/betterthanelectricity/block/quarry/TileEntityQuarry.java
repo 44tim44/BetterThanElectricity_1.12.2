@@ -15,6 +15,8 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityLockable;
@@ -35,7 +37,6 @@ import se.sst_55t.betterthanelectricity.block.*;
 import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
 import se.sst_55t.betterthanelectricity.block.inventory.SlotBattery;
 import se.sst_55t.betterthanelectricity.block.multiSocket.TileEntityMultiSocketOut;
-import se.sst_55t.betterthanelectricity.block.pulverizer.ContainerPulverizer;
 import se.sst_55t.betterthanelectricity.item.IBattery;
 
 import javax.annotation.Nullable;
@@ -49,7 +50,7 @@ import static net.minecraft.tileentity.TileEntityHopper.putStackInInventoryAllSl
  */
 public class TileEntityQuarry extends TileEntityLockable implements ITickable, ISidedInventory, IConsumer
 {
-    public static final int BASE_CONSUME_RATE = 20;
+    public static final int BASE_CONSUME_RATE = 1;
 
     private static final int[] SLOTS_TOP = new int[] {0};
     private static final int[] SLOTS_BOTTOM = new int[] {1,2,3,4,5};
@@ -61,10 +62,21 @@ public class TileEntityQuarry extends TileEntityLockable implements ITickable, I
     /** The number of ticks that a fresh copy of the currently-burning item would keep the furnace burning for */
     private int currentConsumeRate;
     private int currentBlockMineTime;
-    private int totalBlockMineTime = getPulverizeItemTime();
+    private int totalBlockMineTime = getTimeToMineBlock();
     private String furnaceCustomName;
     private int transferCooldown = -1;
+
     private BlockPos minerPosition;
+
+    /** Gets minerPosition */
+    public BlockPos getMinerPosition() {
+        return minerPosition;
+    }
+
+    @Override
+    public boolean hasFastRenderer() {
+        return true;
+    }
 
     /**
      * Returns the number of slots in the inventory.
@@ -131,7 +143,7 @@ public class TileEntityQuarry extends TileEntityLockable implements ITickable, I
         /*
         if (index == 0 && !flag)
         {
-            this.totalBlockMineTime = this.getPulverizeItemTime();
+            this.totalBlockMineTime = this.getTimeToMineBlock();
             this.currentBlockMineTime = 0;
             this.markDirty();
         }
@@ -143,7 +155,7 @@ public class TileEntityQuarry extends TileEntityLockable implements ITickable, I
      */
     public String getName()
     {
-        return this.hasCustomName() ? this.furnaceCustomName : "container.pulverizer";
+        return this.hasCustomName() ? this.furnaceCustomName : "container.quarry";
     }
 
     /**
@@ -162,6 +174,33 @@ public class TileEntityQuarry extends TileEntityLockable implements ITickable, I
     public static void registerFixesFurnace(DataFixer fixer)
     {
         fixer.registerWalker(FixTypes.BLOCK_ENTITY, new ItemStackDataLists(TileEntityQuarry.class, new String[] {"Items"}));
+    }
+
+    @Override
+    public NBTTagCompound getUpdateTag() {
+        // getUpdateTag() is called whenever the chunkdata is sent to the
+        // client. In contrast getUpdatePacket() is called when the tile entity
+        // itself wants to sync to the client. In many cases you want to send
+        // over the same information in getUpdateTag() as in getUpdatePacket().
+        return writeToNBT(new NBTTagCompound());
+    }
+
+    @Nullable
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        // Prepare a packet for syncing our TE to the client. Since we only have to sync the stack
+        // and that's all we have we just write our entire NBT here. If you have a complex
+        // tile entity that doesn't need to have all information on the client you can write
+        // a more optimal NBT here.
+        NBTTagCompound nbtTag = new NBTTagCompound();
+        this.writeToNBT(nbtTag);
+        return new SPacketUpdateTileEntity(getPos(), 1, nbtTag);
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+        // Here we get the packet from the server and read it into our client side tile entity
+        this.readFromNBT(packet.getNbtCompound());
     }
 
     public void readFromNBT(NBTTagCompound compound)
@@ -316,7 +355,7 @@ public class TileEntityQuarry extends TileEntityLockable implements ITickable, I
                     {
                         //System.out.println("Block Broken");
                         this.currentBlockMineTime = 0;
-                        this.totalBlockMineTime = this.getPulverizeItemTime();
+                        this.totalBlockMineTime = this.getTimeToMineBlock();
                         this.quarryBlock();
                         world.sendBlockBreakProgress(-1,minerPosition,0);
                         isDirty = true;
@@ -339,6 +378,7 @@ public class TileEntityQuarry extends TileEntityLockable implements ITickable, I
                     }
                     world.sendBlockBreakProgress(-1,minerPosition,0);
                     this.currentBlockMineTime = 0;
+                    world.notifyBlockUpdate(this.pos,world.getBlockState(this.pos),world.getBlockState(this.pos),0);
                     //System.out.println("minerPosition moved to : x:" + minerPosition.getX() +" y:"+ minerPosition.getY() +" z:"+ minerPosition.getZ());
                 }
                 else
@@ -434,12 +474,12 @@ public class TileEntityQuarry extends TileEntityLockable implements ITickable, I
     }
 
     /**
-     * Time to cook:
-     * Lower number = faster.
+     * Amount of ticks required to destroy a block.
+     * Lower number = faster. 20 ticks = 1 sec
      */
-    public int getPulverizeItemTime()
+    public int getTimeToMineBlock()
     {
-        return 120;
+        return 10;
     }
 
     /**
@@ -618,12 +658,12 @@ public class TileEntityQuarry extends TileEntityLockable implements ITickable, I
 
     public String getGuiID()
     {
-        return "betterthanelectricity:pulverizer_block";
+        return "betterthanelectricity:quarry_block";
     }
 
     public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
     {
-        return new ContainerPulverizer(playerInventory, this);
+        return new ContainerQuarry(playerInventory, this);
     }
 
     public int getField(int id)
@@ -1058,4 +1098,27 @@ public class TileEntityQuarry extends TileEntityLockable implements ITickable, I
     {
         return this.transferCooldown > 0;
     }
+
+    @Override
+    public AxisAlignedBB getRenderBoundingBox() {
+        AxisAlignedBB bb = INFINITE_EXTENT_AABB;
+        //Block type = getBlockType();
+        //BlockPos pos = getPos();
+
+        //bb = new AxisAlignedBB(pos.add(-10,-255,-10),pos.add(10,255,10));
+
+        return bb;
+    }
+
+    @Override
+    public boolean shouldRenderInPass(int pass) {
+        return super.shouldRenderInPass(pass);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public double getMaxRenderDistanceSquared()
+    {
+        return 65536.0D;
+    }
+
 }

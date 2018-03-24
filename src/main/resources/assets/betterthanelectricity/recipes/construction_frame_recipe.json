@@ -1,0 +1,15 @@
+{
+  "result": {
+    "item": "betterthanelectricity:construction_frame"
+  },
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+      "item": "betterthanelectricity:steel_rod"
+    }
+  }
+}
