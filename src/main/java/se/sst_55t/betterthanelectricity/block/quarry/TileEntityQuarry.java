@@ -31,10 +31,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import se.sst_55t.betterthanelectricity.block.ICable;
-import se.sst_55t.betterthanelectricity.block.IConsumer;
-import se.sst_55t.betterthanelectricity.block.IElectricityStorage;
-import se.sst_55t.betterthanelectricity.block.IGenerator;
+import se.sst_55t.betterthanelectricity.block.*;
 import se.sst_55t.betterthanelectricity.block.cable.TileEntityCable;
 import se.sst_55t.betterthanelectricity.block.inventory.SlotBattery;
 import se.sst_55t.betterthanelectricity.block.multiSocket.TileEntityMultiSocketOut;
@@ -273,12 +270,14 @@ public class TileEntityQuarry extends TileEntityLockable implements ITickable, I
         {
             minerPosition = new BlockPos(getMinX(),this.pos.getY(),getMinZ());
         }
+
         boolean flag = this.isWorking();
         boolean isDirty = false;
 
         if (this.isWorking())
         {
             --this.workTimeLeft;
+            placeScaffold();
         }
 
         if (!this.world.isRemote)
@@ -362,14 +361,42 @@ public class TileEntityQuarry extends TileEntityLockable implements ITickable, I
 
         if (this.world != null && !this.world.isRemote)
         {
-            System.out.println("Lowering cooldown from: " + this.transferCooldown);
             --this.transferCooldown;
-            System.out.println("To: " + this.transferCooldown);
 
             if (!this.isOnTransferCooldown())
             {
                 this.setTransferCooldown(0);
                 this.updateItemTransfer();
+            }
+        }
+    }
+
+    protected void placeScaffold()
+    {
+        for(int x = getMinX()-1; x <= getMaxX()+1; x++)
+        {
+            if (world.getBlockState(new BlockPos(x, this.pos.getY(), getMinZ()).north()).getBlock() != ModBlocks.quarry_scaffold &&
+                    !(world.getBlockState(new BlockPos(x, this.pos.getY(), getMinZ()).north()).getBlock() instanceof BlockQuarry))
+            {
+                world.setBlockState(new BlockPos(x, this.pos.getY(), getMinZ()).north(), ModBlocks.quarry_scaffold.getDefaultState());
+            }
+            if (world.getBlockState(new BlockPos(x, this.pos.getY(), getMaxZ()).south()).getBlock() != ModBlocks.quarry_scaffold &&
+                    !(world.getBlockState(new BlockPos(x, this.pos.getY(), getMaxZ()).south()).getBlock() instanceof BlockQuarry))
+            {
+                world.setBlockState(new BlockPos(x, this.pos.getY(), getMaxZ()).south(), ModBlocks.quarry_scaffold.getDefaultState());
+            }
+        }
+        for(int z = getMinZ()-1; z <= getMaxZ()+1; z++)
+        {
+            if (world.getBlockState(new BlockPos(getMinX(), this.pos.getY(), z).west()).getBlock() != ModBlocks.quarry_scaffold &&
+                    !(world.getBlockState(new BlockPos(getMinX(), this.pos.getY(), z).west()).getBlock() instanceof BlockQuarry))
+            {
+                world.setBlockState(new BlockPos(getMinX(), this.pos.getY(), z).west(), ModBlocks.quarry_scaffold.getDefaultState());
+            }
+            if (world.getBlockState(new BlockPos(getMaxX(), this.pos.getY(), z).east()).getBlock() != ModBlocks.quarry_scaffold &&
+                    !(world.getBlockState(new BlockPos(getMaxX(), this.pos.getY(), z).east()).getBlock() instanceof BlockQuarry))
+            {
+                world.setBlockState(new BlockPos(getMaxX(), this.pos.getY(), z).east(), ModBlocks.quarry_scaffold.getDefaultState());
             }
         }
     }

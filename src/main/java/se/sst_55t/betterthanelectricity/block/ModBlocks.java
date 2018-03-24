@@ -217,6 +217,10 @@ public class ModBlocks {
     public static BlockConcreteMixer concrete_mixer = (BlockConcreteMixer) new BlockConcreteMixer(false,"concrete_mixer").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(5.0F);
     public static BlockConcreteMixer concrete_mixer_on = (BlockConcreteMixer) new BlockConcreteMixer(true,"concrete_mixer_on").setHardness(5.0F);
 
+    // Special Blocks
+
+    public static BlockQuarryScaffold quarry_scaffold = (BlockQuarryScaffold) new BlockQuarryScaffold("quarry_scaffold").setHardness(5.0F);
+
     public static void register(IForgeRegistry<Block> registry) {
         registry.registerAll(
                 /* Ores */
@@ -400,7 +404,9 @@ public class ModBlocks {
 
                 dry_acacia_log,
                 concrete_mixer,
-                concrete_mixer_on
+                concrete_mixer_on,
+
+                quarry_scaffold
 
         );
 
@@ -575,7 +581,9 @@ public class ModBlocks {
 
                 dry_acacia_log.createItemBlock(),
                 concrete_mixer.createItemBlock(),
-                concrete_mixer_on.createItemBlock()
+                concrete_mixer_on.createItemBlock(),
+
+                quarry_scaffold.createItemBlock()
         );
     }
 
@@ -727,6 +735,8 @@ public class ModBlocks {
         dry_acacia_log.registerItemModel(Item.getItemFromBlock(dry_acacia_log));
         concrete_mixer.registerItemModel(Item.getItemFromBlock(concrete_mixer));
         concrete_mixer_on.registerItemModel(Item.getItemFromBlock(concrete_mixer_on));
+
+        quarry_scaffold.registerItemModel(Item.getItemFromBlock(quarry_scaffold));
     }
 
 }

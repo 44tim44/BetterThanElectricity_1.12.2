@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "facing=north": { "model": "betterthanelectricity:quarry_block_on" },
+        "facing=south": { "model": "betterthanelectricity:quarry_block_on", "y": 180 },
+        "facing=west":  { "model": "betterthanelectricity:quarry_block_on", "y": 270 },
+        "facing=east":  { "model": "betterthanelectricity:quarry_block_on", "y": 90 },
+        "inventory": { "model": "betterthanelectricity:quarry_block" }
+    }
+}

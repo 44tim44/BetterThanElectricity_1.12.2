@@ -1,0 +1,9 @@
+{
+  "parent": "betterthanelectricity:block/machine_block_template",
+  "textures": {
+    "front": "betterthanelectricity:blocks/block_quarry_front",
+    "left": "betterthanelectricity:blocks/block_quarry_side",
+    "right": "betterthanelectricity:blocks/block_quarry_side",
+    "top": "betterthanelectricity:blocks/block_quarry_top_on"
+  }
+}

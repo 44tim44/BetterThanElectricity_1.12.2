@@ -34,7 +34,7 @@ private final TileEntityQuarry tileQuarry;
     @Override
     public void initGui() {
         super.initGui();
-        buttonList.add(new HintButton(0, this.guiLeft + 56, this.guiTop + 36));
+        buttonList.add(new HintButton(0, this.guiLeft + 26, this.guiTop + 36));
     }
 
     /**
@@ -83,10 +83,10 @@ private final TileEntityQuarry tileQuarry;
         this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
 
         int k = this.getBurnLeftScaled(14);
-        this.drawTexturedModalRect(i + 56, j + 36 + 14 - k, 176, 14 - k, 14, k);
+        this.drawTexturedModalRect(i + 26, j + 36 + 14 - k, 176, 14 - k, 14, k);
 
-        int l = this.getCookProgressScaled(24);
-        this.drawTexturedModalRect(i + 79, j + 34, 176, 14, l + 1, 16);
+        int l = this.getCookProgressScaled(18);
+        this.drawTexturedModalRect(i + 25, j + 17, 176, 14, l + 1, 18);
     }
 
     private int getCookProgressScaled(int pixels)
