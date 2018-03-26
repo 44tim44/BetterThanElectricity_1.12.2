@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "betterthanelectricity:wind_wheel_steel"
+  },
+  "pattern": [
+    "S S",
+    " R ",
+    "S S"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+      "item": "betterthanelectricity:steel_sheet"
+    },
+    "R": {
+      "item": "betterthanelectricity:steel_rod"
+    }
+  }
+}

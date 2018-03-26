@@ -5,7 +5,15 @@
       "betterthanelectricity:steel_boots_recipe",
       "betterthanelectricity:steel_chestplate_recipe",
       "betterthanelectricity:steel_helmet_recipe",
-      "betterthanelectricity:steel_leggings_recipe"
+      "betterthanelectricity:steel_leggings_recipe",
+      "betterthanelectricity:steel_block_recipe",
+      "betterthanelectricity:steel_fence",
+      "betterthanelectricity:steel_rod_recipe",
+      "betterthanelectricity:steel_axe_recipe",
+      "betterthanelectricity:steel_pickaxe_recipe",
+      "betterthanelectricity:steel_shovel_recipe",
+      "betterthanelectricity:steel_sword_recipe",
+      "betterthanelectricity:propeller_recipe"
 
     ]
   },

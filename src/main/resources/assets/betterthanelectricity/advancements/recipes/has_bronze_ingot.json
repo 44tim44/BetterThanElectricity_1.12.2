@@ -1,0 +1,24 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "betterthanelectricity:bronze_axe_recipe",
+      "betterthanelectricity:bronze_pickaxe_recipe",
+      "betterthanelectricity:bronze_shovel_recipe",
+      "betterthanelectricity:bronze_sword_recipe"
+
+    ]
+  },
+  "criteria": {
+    "has_bronze_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "betterthanelectricity:ingot_bronze"
+          }
+        ]
+      }
+    }
+  }
+}

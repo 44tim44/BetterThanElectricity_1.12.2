@@ -67,6 +67,7 @@ public class ModBlocks {
 
     /* Building Blocks */
     public static BlockBase stone_tile = new BlockBase(Material.ROCK,"stone_tile").setCreativeTab(CreativeTabs.BUILDING_BLOCKS).setHardness(5.0F);
+    public static BlockBase steel_block = new BlockBase(Material.IRON,"steel_block").setCreativeTab(CreativeTabs.BUILDING_BLOCKS).setHardness(5.0F);
 
     public static BlockBase planks_white = new BlockBase(Material.WOOD,"planks_white").setCreativeTab(CreativeTabs.BUILDING_BLOCKS).setHardness(2.0F);
     public static BlockBase planks_lightgray = new BlockBase(Material.WOOD,"planks_lightgray").setCreativeTab(CreativeTabs.BUILDING_BLOCKS).setHardness(2.0F);
@@ -267,6 +268,7 @@ public class ModBlocks {
 
                 /* Building Blocks */
                 stone_tile,
+                steel_block,
 
                 planks_white,
                 planks_lightgray,
@@ -479,6 +481,7 @@ public class ModBlocks {
 
                 /* Building Blocks */
                 stone_tile.createItemBlock(),
+                steel_block.createItemBlock(),
 
                 planks_white.createItemBlock(),
                 planks_lightgray.createItemBlock(),
@@ -637,6 +640,7 @@ public class ModBlocks {
         water_wheel_steel.registerItemModel(Item.getItemFromBlock(water_wheel_steel));
 
         stone_tile.registerItemModel(Item.getItemFromBlock(stone_tile));
+        steel_block.registerItemModel(Item.getItemFromBlock(steel_block));
 
         planks_white.registerItemModel(Item.getItemFromBlock(planks_white));
         planks_lightgray.registerItemModel(Item.getItemFromBlock(planks_lightgray));

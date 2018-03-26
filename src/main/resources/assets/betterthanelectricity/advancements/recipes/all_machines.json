@@ -8,7 +8,13 @@
       "betterthanelectricity:solar_panel_recipe",
       "betterthanelectricity:fuel_generator_recipe",
       "betterthanelectricity:wind_mill_recipe",
+      "betterthanelectricity:wind_wheel_wood",
+      "betterthanelectricity:wind_wheel_steel",
+      "betterthanelectricity:water_wheel_wood",
+      "betterthanelectricity:water_wheel_steel",
       "betterthanelectricity:charging_station_recipe",
+      "betterthanelectricity:construction_frame_recipe",
+      "betterthanelectricity:quarry_recipe",
       "betterthanelectricity:battery_recipe"
 
     ]

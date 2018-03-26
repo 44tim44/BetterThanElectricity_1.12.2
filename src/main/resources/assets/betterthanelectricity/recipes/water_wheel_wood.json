@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "betterthanelectricity:water_wheel_wood"
+  },
+  "pattern": [
+    "SSS",
+    "SRS",
+    "SSS"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+      "item": "betterthanelectricity:wood_board"
+    },
+    "R": {
+      "item": "minecraft:stick"
+    }
+  }
+}

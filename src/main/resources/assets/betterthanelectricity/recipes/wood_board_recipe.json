@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "betterthanelectricity:wood_board"
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:planks",
+      "data": 0
+    }
+  }
+}

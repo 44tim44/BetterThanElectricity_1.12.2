@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "betterthanelectricity:water_wheel_steel"
+  },
+  "pattern": [
+    "SSS",
+    "SRS",
+    "SSS"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+      "item": "betterthanelectricity:steel_sheet"
+    },
+    "R": {
+      "item": "betterthanelectricity:steel_rod"
+    }
+  }
+}

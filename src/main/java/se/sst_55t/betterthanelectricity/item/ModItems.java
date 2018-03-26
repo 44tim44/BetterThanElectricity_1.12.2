@@ -84,6 +84,8 @@ public class ModItems {
     public static ItemBase glassDoorItem = new ItemDoorCustom(ModBlocks.glassDoor,"glass_door_item").setCreativeTab(CreativeTabs.REDSTONE);
 
     public static ItemBase constructionFrame = new ItemBase("construction_frame").setCreativeTab(CreativeTabs.MISC);
+    public static ItemBase steelSheet = new ItemBase("steel_sheet").setCreativeTab(CreativeTabs.MISC);
+    public static ItemBase woodBoard = new ItemBase("wood_board").setCreativeTab(CreativeTabs.MISC);
 
     // Armor
     public static ItemArmorCustom steelHelmet = new ItemArmorCustom(BTEMod.steelArmorMaterial, EntityEquipmentSlot.HEAD, "steel_helmet");
@@ -163,6 +165,8 @@ public class ModItems {
                 glassDoorItem,
 
                 constructionFrame,
+                steelSheet,
+                woodBoard,
 
                 steelHelmet,
                 steelChestplate,
@@ -241,6 +245,8 @@ public class ModItems {
         glassDoorItem.registerItemModel();
 
         constructionFrame.registerItemModel();
+        steelSheet.registerItemModel();
+        woodBoard.registerItemModel();
 
         steelHelmet.registerItemModel();
         steelChestplate.registerItemModel();

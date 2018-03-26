@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "betterthanelectricity:wind_wheel_wood"
+  },
+  "pattern": [
+    "S S",
+    " R ",
+    "S S"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+      "item": "betterthanelectricity:wood_board"
+    },
+    "R": {
+      "item": "minecraft:stick"
+    }
+  }
+}
