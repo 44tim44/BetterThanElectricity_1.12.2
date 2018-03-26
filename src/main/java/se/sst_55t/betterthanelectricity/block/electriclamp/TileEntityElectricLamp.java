@@ -116,7 +116,7 @@ public class TileEntityElectricLamp extends TileEntity implements ILightEventCon
                 break;
         }
 
-        if(((BlockElectricLamp)this.getBlockType()).isOn)
+        if(((BlockElectricLamp)this.getBlockType()).isOn && ((BlockElectricLamp)this.getBlockType()).color != 0)
         {
             gatherLightsEvent.add(Light.builder()
                     .pos(this.pos)

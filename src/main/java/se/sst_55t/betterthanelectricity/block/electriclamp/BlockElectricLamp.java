@@ -56,11 +56,10 @@ public class BlockElectricLamp extends BlockTileEntity<TileEntityElectricLamp> /
         this.isOn = isOn;
         this.color = color;
 
-        /*if (isOn)
+        if (isOn && color == 0)
         {
             this.setLightLevel(1.0F);
         }
-        */
     }
 
     /**
