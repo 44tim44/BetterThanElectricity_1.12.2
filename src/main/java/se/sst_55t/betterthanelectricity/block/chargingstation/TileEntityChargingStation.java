@@ -628,7 +628,9 @@ public class TileEntityChargingStation extends TileEntityLockable implements ITi
     @Override
     public float getChargeRate() {
         ItemStack batteryOutputStack = this.chargingStationItemStacks.get(0);
-        if(batteryOutputStack.isEmpty() ||  ((IChargeable) batteryOutputStack.getItem()).getCharge(batteryOutputStack) == ((IChargeable) batteryOutputStack.getItem()).getMaxCharge(batteryOutputStack))
+        if(batteryOutputStack.isEmpty() ||
+                (batteryOutputStack.getItem() instanceof IChargeable && ((IChargeable) batteryOutputStack.getItem()).getCharge(batteryOutputStack) == ((IChargeable) batteryOutputStack.getItem()).getMaxCharge(batteryOutputStack)) ||
+                (batteryOutputStack.getItem() instanceof IBattery && ((IBattery) batteryOutputStack.getItem()).getCharge(batteryOutputStack) == ((IBattery) batteryOutputStack.getItem()).getMaxCharge(batteryOutputStack)))
         {
             if (this.currentCharge > 0)
             {

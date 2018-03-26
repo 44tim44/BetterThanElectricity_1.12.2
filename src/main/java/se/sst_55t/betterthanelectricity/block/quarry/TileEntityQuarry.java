@@ -364,22 +364,26 @@ public class TileEntityQuarry extends TileEntityLockable implements ITickable, I
                 else if (this.isWorking() && !this.hasBlockToMine() && minerPosition.getY() > 1)
                 {
 
-                    if(minerPosition.getX() < getMaxX())
+                    while(!this.hasBlockToMine() && minerPosition.getY() > 1)
                     {
-                        minerPosition = minerPosition.add(1,0,0);
+                        if (minerPosition.getX() < getMaxX())
+                        {
+                            minerPosition = minerPosition.add(1, 0, 0);
+                        }
+                        else if (minerPosition.getX() == getMaxX() && minerPosition.getZ() < getMaxZ())
+                        {
+                            minerPosition = minerPosition.add(-8, 0, 1);
+                        }
+                        else if (minerPosition.getZ() == getMaxZ())
+                        {
+                            minerPosition = minerPosition.add(-8, -1, -8);
+                        }
                     }
-                    else if(minerPosition.getX() == getMaxX() && minerPosition.getZ() < getMaxZ())
-                    {
-                        minerPosition = minerPosition.add(-8,0,1);
-                    }
-                    else if(minerPosition.getZ() == getMaxZ())
-                    {
-                        minerPosition = minerPosition.add(-8,-1,-8);
-                    }
-                    world.sendBlockBreakProgress(-1,minerPosition,0);
+                    world.sendBlockBreakProgress(-1, minerPosition, 0);
                     this.currentBlockMineTime = 0;
-                    world.notifyBlockUpdate(this.pos,world.getBlockState(this.pos),world.getBlockState(this.pos),0);
+                    world.notifyBlockUpdate(this.pos, world.getBlockState(this.pos), world.getBlockState(this.pos), 0);
                     //System.out.println("minerPosition moved to : x:" + minerPosition.getX() +" y:"+ minerPosition.getY() +" z:"+ minerPosition.getZ());
+
                 }
                 else
                 {
