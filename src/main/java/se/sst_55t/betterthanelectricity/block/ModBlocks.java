@@ -30,7 +30,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
+import se.sst_55t.betterthanelectricity.block.windmill.BlockWaterWheel;
 import se.sst_55t.betterthanelectricity.block.windmill.BlockWindMill;
+import se.sst_55t.betterthanelectricity.block.windmill.BlockWindWheel;
 
 public class ModBlocks {
 
@@ -58,6 +60,10 @@ public class ModBlocks {
     public static BlockCompactor compactor_on = (BlockCompactor) new BlockCompactor(true,"compactor_block_on").setHardness(5.0F);
     public static BlockQuarry quarry = (BlockQuarry) new BlockQuarry(false,"quarry_block").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(5.0F);
     public static BlockQuarry quarry_on = (BlockQuarry) new BlockQuarry(true,"quarry_block_on").setHardness(5.0F);
+    public static BlockWindWheel wind_wheel_wood = (BlockWindWheel) new BlockWindWheel(Material.WOOD,"wind_wheel_wood").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
+    public static BlockWindWheel wind_wheel_steel = (BlockWindWheel) new BlockWindWheel(Material.IRON,"wind_wheel_steel").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(5.0F);
+    public static BlockWaterWheel water_wheel_wood = (BlockWaterWheel) new BlockWaterWheel(Material.WOOD,"water_wheel_wood").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(2.0F);
+    public static BlockWaterWheel water_wheel_steel = (BlockWaterWheel) new BlockWaterWheel(Material.IRON,"water_wheel_steel").setCreativeTab(CreativeTabs.DECORATIONS).setHardness(5.0F);
 
     /* Building Blocks */
     public static BlockBase stone_tile = new BlockBase(Material.ROCK,"stone_tile").setCreativeTab(CreativeTabs.BUILDING_BLOCKS).setHardness(5.0F);
@@ -254,6 +260,10 @@ public class ModBlocks {
                 compactor_on,
                 quarry,
                 quarry_on,
+                wind_wheel_wood,
+                wind_wheel_steel,
+                water_wheel_wood,
+                water_wheel_steel,
 
                 /* Building Blocks */
                 stone_tile,
@@ -422,6 +432,8 @@ public class ModBlocks {
         GameRegistry.registerTileEntity(chargingStation.getTileEntityClass(),chargingStation.getRegistryName().toString());
         GameRegistry.registerTileEntity(compactor.getTileEntityClass(),compactor.getRegistryName().toString());
         GameRegistry.registerTileEntity(quarry.getTileEntityClass(),quarry.getRegistryName().toString());
+        GameRegistry.registerTileEntity(wind_wheel_wood.getTileEntityClass(),wind_wheel_wood.getRegistryName().toString());
+        GameRegistry.registerTileEntity(water_wheel_wood.getTileEntityClass(),water_wheel_wood.getRegistryName().toString());
         GameRegistry.registerTileEntity(tableOak.getTileEntityClass(), tableOak.getRegistryName().toString());
 
         GameRegistry.registerTileEntity(electricLamp_on.getTileEntityClass(), electricLamp_on.getRegistryName().toString());
@@ -460,6 +472,10 @@ public class ModBlocks {
                 compactor_on.createItemBlock(),
                 quarry.createItemBlock(),
                 quarry_on.createItemBlock(),
+                wind_wheel_wood.createItemBlock(),
+                wind_wheel_steel.createItemBlock(),
+                water_wheel_wood.createItemBlock(),
+                water_wheel_steel.createItemBlock(),
 
                 /* Building Blocks */
                 stone_tile.createItemBlock(),
@@ -615,7 +631,10 @@ public class ModBlocks {
         compactor_on.registerItemModel(Item.getItemFromBlock(compactor_on));
         quarry.registerItemModel(Item.getItemFromBlock(quarry));
         quarry_on.registerItemModel(Item.getItemFromBlock(quarry_on));
-
+        wind_wheel_wood.registerItemModel(Item.getItemFromBlock(wind_wheel_wood));
+        wind_wheel_steel.registerItemModel(Item.getItemFromBlock(wind_wheel_steel));
+        water_wheel_wood.registerItemModel(Item.getItemFromBlock(water_wheel_wood));
+        water_wheel_steel.registerItemModel(Item.getItemFromBlock(water_wheel_steel));
 
         stone_tile.registerItemModel(Item.getItemFromBlock(stone_tile));
 

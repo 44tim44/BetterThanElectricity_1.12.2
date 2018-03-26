@@ -1,5 +1,7 @@
 package se.sst_55t.betterthanelectricity.block.windmill;
 
+import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -26,7 +28,8 @@ import static se.sst_55t.betterthanelectricity.block.windmill.BlockWindMill.FACI
  */
 public class TileEntityWindMill extends TileEntity implements ITickable, IGenerator, IElectricityStorage {
 
-    private static final int BASE_CHARGE_RATE = 20; // Amount of ticks required to charge 1 energy.
+    private static final int BASE_WIND_CHARGE_RATE = 20; // Amount of ticks required to charge 1 energy.
+    private static final int BASE_WATER_CHARGE_RATE = 20; // Amount of ticks required to charge 1 energy.
     private int chargeTime;
     private int totalChargeTime;
     private ItemStackHandler inventory = new ItemStackHandler(1);
@@ -76,12 +79,53 @@ public class TileEntityWindMill extends TileEntity implements ITickable, IGenera
      */
     public int getItemChargeTime()
     {
-        int height = this.pos.getY();
-        // Normalizes height to 0.0F-2.0F = y:62-y:140
-        float value = ((float)(height - 62) / (float)(140 - 62)) * 2.0F;
-        if(value < 0.1F) value = 0.1F;
-        if(value > 2.0F) value = 2.0F;
-        return Math.round((float)BASE_CHARGE_RATE / value);
+
+        EnumFacing facing = this.world.getBlockState(pos).getValue(FACING);
+        if(this.world.getBlockState(this.getPos().offset(facing)).getBlock() instanceof BlockWindWheel)
+        {
+            int height = this.pos.getY();
+
+            /** Normalizes height to 0.0F-2.0F = y:62-y:140 */
+            float value = ((float)(height - 62) / (float)(140 - 62)) * 2.0F;
+
+            if(value < 0.1F) value = 0.1F;
+            if(value > 2.0F) value = 2.0F;
+
+            if(this.world.getBlockState(this.getPos().offset(facing)).getMaterial() == Material.IRON)
+            {
+                return Math.round((float) BASE_WIND_CHARGE_RATE / value / 2.0F);
+            }
+            return Math.round((float) BASE_WIND_CHARGE_RATE / value);
+        }
+        else if(this.world.getBlockState(this.getPos().offset(facing)).getBlock() instanceof BlockWaterWheel)
+        {
+            BlockPos wheelPos = this.getPos().offset(facing);
+            int waterAmount = 0;
+            for(int i = 1; i <= 10; i++)
+            {
+                if(this.world.getBlockState(wheelPos.down().offset(facing.rotateYCCW(),i)).getBlock() == Blocks.WATER){
+                    waterAmount++;
+                }
+                if(this.world.getBlockState(wheelPos.down().offset(facing.rotateY(),i)).getBlock() == Blocks.WATER){
+                    waterAmount++;
+                }
+            }
+
+            float value = ((float)(waterAmount) / (float)(20)) * 2.0F;
+
+            if(value < 0.1F) value = 0.1F;
+            if(value > 2.0F) value = 2.0F;
+
+            if(this.world.getBlockState(this.getPos().offset(facing)).getMaterial() == Material.IRON)
+            {
+                return Math.round((float) BASE_WATER_CHARGE_RATE / value / 2.0F);
+            }
+            return Math.round((float) BASE_WATER_CHARGE_RATE / value);
+        }
+        else
+        {
+            return BASE_WIND_CHARGE_RATE;
+        }
     }
 
     @Override
@@ -129,46 +173,62 @@ public class TileEntityWindMill extends TileEntity implements ITickable, IGenera
     {
         if (this.hasWorld())
         {
+
             EnumFacing facing = this.world.getBlockState(pos).getValue(FACING);
-            BlockPos tempPos = pos;
-            for(int i = 0; i < 20; i++){
-                if(!this.world.isAirBlock(tempPos.offset(facing))){
+            if(this.world.getBlockState(this.getPos().offset(facing)).getBlock() instanceof BlockWindWheel)
+            {
+                BlockPos tempPos = pos.offset(facing);
+                for(int i = 0; i < 20; i++)
+                {
+                    /**
+                     *  Checks if the 3x3 area in front of the WindMill is air. If not, return false.
+                     */
+                    if(!this.world.isAirBlock(tempPos.offset(facing))){
+                        return false;
+                    }
+                    if(!this.world.isAirBlock(tempPos.offset(facing).offset(EnumFacing.UP))){
+                        return false;
+                    }
+                    if(!this.world.isAirBlock(tempPos.offset(facing).offset(EnumFacing.DOWN))){
+                        return false;
+                    }
+                    if(!this.world.isAirBlock(tempPos.offset(facing).offset(facing.rotateY()))){
+                        return false;
+                    }
+                    if(!this.world.isAirBlock(tempPos.offset(facing).offset(facing.rotateYCCW()))){
+                        return false;
+                    }
+                    if(!this.world.isAirBlock(tempPos.offset(facing).offset(facing.rotateY()).offset(EnumFacing.UP))){
+                        return false;
+                    }
+                    if(!this.world.isAirBlock(tempPos.offset(facing).offset(facing.rotateYCCW()).offset(EnumFacing.UP))){
+                        return false;
+                    }
+                    if(!this.world.isAirBlock(tempPos.offset(facing).offset(facing.rotateY()).offset(EnumFacing.DOWN))){
+                        return false;
+                    }
+                    if(!this.world.isAirBlock(tempPos.offset(facing).offset(facing.rotateYCCW()).offset(EnumFacing.DOWN))){
+                        return false;
+                    }
+                    tempPos = tempPos.offset(facing);
+                }
+
+                return true;
+            }
+            else if(this.world.getBlockState(this.getPos().offset(facing)).getBlock() instanceof BlockWaterWheel)
+            {
+                BlockPos wheelPos = pos.offset(facing);
+                if(this.world.getBlockState(wheelPos.down().offset(facing.rotateYCCW())).getBlock() != Blocks.WATER){
                     return false;
                 }
-                tempPos = tempPos.offset(facing);
-
+                if(this.world.getBlockState(wheelPos.down().offset(facing.rotateY())).getBlock() != Blocks.WATER){
+                    return false;
+                }
+                if(this.world.getBlockState(wheelPos.down()).getBlock() != Blocks.WATER){
+                    return false;
+                }
+                return true;
             }
-            /**
-             *  Checks if the 3x3 area in front of the WindMill is air. If not, return false.
-             */
-            /*
-            if(!this.world.isAirBlock(pos.offset(facing).offset(EnumFacing.UP))){
-                return false;
-            }
-            if(!this.world.isAirBlock(pos.offset(facing).offset(EnumFacing.DOWN))){
-                return false;
-            }
-            if(!this.world.isAirBlock(pos.offset(facing).offset(facing.rotateY()))){
-                return false;
-            }
-            if(!this.world.isAirBlock(pos.offset(facing).offset(facing.rotateYCCW()))){
-                return false;
-            }
-            if(!this.world.isAirBlock(pos.offset(facing).offset(facing.rotateY()).offset(EnumFacing.UP))){
-                return false;
-            }
-            if(!this.world.isAirBlock(pos.offset(facing).offset(facing.rotateYCCW()).offset(EnumFacing.UP))){
-                return false;
-            }
-            if(!this.world.isAirBlock(pos.offset(facing).offset(facing.rotateY()).offset(EnumFacing.DOWN))){
-                return false;
-            }
-            if(!this.world.isAirBlock(pos.offset(facing).offset(facing.rotateYCCW()).offset(EnumFacing.DOWN))){
-                return false;
-            }
-            */
-
-            return true;
         }
         return false;
     }

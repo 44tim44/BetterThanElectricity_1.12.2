@@ -31,6 +31,10 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.*;
+import se.sst_55t.betterthanelectricity.block.windmill.TESRWaterWheel;
+import se.sst_55t.betterthanelectricity.block.windmill.TESRWindWheel;
+import se.sst_55t.betterthanelectricity.block.windmill.TileEntityWaterWheel;
+import se.sst_55t.betterthanelectricity.block.windmill.TileEntityWindWheel;
 import se.sst_55t.betterthanelectricity.entity.item.EntitySubmarine;
 import se.sst_55t.betterthanelectricity.item.ModItems;
 import se.sst_55t.betterthanelectricity.util.submarine.SubmarineFactory;
@@ -55,6 +59,8 @@ public class ClientProxy extends CommonProxy
         ModelLoader.setCustomStateMapper(ModBlocks.glassDoor, (new StateMap.Builder()).ignore(BlockDoorBase.POWERED).build());
         RenderingRegistry.registerEntityRenderingHandler(EntitySubmarine.class, SubmarineFactory.INSTANCE);
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityQuarry.class, new TESRQuarry());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWindWheel.class, new TESRWindWheel());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWaterWheel.class, new TESRWaterWheel());
     }
 
     @Override

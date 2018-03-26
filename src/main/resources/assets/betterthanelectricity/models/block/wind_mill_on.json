@@ -1,6 +1,9 @@
 {
     "parent": "betterthanelectricity:block/machine_block_template",
     "textures": {
-        "front": "betterthanelectricity:blocks/wind_mill_front_on"
+        "front": "betterthanelectricity:blocks/wind_mill_front",
+        "left": "betterthanelectricity:blocks/wind_mill_side",
+        "right": "betterthanelectricity:blocks/wind_mill_side",
+        "top": "betterthanelectricity:blocks/wind_mill_top_on"
     }
 }
