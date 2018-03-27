@@ -382,8 +382,6 @@ public class TileEntityQuarry extends TileEntityLockable implements ITickable, I
                     world.sendBlockBreakProgress(-1, minerPosition, 0);
                     this.currentBlockMineTime = 0;
                     world.notifyBlockUpdate(this.pos, world.getBlockState(this.pos), world.getBlockState(this.pos), 0);
-                    //System.out.println("minerPosition moved to : x:" + minerPosition.getX() +" y:"+ minerPosition.getY() +" z:"+ minerPosition.getZ());
-
                 }
                 else
                 {
@@ -475,7 +473,6 @@ public class TileEntityQuarry extends TileEntityLockable implements ITickable, I
     {
         if (this.world != null && !this.world.isRemote)
         {
-            System.out.println("updateItemTransfer");
             if (!this.isOnTransferCooldown())
             {
                 boolean transferOutFlag = false;
@@ -547,12 +544,11 @@ public class TileEntityQuarry extends TileEntityLockable implements ITickable, I
      */
     public void quarryBlock()
     {
-        System.out.println("quarryBlock()");
+
         if (this.hasBlockToMine())
         {
             NonNullList<ItemStack> drops = NonNullList.create();
             world.getBlockState(minerPosition).getBlock().getDrops(drops, world, minerPosition,world.getBlockState(minerPosition),0);
-            System.out.println("retrieved drops");
             if(!isFull()){
                 for (ItemStack drop : drops)
                 {
@@ -562,7 +558,6 @@ public class TileEntityQuarry extends TileEntityLockable implements ITickable, I
                     }
                 }
             }
-            System.out.println("Block destroyed");
             world.destroyBlock(minerPosition,false);
         }
     }
